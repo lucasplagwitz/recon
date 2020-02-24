@@ -7,6 +7,8 @@ class FcthdlOperator(LinearOperator):
     def __init__(self, domain_dim, image_dim, fwfcthdl, bwfcthdl):
 
         self.type = 'fcthdlop'
+        self.flag = 'regular'
+        self.prop = False
 
         self.domain_dim = domain_dim
         self.image_dim = image_dim

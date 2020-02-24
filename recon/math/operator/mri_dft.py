@@ -19,24 +19,30 @@ class MriDft(FcthdlOperator):
         # ToDO: input check
 
         if len(center) == 1:
-            onevec = 1
+            self.onevec = 1
         else:
-            onevec = np.ones(self.domain_dim)
+            self.onevec = np.ones(len(self.domain_dim))
+
+        roll_val = self.center - self.onevec
 
         fwfcthdl = lambda u: np.sqrt(np.prod(self.domain_dim)) * \
                              np.roll(
-                                 np.fft.ifftn(
-                                     np.fft.ifftshift(u)
-                                 ),
-                                 -(center - onevec)
+                                 np.roll(
+                                     np.fft.ifftn(
+                                         np.fft.ifftshift(u)
+                                     ),
+                                     int(roll_val[0]), axis= 0
+                                 ), int(roll_val[1]), axis= 1
                              )
 
         bwfcthdl = lambda f: 1/np.sqrt(np.prod(self.domain_dim)) * \
                              np.fft.fftshift(
                                  np.fft.fftn(
-                                     np.roll(f,
-                                             -(-center + onevec)
-                                             )
+                                     np.roll(
+                                         np.roll(f,
+                                                 -int(roll_val[0]), axis=0
+                                                 ), -int(roll_val[1]), axis= 1
+                                     )
                                  )
                              )
         
