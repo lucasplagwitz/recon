@@ -64,7 +64,7 @@ def c1(img):
 
         if True:
 
-            if its % 2 == 0:
+            if its % 10 == 0:
                 fig, axes = plt.subplots(ncols=2)
                 show_curve_and_phi(fig, img, phi, 'red')
 
@@ -81,10 +81,9 @@ def c1(img):
                                        (bh.get_value_at_idx(img, all) - c2) ** 2).ravel()
 
 
-
             nu = 0
-            dt = 0.005 #0.5
-            mu = 200
+            dt = 0.5 #0.5
+            mu = 20
             h = 1
             lambda1 = 1
             lambda2 = 1

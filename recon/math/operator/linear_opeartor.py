@@ -13,8 +13,8 @@ class LinearOperator(object):
         self.domain_dim = np.array([1, 1])
         self.image_dim = np.array([1, 1])
 
-        if not (arg2 and flag):
-            pass
+        if arg2 is None and flag == "":
+            raise NotImplementedError()
         elif all(i is not None for i in [arg1, arg2, flag]):
             self.flag = flag
             if self.flag == 'scalmult':
@@ -72,7 +72,6 @@ class LinearOperator(object):
                 if not self.prop:
                     return self.arg1 * (self.arg2 * (other))
                 else:
-                    a = self.arg1 * (other)
                     return self.arg2 * (self.arg1 * (other))
             elif self.flag == 'matadd':
                 raise NotImplementedError()

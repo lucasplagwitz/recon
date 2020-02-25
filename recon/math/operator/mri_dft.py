@@ -31,8 +31,8 @@ class MriDft(FcthdlOperator):
                                      np.fft.ifftn(
                                          np.fft.ifftshift(u)
                                      ),
-                                     int(roll_val[0]), axis= 0
-                                 ), int(roll_val[1]), axis= 1
+                                     -int(roll_val[0]), axis= 0
+                                 ), -int(roll_val[1]), axis= 1
                              )
 
         bwfcthdl = lambda f: 1/np.sqrt(np.prod(self.domain_dim)) * \
@@ -40,8 +40,8 @@ class MriDft(FcthdlOperator):
                                  np.fft.fftn(
                                      np.roll(
                                          np.roll(f,
-                                                 -int(roll_val[0]), axis=0
-                                                 ), -int(roll_val[1]), axis= 1
+                                                 int(roll_val[0]), axis=0
+                                                 ), int(roll_val[1]), axis= 1
                                      )
                                  )
                              )
