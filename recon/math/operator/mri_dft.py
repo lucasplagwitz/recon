@@ -3,8 +3,14 @@ import numpy as np
 from recon.math.operator.fcthdl_operator import FcthdlOperator
 
 class MriDft(FcthdlOperator):
+    """
+    MRI FourierTransform Operator.
 
-    def __init__(self, domain_dim, center = 0):
+    fwfcthdl: sqrt(m*n) * FFT
+    bwfcthdl: 1/sqrt(m*n) * IFFT
+    """
+
+    def __init__(self, domain_dim, center=np.array([0])):
 
 
         self.domain_dim = domain_dim # attention: self doppelt...

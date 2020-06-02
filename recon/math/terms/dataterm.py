@@ -1,18 +1,62 @@
 import numpy as np
-from scipy import sparse
 
 class Dataterm(object):
+    """
+        This class is the basic form of the L2-Dataterm.
+
+        Form:
+        u(f) = argmin_x 1/2 * ||Ax - f||^2     A=S*F
+        u_0(f) = 1/2 * ||Ax - f||^2     A=S*F
+        u'(f) = AT * (Ax - f)
+        prox_{tau * u(f)}(x) = FT * ST * (SF * x - f) = FT * (STS * F * x - ST * f) =(1)=
+
+        (*) prox_{tau * f}(f_bar) = (I + tau*df)^{-1}(f_bar)
+        prox_{tau * u_0}(f) = (I + ATAf - ATx)^{-1}(f) = (I + tau * (FT * (STS * F * f - ST * x))^{-1}(f)
+
+        IF S = I
+        = (I + tau * (FT*F * f - FT*x))^{-1}(f)
+
+
+
+
+
+        = (I + tau* FT*F*f - tau*FT*x)^{-1}(f)
+
+
+
+
+
+        u = 1/(1+tau) * FT*F*f + tau*Ft*x
+
+        u = FT*F*f/(1+tau) + tau/(1+tau)(Ft*x)
+
+        u = FT (F*f/(1+tau*diagS) + tau*Ft*(x/(1+tau*diagS))
+        (1)
+
+        """
 
     def __init__(self, S, F):
+        """
+
+        :param S: sampling Matrix for
+        :param F: Operator
+        """
         self.dim = F.shape[1]
         self.tau = 1
-        self.proxdata = np.zeros(S.shape[0])
-        self.S = S
-        self.diagS = (S.T*S).diagonal()
+        if S is not None:
+            self.proxdata = np.zeros(S.shape[0])
+            self.S = S
+            self.diagS = (S.T*S).diagonal()
+        else:
+            self.diagS = 1
+            self.S = None
         self.F = F
 
     def modify_data(self):
-        self.data = (self.S.T)*self.proxdata
+        if self.S is not None:
+            self.data = (self.S.T)*self.proxdata
+        else:
+            self.data = self.proxdata
 
     def set_proxparam(self, tau):
         self.tau = tau
@@ -25,7 +69,12 @@ class Dataterm(object):
         self.modify_data()
 
     def prox(self, f):
-        c= self.F.T*((self.F*f + self.get_proxparam() * (self.data)))
+        """
+        u = F_star * (( F*f + tau * S_star*f_0) / (1 + tau * S_star*S)
+        u = f + phi * A_star * f_0 /
+        :param f:
+        :return:
+        """
         u = self.F.T*((self.F*f + self.get_proxparam() * (self.data)) / (
-            1 + self.tau * self.diagS))
+            1 + self.get_proxparam() * self.diagS))
         return u

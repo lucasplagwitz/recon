@@ -64,7 +64,7 @@ def c1(img):
 
         if True:
 
-            if its % 10 == 0:
+            if its % 1 == 0:
                 fig, axes = plt.subplots(ncols=2)
                 show_curve_and_phi(fig, img, phi, 'red')
 
@@ -82,7 +82,7 @@ def c1(img):
 
 
             nu = 0
-            dt = 0.5 #0.5
+            dt = 0.01 #0.5
             mu = 20
             h = 1
             lambda1 = 1

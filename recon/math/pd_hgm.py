@@ -24,7 +24,7 @@ class PdHgm(object):
                 3. update sens
     """
 
-    def __init__(self, K, F_star, G):
+    def __init__(self, K, F_star, G, param_alpha = None):
         """
         Consturctor. Set required params.
         :param K:
@@ -43,6 +43,9 @@ class PdHgm(object):
 
         self.var = {'x': None, 'y': None}
 
+        if param_alpha is not None:
+            self.param_alpha = param_alpha
+
     def restart_counter(self):
         """
         Reset iteration counter.
@@ -51,7 +54,7 @@ class PdHgm(object):
         self.k = 1
         return
 
-    def initialise(self):
+    def initialise(self, primal_dual = ()):
         """
         Set default start params.
         :return: None
@@ -60,8 +63,12 @@ class PdHgm(object):
         self.res = np.inf
         self.resold = 1
         self.sens = 0.001
-        self.var['x'] = np.zeros(self.K.shape[1])
-        self.var['y'] = np.zeros(self.K.shape[0])
+        if primal_dual:
+            self.var['x'] = primal_dual[0]
+            self.var['y'] = primal_dual[1]
+        else:
+            self.var['x'] = np.zeros((self.K.shape[1]))
+            self.var['y'] = np.zeros((self.K.shape[0]))
         return
 
     def solve(self):
@@ -89,7 +96,7 @@ class PdHgm(object):
 
             # primal iteration
             self.var['x'] = self.G.prox(self.var['x'] -
-                                        self.G.get_proxparam() * (self.K.T*self.var['y'])
+                                        self.G.get_proxparam() * (self.K.T * self.var['y'])
                                         )
 
             # dual iteration

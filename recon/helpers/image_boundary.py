@@ -32,12 +32,12 @@ class boundary_handler_2d(object):
 
 
     def dx_value_at_idx(self, img, idx=np.array([[0], [0]])):
-        return self.get_value_at_idx(img, np.array([idx[:, 0], idx[:,1]-1]).T)\
-               - self.get_value_at_idx(img, np.array([idx[:,0], idx[:,1]+1]).T)
+        return self.get_value_at_idx(img, np.array([idx[:, 0]+1, idx[:,1]]).T)\
+               - self.get_value_at_idx(img, np.array([idx[:,0]-1, idx[:,1]]).T)
 
     def dy_value_at_idx(self, img, idx=np.array([[0], [0]])):
-        return self.get_value_at_idx(img, np.array([idx[:,0]-1, idx[:,1]]).T) \
-               - self.get_value_at_idx(img, np.array([idx[:,0]+1, idx[:,1]]).T)
+        return self.get_value_at_idx(img, np.array([idx[:,0], idx[:,1]+1]).T) \
+               - self.get_value_at_idx(img, np.array([idx[:,0], idx[:,1]-1]).T)
 
     def dxx_value_at_idx(self, img, idx=np.array([[0], [0]])):
         return self.get_value_at_idx(img, np.array([idx[:,0] - 1, idx[:,1]]).T) \

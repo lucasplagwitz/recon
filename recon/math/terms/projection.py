@@ -21,7 +21,8 @@ class Projection(object):
 
     def prox(self, f):
         aux = np.sqrt(np.sum(abs(np.reshape(f, (int(self.shape/2), 2)))**2, axis=1))
-        aux = matlib.repmat(np.reshape(aux, [aux.shape[0], 1]),1,2).ravel()
+        aux = matlib.repmat(np.reshape(aux, [aux.shape[0], 1]),1,2).ravel()  # todo
         aux[aux<1] = 1
+        aux = aux.reshape(f.shape)
         u = f/aux
         return u
