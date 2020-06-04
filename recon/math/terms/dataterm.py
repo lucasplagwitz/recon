@@ -1,4 +1,5 @@
 import numpy as np
+import pylops
 
 class Dataterm(object):
     """
@@ -52,6 +53,9 @@ class Dataterm(object):
             self.S = None
         self.F = F
 
+        if isinstance(F, pylops.LinearOperator):
+            self.pylops = True
+
     def modify_data(self):
         if self.S is not None:
             self.data = (self.S.T)*self.proxdata
@@ -75,6 +79,10 @@ class Dataterm(object):
         :param f:
         :return:
         """
-        u = self.F.T*((self.F*f + self.get_proxparam() * (self.data)) / (
+        if self.pylops:
+            F_star = self.F.H
+        else:
+            F_star = self.F.T
+        u = F_star*((self.F*f + self.get_proxparam() * (self.data)) / (
             1 + self.get_proxparam() * self.diagS))
         return u
