@@ -3,9 +3,13 @@
   <component name="ChangeListManager">
     <list default="true" id="0ff715c0-77f2-4a6d-9da2-54bf536f8191" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/recon/math/terms/dataterm.py" beforeDir="false" afterPath="$PROJECT_DIR$/recon/math/terms/dataterm.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/recon/math/terms/dataterm_rec_bregman.py" beforeDir="false" afterPath="$PROJECT_DIR$/recon/math/terms/dataterm_rec_bregman.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/recon/math/terms/projection.py" beforeDir="false" afterPath="$PROJECT_DIR$/recon/math/terms/projection.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/demo/bregman_recon_error.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/demo/noise_recon_error.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/demo/plain_recon_error.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/demo/tv_recon_error.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/nifti/fft_reconstruction.py" beforeDir="false" afterPath="$PROJECT_DIR$/examples/nifti/fft_reconstruction.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/segmentation/tv_pdghm.py" beforeDir="false" afterPath="$PROJECT_DIR$/examples/segmentation/tv_pdghm.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/recon/segmentation/tv_pdghm.py" beforeDir="false" afterPath="$PROJECT_DIR$/recon/segmentation/tv_pdghm.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -16,10 +20,22 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/examples/nifti/fft_reconstruction.py">
+        <entry file="file://$PROJECT_DIR$/recon/segmentation/tv_pdghm.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1197">
-              <caret line="119" column="15" selection-start-line="119" selection-start-column="15" selection-end-line="119" selection-end-column="15" />
+            <state relative-caret-position="316">
+              <caret line="66" column="52" selection-start-line="66" selection-start-column="52" selection-end-line="66" selection-end-column="52" />
+              <folding>
+                <element signature="e#0#18#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/examples/nifti/segmentation.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="166">
+              <caret line="26" column="61" selection-start-line="26" selection-start-column="61" selection-end-line="26" selection-end-column="61" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
               </folding>
@@ -28,47 +44,62 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/examples/data/nifti/output/bregman_recon.png">
-          <provider selected="true" editor-type-id="images" />
+        <entry file="file://$PROJECT_DIR$/recon/ideas/gif_your_nifti_master/examples/example_script.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="60">
+              <caret line="4" column="91" selection-start-line="4" selection-start-column="91" selection-end-line="4" selection-end-column="91" />
+            </state>
+          </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/examples/data/nifti/output/pylops_fft_3d_tv_recon.png">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/examples/segmentation/tv_pdghm.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="345">
+              <caret line="23" column="11" selection-start-line="23" selection-start-column="11" selection-end-line="23" selection-end-column="11" />
+              <folding>
+                <element signature="e#0#18#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/examples/data/segmentation/output/tv_segmentation.png">
           <provider selected="true" editor-type-id="images" />
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/examples/data/nifti/output/Bregman_reconstruction_iter1.png">
+        <entry file="file://$PROJECT_DIR$/examples/nifti/fft_reconstruction.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="231">
+              <caret line="69" selection-start-line="69" selection-end-line="71" selection-end-column="63" />
+              <folding>
+                <element signature="e#0#18#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/examples/data/nifti/output/Bregman_reconstruction_iter12.png">
           <provider selected="true" editor-type-id="images" />
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/examples/data/nifti/output/Bregman_reconstruction_iter2.png">
-          <provider selected="true" editor-type-id="images" />
+        <entry file="file://$PROJECT_DIR$/recon/ideas/gif_your_nifti_master/gif_your_nifti/core.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="323">
+              <caret line="69" column="20" selection-start-line="69" selection-start-column="20" selection-end-line="69" selection-end-column="20" />
+              <folding>
+                <element signature="e#23#32#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/examples/data/nifti/output/Bregman_reconstruction_iter3.png">
-          <provider selected="true" editor-type-id="images" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/examples/data/nifti/output/Bregman_reconstruction_iter13.png">
-          <provider selected="true" editor-type-id="images" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/examples/data/nifti/output/recon_plain.png">
-          <provider selected="true" editor-type-id="images" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/examples/data/nifti/output/recon_noise.png">
-          <provider selected="true" editor-type-id="images" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/examples/data/nifti/output/Bregman_reconstruction_iter11.png">
+        <entry file="file://$PROJECT_DIR$/examples/demo/tv_recon.gif">
           <provider selected="true" editor-type-id="images" />
         </entry>
       </file>
@@ -124,11 +155,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/recon/math/operator/diff_operator.py" />
-        <option value="$PROJECT_DIR$/test/math/terms/constraints_uniform_unitsimpex_test.py" />
-        <option value="$PROJECT_DIR$/recon/math/terms/regularizer_uniform_tv.py" />
-        <option value="$PROJECT_DIR$/recon/helpers/objects.py" />
-        <option value="$PROJECT_DIR$/recon/math/terms/constraints_uniform_unitsimplex.py" />
         <option value="$PROJECT_DIR$/recon/segmentation/convex_segmentation.py" />
         <option value="$PROJECT_DIR$/recon/math/operator/linear_opeartor.py" />
         <option value="$PROJECT_DIR$/recon/math/operator/first_derivative.py" />
@@ -136,7 +162,6 @@
         <option value="$PROJECT_DIR$/examples/segmentation/chan_vese_multi_class.py" />
         <option value="$PROJECT_DIR$/recon/math/terms/dataterm_linear.py" />
         <option value="$PROJECT_DIR$/recon/math/terms/dataterm_linear_rec_bregman.py" />
-        <option value="$PROJECT_DIR$/examples/segmentation/tv_pdghm.py" />
         <option value="$PROJECT_DIR$/examples/thesis/direct_reconstruction" />
         <option value="$PROJECT_DIR$/recon/math/operator/ct_radon.py" />
         <option value="$PROJECT_DIR$/ideas/TMI_parameter_tuning-master/PTPN_Recon.py" />
@@ -163,7 +188,6 @@
         <option value="$PROJECT_DIR$/recon/math/terms/__init__.py" />
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/recon/helpers/functions.py" />
-        <option value="$PROJECT_DIR$/recon/segmentation/tv_pdghm.py" />
         <option value="$PROJECT_DIR$/recon/segmentation/tv_bregman_pdghm.py" />
         <option value="$PROJECT_DIR$/examples/other/smooth.py" />
         <option value="$PROJECT_DIR$/examples/pylops/fft_reconstruction.py" />
@@ -174,7 +198,14 @@
         <option value="$PROJECT_DIR$/recon/math/pd_hgm.py" />
         <option value="$PROJECT_DIR$/examples/other/corona_main.py" />
         <option value="$PROJECT_DIR$/recon/math/terms/dataterm_rec_bregman.py" />
+        <option value="$PROJECT_DIR$/recon/ideas/gif_your_nifti-master/examples/example_script.py" />
+        <option value="$PROJECT_DIR$/recon/ideas/gif_your_nifti_master/gif_your_nifti/__init__.py" />
         <option value="$PROJECT_DIR$/examples/nifti/fft_reconstruction.py" />
+        <option value="$PROJECT_DIR$/recon/ideas/gif_your_nifti_master/gif_your_nifti/core.py" />
+        <option value="$PROJECT_DIR$/recon/segmentation/tv_pdghm.py" />
+        <option value="$PROJECT_DIR$/examples/segmentation/tv_pdghm.py" />
+        <option value="$PROJECT_DIR$/recon/ideas/gif_your_nifti_master/examples/example_script.py" />
+        <option value="$PROJECT_DIR$/examples/nifti/segmentation.py" />
       </list>
     </option>
   </component>
@@ -189,7 +220,6 @@
     </option>
   </component>
   <component name="ProjectFrameBounds" fullScreen="true">
-    <option name="x" value="86" />
     <option name="y" value="137" />
     <option name="width" value="1294" />
     <option name="height" value="734" />
@@ -216,6 +246,86 @@
             </path>
             <path>
               <item name="recon" type="b2602c69:ProjectViewProjectNode" />
+              <item name="recon" type="462c0819:PsiDirectoryNode" />
+              <item name="examples" type="462c0819:PsiDirectoryNode" />
+              <item name="data" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="recon" type="b2602c69:ProjectViewProjectNode" />
+              <item name="recon" type="462c0819:PsiDirectoryNode" />
+              <item name="examples" type="462c0819:PsiDirectoryNode" />
+              <item name="data" type="462c0819:PsiDirectoryNode" />
+              <item name="nifti" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="recon" type="b2602c69:ProjectViewProjectNode" />
+              <item name="recon" type="462c0819:PsiDirectoryNode" />
+              <item name="examples" type="462c0819:PsiDirectoryNode" />
+              <item name="data" type="462c0819:PsiDirectoryNode" />
+              <item name="nifti" type="462c0819:PsiDirectoryNode" />
+              <item name="output" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="recon" type="b2602c69:ProjectViewProjectNode" />
+              <item name="recon" type="462c0819:PsiDirectoryNode" />
+              <item name="examples" type="462c0819:PsiDirectoryNode" />
+              <item name="data" type="462c0819:PsiDirectoryNode" />
+              <item name="segmentation" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="recon" type="b2602c69:ProjectViewProjectNode" />
+              <item name="recon" type="462c0819:PsiDirectoryNode" />
+              <item name="examples" type="462c0819:PsiDirectoryNode" />
+              <item name="data" type="462c0819:PsiDirectoryNode" />
+              <item name="segmentation" type="462c0819:PsiDirectoryNode" />
+              <item name="output" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="recon" type="b2602c69:ProjectViewProjectNode" />
+              <item name="recon" type="462c0819:PsiDirectoryNode" />
+              <item name="examples" type="462c0819:PsiDirectoryNode" />
+              <item name="demo" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="recon" type="b2602c69:ProjectViewProjectNode" />
+              <item name="recon" type="462c0819:PsiDirectoryNode" />
+              <item name="examples" type="462c0819:PsiDirectoryNode" />
+              <item name="nifti" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="recon" type="b2602c69:ProjectViewProjectNode" />
+              <item name="recon" type="462c0819:PsiDirectoryNode" />
+              <item name="examples" type="462c0819:PsiDirectoryNode" />
+              <item name="segmentation" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="recon" type="b2602c69:ProjectViewProjectNode" />
+              <item name="recon" type="462c0819:PsiDirectoryNode" />
+              <item name="recon" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="recon" type="b2602c69:ProjectViewProjectNode" />
+              <item name="recon" type="462c0819:PsiDirectoryNode" />
+              <item name="recon" type="462c0819:PsiDirectoryNode" />
+              <item name="ideas" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="recon" type="b2602c69:ProjectViewProjectNode" />
+              <item name="recon" type="462c0819:PsiDirectoryNode" />
+              <item name="recon" type="462c0819:PsiDirectoryNode" />
+              <item name="ideas" type="462c0819:PsiDirectoryNode" />
+              <item name="gif_your_nifti_master" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="recon" type="b2602c69:ProjectViewProjectNode" />
+              <item name="recon" type="462c0819:PsiDirectoryNode" />
+              <item name="recon" type="462c0819:PsiDirectoryNode" />
+              <item name="ideas" type="462c0819:PsiDirectoryNode" />
+              <item name="gif_your_nifti_master" type="462c0819:PsiDirectoryNode" />
+              <item name="examples" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="recon" type="b2602c69:ProjectViewProjectNode" />
               <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
             </path>
           </expand>
@@ -235,11 +345,11 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/recon/ideas" />
+      <recent name="$PROJECT_DIR$/examples/demo" />
       <recent name="$PROJECT_DIR$/examples/data/nifti" />
       <recent name="$PROJECT_DIR$/examples/data/smoothing_images/output" />
       <recent name="$PROJECT_DIR$/examples/data/corona_images" />
-      <recent name="$PROJECT_DIR$/examples/data/corona_images/output" />
-      <recent name="$PROJECT_DIR$/examples/data" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/examples/other/smoothing_images" />
@@ -257,8 +367,8 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.fft_reconstruction (1)">
-    <configuration name="corona_main" type="PythonConfigurationType" factoryName="Python" temporary="true">
+  <component name="RunManager" selected="Python.example_script (1)">
+    <configuration name="core" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="recon" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -266,12 +376,12 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/examples/other" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/recon/ideas/gif_your_nifti_master/gif_your_nifti" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/examples/other/corona_main.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/recon/ideas/gif_your_nifti_master/gif_your_nifti/core.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -280,7 +390,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="dataterm" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="example_script (1)" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="recon" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -288,12 +398,12 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/recon/math/terms" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/recon/ideas/gif_your_nifti_master/examples" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/recon/math/terms/dataterm.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/recon/ideas/gif_your_nifti_master/examples/example_script.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -324,7 +434,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="fft_reconstruction" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="segmentation" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="recon" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -332,12 +442,12 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/examples/pylops" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/examples/nifti" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/examples/pylops/fft_reconstruction_2d.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/examples/nifti/segmentation.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -346,7 +456,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="fft_reconstruction_3d" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="tv_pdghm" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="recon" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -354,12 +464,12 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/examples/pylops" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/examples/segmentation" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/examples/pylops/fft_reconstruction_3d.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/examples/segmentation/tv_pdghm.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -370,11 +480,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.example_script (1)" />
+        <item itemvalue="Python.segmentation" />
+        <item itemvalue="Python.tv_pdghm" />
         <item itemvalue="Python.fft_reconstruction (1)" />
-        <item itemvalue="Python.fft_reconstruction_3d" />
-        <item itemvalue="Python.fft_reconstruction" />
-        <item itemvalue="Python.dataterm" />
-        <item itemvalue="Python.corona_main" />
+        <item itemvalue="Python.core" />
       </list>
     </recent_temporary>
   </component>
@@ -424,7 +534,7 @@
       <workItem from="1590698588113" duration="179000" />
       <workItem from="1590698772751" duration="3682000" />
       <workItem from="1590704268934" duration="1663000" />
-      <workItem from="1591024260540" duration="37319000" />
+      <workItem from="1591024260540" duration="43285000" />
     </task>
     <servers />
   </component>
@@ -461,7 +571,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="464984000" />
+    <option name="totallyTimeSpent" value="470950000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -473,14 +583,15 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="1920" height="1080" extended-state="0" />
+    <frame x="0" y="0" width="1280" height="800" extended-state="0" />
+    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.22097977" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.3352181" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.24158415" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.33424658" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.24520548" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -559,6 +670,11 @@
           <line>23</line>
           <option name="timeStamp" value="97" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/recon/ideas/gif_your_nifti_master/gif_your_nifti/core.py</url>
+          <line>200</line>
+          <option name="timeStamp" value="105" />
+        </line-breakpoint>
       </breakpoints>
       <default-breakpoints>
         <breakpoint type="python-exception">
@@ -571,6 +687,7 @@
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/recon$tv_pdghm__1_.coverage" NAME="tv_pdghm (1) Coverage Results" MODIFIED="1584899847040" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/recon/segmentation" />
+    <SUITE FILE_PATH="coverage/recon$core.coverage" NAME="core Coverage Results" MODIFIED="1591304284975" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/recon/ideas/gif_your_nifti_master/gif_your_nifti" />
     <SUITE FILE_PATH="coverage/recon$PTPN_Recon.coverage" NAME="PTPN_Recon Coverage Results" MODIFIED="1586354896072" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/ideas/TMI_parameter_tuning-master" />
     <SUITE FILE_PATH="coverage/recon$corona_main.coverage" NAME="corona_main Coverage Results" MODIFIED="1591187652063" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/examples/other" />
     <SUITE FILE_PATH="coverage/recon$dataterm.coverage" NAME="dataterm Coverage Results" MODIFIED="1591188517569" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/recon/math/terms" />
@@ -582,23 +699,26 @@
     <SUITE FILE_PATH="coverage/recon$chan_vese_multi_dim.coverage" NAME="chan_vese_multi_dim Coverage Results" MODIFIED="1583506701788" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/recon/segmentation" />
     <SUITE FILE_PATH="coverage/recon$cv.coverage" NAME="cv Coverage Results" MODIFIED="1581862096346" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/recon/segmentation" />
     <SUITE FILE_PATH="coverage/recon$chan_vese_01.coverage" NAME="chan_vese_01 Coverage Results" MODIFIED="1583327389856" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/examples/segmentation" />
-    <SUITE FILE_PATH="coverage/recon$tv_pdghm.coverage" NAME="tv_pdghm Coverage Results" MODIFIED="1585132435759" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/examples/segmentation" />
+    <SUITE FILE_PATH="coverage/recon$example_script.coverage" NAME="example_script Coverage Results" MODIFIED="1591303437842" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/recon/ideas/gif_your_nifti-master/examples" />
+    <SUITE FILE_PATH="coverage/recon$tv_pdghm.coverage" NAME="tv_pdghm Coverage Results" MODIFIED="1591339855688" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/examples/segmentation" />
     <SUITE FILE_PATH="coverage/recon$create_learning_data.coverage" NAME="create_learning_data Coverage Results" MODIFIED="1586443526465" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/recon/ideas" />
     <SUITE FILE_PATH="coverage/recon$primal_dual_figure.coverage" NAME="primal_dual_figure Coverage Results" MODIFIED="1587978976886" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/examples/thesis/other" />
     <SUITE FILE_PATH="coverage/recon$direct_reconstruction_ct.coverage" NAME="direct_reconstruction_ct Coverage Results" MODIFIED="1587022123137" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/examples/thesis" />
     <SUITE FILE_PATH="coverage/recon$diff_operator.coverage" NAME="diff_operator Coverage Results" MODIFIED="1584476537508" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/recon/math/operator" />
     <SUITE FILE_PATH="coverage/recon$tv_loop_reconstruction_mrt.coverage" NAME="tv_loop_reconstruction_mrt Coverage Results" MODIFIED="1586945931389" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/examples/thesis" />
     <SUITE FILE_PATH="coverage/recon$image_boundary.coverage" NAME="image_boundary Coverage Results" MODIFIED="1583699366065" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/recon/helpers" />
-    <SUITE FILE_PATH="coverage/recon$fft_reconstruction__1_.coverage" NAME="fft_reconstruction (1) Coverage Results" MODIFIED="1591289056268" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/examples/nifti" />
+    <SUITE FILE_PATH="coverage/recon$fft_reconstruction__1_.coverage" NAME="fft_reconstruction (1) Coverage Results" MODIFIED="1591305424749" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/examples/nifti" />
     <SUITE FILE_PATH="coverage/recon$direct_reconstruction_mrt.coverage" NAME="direct_reconstruction_mrt Coverage Results" MODIFIED="1587022107786" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/examples/thesis" />
     <SUITE FILE_PATH="coverage/recon$linear_opeartor.coverage" NAME="linear_opeartor Coverage Results" MODIFIED="1582573998656" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/recon/math/operator" />
     <SUITE FILE_PATH="coverage/recon$mri_dft.coverage" NAME="mri_dft Coverage Results" MODIFIED="1582575440137" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/recon/math/operator" />
     <SUITE FILE_PATH="coverage/recon$PTPN_Recon__1_.coverage" NAME="PTPN_Recon (1) Coverage Results" MODIFIED="1586354988742" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/ideas/TMI_parameter_tuning_master" />
     <SUITE FILE_PATH="coverage/recon$tv_reconstruction_mrt.coverage" NAME="tv_reconstruction_mrt Coverage Results" MODIFIED="1586940474459" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/examples/thesis" />
     <SUITE FILE_PATH="coverage/recon$smooth.coverage" NAME="smooth Coverage Results" MODIFIED="1591109332072" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/examples/other" />
+    <SUITE FILE_PATH="coverage/recon$example_script__1_.coverage" NAME="example_script (1) Coverage Results" MODIFIED="1591341037264" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/recon/ideas/gif_your_nifti_master/examples" />
     <SUITE FILE_PATH="coverage/recon$fft_reconstruction.coverage" NAME="fft_reconstruction Coverage Results" MODIFIED="1591190903012" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/examples/pylops" />
     <SUITE FILE_PATH="coverage/recon$Unittests_in_constraints_uniform_unitsimpex_test_py.coverage" NAME="Unittests in constraints_uniform_unitsimpex_test.py Coverage Results" MODIFIED="1584603032486" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test/math/terms" />
     <SUITE FILE_PATH="coverage/recon$direct_reconstruction.coverage" NAME="direct_reconstruction Coverage Results" MODIFIED="1586333477970" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/examples/thesis" />
+    <SUITE FILE_PATH="coverage/recon$segmentation.coverage" NAME="segmentation Coverage Results" MODIFIED="1591340920957" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/examples/nifti" />
     <SUITE FILE_PATH="coverage/recon$tv_bregman_reconstruction_mrt.coverage" NAME="tv_bregman_reconstruction_mrt Coverage Results" MODIFIED="1586948066333" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/examples/thesis" />
     <SUITE FILE_PATH="coverage/recon$chan_vese.coverage" NAME="chan_vese Coverage Results" MODIFIED="1583327362647" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/recon/segmentation" />
     <SUITE FILE_PATH="coverage/recon$pd_hgm.coverage" NAME="pd_hgm Coverage Results" MODIFIED="1584874695376" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/recon/math" />
@@ -653,110 +773,10 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/examples/data/joint_recon_vcorona/output/tv_reconstruction.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/examples/data/joint_recon_vcorona/output/tv_segmentation.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/examples/data/joint_recon_vcorona/output/bregman_segmentation.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/examples/data/joint_recon_vcorona/output/Bregman_reconstruction.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/examples/data/joint_recon_vcorona/output/joint_segmentation.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/examples/data/joint_recon_vcorona/output/joint_reconstruction.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/examples/data/smoothing_images/gt.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/examples/data/smoothing_images/output/gt_seg.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/examples/data/gt.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/examples/data/smoothing_images/output/gt.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/examples/data/smoothing_images/output/noise_seg_001.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/recon/math/terms/constraints_uniform_unitsimplex.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/examples/data/pylops/output/tv_reconstruction.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/examples/data/pylops/output/pylops_fft_plain.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/examples/data/pylops/output/pylops_fft_noise.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/examples/data/pylops/output/pylops_recon_3d_plain.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$USER_HOME$/anaconda/envs/recon/lib/python3.7/site-packages/numpy/core/fromnumeric.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="60" selection-start-line="60" selection-end-line="60" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/recon/math/terms/projection.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" column="25" selection-start-line="4" selection-start-column="25" selection-end-line="4" selection-end-column="25" />
-          <folding>
-            <element signature="e#0#18#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/examples/data/pylops/output/pylops_fft_tv_recon.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/examples/pylops/fft_reconstruction_2d.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="250">
-          <caret line="100" column="12" lean-forward="true" selection-start-line="100" selection-start-column="12" selection-end-line="100" selection-end-column="12" />
-          <folding>
-            <element signature="e#308#326#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/examples/data/pylops/output/fft.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/examples/data/pylops/output/pylops_fft_3d_noise.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/examples/data/pylops/output/pylops_fft_3d_tv_recon.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/examples/data/pylops/output/pylops_fft_example.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/examples/pylops/fft_reconstruction_3d.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="192">
           <caret line="99" column="12" selection-start-line="99" selection-start-column="12" selection-end-line="99" selection-end-column="12" />
-          <folding>
-            <element signature="e#0#18#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/recon/segmentation/tv_pdghm.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="130">
-          <caret line="16" column="45" selection-start-line="16" selection-start-column="45" selection-end-line="16" selection-end-column="45" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
           </folding>
@@ -807,9 +827,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/examples/data/nifti/output/Bregman_reconstruction_iter12.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/examples/data/nifti/output/Bregman_reconstruction_iter8.png">
       <provider selected="true" editor-type-id="images" />
     </entry>
@@ -856,19 +873,6 @@
     <entry file="file://$PROJECT_DIR$/examples/data/nifti/output/Bregman_reconstruction_iter3.png">
       <provider selected="true" editor-type-id="images" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/examples/data/nifti/output/Bregman_reconstruction_iter13.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/examples/nifti/fft_reconstruction.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1197">
-          <caret line="119" column="15" selection-start-line="119" selection-start-column="15" selection-end-line="119" selection-end-column="15" />
-          <folding>
-            <element signature="e#0#18#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/examples/data/nifti/output/recon_plain.png">
       <provider selected="true" editor-type-id="images" />
     </entry>
@@ -880,6 +884,138 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/examples/data/nifti/output/pylops_fft_3d_tv_recon.png">
       <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/examples/demo/plain.gif">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/examples/demo/noise.gif">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/recon/ideas/gif_your_nifti_master/gifs/readme.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor />
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/recon/ideas/gif_your_nifti_master/gifs/Me_2014_grayscale.gif">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/recon/ideas/gif_your_nifti_master/gifs/mni_icbm152_gm_tal_nlin_asym_09c.gif">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/recon/ideas/gif_your_nifti_master/gifs/mni_icbm152_t1_tal_nlin_asym_09c.gif">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/recon/ideas/gif_your_nifti_master/gifs/mni_icbm152_gm_tal_nlin_asym_09c_rgb.gif">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/recon/ideas/gif_your_nifti_master/gifs/mni_icbm152_gm_tal_nlin_asym_09c_depth.gif">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/recon/ideas/gif_your_nifti_master/gifs/mni_icbm152_t1_tal_nlin_asym_09c_plasma.gif">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/recon/ideas/gif_your_nifti_master/gifs/mni_icbm152_gm_tal_nlin_asym_09c_inferno.gif">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/recon/ideas/gif_your_nifti_master/gifs/mni_icbm152_gm_tal_nlin_asym_09c_viridis.gif">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/examples/demo/bregman.gif">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/examples/demo/tv.gif">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/recon/ideas/gif_your_nifti_master/gif_your_nifti/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" column="1" selection-start-line="4" selection-start-column="1" selection-end-line="4" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/examples/demo/bregman_recon.gif">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/examples/demo/noise_recon.gif">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/examples/demo/tv_recon.gif">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/examples/demo/plain_recon.gif">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/examples/data/nifti/output/Bregman_reconstruction_iter12.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/examples/data/nifti/output/Bregman_reconstruction_iter13.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/recon/ideas/gif_your_nifti_master/gif_your_nifti/core.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="69" column="20" selection-start-line="69" selection-start-column="20" selection-end-line="69" selection-end-column="20" />
+          <folding>
+            <element signature="e#23#32#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/examples/data/segmentation/output/tv_segmentation.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/examples/nifti/fft_reconstruction.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="231">
+          <caret line="69" selection-start-line="69" selection-end-line="71" selection-end-column="63" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/examples/data/nifti/output/plain_segmentation.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/recon/segmentation/tv_pdghm.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="316">
+          <caret line="66" column="52" selection-start-line="66" selection-start-column="52" selection-end-line="66" selection-end-column="52" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/examples/segmentation/tv_pdghm.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="345">
+          <caret line="23" column="11" selection-start-line="23" selection-start-column="11" selection-end-line="23" selection-end-column="11" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/recon/ideas/gif_your_nifti_master/examples/example_script.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" column="91" selection-start-line="4" selection-start-column="91" selection-end-line="4" selection-end-column="91" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/examples/nifti/segmentation.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="166">
+          <caret line="26" column="61" selection-start-line="26" selection-start-column="61" selection-end-line="26" selection-end-column="61" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
     </entry>
   </component>
 </project>

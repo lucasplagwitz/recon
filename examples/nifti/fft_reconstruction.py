@@ -67,6 +67,12 @@ new_image = nib.Nifti1Image(dinv, affine=np.eye(4))
 
 new_image.to_filename(data_output_path+'plain_recon.nii')
 
+new_image = nib.Nifti1Image(np.abs(d-dinv), affine=np.eye(4))
+
+new_image.to_filename(data_output_path+'plain_recon_error.nii')
+
+mse = np.sqrt(np.sum((d-dinv)**2))
+print(20*np.log(1/mse))
 
 # Gaussian noise #
 ##################
@@ -107,10 +113,16 @@ new_image = nib.Nifti1Image(dinv, affine=np.eye(4))
 
 new_image.to_filename(data_output_path+'noise_recon.nii')
 
+new_image = nib.Nifti1Image(np.abs(d-dinv), affine=np.eye(4))
+
+new_image.to_filename(data_output_path+'noise_recon_error.nii')
+
+mse = np.sqrt(np.sum((d-dinv)**2))
+print(20*np.log(1/mse))
 
 # Gaussian noise - TV regularised Reconstruction #
 ##################################################
-tv_recon = True
+tv_recon = False
 recalc_normest = True
 if tv_recon:
     #ny = 100 #2000
@@ -168,6 +180,16 @@ if tv_recon:
 
     new_image.to_filename(data_output_path+'tv_recon.nii')
 
+
+img = nib.load(data_output_path+'tv_recon.nii')
+dinv = np.array(img.dataobj)
+
+new_image = nib.Nifti1Image(np.abs(d-dinv), affine=np.eye(4))
+
+new_image.to_filename(data_output_path+'tv_recon_error.nii')
+
+mse = np.sqrt(np.sum((d-dinv)**2))
+print(20*np.log(1/mse))
 
 bregman_recon = False
 if bregman_recon:
@@ -249,3 +271,14 @@ if bregman_recon:
     new_image = nib.Nifti1Image(u01, affine=np.eye(4))
 
     new_image.to_filename(data_output_path + 'bregman_recon.nii')
+
+
+img = nib.load(data_output_path+'bregman_recon.nii')
+dinv = np.array(img.dataobj)
+
+new_image = nib.Nifti1Image(np.abs(d-dinv), affine=np.eye(4))
+
+new_image.to_filename(data_output_path+'bregman_recon_error.nii')
+
+mse = np.sqrt(np.sum((d-dinv)**2))
+print(20*np.log(1/mse))
