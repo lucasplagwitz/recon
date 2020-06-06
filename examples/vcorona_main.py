@@ -9,8 +9,9 @@ import matplotlib.pyplot as plt
 
 
 from recon.math.operator.mri_dft import MriDft
-from recon.math.terms import Dataterm, Projection, DatatermRecBregman, DatatermBregman
-from recon.math.operator.first_derivative import FirstDerivative
+from recon.math.terms import Projection, DatatermBregman
+from recon.math.terms.sampling_dataterm import Dataterm
+from recon.math.terms.sampling_dataterm_rec_bregman import DatatermRecBregman
 from recon.math.pd_hgm import PdHgm
 from recon.segmentation.tv_pdghm import multi_class_segmentation
 from recon.segmentation.tv_bregman_pdghm import multi_class_segmentation_bregman

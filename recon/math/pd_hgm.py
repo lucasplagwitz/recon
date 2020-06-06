@@ -12,6 +12,7 @@ see abstract /documentation/primal_dual.pdf
 import numpy as np
 import copy
 import sys
+import pylops
 
 class PdHgm(object):
     """
@@ -45,6 +46,9 @@ class PdHgm(object):
 
         if param_alpha is not None:
             self.param_alpha = param_alpha
+
+        if isinstance(K, pylops.LinearOperator):
+            self.pylops = False
 
     def restart_counter(self):
         """
@@ -134,6 +138,7 @@ class PdHgm(object):
 
         :return: None
         """
+
         x_gap = self.var['x'] - self.var_prev['x']
         y_gap = self.var['y'] - self.var_prev['y']
         self.sens = 1 / 2 * (np.linalg.norm(x_gap - self.G.get_proxparam() * (self.K.T * y_gap), 2) /

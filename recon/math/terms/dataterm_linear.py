@@ -1,44 +1,25 @@
-import numpy as np
+from recon.math.terms.base_term import BaseTerm
 
-from recon.helpers.objects import dimensions
 
-from scipy import sparse
-
-class DatatermLinear(object):
+class DatatermLinear(BaseTerm):
     """
-    Aquivalend to dataterm without operator:
+    Linear Dataterm without Operator
 
-    1
+    Form:
+        1/2 ||u - f||^2
 
     """
 
     def __init__(self):
-        """
-
-        :param S: sampling Matrix for
-        :param F: Operator
-        """
-        self.tau = 1
-        self.proxdata = None
-        #self.diagS = (S.T*S).diagonal()
-
-
-    def set_proxparam(self, tau):
-        self.tau = tau
-
-    def get_proxparam(self):
-        return self.tau
+        super(DatatermLinear, self).__init__(None)
 
     def set_proxdata(self, proxdata):
-        self.proxdata = proxdata #.T #.ravel()
+        self.proxdata = proxdata
 
     def prox(self, f):
         """
-        u = F_star * (( F*f + tau * S_star*f_0) / (1 + tau * S_star*S)
-        u = f + phi * A_star * f_0 /
-        :param f:
-        :return:
+            u =  (f + tau *f_0) / (1 + tau)
         """
-        u = (f +  self.get_proxparam() * self.proxdata) / (
+        u = (f + self.get_proxparam() * self.proxdata) / (
             1 + self.get_proxparam())
         return u
