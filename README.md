@@ -11,7 +11,7 @@ A python-based research toolbox for reconstruction and segmentation to solve Inv
       <td><img src="https://github.com/lucasplagwitz/recon/blob/pylops_support/examples/demo/tv_recon.gif" alt="" width="300"> 
     </td>
   </tr>
- </table
+ </table>
 
 ## Smoothing
 Smoothing of an image is a special case of regularized reconstruction.
@@ -26,8 +26,10 @@ Smoothing of an image is a special case of regularized reconstruction.
     <td><img src="https://github.com/lucasplagwitz/recon/blob/pylops_support/examples/demo/2d_smoothing_bregman.png" alt="" width="200"></td>
     </td>
   </tr>
- </table
- <img src="https://github.com/lucasplagwitz/recon/blob/pylops_support/examples/demo/2d_smoothing_1d_comp_2.png" alt="" width="600">
+ </table>
+ <p align="center">
+ <img src="https://github.com/lucasplagwitz/recon/blob/pylops_support/examples/demo/2d_smoothing_1d_comp_2.png" alt="" width="400">
+  </p>
 
 ## Segmentation
 <table>
