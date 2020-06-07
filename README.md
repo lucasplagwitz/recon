@@ -32,9 +32,9 @@ u = tv_recon.solve(D, maxiter=350, tol=10**(-4))
   </tr>
   <tr>
     <td algin="center">
-     <img src="https://github.com/lucasplagwitz/recon/blob/pylops_support/examples/demo/noise_recon.gif" alt="" width="450">
+     <img src="https://github.com/lucasplagwitz/recon/blob/master/examples/demo/noise_recon.gif" alt="" width="450">
   </td>
-      <td algin="center"><img src="https://github.com/lucasplagwitz/recon/blob/pylops_support/examples/demo/tv_recon.gif" alt="" width="450">
+      <td algin="center"><img src="https://github.com/lucasplagwitz/recon/blob/master/examples/demo/tv_recon.gif" alt="" width="450">
     </td>
   </tr>
  </table>
@@ -65,15 +65,15 @@ u0 = tv_smoothing.solve(data=noise_img, maxiter=150, tol=10**(-4))
     <th algin="center">Noisy Image</th><th algin="center">Tikhonov</th><th algin="center">TV</th><th algin="center">Bregman-TV</th>
   </tr>
   <tr>
-    <td><img src="https://github.com/lucasplagwitz/recon/blob/pylops_support/examples/demo/2d_smoothing_noisy.png" alt="" width="200"></td>
-    <td><img src="https://github.com/lucasplagwitz/recon/blob/pylops_support/examples/demo/2d_smoothing_tikhonov.png" alt="" width="200"></td>
-    <td><img src="https://github.com/lucasplagwitz/recon/blob/pylops_support/examples/demo/2d_smoothing_tv.png" alt="" width="200"></td>
-    <td><img src="https://github.com/lucasplagwitz/recon/blob/pylops_support/examples/demo/2d_smoothing_bregman.png" alt="" width="200"></td>
+    <td><img src="https://github.com/lucasplagwitz/recon/blob/master/examples/demo/2d_smoothing_noisy.png" alt="" width="200"></td>
+    <td><img src="https://github.com/lucasplagwitz/recon/blob/master/examples/demo/2d_smoothing_tikhonov.png" alt="" width="200"></td>
+    <td><img src="https://github.com/lucasplagwitz/recon/blob/master/examples/demo/2d_smoothing_tv.png" alt="" width="200"></td>
+    <td><img src="https://github.com/lucasplagwitz/recon/blob/master/examples/demo/2d_smoothing_bregman.png" alt="" width="200"></td>
     </td>
   </tr>
  </table>
  <p align="center">
- <img src="https://github.com/lucasplagwitz/recon/blob/pylops_support/examples/demo/2d_smoothing_1d_comp_2.png" alt="" width="400">
+ <img src="https://github.com/lucasplagwitz/recon/blob/master/examples/demo/2d_smoothing_1d_comp_2.png" alt="" width="400">
   </p>
 
 ## Segmentation
@@ -94,8 +94,8 @@ result, _ = multi_class_segmentation(gt, classes=classes, beta=0.001)
     <th align="center">Image</th><th align="center">Segmentation</th>
   </tr>
   <tr>
-    <td><img src="https://github.com/lucasplagwitz/recon/blob/pylops_support/examples/demo/plain_recon.gif" alt="" width="450"></td>
-      <td><img src="https://github.com/lucasplagwitz/recon/blob/pylops_support/examples/demo/plain_segmentation.gif" alt="" width="450"> 
+    <td><img src="https://github.com/lucasplagwitz/recon/blob/master/examples/demo/plain_recon.gif" alt="" width="450"></td>
+      <td><img src="https://github.com/lucasplagwitz/recon/blob/master/examples/demo/plain_segmentation.gif" alt="" width="450"> 
     </td>
   </tr>
  </table>
