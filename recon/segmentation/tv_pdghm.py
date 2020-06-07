@@ -3,6 +3,7 @@ from scipy import sparse
 import scipy.sparse.linalg
 from scipy.io import loadmat
 import matplotlib.pyplot as plt
+import pylops
 
 
 from recon.math.terms import Projection, DatatermLinear
@@ -13,8 +14,8 @@ from recon.helpers.functions import normest
 
 def multi_class_segmentation(img, classes: list, beta: float= 0.001, tau: float= None):
 
-    f = np.zeros(((img.shape[0], img.shape[1], len(classes))))
-    raveld_f =  np.zeros(((img.shape[0]*img.shape[1], len(classes))))
+    #f = np.zeros( tuple( list(img.shape) + [len(classes)]))
+    raveld_f =  np.zeros(((np.prod(img.shape), len(classes))))
 
     for i in range(len(classes)):
         #f[:, :, i] = (img.T - classes[i]) ** 2
@@ -23,30 +24,15 @@ def multi_class_segmentation(img, classes: list, beta: float= 0.001, tau: float=
     #f = np.ravel(f, order='C')
     f = raveld_f
 
-    shape = (img.shape[0], img.shape[1])
 
-
-    ex = np.ones((shape[1], 1))
-    ey = np.ones((1, shape[0]))
-    dx = sparse.diags([1, -1], [0, 1], shape=(shape[1], shape[1])).tocsr()
-    dx[shape[1] - 1, :] = 0
-    dy = sparse.diags([-1, 1], [0, 1], shape=(shape[0], shape[0])).tocsr()
-    dy[shape[0] - 1, :] = 0
-
-    grad = sparse.vstack((sparse.kron(dx, sparse.eye(img.shape[0]).tocsr()),
-                          sparse.kron(sparse.eye(img.shape[1]).tocsr(), dy)))
-
-
-
-
-    boundaries = 'neumann'
+    grad = pylops.Gradient(dims=img.shape, dtype='float64')
     # grad = FirstDerivative(262144, boundaries=boundaries)
     K = beta * grad
     # vd1 = convex_segmentation(u0, beta0, classes)
 
     G = DatatermLinear()
     G.set_proxdata(f)
-    F_star = Projection(f.shape)
+    F_star = Projection(f.shape, len(img.shape))
     solver = PdHgm(K, F_star, G)
 
     solver.var['x'] = np.zeros((K.shape[1], len(classes)))
@@ -67,16 +53,21 @@ def multi_class_segmentation(img, classes: list, beta: float= 0.001, tau: float=
     # G.set_proxdata(f)
     solver.solve()
 
-    seg = np.reshape(solver.var['x'], (img.shape[0], img.shape[1], len(classes)), order='C')
+    seg = np.reshape(solver.var['x'], tuple( list(img.shape) + [len(classes)]), order='C')
 
     a = seg
-    result = np.zeros(a.shape)
-    for i in range(a.shape[0]):  # SLOW
-        for j in range(a.shape[1]):
-            idx = np.argmin((a[i, j, :]))
-            result[i, j, idx] = 1
+    result = [] #np.zeros(a.shape)
+    #for i in range(a.shape[0]):  # SLOW
+    #    for j in range(a.shape[1]):
+    #            idx = np.argmin((a[i, j,  :]))
+    #            result[i, j, idx] = 1
+    tmp_result = np.argmin(a, axis=len(img.shape))
 
-    result0 = sum([i*result[:, :, i] for i in range(len(classes))])
+    for i,c in enumerate(classes):
+        result.append((tmp_result == i).astype(int))
 
+    result0 = sum([i*result[i] for i in range(len(classes))])
+
+    result = np.array(result)
 
     return result0, result

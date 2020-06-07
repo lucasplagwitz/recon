@@ -1,25 +1,15 @@
-import numpy as np
+import pylops
 
-class DatatermRecBregman(object):
+from recon.math.terms.base_term import BaseTerm
 
-    def __init__(self, S, F):
-        self.dim = F.shape_nd[1]
-        self.tau = 1
-        self.proxdata = np.zeros(S.shape[0])
-        self.S = S
-        self.diagS = (S.T*S).diagonal()
-        self.F = F
-        self.pk = np.zeros(F.shape_nd[1])
+class DatatermRecBregman(BaseTerm):
+
+    def __init__(self, O):
+        super(DatatermRecBregman, self).__init__(O)
+
         self.alpha = 1
-
-    def modify_data(self):
-        self.data = (self.S.T)*self.proxdata
-
-    def set_proxparam(self, tau):
-        self.tau = tau
-
-    def get_proxparam(self):
-        return self.tau
+        if isinstance(self.O, pylops.LinearOperator):
+            self.pylops = True
 
     def get_proxparam1(self):
         return self.alpha
@@ -28,14 +18,16 @@ class DatatermRecBregman(object):
         self.alpha = alpha
 
     def set_proxdata(self, proxdata):
-        self.proxdata = proxdata.T.ravel()
-        self.modify_data()
+        self.data = proxdata.T.ravel()
 
     def prox(self, f):
-
-        u = self.F.T*((self.F * (f+ self.get_proxparam() * self.get_proxparam1() * self.pk) +
+        if self.pylops:
+            O_star = self.O.H
+        else:
+            O_star = self.O.T
+        u = O_star*((self.O * (f+ self.get_proxparam() * self.get_proxparam1() * self.pk) +
                        self.get_proxparam() * self.data) / (
-                        1 + self.tau * self.diagS))
+                        1 + self.tau))
         return u
 
     def setP(self, pk):
