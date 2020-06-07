@@ -25,17 +25,20 @@ are added and the optimization problem is maintained as
 
 u = tv_recon.solve(D, maxiter=350, tol=10**(-4))
  ```
- 
-<table>
+ <p align="center">
+<table align="center">
   <tr>
-    <td>Noisy Data</td><td>TV Regularized</td>
+    <th align='center'>Noisy Data</td><th align='center'>TV Regularized</td>
   </tr>
   <tr>
-    <td><img src="https://github.com/lucasplagwitz/recon/blob/pylops_support/examples/demo/noise_recon.gif" alt="" width="300"></td>
-      <td><img src="https://github.com/lucasplagwitz/recon/blob/pylops_support/examples/demo/tv_recon.gif" alt="" width="300"> 
+    <td algin="center">
+     <img src="https://github.com/lucasplagwitz/recon/blob/pylops_support/examples/demo/noise_recon.gif" alt="" width="450">
+  </td>
+      <td algin="center"><img src="https://github.com/lucasplagwitz/recon/blob/pylops_support/examples/demo/tv_recon.gif" alt="" width="450">
     </td>
   </tr>
  </table>
+</p>
 
 ## Smoothing
 Image Smoothing is a special case of regularized reconstruction.
@@ -59,7 +62,7 @@ u0 = tv_smoothing.solve(data=noise_img, maxiter=150, tol=10**(-4))
  
 <table>
   <tr>
-    <td>Noisy Image</td><td>Tikhonov</td><td>TV</td><td>Bregman-TV</td>
+    <th algin="center">Noisy Image</th><th algin="center">Tikhonov</th><th algin="center">TV</th><th algin="center">Bregman-TV</th>
   </tr>
   <tr>
     <td><img src="https://github.com/lucasplagwitz/recon/blob/pylops_support/examples/demo/2d_smoothing_noisy.png" alt="" width="200"></td>
@@ -88,11 +91,11 @@ result, _ = multi_class_segmentation(gt, classes=classes, beta=0.001)
  ```
 <table>
   <tr>
-    <td>Image</td><td>Segmentation</td>
+    <th align="center">Image</th><th align="center">Segmentation</th>
   </tr>
   <tr>
-    <td><img src="https://github.com/lucasplagwitz/recon/blob/pylops_support/examples/demo/plain_recon.gif" alt="" width="300"></td>
-      <td><img src="https://github.com/lucasplagwitz/recon/blob/pylops_support/examples/demo/plain_segmentation.gif" alt="" width="300"> 
+    <td><img src="https://github.com/lucasplagwitz/recon/blob/pylops_support/examples/demo/plain_recon.gif" alt="" width="450"></td>
+      <td><img src="https://github.com/lucasplagwitz/recon/blob/pylops_support/examples/demo/plain_segmentation.gif" alt="" width="450"> 
     </td>
   </tr>
  </table>
