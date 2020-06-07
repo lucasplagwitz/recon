@@ -43,7 +43,7 @@ u = tv_recon.solve(D, maxiter=350, tol=10**(-4))
 ## Smoothing
 Image Smoothing is a special case of regularized reconstruction.
 <p align="center">
-<img src="https://render.githubusercontent.com/render/math?math=\Large \argmin_u ||u - f|| %2B \lambda J(u)">
+<img src="https://render.githubusercontent.com/render/math?math=\Large \argmin_u ||u - f|| %2B \alpha J(u)">
  <p/>
  
   ```python
