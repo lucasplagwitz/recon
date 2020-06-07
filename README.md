@@ -20,7 +20,7 @@ are added and the optimization problem is maintained as
  import pylops
  
  FFTop = pylops.signalprocessing.FFT(dims=(nt, nx), dir=0, nfft=nfft, sampling=dt)
- D = FFTop*d.flatten()
+ D = FFTop*d.flatten() + n
  tv_recon = PdRecon(O=FFTop, domain_shape=d.shape, reg_mode='tv', alpha=2.0)
 
 u = tv_recon.solve(D, maxiter=350, tol=10**(-4))
