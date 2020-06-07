@@ -4,6 +4,7 @@
 **/output/*.*
 **/thesis
 **/ideas
+*.idea
 
 # Compiled source #
 ###################
