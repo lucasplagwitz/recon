@@ -3,15 +3,11 @@ import numpy as np
 
 class PrimalDualBase(object):
 
-    def __init__(self, sigma=1, tau=1, max_iter=100):
+    def __init__(self, max_iter=100):
 
         self.__name__ = "Abstract Primal Dual Base class"
         self.non_diff = None
-
-        self.sigam = sigma
-        self.tau = tau
         self.max_iter = max_iter
-
 
     def update_step(self, x, x_bar, y):
         x_old = x

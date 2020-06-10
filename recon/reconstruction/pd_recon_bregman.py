@@ -6,7 +6,6 @@ import matplotlib.pyplot as plt
 
 from recon.math.terms import DatatermRecBregman, Projection, DatatermLinear
 from recon.math.pd_hgm import PdHgm
-from recon.helpers.functions import normest
 
 
 class PdReconBregman(object):
@@ -40,7 +39,6 @@ class PdReconBregman(object):
         self.data_output_path = data_output_path
         self.assessment = assessment
 
-
     @property
     def reg_mode(self):
         return self._reg_mode
@@ -56,36 +54,17 @@ class PdReconBregman(object):
     def solve(self, data: np.ndarray, maxiter: int = 150, tol: float = 5*10**(-4)):
 
         if self.reg_mode is not None:
-            if len(self.domain_shape)>2:
-                grad = Gradient(dims=self.domain_shape, edge = False, dtype='float64')
-            else:
-                dx = sparse.diags([1, -1], [0, 1], shape=(self.domain_shape[1], self.domain_shape[1])).tocsr()
-                dx[self.domain_shape[1] - 1, :] = 0
-                dy = sparse.diags([-1, 1], [0, 1], shape=(self.domain_shape[0], self.domain_shape[0])).tocsr()
-                dy[self.domain_shape[0] - 1, :] = 0
-
-                grad = sparse.vstack((sparse.kron(dx, sparse.eye(self.domain_shape[0]).tocsr()),
-                                  sparse.kron(sparse.eye(self.domain_shape[1]).tocsr(), dy)))
-
+            grad = Gradient(dims=self.domain_shape, edge = True, dtype='float64', kind='backward')
             K = self.alpha * grad
             if not self.tau:
-                if np.prod(self.domain_shape) > 25000:
-                    long = True
-                else:
-                    long = False
-                if long:
-                    print("Start evaluate tau. Long runtime.")
-                if len(self.domain_shape)>2:
-                    norm = np.abs(np.asscalar(K.eigs(neigs=1, which='LM')))
-                else:
-                    norm = normest(K)
+                norm = np.abs(np.asscalar(K.eigs(neigs=1, which='LM')))
                 sigma = 0.99 / norm
-                print("Calc tau: "+str(sigma))
+                print("Calced tau: "+str(sigma) + ". "
+                      "Next run with same alpha, set this tau value to decrease runtime.")
                 tau = sigma
             else:
                 tau = self.tau
                 sigma = tau
-
             if self.reg_mode == 'tv':
                 F_star = Projection(self.domain_shape, len(self.domain_shape))
             else:
@@ -102,17 +81,15 @@ class PdReconBregman(object):
         G.set_proxdata(data.ravel())
         F_star.set_proxparam(sigma)
 
-
         pk = np.zeros(self.domain_shape)
         pk = pk.T.ravel()
         plt.Figure()
         ulast = np.zeros(self.domain_shape)
         u01 = ulast
-        i = 0
 
+        i = 0
         while np.linalg.norm(self.O * u01.ravel() - data.ravel()) > self.assessment:
-            print(np.linalg.norm(self.O * u01.ravel() - data.ravel()))
-            print(self.assessment)
+            print("norm error: " + str(np.linalg.norm(self.O * u01.ravel() - data.ravel())))
 
             self.solver = PdHgm(K, F_star, G)
             self.solver.maxiter = maxiter

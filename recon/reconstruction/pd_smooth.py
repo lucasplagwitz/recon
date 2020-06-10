@@ -1,5 +1,5 @@
 from pylops.basicoperators import Gradient
-from pylops import LinearOperator
+from pylops import LinearOperator, Diagonal
 import numpy as np
 from scipy import sparse
 
@@ -21,7 +21,7 @@ class PdSmooth(object):
     def __init__(self,
                  domain_shape: np.ndarray,
                  reg_mode: str = '',
-                 alpha: float= 0.01,
+                 alpha=0.01,
                  tau: float = None):
         self._reg_mode = None
 
@@ -31,6 +31,13 @@ class PdSmooth(object):
         self.reg_mode = reg_mode
         self.solver = None
 
+        if type(alpha) is not float:
+            if self.alpha.shape == domain_shape:
+                self.alpha = Diagonal(self.alpha.ravel())
+            else:
+                msg = "shape of local parameter alpha does not match: "+ \
+                      str(self.alpha.shape) + "!=" + str(domain_shape)
+                raise ValueError(msg)
 
     @property
     def reg_mode(self):
@@ -47,34 +54,14 @@ class PdSmooth(object):
     def solve(self, data: np.ndarray, maxiter: int = 150, tol: float = 5*10**(-4)):
 
         if self.reg_mode is not None:
-            if len(self.domain_shape)>2:
-                grad = Gradient(dims=self.domain_shape, edge = True, dtype='float64')
-            else:
-                ex = np.ones((self.domain_shape[1], 1))
-                ey = np.ones((1, self.domain_shape[0]))
-                dx = sparse.diags([1, -1], [0, 1], shape=(self.domain_shape[1], self.domain_shape[1])).tocsr()
-                dx[self.domain_shape[1] - 1, :] = 0
-                dy = sparse.diags([-1, 1], [0, 1], shape=(self.domain_shape[0], self.domain_shape[0])).tocsr()
-                dy[self.domain_shape[0] - 1, :] = 0
+            grad = Gradient(dims=self.domain_shape, edge = True, dtype='float64', kind='backward')
+            K = grad * self.alpha
 
-                grad = sparse.vstack((sparse.kron(dx, sparse.eye(self.domain_shape[0]).tocsr()),
-                                  sparse.kron(sparse.eye(self.domain_shape[1]).tocsr(), dy)))
-
-            K = self.alpha * grad
             if not self.tau:
-                if np.prod(self.domain_shape) > 25000:
-                    long = True
-                else:
-                    long = False
-                if long:
-                    print("Start evaluate tau. Long runtime.")
-                if len(self.domain_shape)>2:
-                    norm = np.abs(np.asscalar(K.eigs(neigs=1, which='LM')))
-                else:
-                    norm = normest(K)
+                norm = np.abs(np.asscalar(K.eigs(neigs=1, which='LM')))
                 sigma = 0.99 / norm
-                if long:
-                    print("Calc tau: "+str(sigma))
+                print("Calced tau: " + str(sigma) + ". "
+                      "Next run with same alpha: set this tau value to decrease runtime.")
                 tau = sigma
             else:
                 tau = self.tau

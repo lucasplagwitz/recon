@@ -1,12 +1,9 @@
-from pylops.basicoperators import Gradient
-from pylops import LinearOperator
+from pylops import Gradient
 import numpy as np
-from scipy import sparse
 import matplotlib.pyplot as plt
 
 from recon.math.terms import DatatermLinearRecBregman, Projection, DatatermLinear
 from recon.math.pd_hgm import PdHgm
-from recon.helpers.functions import normest
 
 
 class PdSmoothBregman(object):
@@ -54,32 +51,13 @@ class PdSmoothBregman(object):
     def solve(self, data: np.ndarray, maxiter: int = 150, tol: float = 5*10**(-4)):
 
         if self.reg_mode is not None:
-            if len(self.domain_shape)>2:
-                grad = Gradient(dims=self.domain_shape, edge = True, dtype='float64')
-            else:
-                dx = sparse.diags([1, -1], [0, 1], shape=(self.domain_shape[1], self.domain_shape[1])).tocsr()
-                dx[self.domain_shape[1] - 1, :] = 0
-                dy = sparse.diags([-1, 1], [0, 1], shape=(self.domain_shape[0], self.domain_shape[0])).tocsr()
-                dy[self.domain_shape[0] - 1, :] = 0
-
-                grad = sparse.vstack((sparse.kron(dx, sparse.eye(self.domain_shape[0]).tocsr()),
-                                  sparse.kron(sparse.eye(self.domain_shape[1]).tocsr(), dy)))
-
+            grad = Gradient(dims=self.domain_shape, edge = True, kind='backward', dtype='float64')
             K = self.alpha * grad
             if not self.tau:
-                if np.prod(self.domain_shape) > 25000:
-                    long = True
-                else:
-                    long = False
-                if long:
-                    print("Start evaluate tau. Long runtime.")
-                if len(self.domain_shape)>2:
-                    norm = np.abs(np.asscalar(K.eigs(neigs=1, which='LM')))
-                else:
-                    norm = normest(K)
+                norm = np.abs(np.asscalar(K.eigs(neigs=1, which='LM')))
                 sigma = 0.99 / norm
-                if long:
-                    print("Calc tau: "+str(sigma))
+                print("Calced tau: " + str(sigma) + ". "
+                      "Next run with same alpha: Set this tau value to decrease runtime.")
                 tau = sigma
             else:
                 tau = self.tau
@@ -101,7 +79,6 @@ class PdSmoothBregman(object):
         G.set_proxdata(data.ravel())
         F_star.set_proxparam(sigma)
 
-
         pk = np.zeros(self.domain_shape)
         pk = pk.T.ravel()
         plt.Figure()
@@ -110,8 +87,7 @@ class PdSmoothBregman(object):
         i = 0
 
         while np.linalg.norm(u01.ravel() - data.ravel()) > self.assessment:
-            print(np.linalg.norm(u01.ravel() - data.ravel()))
-            print(self.assessment)
+            print("norm error: " + str(np.linalg.norm(u01.ravel() - data.ravel())))
 
             self.solver = PdHgm(K, F_star, G)
             self.solver.maxiter = maxiter
@@ -131,7 +107,6 @@ class PdSmoothBregman(object):
                 plt.savefig(self.data_output_path + 'Bregman_reconstruction_iter' + str(i) + '.png', bbox_inches='tight',
                             pad_inches=0)
                 plt.close()
-
 
         return np.reshape(self.solver.var['x'], self.domain_shape)
 

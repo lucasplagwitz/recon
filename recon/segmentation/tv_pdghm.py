@@ -14,21 +14,15 @@ from recon.helpers.functions import normest
 
 def multi_class_segmentation(img, classes: list, beta: float= 0.001, tau: float= None):
 
-    #f = np.zeros( tuple( list(img.shape) + [len(classes)]))
     raveld_f =  np.zeros(((np.prod(img.shape), len(classes))))
 
     for i in range(len(classes)):
-        #f[:, :, i] = (img.T - classes[i]) ** 2
         raveld_f[:,i] = (img.ravel() - classes[i]) ** 2
 
-    #f = np.ravel(f, order='C')
     f = raveld_f
 
-
-    grad = pylops.Gradient(dims=img.shape, dtype='float64')
-    # grad = FirstDerivative(262144, boundaries=boundaries)
+    grad = pylops.Gradient(dims=img.shape, edge=True, dtype='float64', kind="backward")
     K = beta * grad
-    # vd1 = convex_segmentation(u0, beta0, classes)
 
     G = DatatermLinear()
     G.set_proxdata(f)
@@ -41,8 +35,10 @@ def multi_class_segmentation(img, classes: list, beta: float= 0.001, tau: float=
     if tau:
         tau0 = tau
     else:
-        tau0 = 0.99 / normest(K)
-        print(tau0)
+        norm = np.abs(np.asscalar(K.eigs(neigs=1, which='LM')))
+        tau0 = 0.99 / norm
+        print("Calced tau: " + str(tau0) + ". "
+              "Next run with same beta, set this tau value to decrease runtime.")
     sigma0 = tau0
 
     G.set_proxparam(tau0)
@@ -50,7 +46,6 @@ def multi_class_segmentation(img, classes: list, beta: float= 0.001, tau: float=
     solver.maxiter = 200
     solver.tol = 10 ** (-6)
 
-    # G.set_proxdata(f)
     solver.solve()
 
     seg = np.reshape(solver.var['x'], tuple( list(img.shape) + [len(classes)]), order='C')

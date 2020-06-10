@@ -12,7 +12,7 @@ data_import_path = "./data/"
 data_output_path = data_import_path+"output/"
 
 img = nib.load(data_import_path+"PAC2018.nii")
-d = np.array(img.dataobj)[20:80,20:82, 50:55]
+d = np.array(img.dataobj) # [20:80,20:82, 50:55]
 d = d/np.max(d)
 gt = d
 
@@ -24,8 +24,8 @@ t = np.arange(nx)*dx
 x = np.arange(ny)*dy
 y = np.arange(nz)*dz
 f0 = 10
-nfft = 2**6
-nfftk = 2**6
+nfft = 2**8
+nfftk = 2**8
 
 FFTop = pylops.signalprocessing.FFTND(dims=(nx, ny, nz),
                                       nffts=(nfft, nfftk, nfftk),
@@ -139,36 +139,39 @@ new_image.to_filename(data_output_path+'tv_recon.nii')
 
 # Bregman reconstruction #
 ##########################
-tv_recon = PdReconBregman(O=FFTop,
-                          domain_shape=d.shape,
-                          reg_mode='tv',
-                          tau = 0.05,
-                          alpha=0.15,
-                          assessment=10*sigma*np.max(abs(gt.ravel()))*np.sqrt(np.prod(gt.shape)))
+# too long at this point
+bregman = False
+if bregman:
+    tv_recon = PdReconBregman(O=FFTop,
+                              domain_shape=d.shape,
+                              reg_mode='tv',
+                              tau = 0.05,
+                              alpha=0.15,
+                              assessment=10*sigma*np.max(abs(gt.ravel()))*np.sqrt(np.prod(gt.shape)))
 
-u = np.real(tv_recon.solve(D))
+    u = np.real(tv_recon.solve(D))
 
-fig, axs = plt.subplots(2, 2, figsize=(10, 6))
-axs[0][0].imshow(d[:, :, nz // 2], vmin=np.min(d), vmax=np.max(d), cmap='seismic')
-axs[0][0].set_title('Signal')
-axs[0][0].axis('tight')
-axs[0][1].imshow(np.abs(np.fft.fftshift(D.reshape(nfft, nfftk, nfftk),
-                                            axes=1)[:20, :, nfftk // 2]),
-                     cmap='seismic')
-axs[0][1].set_title('Fourier Transform')
-axs[0][1].axis('tight')
-axs[1][0].imshow(u[:, :, nz // 2], vmin=np.min(d), vmax=np.max(d), cmap='seismic')
-axs[1][0].set_title('Inverted')
-axs[1][0].axis('tight')
-axs[1][1].imshow(d[:, :, nz // 2] - u[:, :, nz // 2]
-                     , vmin=np.min(d), vmax=np.max(d), cmap='seismic')
-axs[1][1].set_title('Error')
-axs[1][1].axis('tight')
-fig.tight_layout()
+    fig, axs = plt.subplots(2, 2, figsize=(10, 6))
+    axs[0][0].imshow(d[:, :, nz // 2], vmin=np.min(d), vmax=np.max(d), cmap='seismic')
+    axs[0][0].set_title('Signal')
+    axs[0][0].axis('tight')
+    axs[0][1].imshow(np.abs(np.fft.fftshift(D.reshape(nfft, nfftk, nfftk),
+                                                axes=1)[:20, :, nfftk // 2]),
+                         cmap='seismic')
+    axs[0][1].set_title('Fourier Transform')
+    axs[0][1].axis('tight')
+    axs[1][0].imshow(u[:, :, nz // 2], vmin=np.min(d), vmax=np.max(d), cmap='seismic')
+    axs[1][0].set_title('Inverted')
+    axs[1][0].axis('tight')
+    axs[1][1].imshow(d[:, :, nz // 2] - u[:, :, nz // 2]
+                         , vmin=np.min(d), vmax=np.max(d), cmap='seismic')
+    axs[1][1].set_title('Error')
+    axs[1][1].axis('tight')
+    fig.tight_layout()
 
-plt.savefig(data_output_path + "bregman_recon.png")
-plt.close(fig)
+    plt.savefig(data_output_path + "bregman_recon.png")
+    plt.close(fig)
 
-new_image = nib.Nifti1Image(u, affine=np.eye(4))
-new_image.to_filename(data_output_path + 'bregman_recon.nii')
+    new_image = nib.Nifti1Image(u, affine=np.eye(4))
+    new_image.to_filename(data_output_path + 'bregman_recon.nii')
 

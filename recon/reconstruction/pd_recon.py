@@ -4,6 +4,7 @@ import numpy as np
 from recon.math.terms import Dataterm, Projection, DatatermLinear
 from recon.math.pd_hgm import PdHgm
 
+
 class PdRecon(object):
     """
     A Reconstruction object to solve regularized inverse reconstruction problems.
@@ -46,13 +47,15 @@ class PdRecon(object):
     def solve(self, f: np.ndarray, maxiter: int = 150, tol: float = 5*10**(-4)):
 
         if self.reg_mode is not None:
-            grad = Gradient(self.domain_shape, dtype='float64')
+            grad = Gradient(self.domain_shape, edge = True, dtype='float64', kind='backward')
             K = self.alpha * grad
 
             if not self.tau:
                 norm = np.abs(np.asscalar(K.eigs(neigs=1, which='LM')))
                 sigma = 0.99 / norm
                 tau = sigma
+                print("Calced tau: " + str(sigma) + ". "
+                      "Next run with same alpha, set this tau value to decrease runtime.")
             else:
                 tau = self.tau
                 sigma = tau

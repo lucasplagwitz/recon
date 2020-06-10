@@ -22,7 +22,7 @@ class CtRt(FcthdlOperator):
             if len(self.domain_dim) == 2 and self.domain_dim[1] == 1:
                 self.center = int((self.domain_dim[0] + 1) / 2)
             else:
-                self.cemter = int((self.domain_dim + 1) / 2)
+                self.center = int((self.domain_dim + 1) / 2)
 
         # ToDO: input check
 

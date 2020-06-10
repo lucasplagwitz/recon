@@ -12,7 +12,7 @@ data_import_path = "./data/"
 data_output_path = "./data/output/"
 
 img = nib.load(data_import_path+"PAC2018.nii")
-d = np.array(img.dataobj)[20:80, 20:82, 30:70]
+d = np.array(img.dataobj) #[20:80, 20:82, 30:70]
 d = d/np.max(d)
 gt = d
 
