@@ -1,8 +1,10 @@
+# required nilearn
 import numpy as np
 import matplotlib.pyplot as plt
 
 from recon.reconstruction import PdRecon, PdReconBregman
-
+import numpy as np
+from nilearn import datasets
 import pylops
 import nibabel as nib
 
@@ -11,7 +13,10 @@ plt.close('all')
 data_import_path = "./data/"
 data_output_path = data_import_path+"output/"
 
-img = nib.load(data_import_path+"PAC2018.nii")
+n_subjects = 1
+oasis_dataset = datasets.fetch_oasis_vbm(n_subjects=n_subjects)
+
+img = nib.load(oasis_dataset.gray_matter_maps[0])
 d = np.array(img.dataobj) # [20:80,20:82, 50:55]
 d = d/np.max(d)
 gt = d
@@ -24,8 +29,8 @@ t = np.arange(nx)*dx
 x = np.arange(ny)*dy
 y = np.arange(nz)*dz
 f0 = 10
-nfft = 2**8
-nfftk = 2**8
+nfft = 2**7
+nfftk = 2**7
 
 FFTop = pylops.signalprocessing.FFTND(dims=(nx, ny, nz),
                                       nffts=(nfft, nfftk, nfftk),

@@ -3,6 +3,7 @@ import matplotlib.pyplot as plt
 
 from recon.segmentation.tv_pdghm import multi_class_segmentation
 
+from nilearn import datasets
 import pylops
 import nibabel as nib
 
@@ -11,7 +12,10 @@ plt.close('all')
 data_import_path = "./data/"
 data_output_path = "./data/output/"
 
-img = nib.load(data_import_path+"PAC2018.nii")
+n_subjects = 1
+oasis_dataset = datasets.fetch_oasis_vbm(n_subjects=n_subjects)
+
+img = nib.load(oasis_dataset.gray_matter_maps[0])
 d = np.array(img.dataobj) #[20:80, 20:82, 30:70]
 d = d/np.max(d)
 gt = d
