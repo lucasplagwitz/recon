@@ -1,5 +1,5 @@
 from pylops.basicoperators import Gradient
-from pylops import LinearOperator, Diagonal
+from pylops import LinearOperator, Diagonal, VStack, BlockDiag
 import numpy as np
 from scipy import sparse
 
@@ -30,10 +30,12 @@ class PdSmooth(object):
         self.tau = tau
         self.reg_mode = reg_mode
         self.solver = None
+        self.local_param = False
 
         if type(alpha) is not float:
-            if self.alpha.shape == domain_shape:
+            if self.alpha.shape == self.domain_shape:
                 self.alpha = Diagonal(self.alpha.ravel())
+                self.local_param = True
             else:
                 msg = "shape of local parameter alpha does not match: "+ \
                       str(self.alpha.shape) + "!=" + str(domain_shape)
@@ -55,7 +57,10 @@ class PdSmooth(object):
 
         if self.reg_mode is not None:
             grad = Gradient(dims=self.domain_shape, edge = True, dtype='float64', kind='backward')
-            K = grad * self.alpha
+            if self.local_param:
+                K = BlockDiag([self.alpha]*len(self.domain_shape)) * grad
+            else:
+                K = self.alpha * grad
 
             if not self.tau:
                 norm = np.abs(np.asscalar(K.eigs(neigs=1, which='LM')))

@@ -1,10 +1,10 @@
 """
+Based on exmaple from: https://github.com/equinor/pylops
+
 Fourier Transform
 =================
-This example shows how to use the :py:class:`pylops.signalprocessing.FFT`,
-:py:class:`pylops.signalprocessing.FFT2D`
-and :py:class:`pylops.signalprocessing.FFTND` operators to apply the Fourier
-Transform to the model and the inverse Fourier Transform to the data.
+Base on PyLops Fourier Transformation, we add noise and to die fourier k-space data and
+reconstruct the noisy data by TV-regularized Primal-Dual.
 """
 import numpy as np
 import matplotlib.pyplot as plt
@@ -15,7 +15,7 @@ import pylops
 
 plt.close('all')
 
-data_output_path = "./data/pylops/output/"
+data_output_path = "./data/output/"
 
 dt = 0.005
 nt, nx = 100, 20
@@ -96,7 +96,7 @@ tv_recon = PdRecon(O=FFTop,
                    tau=None)
 
 
-u = tv_recon.solve(D)
+u = np.real(tv_recon.solve(D))
 rel_tvrec = np.linalg.norm(d - u, 2) #/np.linalg.norm(gt)
 
 fig, axs = plt.subplots(2, 2, figsize=(10, 6))

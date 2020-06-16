@@ -1,3 +1,4 @@
+# Based on exmaple from: https://github.com/equinor/pylops
 import numpy as np
 import matplotlib.pyplot as plt
 import pylops

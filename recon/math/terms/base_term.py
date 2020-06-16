@@ -21,3 +21,21 @@ class BaseTerm(object):
         proximal operator of term
         """
         pass
+
+
+class BaseRegTerm(object):
+
+    def __init__(self):
+        self.sigma = 0.99
+
+    def set_proxparam(self, sigma):
+        self.tau = sigma
+
+    def get_proxparam(self):
+        return self.sigma
+
+    def prox(self, f):
+        """
+        proximal operator of term
+        """
+        pass
