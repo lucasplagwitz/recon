@@ -2,11 +2,11 @@
 A python-based research toolbox for reconstruction and segmentation to solve Inverse Problems.
 
 ## Reconstruction
-In terms of Inverse Problems one is intrested in the reason 
+In terms of Inverse Problems one is interested in the reason 
 <img src="https://render.githubusercontent.com/render/math?math=\Large u">
 of measurment data 
 <img src="https://render.githubusercontent.com/render/math?math=\Large f">
-respect to some forward map 
+with regard to a forward map 
 <img src="https://render.githubusercontent.com/render/math?math=\Large A">.
 Due to the fact of measurement inaccuracies, regularization terms 
 <img src="https://render.githubusercontent.com/render/math?math=\Large J">
@@ -103,4 +103,4 @@ result, _ = multi_class_segmentation(gt, classes=classes, beta=0.001)
   
   ## References
   1. The Repo based on [Enhancing joint reconstruction and segmentation with non-convex Bregman iteration](https://iopscience.iop.org/article/10.1088/1361-6420/ab0b77/pdf) - Veronica Corona et al 2019 Inverse Problems 35, and their code on [GitHub](https://github.com/veronicacorona/JointReconstructionSegmentation).
-  1. To outsource operator handling [pylops](https://github.com/equinor/pylops) package is used.
+  1. To outsource operator handling [PyLops](https://github.com/equinor/pylops) package is used.
