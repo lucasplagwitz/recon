@@ -16,12 +16,12 @@ are added and the optimization problem is maintained as
  <p/>
  
  ```python
- from recon.reconstruction import PdRecon
+ from recon.interfaces import Recon
  import pylops
  
  FFTop = pylops.signalprocessing.FFT(dims=(nt, nx), dir=0, nfft=nfft, sampling=dt)
  D = FFTop*d.flatten() + n
- tv_recon = PdRecon(O=FFTop, domain_shape=d.shape, reg_mode='tv', alpha=2.0)
+ tv_recon = Recon(O=FFTop, domain_shape=d.shape, reg_mode='tv', alpha=2.0)
 
 u = tv_recon.solve(D, maxiter=350, tol=10**(-4))
  ```
@@ -48,7 +48,7 @@ Image Smoothing is a special case of regularized reconstruction.
  
   ```python
 from scipy import misc
-from recon.reconstruction import PdSmooth
+from recon.interfaces import Smooth
 
 img = misc.ascent()
 gt = img/np.max(img)
@@ -56,7 +56,7 @@ sigma = 0.2
 n = sigma*np.max(gt.ravel()*np.random.uniform(-1,1, gt.shape)
 noise_img = gt + n
  
-tv_smoothing = PdSmooth(domain_shape=gt.shape, reg_mode='tv', alpha=0.2, tau=2.3335)
+tv_smoothing = Smooth(domain_shape=gt.shape, reg_mode='tv', alpha=0.2, tau=2.3335)
 u0 = tv_smoothing.solve(data=noise_img, maxiter=150, tol=10**(-4))
  ```
  
@@ -79,7 +79,7 @@ u0 = tv_smoothing.solve(data=noise_img, maxiter=150, tol=10**(-4))
 ## Segmentation
 Some segmentation methods are implemented as part of regularization approaches and performance measurements.
   ```python
-from recon.segmentation.tv_pdghm import multi_class_segmentation
+from recon.interfaces import Segmentation
 import nibabel as nib
 
 img = nib.load("file.nii")
@@ -87,7 +87,8 @@ d = np.array(img.dataobj)
 gt = d/np.max(d)
 classes = [0, 0.2, 0.4, 0.7]
 
-result, _ = multi_class_segmentation(gt, classes=classes, beta=0.001)
+segmentation = Segmentation(gt.shape, classes=classes, alpha=0.001)
+result, _ = segmentation.solve(image)
  ```
 <table>
   <tr>
