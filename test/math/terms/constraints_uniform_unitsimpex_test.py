@@ -1,6 +1,6 @@
 
 
-from recon.math.terms.constraints_uniform_unitsimplex import ConstraintsUniformUnitsimplex
+from experimental.terms.constraints_uniform_unitsimplex import ConstraintsUniformUnitsimplex
 
 from numpy.testing import assert_almost_equal
 

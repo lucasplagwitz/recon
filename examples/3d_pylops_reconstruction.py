@@ -3,7 +3,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import pylops
 
-from recon.reconstruction import PdRecon
+from recon.interfaces import Recon
 
 plt.close('all')
 
@@ -88,10 +88,10 @@ plt.close(fig)
 
 # Gaussian noise - TV regularised Reconstruction #
 ##################################################
-tv_recon = PdRecon(O=FFTop,
-                   domain_shape=d.shape,
-                   reg_mode='tv',
-                   alpha=15.0)
+tv_recon = Recon(O=FFTop,
+                 domain_shape=d.shape,
+                 reg_mode='tv',
+                 alpha=15.0)
 
 u = np.real(tv_recon.solve(D))
 

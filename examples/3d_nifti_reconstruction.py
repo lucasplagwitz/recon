@@ -2,7 +2,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-from recon.reconstruction import PdRecon, PdReconBregman
+from recon.interfaces import Recon, ReconBregman
 import numpy as np
 from nilearn import datasets
 import pylops
@@ -110,10 +110,11 @@ new_image.to_filename(data_output_path+'noise_recon_error.nii')
 
 # Gaussian noise - TV regularised Reconstruction #
 ##################################################
-tv_recon = PdRecon(O=FFTop,
-                   domain_shape=d.shape,
-                   reg_mode='tv',
-                   alpha=0.05)
+tv_recon = Recon(O=FFTop,
+                 domain_shape=d.shape,
+                 reg_mode='tv',
+                 alpha=0.1,
+                 tau=2.0)
 
 u = np.real(tv_recon.solve(D))
 
@@ -147,12 +148,12 @@ new_image.to_filename(data_output_path+'tv_recon.nii')
 # too long at this point
 bregman = False
 if bregman:
-    tv_recon = PdReconBregman(O=FFTop,
-                              domain_shape=d.shape,
-                              reg_mode='tv',
-                              tau = 0.05,
-                              alpha=0.15,
-                              assessment=10*sigma*np.max(abs(gt.ravel()))*np.sqrt(np.prod(gt.shape)))
+    tv_recon = ReconBregman(O=FFTop,
+                            domain_shape=d.shape,
+                            reg_mode='tv',
+                            tau = 0.05,
+                            alpha=0.15,
+                            assessment=10*sigma*np.max(abs(gt.ravel()))*np.sqrt(np.prod(gt.shape)))
 
     u = np.real(tv_recon.solve(D))
 

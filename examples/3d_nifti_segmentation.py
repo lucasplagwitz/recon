@@ -1,10 +1,9 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-from recon.segmentation.tv_pdghm import multi_class_segmentation
+from recon.interfaces import Segmentation
 
 from nilearn import datasets
-import pylops
 import nibabel as nib
 
 plt.close('all')
@@ -23,9 +22,8 @@ gt = d
 
 classes = [0, 0.2, 0.4, 0.7]
 
-
-result, _ = multi_class_segmentation(gt, classes=classes, beta=0.001)
-
+segmentation = Segmentation(gt.shape, classes=classes, alpha=0.1, tau=1.7)
+result, _ = segmentation.solve(gt)
 
 plt.Figure()
 plt.imshow(result[:,:,35])
