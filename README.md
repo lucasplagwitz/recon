@@ -25,20 +25,6 @@ are added and the optimization problem is maintained as
 
 u = tv_recon.solve(D, maxiter=350, tol=10**(-4))
  ```
- <p align="center">
-<table align="center">
-  <tr>
-    <th align='center'>Noisy Data</td><th align='center'>TV Regularized</td>
-  </tr>
-  <tr>
-    <td algin="center">
-     <img src="https://github.com/lucasplagwitz/recon/blob/master/examples/demo/noise_recon.gif" alt="" width="450">
-  </td>
-      <td algin="center"><img src="https://github.com/lucasplagwitz/recon/blob/master/examples/demo/tv_recon.gif" alt="" width="450">
-    </td>
-  </tr>
- </table>
-</p>
 
 ## Smoothing
 Image Smoothing is a special case of regularized reconstruction.
@@ -65,10 +51,10 @@ u0 = tv_smoothing.solve(data=noise_img, maxiter=150, tol=10**(-4))
     <th algin="center">Noisy Image</th><th algin="center">Tikhonov</th><th algin="center">TV</th><th algin="center">Bregman-TV</th>
   </tr>
   <tr>
-    <td><img src="https://github.com/lucasplagwitz/recon/blob/master/examples/demo/2d_smoothing_noisy.png" alt="" width="200"></td>
-    <td><img src="https://github.com/lucasplagwitz/recon/blob/master/examples/demo/2d_smoothing_tikhonov.png" alt="" width="200"></td>
-    <td><img src="https://github.com/lucasplagwitz/recon/blob/master/examples/demo/2d_smoothing_tv.png" alt="" width="200"></td>
-    <td><img src="https://github.com/lucasplagwitz/recon/blob/master/examples/demo/2d_smoothing_bregman.png" alt="" width="200"></td>
+    <td><img src="./examples/demo/2d_smoothing_noisy.png" alt="" width="200"></td>
+    <td><img src="./examples/demo/2d_smoothing_tikhonov.png" alt="" width="200"></td>
+    <td><img src="./examples/demo/2d_smoothing_tv.png" alt="" width="200"></td>
+    <td><img src="./examples/demo/2d_smoothing_bregman.png" alt="" width="200"></td>
     </td>
   </tr>
  </table>
@@ -82,6 +68,7 @@ Some segmentation methods are implemented as part of regularization approaches a
 from recon.segmentation.tv_pdghm import multi_class_segmentation
 import nibabel as nib
 
+# segmentation of 3D nifti image
 img = nib.load("file.nii")
 d = np.array(img.dataobj)
 gt = d/np.max(d)
@@ -89,16 +76,6 @@ classes = [0, 0.2, 0.4, 0.7]
 
 result, _ = multi_class_segmentation(gt, classes=classes, beta=0.001)
  ```
-<table>
-  <tr>
-    <th align="center">Image</th><th align="center">Segmentation</th>
-  </tr>
-  <tr>
-    <td><img src="https://github.com/lucasplagwitz/recon/blob/master/examples/demo/plain_recon.gif" alt="" width="450"></td>
-      <td><img src="https://github.com/lucasplagwitz/recon/blob/master/examples/demo/plain_segmentation.gif" alt="" width="450"> 
-    </td>
-  </tr>
- </table>
 
   
   ## References
