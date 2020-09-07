@@ -11,6 +11,11 @@ class Dataterm(BaseDataterm):
 
     def __init__(self, O, sampling=None):
         super(Dataterm, self).__init__(O, sampling=sampling)
+        self.lam = 1
+        self.faktor = 1
+
+    def set_weight(self, lam):
+        self.lam = lam
 
     def prox(self, f):
         """
@@ -19,8 +24,8 @@ class Dataterm(BaseDataterm):
         u = F_star * (( F*f + tau * S_star*f_0) / (1 + tau*diag_sampling)
         """
         u = self.O.H*(
-                (self.O*f + self.get_proxparam() * self.data) /
-                (1 + self.get_proxparam() * self.diag_sampling)
+                (self.O*f + self.get_proxparam() * self.lam * self.data) /
+                (1 + self.get_proxparam() * self.lam * self.diag_sampling)
             )
 
-        return u
+        return self.faktor * u

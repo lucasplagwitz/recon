@@ -1,6 +1,8 @@
 import numpy as np
 from skimage.transform import radon, iradon
 
+import sys
+#sys.path.append("/Users/lucasplagwitz/git_projects/recon")
 
 from experimental.operator.fcthdl_operator import FcthdlOperator
 
@@ -13,7 +15,7 @@ class CtRt(FcthdlOperator):
     bwfcthdl: IRT
     """
 
-    def __init__(self, domain_dim, center=np.array([0])):
+    def __init__(self, domain_dim, center=np.array([0]), theta=None):
 
         self.domain_dim = domain_dim  # attention: self doppelt...
         self.center = center
@@ -33,7 +35,10 @@ class CtRt(FcthdlOperator):
 
         roll_val = self.center - self.onevec
 
-        self.theta = np.linspace(0., 180., 100, endpoint=False) # max(self.domain_dim)
+        if theta is not None:
+            self.theta = theta
+        else:
+            self.theta = np.linspace(0., 180., 100, endpoint=False) # max(self.domain_dim)
 
         fwfcthdl = lambda u: radon(u, theta=self.theta, circle=False)
 

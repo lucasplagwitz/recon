@@ -21,7 +21,7 @@ class PdHgm(object):
                 3. update sens
     """
 
-    def __init__(self, K, F_star, G, param_alpha = None):
+    def __init__(self, K, F_star, G):
         """
         Consturctor. Set required params.
         :param K:
@@ -39,9 +39,6 @@ class PdHgm(object):
         self.plot_on = False
 
         self.var = {'x': None, 'y': None}
-
-        if param_alpha is not None:
-            self.param_alpha = param_alpha
 
         if isinstance(K, pylops.LinearOperator):
             self.pylops = False

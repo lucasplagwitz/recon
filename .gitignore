@@ -2,6 +2,7 @@
 ##################
 
 **/output/*.*
+__pycache__/
 **/thesis
 **/ideas
 *.idea

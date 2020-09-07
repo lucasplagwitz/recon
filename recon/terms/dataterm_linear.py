@@ -13,11 +13,15 @@ class DatatermLinear(BaseDataterm):
     def __init__(self):
         super(DatatermLinear, self).__init__(None)
 
+        self.lam = 1
+
+    def set_weight(self, lam):
+        self.lam = lam
 
     def prox(self, f):
         """
             u =  (f + tau *f_0) / (1 + tau)
         """
-        u = (f + self.get_proxparam() * self.data) / (
-            1 + self.get_proxparam())
+        u = (f + self.get_proxparam() * self.lam * self.data) / (
+            1 + self.get_proxparam() * self.lam)
         return u

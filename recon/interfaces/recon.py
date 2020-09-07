@@ -21,16 +21,24 @@ class Recon(BaseInterface):
                  domain_shape: np.ndarray,
                  reg_mode: str = '',
                  alpha: float= 0.01,
-                 tau: float = None):
+                 tau: float = None,
+                 weight_term: str = 'reg'):
 
         super(Recon, self).__init__(domain_shape=domain_shape,
+                                    image_shape=O.image_dim,
                                     reg_mode=reg_mode,
                                     alpha=alpha,
                                     possible_reg_modes=['tv', 'tikhonov', None],
-                                    tau=tau)
+                                    tau=tau,
+                                    weight_term=weight_term)
 
         self.O = O
         self.G = Dataterm(self.O)
+        if weight_term == 'data':
+            if isinstance(alpha, np.ndarray):
+                self.G.set_weight(alpha.ravel())
+            else:
+                self.G.set_weight(alpha)
 
     def solve(self, data: np.ndarray, max_iter: int = 150, tol: float = 5*10**(-4)):
 
