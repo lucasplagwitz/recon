@@ -1,4 +1,5 @@
-numpy
 imageio
-sklearn
+numpy
 pylops
+sklearn
+skimage
