@@ -71,6 +71,7 @@ class PdHgmTGV(object):
             v_bar = 2*v - v_old
 
             #self.update_sensivity(u, u_old, v, v_old, grad)
+            # test
             u_gap = u-u_old
             v_gap = v-v_old
             sens = 1/2*(
