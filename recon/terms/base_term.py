@@ -3,10 +3,11 @@ import numpy as np
 
 class BaseDataterm(object):
 
-    def __init__(self, O, sampling=None):
+    def __init__(self, operator, data, sampling=None):
+        self._data = None
+
         self.tau = 0.99
-        self.O = O
-        self.data = None
+        self.operator = operator
         self.samling = sampling
         if not sampling:
             self.sampling = 1
@@ -16,38 +17,21 @@ class BaseDataterm(object):
             self.diag_sampling = (self.sampling.T * self.sampling).diagonal()
             self.sampling_transpose = self.samling.T
 
-    def set_proxparam(self, tau):
-        self.tau = tau
+    @property
+    def data(self):
+        return self._data
 
-    def get_proxparam(self):
-        return self.tau
-
-    def set_proxdata(self, proxdata):
-        if isinstance(proxdata, (int, float)):
-            self.data = proxdata
+    @data.setter
+    def data(self, value):
+        if isinstance(value, (int, float)):
+            self.data = value
+        elif isinstance(value, np.ndarray) and len(value.shape):
+            self._data = (self.sampling_transpose)*value
         else:
-            self.data = (self.sampling_transpose)*proxdata
-
-    def prox(self, f):
-        """
-        proximal operator of term
-        """
-        pass
+            raise ValueError("Require int, float, np.ndarray in raveled form.")
 
 
 class BaseRegTerm(object):
 
-    def __init__(self):
-        self.sigma = 0.99
-
-    def set_proxparam(self, sigma):
-        self.tau = sigma
-
-    def get_proxparam(self):
-        return self.sigma
-
-    def prox(self, f):
-        """
-        proximal operator of term
-        """
-        pass
+    def __init__(self, prox_param: float = 0.99):
+        self.prox_param = prox_param

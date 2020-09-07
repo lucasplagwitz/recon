@@ -12,8 +12,12 @@ class IndicatorL2(BaseRegTerm):
     This function is the indicator function of the convex set P ("union of pointwise L2 balls"):
         P := {p in Y: |p| <= upper_bound}.  |p| = max_ij|p_ij| = max_ij sqrt(p1_ij**2 + p2_ij**2)
 
+    Function d(p): {
+        0       if p in P
+        inf     if p not in P
+
     Some properties:
-        - this function is the Fenchel-Legendre conjugate of TV-norm
+        - this function is the Fenchel-Legendre conjugate of L1-norm
 
     Imlementation based on:
         - Antonin Chambolle, Thomas Pock:
