@@ -1,0 +1,17 @@
+os: linux
+dist: bionic
+language: python
+python:
+  - "3.7"
+services:
+  - docker
+install:
+  - sudo apt-get update
+  - pip install -r requirements.txt
+  - pip install pytest
+  - pip install pytest-cov
+  - pip install coveralls
+script:
+  - PYTHONPATH=./ pytest ./test --cov=./recon
+after_success:
+  - coveralls
