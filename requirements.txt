@@ -2,4 +2,4 @@ imageio
 numpy
 pylops
 sklearn
-skimage
+scikit-image

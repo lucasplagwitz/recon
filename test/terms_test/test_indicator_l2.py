@@ -15,7 +15,6 @@ class TestIndicatorL2(unittest.TestCase):
         filename = os.path.join(skimage.data_dir, 'camera.png')
         self.camera = io.imread(filename)
 
-
     def test_callable(self):
         # base test for derivate_dim == 1
         derivate_dim = 1
@@ -25,7 +24,6 @@ class TestIndicatorL2(unittest.TestCase):
         # should 0 cause random.uniform in (0, 1)
         for _ in range(20):
             self.assertEqual(indicator(np.random.uniform(size=image_size).ravel()), 0)
-
 
         # should inf cause upper |p| > 0
         indicator = IndicatorL2(image_size=image_size, derivate_dim=derivate_dim, upper_bound=-1)
@@ -66,4 +64,4 @@ class TestIndicatorL2(unittest.TestCase):
         mult_camera = np.array([g_camera]*10).T
         prox_results = indicator.prox(mult_camera)
         for i in range(10):
-            np.testing.assert_array_equal(prox_results[:,i], start_camera)
+            np.testing.assert_array_equal(prox_results[:, i], start_camera)

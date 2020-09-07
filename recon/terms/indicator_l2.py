@@ -46,7 +46,7 @@ class IndicatorL2(BaseRegTerm):
         """
         Apply indicator function.
         """
-        assert self._input_check(p) == True
+        assert self._input_check(p)
 
         def ic(x):
             if self._infty_norm(x) <= self.upper_bound:
@@ -67,7 +67,7 @@ class IndicatorL2(BaseRegTerm):
         f_row stores row-wise: In case of f^(*) as Projection and K=Grad
                                 -> dual f_row[i,:] stores i-th directional derivative.
         """
-        assert self._input_check(f) == True
+        assert self._input_check(f)
         if self.times is None:
             norm_f = self._infty_abs(f)
             norm_f = matlib.repmat(norm_f, 1, self.derivate_dim).ravel() / self.upper_bound
