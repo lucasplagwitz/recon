@@ -36,22 +36,24 @@ We import ....
     n = sigma*np.random.uniform(-1, 1, gt.shape)
     noise_img = gt + n
 
-    f = plt.figure()
+    f = plt.figure(figsize=(6, 3))
     plt.gray()
     f.add_subplot(1,2, 1)
+    plt.title("GT")
     plt.axis('off')
     plt.imshow(gt, vmin=vmin, vmax=vmax)
     f.add_subplot(1, 2, 2)
     plt.gray()
+    plt.title("Noisy")
     plt.imshow(noise_img, vmin=vmin, vmax=vmax)
     plt.axis('off')
-    plt.show(block=True)
+    plt.show(block=False)
 
 
 
 
 .. image:: /tutorials/images/sphx_glr_2d_image_smoothing_001.png
-    :alt: 2d image smoothing
+    :alt: GT, Noisy
     :class: sphx-glr-single-img
 
 
@@ -68,14 +70,14 @@ TV-Regularization and Tikhonov
 
 
     # TV smoothing small alpha
-    tv_smoothing = Smoothing(domain_shape=gt.shape, reg_mode='tv', alpha=0.2)
-    u_tv = tv_smoothing.solve(data=noise_img, max_iter=350, tol=10**(-5))
+    tv_smoothing = Smoothing(domain_shape=gt.shape, reg_mode='tv', alpha=0.3)
+    u_tv = tv_smoothing.solve(data=noise_img, max_iter=450, tol=10**(-5))
 
     # Tikhonov smoothing -> with lam = 1 => alpha > 1 we decrease lam instead.
     tikh_smoothing = Smoothing(domain_shape=gt.shape, reg_mode='tikhonov', lam=0.1, alpha=1, tau=0.1)
-    u_tik = tikh_smoothing.solve(data=noise_img, max_iter=350, tol=10**(-5))
+    u_tik = tikh_smoothing.solve(data=noise_img, max_iter=450, tol=10**(-5))
 
-    f = plt.figure()
+    f = plt.figure(figsize=(6, 3))
     f.add_subplot(1, 2, 1)
     plt.axis('off')
     plt.gray()
@@ -86,7 +88,7 @@ TV-Regularization and Tikhonov
     plt.title("TV")
     plt.axis('off')
     plt.gray()
-    plt.show(block=True)
+    plt.show(block=False)
 
 
 
@@ -103,7 +105,7 @@ TV-Regularization and Tikhonov
  .. code-block:: none
 
     Primal-Dual Algorithm: [                                        ]--------------------]
-    Primal-Dual Algorithm: [                                        ]------]
+    Primal-Dual Algorithm: [                                        ]----]
     early stopping!
 
 
@@ -184,7 +186,7 @@ Bregman is not yet adjusted.
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  32.538 seconds)
+   **Total running time of the script:** ( 0 minutes  39.142 seconds)
 
 
 .. _sphx_glr_download_tutorials_2d_image_smoothing.py:

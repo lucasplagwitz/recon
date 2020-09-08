@@ -38,7 +38,7 @@ TV based segmentation.
     result, _ = segmentation.solve(image)
 
 
-    f = plt.figure()
+    f = plt.figure(figsize=(6, 3))
     f.add_subplot(1, 2, 1)
     plt.axis('off')
     plt.imshow(image)
@@ -47,7 +47,7 @@ TV based segmentation.
     plt.imshow(result)
     plt.title("TV based segmentation")
     plt.axis('off')
-    plt.show(block=True)
+    plt.show(block=False)
 
 
 .. image:: /tutorials/images/sphx_glr_2d_tv_segmentation_001.png
@@ -69,7 +69,7 @@ TV based segmentation.
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 2 minutes  9.602 seconds)
+   **Total running time of the script:** ( 2 minutes  8.877 seconds)
 
 
 .. _sphx_glr_download_tutorials_2d_tv_segmentation.py:

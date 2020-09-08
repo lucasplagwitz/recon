@@ -46,21 +46,16 @@ tv_smoothing = PdSmooth(domain_shape=gt.shape, reg_mode='tv', alpha=0.2, tau=2.3
 u0 = tv_smoothing.solve(data=noise_img, maxiter=150, tol=10**(-4))
  ```
  
-<table>
+ <table>
   <tr>
-    <th algin="center">Noisy Image</th><th algin="center">Tikhonov</th><th algin="center">TV</th><th algin="center">Bregman-TV</th>
-  </tr>
-  <tr>
-    <td><img src="./examples/demo/2d_smoothing_noisy.png" alt="" width="200"></td>
-    <td><img src="./examples/demo/2d_smoothing_tikhonov.png" alt="" width="200"></td>
-    <td><img src="./examples/demo/2d_smoothing_tv.png" alt="" width="200"></td>
-    <td><img src="./examples/demo/2d_smoothing_bregman.png" alt="" width="200"></td>
+    <td><img src="./docs/source/tutorials/images/sphx_glr_2d_image_smoothing_001.png" alt="" width="400"></td>
+    <td><img src="./docs/source/tutorials/images/sphx_glr_2d_image_smoothing_001.png" alt="" width="400"></td>
     </td>
   </tr>
  </table>
  <p align="center">
- <img src="https://github.com/lucasplagwitz/recon/blob/master/examples/demo/2d_smoothing_1d_comp_2.png" alt="" width="400">
-  </p>
+ <img src="./docs/source/tutorials/images/sphx_glr_2d_image_smoothing_003.png" alt="" width="400">
+ </p>
 
 ## Segmentation
 Some segmentation methods are implemented as part of regularization approaches and performance measurements.
