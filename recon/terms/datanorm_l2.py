@@ -27,12 +27,13 @@ class DatanormL2(BaseDataterm):
         same behavior like lam. normally known as tau*u(x)
     sampling:
         Matrix for undersampling data f.
+    data: np.ndarry, float
     """
 
     def __init__(self,
                  image_size,
                  operator=None,
-                 data: np.ndarray = None,
+                 data: Union[float, np.ndarray] = 0,
                  lam: float = 1,
                  prox_param: float = 0.9,
                  sampling=None):

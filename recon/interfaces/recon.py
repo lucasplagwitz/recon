@@ -1,7 +1,7 @@
 from pylops import LinearOperator
 import numpy as np
 
-from recon.terms import Dataterm
+from recon.terms import DatanormL2
 from recon.solver import PdHgm
 from recon.interfaces import BaseInterface
 

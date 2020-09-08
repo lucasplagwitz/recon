@@ -2,43 +2,37 @@ import numpy as np
 import pylops
 
 
-from recon.terms import Projection, DatatermLinear
+from recon.terms import IndicatorL2, DatanormL2
 from recon.solver.pd_hgm import PdHgm
 from recon.interfaces.base_interface import BaseInterface
 
 
 class Segmentation(BaseInterface):
 
-    def __init__(self, image_shape, classes: list, alpha: float = 0.001, tau: float = None):
+    def __init__(self, image_size, classes: list, lam: float = 1, alpha: float = 0.001, tau: float = None):
 
-        super(Segmentation, self).__init__(domain_shape=image_shape,
+        super(Segmentation, self).__init__(domain_shape=image_size,
                                            reg_mode='tv',
                                            possible_reg_modes=['tv'],
+                                           lam=lam,
                                            alpha=alpha,
                                            tau=tau)
 
         self.seg = np.zeros((np.prod(self.domain_shape), len(classes)))
         self.classes = classes
+        self.G = DatanormL2(image_size=image_size, prox_param=self.tau)
 
-
-        grad = pylops.Gradient(image_shape, edge=True, dtype='float64', kind="backward")
-        self.K = self.alpha * grad
-        self.G = DatatermLinear()
-        self.F_star = Projection(image_shape, len(self.domain_shape), times=len(classes))
-        self.solver = PdHgm(self.K, self.F_star, self.G)
-
-
-    def solve(self, img, max_iter= 200, tol=10**(-6)):
+    def solve(self, img, max_iter=200, tol=10**(-6)):
 
         data = np.zeros((np.prod(self.domain_shape), len(self.classes)))
         for i in range(len(self.classes)):
             data[:, i] = (img.ravel() - self.classes[i]) ** 2
 
         super(Segmentation, self).solve(data=data, max_iter=max_iter, tol=tol)
+        self.F_star = IndicatorL2(self.domain_shape, len(self.domain_shape), times=len(self.classes), prox_param=self.tau)
+        self.solver = PdHgm(self.K, self.F_star, self.G)
 
-        self.G.set_proxdata(data)
-        self.G.set_proxparam(self.tau)
-        self.F_star.set_proxparam(self.tau)
+        self.G.data = data
         self.solver.var['x'] = np.zeros((self.K.shape[1], len(self.classes)))
         self.solver.var['y'] = np.zeros((self.K.shape[0], len(self.classes)))
 
@@ -46,7 +40,7 @@ class Segmentation(BaseInterface):
         self.solver.tol = tol
         self.solver.solve()
 
-        u = np.reshape(self.solver.var['x'], tuple( list(img.shape) + [len(self.classes)]), order='C')
+        u = np.reshape(self.solver.var['x'], tuple(list(img.shape) + [len(self.classes)]), order='C')
 
         a = u
         result = []

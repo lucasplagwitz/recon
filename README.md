@@ -12,7 +12,7 @@ Due to the fact of measurement inaccuracies, regularization terms
 <img src="https://render.githubusercontent.com/render/math?math=\Large J">
 are added and the optimization problem is maintained as
 <p align="center">
-<img src="https://render.githubusercontent.com/render/math?math=\Large \argmin_u ||Au - f|| %2B \alpha J(u)">
+<img src="https://render.githubusercontent.com/render/math?math=\Large \argmin_u \frac{\lambda}{2}||Au - f||^2 %2B \alpha J(u)">
  <p/>
  
  ```python
@@ -29,7 +29,7 @@ u = tv_recon.solve(D, maxiter=350, tol=10**(-4))
 ## Smoothing
 Image Smoothing is a special case of regularized reconstruction.
 <p align="center">
-<img src="https://render.githubusercontent.com/render/math?math=\Large \argmin_u ||u - f|| %2B \alpha J(u)">
+<img src="https://render.githubusercontent.com/render/math?math=\Large \argmin_u \frac{\lambda}{2}||u - f||^2 %2B \alpha J(u)">
  <p/>
  
   ```python

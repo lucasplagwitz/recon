@@ -93,12 +93,12 @@ class PdHgm(object):
 
             # primal iteration
             self.var['x'] = self.G.prox(self.var['x'] -
-                                        self.G.get_proxparam() * (self.K.T * self.var['y'])
+                                        self.G.prox_param * (self.K.T * self.var['y'])
                                         )
 
             # dual iteration
             self.var['y'] = self.F_star.prox(self.var['y'] +
-                                             self.F_star.get_proxparam() *
+                                             self.F_star.prox_param *
                                                 (self.K * (2 * self.var['x'] - self.var_prev['x']))
                                             )
 
@@ -134,8 +134,8 @@ class PdHgm(object):
 
         x_gap = self.var['x'] - self.var_prev['x']
         y_gap = self.var['y'] - self.var_prev['y']
-        self.sens = 1 / 2 * (np.linalg.norm(x_gap - self.G.get_proxparam() * (self.K.T * y_gap), 2) /
+        self.sens = 1 / 2 * (np.linalg.norm(x_gap - self.G.prox_param * (self.K.T * y_gap), 2) /
                              np.linalg.norm(self.var['x'], 2) +
-                             np.linalg.norm(y_gap - self.F_star.get_proxparam() * (self.K * x_gap), 2) /
+                             np.linalg.norm(y_gap - self.F_star.prox_param * (self.K * x_gap), 2) /
                              np.linalg.norm(self.var['y'], 2))
         return

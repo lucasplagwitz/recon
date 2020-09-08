@@ -38,9 +38,10 @@ class IndicatorL2(BaseRegTerm):
 
     """
 
-    def __init__(self, image_size, derivate_dim=2, upper_bound: float = 1, times: int = None):
+    def __init__(self, image_size, derivate_dim=2, upper_bound: float = 1, times: int = None, prox_param: float = 0.99):
         super(IndicatorL2, self).__init__()
 
+        self.prox_param = prox_param
         self.upper_bound = upper_bound
         self.image_size = image_size
         self.derivate_dim = derivate_dim

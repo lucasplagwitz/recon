@@ -24,7 +24,7 @@ class BaseDataterm(object):
     @data.setter
     def data(self, value):
         if isinstance(value, (int, float)):
-            self.data = value
+            self._data = value
         elif isinstance(value, np.ndarray) and len(value.shape):
             self._data = (self.sampling_transpose)*value
         else:
