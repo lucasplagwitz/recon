@@ -54,5 +54,8 @@ class TestDatanormL2(unittest.TestCase):
 
         np.testing.assert_almost_equal(raveled_camera, prox_camera, 4)
 
-    def test_undersamling(self):
-        pass
+    def test_unraveld(self):
+        with self.assertRaises(ValueError):
+            indicator = DatanormL2(image_size=self.camera.shape, data=self.camera)
+            prox_camera = np.zeros(shape=self.camera.shape)
+            _ = indicator.prox(prox_camera)

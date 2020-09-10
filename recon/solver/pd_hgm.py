@@ -100,9 +100,9 @@ class PdHgm(object):
             self.var['y'] = self.F_star.prox(self.var['y'] +
                                              self.F_star.prox_param *
                                                 (self.K * (2 * self.var['x'] - self.var_prev['x']))
-                                            )
-
-            self.update_sensivity()
+                                             )
+            if self.k % 20 == 0:
+                self.update_sensivity()
 
             self.k += 1
 

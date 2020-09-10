@@ -49,7 +49,7 @@ u0 = tv_smoothing.solve(data=noise_img, maxiter=150, tol=10**(-4))
  <table>
   <tr>
     <td><img src="./docs/source/tutorials/images/sphx_glr_2d_image_smoothing_001.png" alt="" width="400"></td>
-    <td><img src="./docs/source/tutorials/images/sphx_glr_2d_image_smoothing_001.png" alt="" width="400"></td>
+    <td><img src="./docs/source/tutorials/images/sphx_glr_2d_image_smoothing_002.png" alt="" width="400"></td>
     </td>
   </tr>
  </table>

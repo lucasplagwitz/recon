@@ -3,19 +3,17 @@ import numpy as np
 
 class BaseDataterm(object):
 
-    def __init__(self, operator, data, sampling=None):
+    def __init__(self, operator, sampling=None):
         self._data = None
 
         self.tau = 0.99
         self.operator = operator
-        self.samling = sampling
-        if not sampling:
-            self.sampling = 1
+        if sampling is None:
             self.diag_sampling = 1
             self.sampling_transpose = 1
         else:
-            self.diag_sampling = (self.sampling.T * self.sampling).diagonal()
-            self.sampling_transpose = self.samling.T
+            self.diag_sampling = (sampling.T * sampling).diagonal()
+            self.sampling_transpose = sampling.T
 
     @property
     def data(self):

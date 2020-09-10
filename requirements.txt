@@ -1,5 +1,6 @@
 imageio
 numpy
 pylops
-sklearn
 scikit-image
+scipy
+scikit-learn

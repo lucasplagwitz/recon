@@ -4,7 +4,7 @@ import sys
 import pylops
 from pylops import FirstDerivative, Gradient, HStack, BlockDiag
 
-from recon.terms import Projection, DatatermLinear
+from recon.terms import IndicatorL2, DatanormL2
 
 class PdHgmTGV(object):
     """
@@ -29,20 +29,20 @@ class PdHgmTGV(object):
                 2. y^{n+1} = prox_{F_star}( y^{n} - sigma * (K * (2*x^{n+1} - x^{n})) )
                 3. update sens
     """
-    def __init__(self, lam: float = 1, alpha: tuple = (1, 1), tol=10e-5):
+    def __init__(self, lam: float = 1, alpha: tuple = (1, 1), tol=10e-5, prox_param: float = 1/np.sqrt(12)):
         """
         Consturctor. Set required params.
         """
-
+        self.lam = lam
         self.alpha = alpha   # form: (a_1, a_2)
-        self.sigma = 1/np.sqrt(12)
+        self.sigma = prox_param
         self.tau = self.sigma
         self.tol = tol
         self.k = 1
 
     # Todo: symmetric saves double dxdy <-> dydx...not necessary
 
-    def solve(self, f: np.ndarray, max_iter: int = 100):
+    def solve(self, f: np.ndarray, max_iter: int = 500):
         self.k = 1
         if len(np.shape(f)) != 2:
             raise ValueError("The TGV-Algorithm only implemnted for 2D images. Please give input shaped (m, n)")
@@ -54,32 +54,31 @@ class PdHgmTGV(object):
         u = u_bar = f.ravel()
 
         # Projections
-        proj_p = Projection((primal_n, primal_m), upper_bound=self.alpha[0])
-        proj_q = Projection((primal_n, 2*primal_m), upper_bound=self.alpha[1])
-        dataterm = DatatermLinear()
-        dataterm.set_proxparam(self.tau)
-        dataterm.set_proxdata(f.ravel())
-        sens = 0
+        proj_p = IndicatorL2((primal_n, primal_m), upper_bound=self.alpha[0])
+        proj_q = IndicatorL2((2*primal_n, primal_m), upper_bound=self.alpha[1])
+        dataterm = DatanormL2(image_size=f.shape, data=f.ravel(), prox_param=self.tau, lam=self.lam)
+        sens = 100
         while (self.tol < sens or self.k == 1) and (self.k <= max_iter):
-            p = proj_p.prox(p + self.sigma*(grad*u_bar - v))
+            p = proj_p.prox(p + self.sigma*(grad*u_bar - v_bar))
             q = proj_q.prox(q + self.sigma*(grad_v*v_bar)) #self.adjoint_div(v_bar, 1)
             u_old = u
             v_old = v
             u = dataterm.prox(u - self.tau*grad.H*p)
             u_bar = 2*u - u_old
-            v = v + self.tau*(p-grad_v.H*q)
+            v = v + self.tau*(p - grad_v.H*q)
             v_bar = 2*v - v_old
 
             #self.update_sensivity(u, u_old, v, v_old, grad)
             # test
-            u_gap = u-u_old
-            v_gap = v-v_old
-            sens = 1/2*(
-                    np.linalg.norm(u_gap - self.tau*grad.H*proj_p.prox(p+self.sigma*(grad*u_gap - v_gap)), 2)/
-                    np.linalg.norm(u, 2) +
-                    np.linalg.norm(v-proj_p.prox(p+self.sigma*(grad*u_gap - v_gap))-grad_v.H*proj_q.prox(q+ self.sigma*(grad_v*v_gap)), 2)/
-                    np.linalg.norm(v, 2))   # not best sens
-            print(sens)
+            if self.k % 100 == 0:
+                u_gap = u-u_old
+                v_gap = v-v_old
+                sens = 1/2*(
+                        np.linalg.norm(u_gap - self.tau*grad.H*proj_p.prox(p+self.sigma*(grad*u_gap - v_gap)), 2)/
+                        np.linalg.norm(u, 2) +
+                        np.linalg.norm(v-proj_p.prox(p+self.sigma*(grad*u_gap - v_gap))-grad_v.H*proj_q.prox(q+ self.sigma*(grad_v*v_gap)), 2)/
+                        np.linalg.norm(v, 2))   # not best sens
+                print(np.linalg.norm(u_gap, 2))
             self.k += 1
         return np.reshape(u, (primal_n, primal_m))
 

@@ -19,9 +19,9 @@ class Smoothing(BaseInterface):
     """
 
     def __init__(self,
-                 domain_shape: np.ndarray,
+                 domain_shape: Union[np.ndarray, tuple],
                  reg_mode: str = '',
-                 alpha:float = 0.01,
+                 alpha: float = 0.01,
                  lam: float = 1,
                  tau: Union[float, str] = 'auto'):
 

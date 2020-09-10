@@ -37,7 +37,7 @@ class DatanormL2(BaseDataterm):
                  lam: float = 1,
                  prox_param: float = 0.9,
                  sampling=None):
-        super(DatanormL2, self).__init__(operator, data=data, sampling=sampling)
+        super(DatanormL2, self).__init__(operator, sampling=sampling)
         self.lam = lam
         self.prox_param = prox_param
         self.data = data

@@ -51,6 +51,27 @@ Tutorials
    :hidden:
 
    /tutorials/2d_tv_segmentation
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="We focus on concepts from different papers. Mainly we use for numerical access:     Knoll, Bred...">
+
+.. only:: html
+
+ .. figure:: /tutorials/images/thumb/sphx_glr_total_generalized_variation_thumb.png
+     :alt: 04. Total Generalized Variation
+
+     :ref:`sphx_glr_tutorials_total_generalized_variation.py`
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /tutorials/total_generalized_variation
 .. raw:: html
 
     <div class="sphx-glr-clear"></div>

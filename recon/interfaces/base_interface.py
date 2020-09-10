@@ -52,6 +52,11 @@ class BaseInterface(object):
         # weights
         self.lam = lam
         self.alpha = alpha
+
+        self.solver = None
+        self.tau = 1  # tmp
+        self.set_up_operator()
+
         if isinstance(tau, (float, int)):
             self.tau = tau
         elif tau == 'auto':
