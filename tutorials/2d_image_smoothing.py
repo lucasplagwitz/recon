@@ -11,7 +11,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 from scipy import misc
 
-from recon.interfaces import Smoothing
+from recon.interfaces import Smoothing, SmoothBregman
 
 img = misc.ascent()
 img = img/np.max(img)
@@ -21,7 +21,7 @@ vmin, vmax = 0, 1
 
 # create noisy image
 sigma = 0.2
-n = sigma*np.random.uniform(-1, 1, gt.shape)
+n = np.random.normal(0, sigma, gt.shape)
 noise_img = gt + n
 
 f = plt.figure(figsize=(6, 3))
@@ -79,20 +79,32 @@ plt.plot(bbox_inches='tight', pad_inches=0)
 plt.show()
 
 ###############################################################################
-# Later on....
-# Bregman is not yet adjusted.
-"""
-# bregman iteration
+# Bregman ... iteration
+
 breg_smoothing = SmoothBregman(domain_shape=gt.shape,
                                reg_mode='tv',
                                alpha=1.1,
-                               tau=0.0782,
-                               plot_iteration=True,
-                               assessment=0.6 * sigma*np.max(abs(gt.ravel())) * np.sqrt(np.prod(gt.shape)) )
-u_breg = breg_smoothing.solve(data=noise_img, max_iter=150, tol=5*10**(-6))
-draw_images(u_breg, '2d_smoothing_bregman.png', vmin=0, vmax=np.max(gt))
+                               lam=1,
+                               tau=0.3,
+                               plot_iteration=False,
+                               assessment=sigma * np.sqrt(np.prod(gt.shape)))
 
+u_breg = breg_smoothing.solve(data=noise_img, max_iter=350, tol=5*10**(-6))
 
+f = plt.figure(figsize=(6, 3))
+f.add_subplot(1, 2, 1)
+plt.axis('off')
+plt.gray()
+plt.imshow(u_tv, vmin=vmin, vmax=vmax)
+plt.title("TV")
+f.add_subplot(1, 2, 2)
+plt.imshow(u_breg, vmin=vmin, vmax=vmax)
+plt.title("TV-Bregman")
+plt.axis('off')
+plt.gray()
+plt.show(block=False)
+
+###############################################################################
 # 1d comparisson with [gt, noise, bregman_tv, tv, tikhonov]
 x_min = 84
 x_max = 155
@@ -103,6 +115,5 @@ plt.plot(range(x_min, x_max), u_tv[x_min:x_max,y], color="green", label="TV")
 plt.plot(range(x_min, x_max), gt[x_min:x_max,y], color="black", label="GT")
 plt.plot(range(x_min, x_max), u_breg[x_min:x_max,y], color="blue", label="BregTV")
 plt.legend(loc="lower left")
-plt.savefig(data_output_path+'2d_smoothing_1d_comp_2.png', bbox_inches = 'tight', pad_inches = 0)
+plt.show()
 plt.close()
-"""

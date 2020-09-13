@@ -3,6 +3,7 @@ import copy
 import sys
 import pylops
 from pylops import FirstDerivative, Gradient, HStack, BlockDiag
+import matplotlib.pyplot as plt
 
 from recon.terms import IndicatorL2, DatanormL2
 
@@ -42,12 +43,12 @@ class PdHgmTGV(object):
 
     # Todo: symmetric saves double dxdy <-> dydx...not necessary
 
-    def solve(self, f: np.ndarray, max_iter: int = 500):
+    def solve(self, f: np.ndarray, max_iter: int = 400):
         self.k = 1
         if len(np.shape(f)) != 2:
             raise ValueError("The TGV-Algorithm only implemnted for 2D images. Please give input shaped (m, n)")
         (primal_n, primal_m) = np.shape(f)
-        grad = Gradient(dims=(primal_n, primal_m), dtype='float64', kind="backward")
+        grad = Gradient(dims=(primal_n, primal_m), dtype='float64', edge=True, kind="backward")
         grad_v = BlockDiag([grad, grad])  # symmetric dxdy <-> dydx not necessary (expensive) but easy and functional
         p, q = 0, 0
         v = v_bar = np.zeros(2*primal_n*primal_m)
@@ -61,6 +62,17 @@ class PdHgmTGV(object):
         while (self.tol < sens or self.k == 1) and (self.k <= max_iter):
             p = proj_p.prox(p + self.sigma*(grad*u_bar - v_bar))
             q = proj_q.prox(q + self.sigma*(grad_v*v_bar)) #self.adjoint_div(v_bar, 1)
+            #plt.imshow(np.reshape((grad_v*v_bar)[:np.prod((primal_n, primal_m))], (primal_n, primal_m)))
+            #plt.show()
+            #assert np.array_equal(
+            #print(np.max(np.abs(
+            #    (grad_v * v_bar)[np.prod((primal_n, primal_m)):2*np.prod((primal_n, primal_m))]-
+            #    (grad_v * v_bar)[2*np.prod((primal_n, primal_m)):3*np.prod((primal_n, primal_m))])
+            #))
+            #plt.imshow(np.reshape((grad_v * v_bar)[3*np.prod((primal_n, primal_m)):
+            #                                       4*np.prod((primal_n, primal_m))], (primal_n, primal_m)))
+            #plt.imshow(np.reshape(v_bar[:np.prod((primal_m, primal_n))], (primal_m, primal_n)))
+            #plt.show()
             u_old = u
             v_old = v
             u = dataterm.prox(u - self.tau*grad.H*p)

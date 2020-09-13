@@ -72,6 +72,27 @@ Tutorials
    :hidden:
 
    /tutorials/total_generalized_variation
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="05. Scaling Dependent Stepsize Problem">
+
+.. only:: html
+
+ .. figure:: /tutorials/images/thumb/sphx_glr_scaling_problem_thumb.png
+     :alt: 05. Scaling Dependent Stepsize Problem
+
+     :ref:`sphx_glr_tutorials_scaling_problem.py`
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /tutorials/scaling_problem
 .. raw:: html
 
     <div class="sphx-glr-clear"></div>

@@ -5,12 +5,14 @@
 
 Computation times
 =================
-**00:13.069** total execution time for **tutorials** files:
+**02:56.819** total execution time for **tutorials** files:
 
 +-----------------------------------------------------------------------------------------------+-----------+--------+
-| :ref:`sphx_glr_tutorials_total_generalized_variation.py` (``total_generalized_variation.py``) | 00:13.069 | 0.0 MB |
+| :ref:`sphx_glr_tutorials_2d_image_smoothing.py` (``2d_image_smoothing.py``)                   | 01:28.955 | 0.0 MB |
 +-----------------------------------------------------------------------------------------------+-----------+--------+
-| :ref:`sphx_glr_tutorials_2d_image_smoothing.py` (``2d_image_smoothing.py``)                   | 00:00.000 | 0.0 MB |
+| :ref:`sphx_glr_tutorials_total_generalized_variation.py` (``total_generalized_variation.py``) | 01:12.509 | 0.0 MB |
++-----------------------------------------------------------------------------------------------+-----------+--------+
+| :ref:`sphx_glr_tutorials_scaling_problem.py` (``scaling_problem.py``)                         | 00:15.354 | 0.0 MB |
 +-----------------------------------------------------------------------------------------------+-----------+--------+
 | :ref:`sphx_glr_tutorials_2d_tv_segmentation.py` (``2d_tv_segmentation.py``)                   | 00:00.000 | 0.0 MB |
 +-----------------------------------------------------------------------------------------------+-----------+--------+

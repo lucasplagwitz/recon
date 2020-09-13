@@ -23,7 +23,7 @@ We import ....
     import numpy as np
     from scipy import misc
 
-    from recon.interfaces import Smoothing
+    from recon.interfaces import Smoothing, SmoothBregman
 
     img = misc.ascent()
     img = img/np.max(img)
@@ -33,7 +33,7 @@ We import ....
 
     # create noisy image
     sigma = 0.2
-    n = sigma*np.random.uniform(-1, 1, gt.shape)
+    n = np.random.normal(0, sigma, gt.shape)
     noise_img = gt + n
 
     f = plt.figure(figsize=(6, 3))
@@ -105,7 +105,7 @@ TV-Regularization and Tikhonov
  .. code-block:: none
 
     Primal-Dual Algorithm: [                                        ]--------------------]
-    Primal-Dual Algorithm: [                                        ]----]
+    Primal-Dual Algorithm: [                                        ]-----]
     early stopping!
 
 
@@ -138,25 +138,70 @@ TV-Regularization and Tikhonov
 
 
 
-Later on....
-Bregman is not yet adjusted.
+Bregman ... iteration
 
 
 .. code-block:: default
 
-    """
-    # bregman iteration
+
     breg_smoothing = SmoothBregman(domain_shape=gt.shape,
                                    reg_mode='tv',
                                    alpha=1.1,
-                                   tau=0.0782,
-                                   plot_iteration=True,
-                                   assessment=0.6 * sigma*np.max(abs(gt.ravel())) * np.sqrt(np.prod(gt.shape)) )
-    u_breg = breg_smoothing.solve(data=noise_img, max_iter=150, tol=5*10**(-6))
-    draw_images(u_breg, '2d_smoothing_bregman.png', vmin=0, vmax=np.max(gt))
+                                   lam=1,
+                                   tau=0.3,
+                                   plot_iteration=False,
+                                   assessment=sigma * np.sqrt(np.prod(gt.shape)))
+
+    u_breg = breg_smoothing.solve(data=noise_img, max_iter=350, tol=5*10**(-6))
+
+    f = plt.figure(figsize=(6, 3))
+    f.add_subplot(1, 2, 1)
+    plt.axis('off')
+    plt.gray()
+    plt.imshow(u_tv, vmin=vmin, vmax=vmax)
+    plt.title("TV")
+    f.add_subplot(1, 2, 2)
+    plt.imshow(u_breg, vmin=vmin, vmax=vmax)
+    plt.title("TV-Bregman")
+    plt.axis('off')
+    plt.gray()
+    plt.show(block=False)
 
 
-    # 1d comparisson with [gt, noise, bregman_tv, tv, tikhonov]
+
+
+.. image:: /tutorials/images/sphx_glr_2d_image_smoothing_004.png
+    :alt: TV, TV-Bregman
+    :class: sphx-glr-single-img
+
+
+.. rst-class:: sphx-glr-script-out
+
+ Out:
+
+ .. code-block:: none
+
+    current norm error: 225.79566982354456
+    runs till norm <: 102.4
+    Primal-Dual Algorithm: [                                        ]--------------------]
+    current norm error: 117.69316038636049
+    runs till norm <: 102.4
+    Primal-Dual Algorithm: [                                        ]--------------------]
+    current norm error: 108.82520706984445
+    runs till norm <: 102.4
+    Primal-Dual Algorithm: [                                        ]--------------------]
+    current norm error: 104.63215176543137
+    runs till norm <: 102.4
+    Primal-Dual Algorithm: [                                        ]--------------------]
+
+
+
+
+1d comparisson with [gt, noise, bregman_tv, tv, tikhonov]
+
+
+.. code-block:: default
+
     x_min = 84
     x_max = 155
     y = 20
@@ -166,27 +211,18 @@ Bregman is not yet adjusted.
     plt.plot(range(x_min, x_max), gt[x_min:x_max,y], color="black", label="GT")
     plt.plot(range(x_min, x_max), u_breg[x_min:x_max,y], color="blue", label="BregTV")
     plt.legend(loc="lower left")
-    plt.savefig(data_output_path+'2d_smoothing_1d_comp_2.png', bbox_inches = 'tight', pad_inches = 0)
+    plt.show()
     plt.close()
-    """
 
 
 
-.. rst-class:: sphx-glr-script-out
-
- Out:
-
- .. code-block:: none
-
-
-    '\n# bregman iteration\nbreg_smoothing = SmoothBregman(domain_shape=gt.shape,\n                               reg_mode=\'tv\',\n                               alpha=1.1,\n                               tau=0.0782,\n                               plot_iteration=True,\n                               assessment=0.6 * sigma*np.max(abs(gt.ravel())) * np.sqrt(np.prod(gt.shape)) )\nu_breg = breg_smoothing.solve(data=noise_img, max_iter=150, tol=5*10**(-6))\ndraw_images(u_breg, \'2d_smoothing_bregman.png\', vmin=0, vmax=np.max(gt))\n\n\n# 1d comparisson with [gt, noise, bregman_tv, tv, tikhonov]\nx_min = 84\nx_max = 155\ny = 20\nplt.plot(range(x_min, x_max), u_tik[x_min:x_max,y], color="darkcyan", label="Tikhonov")\nplt.plot(range(x_min, x_max), noise_img[x_min:x_max,y], color="red", label="Noise")\nplt.plot(range(x_min, x_max), u_tv[x_min:x_max,y], color="green", label="TV")\nplt.plot(range(x_min, x_max), gt[x_min:x_max,y], color="black", label="GT")\nplt.plot(range(x_min, x_max), u_breg[x_min:x_max,y], color="blue", label="BregTV")\nplt.legend(loc="lower left")\nplt.savefig(data_output_path+\'2d_smoothing_1d_comp_2.png\', bbox_inches = \'tight\', pad_inches = 0)\nplt.close()\n'
 
 
 
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  39.142 seconds)
+   **Total running time of the script:** ( 1 minutes  28.955 seconds)
 
 
 .. _sphx_glr_download_tutorials_2d_image_smoothing.py:

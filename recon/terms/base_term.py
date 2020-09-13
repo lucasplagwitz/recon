@@ -1,4 +1,3 @@
-import pylops
 import numpy as np
 
 class BaseDataterm(object):

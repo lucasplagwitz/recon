@@ -37,13 +37,14 @@ class DatanormL2(BaseDataterm):
                  lam: float = 1,
                  prox_param: float = 0.9,
                  sampling=None):
+        if operator is None:
+            operator = Identity(N=np.prod(image_size))
+
         super(DatanormL2, self).__init__(operator, sampling=sampling)
         self.lam = lam
         self.prox_param = prox_param
         self.data = data
 
-        if self.operator is None:
-            self.operator = Identity(N=np.prod(image_size))
 
     def __call__(self, x):
         return np.sqrt(np.sum((self.operator*x-self.data)**2))
