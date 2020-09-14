@@ -44,7 +44,7 @@ plt.show(block=False)
 #
 
 # TV smoothing small alpha
-tv_smoothing = Smoothing(domain_shape=gt.shape, reg_mode='tv', alpha=0.3)
+tv_smoothing = Smoothing(domain_shape=gt.shape, reg_mode='tv', alpha=0.3, tau=0.3)
 u_tv = tv_smoothing.solve(data=noise_img, max_iter=450, tol=10**(-5))
 
 # Tikhonov smoothing -> with lam = 1 => alpha > 1 we decrease lam instead.

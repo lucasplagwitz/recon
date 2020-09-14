@@ -45,9 +45,8 @@ class DatanormL2(BaseDataterm):
         self.prox_param = prox_param
         self.data = data
 
-
     def __call__(self, x):
-        return np.sqrt(np.sum((self.operator*x-self.data)**2))
+        return 1/2*np.sqrt(np.sum((self.operator*x-self.data)**2))
 
     def prox(self, x):
         """
