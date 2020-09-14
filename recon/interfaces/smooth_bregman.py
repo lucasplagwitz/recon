@@ -75,8 +75,7 @@ class SmoothBregman(BaseInterface):
                 plt.gray()
                 plt.imshow(u, vmin=0, vmax=1)
                 plt.axis('off')
-                plt.savefig(self.data_output_path + 'Bregman_iter' + str(i) + '.png', bbox_inches='tight',
-                            pad_inches=0)
+                plt.savefig(self.data_output_path + 'Bregman_iter' + str(i) + '.png', bbox_inches='tight', pad_inches=0)
                 plt.close()
 
         return u

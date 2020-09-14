@@ -1,5 +1,5 @@
 """
-05. Scaling Dependent Stepsize Problem
+06. Scaling Dependent Stepsize Problem
 ================
 In some tests it has been noticed that the scaling of the
 image has an influence on the regularized final result.

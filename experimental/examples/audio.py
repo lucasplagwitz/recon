@@ -1,10 +1,8 @@
 from pydub import AudioSegment
 from pydub.playback import play
 
-import numpy as np
 import matplotlib.pyplot as plt
-from recon.interfaces import Smooth, SmoothBregman
-from experimental.interfaces.satv import SATV
+from recon.interfaces import SmoothBregman
 
 import pydub
 import numpy as np

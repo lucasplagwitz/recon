@@ -1,13 +1,11 @@
-from pylops.basicoperators import Gradient, Identity
-from pylops import Diagonal, Smoothing2D, BlockDiag
+from pylops.basicoperators import Gradient
+from pylops import Diagonal
 import numpy as np
 import matplotlib.pyplot as plt
 
-from experimental.terms.dataterm_linear_constrained import DatatermLinearConstrained
 from experimental.operator.ct_radon import CtRt
-from experimental.interfaces.satv import SATV
+from recon.interfaces.satv import SATV
 
-from recon.interfaces import Recon
 from recon.terms import Projection, DatatermLinear, Dataterm
 from recon.solver.pd_hgm import PdHgm
 

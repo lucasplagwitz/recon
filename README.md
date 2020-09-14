@@ -1,5 +1,14 @@
-# RECON
-A python-based research toolbox for reconstruction and segmentation to solve Inverse Problems.
+# PyRegIP
+
+A python-based toolbox for solving regularized Inverse Problems using Primal-Dual algorithms.
+
+## Overview
+
+* Reconstruction, Smoothing 
+* class-based Segmentation
+* Locally Adapted Regularization
+* Bregman-Iteration
+
 
 ## Reconstruction
 In terms of Inverse Problems one is interested in the reason 
@@ -16,12 +25,12 @@ are added and the optimization problem is maintained as
  <p/>
  
  ```python
- from recon.reconstruction import PdRecon
+ from recon.interfaces import Recon
  import pylops
  
  FFTop = pylops.signalprocessing.FFT(dims=(nt, nx), dir=0, nfft=nfft, sampling=dt)
  D = FFTop*d.flatten() + n
- tv_recon = PdRecon(O=FFTop, domain_shape=d.shape, reg_mode='tv', alpha=2.0)
+ tv_recon = Recon(O=FFTop, domain_shape=d.shape, reg_mode='tv', alpha=2.0)
 
 u = tv_recon.solve(D, maxiter=350, tol=10**(-4))
  ```
@@ -34,7 +43,7 @@ Image Smoothing is a special case of regularized reconstruction.
  
   ```python
 from scipy import misc
-from recon.reconstruction import PdSmooth
+from recon.interfaces import Smoothing
 
 img = misc.ascent()
 gt = img/np.max(img)
@@ -42,14 +51,16 @@ sigma = 0.2
 n = sigma*np.max(gt.ravel()*np.random.uniform(-1,1, gt.shape)
 noise_img = gt + n
  
-tv_smoothing = PdSmooth(domain_shape=gt.shape, reg_mode='tv', alpha=0.2, tau=2.3335)
+tv_smoothing = Smoothing(domain_shape=gt.shape, reg_mode='tv', alpha=0.2, tau=2.3335)
 u0 = tv_smoothing.solve(data=noise_img, maxiter=150, tol=10**(-4))
  ```
  
  <table>
   <tr>
-    <td><img src="./docs/source/tutorials/images/sphx_glr_2d_image_smoothing_001.png" alt="" width="400"></td>
-    <td><img src="./docs/source/tutorials/images/sphx_glr_2d_image_smoothing_002.png" alt="" width="400"></td>
+    <td><img src="./docs/source/tutorials/images/sphx_glr_2d_image_smoothing_001.png" alt="" width="800"></td>
+ </tr>
+ <tr>
+    <td><img src="./docs/source/tutorials/images/sphx_glr_2d_image_smoothing_002.png" alt="" width="800"></td>
     </td>
   </tr>
  </table>
@@ -59,8 +70,9 @@ u0 = tv_smoothing.solve(data=noise_img, maxiter=150, tol=10**(-4))
 
 ## Segmentation
 Some segmentation methods are implemented as part of regularization approaches and performance measurements.
+Through a piecewise constant TV-solution, one quickly obtains a suitable segmentation.
   ```python
-from recon.segmentation.tv_pdghm import multi_class_segmentation
+from recon.interfaces import Segmentation
 import nibabel as nib
 
 # segmentation of 3D nifti image
@@ -69,7 +81,8 @@ d = np.array(img.dataobj)
 gt = d/np.max(d)
 classes = [0, 0.2, 0.4, 0.7]
 
-result, _ = multi_class_segmentation(gt, classes=classes, beta=0.001)
+segmentation = Segmentation(img.shape, classes=classes, alpha=0.1)
+result, _ = segmentation.solve(img)
  ```
 
   

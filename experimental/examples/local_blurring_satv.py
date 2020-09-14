@@ -12,9 +12,8 @@ import numpy as np
 from scipy import misc
 
 
-from experimental.interfaces.satv import SATV
+from recon.interfaces.satv import SATV
 from recon.interfaces import Smooth, SmoothBregman
-from pylops import FirstDerivative, Smoothing2D, Gradient, Laplacian
 
 data_import_path = "./data/"
 data_output_path = data_import_path+"output/"

@@ -38,6 +38,7 @@ class BaseInterface(object):
                  lam: float = 1,
                  tau: float = None):
 
+
         self._reg_mode = None
         self._alpha = None
         self._lam = None
@@ -63,6 +64,7 @@ class BaseInterface(object):
             self.tau = 1/np.sqrt(12)  # see references - only 2d
         elif tau == 'calc':
             self.tau = self.calc_tau()
+            print("calced prox_param: "+str(self.tau))
         else:
             msg = "expected tau to be int, float or in ['calc', 'auto']."
 
@@ -134,10 +136,12 @@ class BaseInterface(object):
     @lam.setter
     def lam(self, value):
         if not (isinstance(value, (int, float))):
-            if value.shape == self.domain_shape:
+            if value.shape == self.domain_shape or \
+                    (len(value.shape) == 1 and value.shape == np.prod(self.domain_shape)):
                 self.local_lam = True
+                value = value.ravel()
             else:
                 msg = "shape of local parameter alpha does not match: " + \
-                      str(self.alpha.shape) + "!=" + str(self.domain_shape)
+                      str(value.shape) + "!=" + str(self.domain_shape)
                 raise ValueError(msg)
         self._lam = value
