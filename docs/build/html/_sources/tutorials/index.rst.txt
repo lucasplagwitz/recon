@@ -33,6 +33,27 @@ Tutorials
 
 .. raw:: html
 
+    <div class="sphx-glr-thumbcontainer" tooltip="02. Reconstruction I">
+
+.. only:: html
+
+ .. figure:: /tutorials/images/thumb/sphx_glr_ct_reconstruction_thumb.png
+     :alt: 02. Reconstruction I
+
+     :ref:`sphx_glr_tutorials_ct_reconstruction.py`
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /tutorials/ct_reconstruction
+
+.. raw:: html
+
     <div class="sphx-glr-thumbcontainer" tooltip="03. Segmentation">
 
 .. only:: html
@@ -75,12 +96,33 @@ Tutorials
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="05. Scaling Dependent Stepsize Problem">
+    <div class="sphx-glr-thumbcontainer" tooltip="Here a locally adapted regularization is shown. For this purpose the SATV algorithm was impleme...">
+
+.. only:: html
+
+ .. figure:: /tutorials/images/thumb/sphx_glr_spatially_adapted_total_variation_thumb.png
+     :alt: 05. Spatially Adapted Total Variation
+
+     :ref:`sphx_glr_tutorials_spatially_adapted_total_variation.py`
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /tutorials/spatially_adapted_total_variation
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="06. Scaling Dependent Stepsize Problem">
 
 .. only:: html
 
  .. figure:: /tutorials/images/thumb/sphx_glr_scaling_problem_thumb.png
-     :alt: 05. Scaling Dependent Stepsize Problem
+     :alt: 06. Scaling Dependent Stepsize Problem
 
      :ref:`sphx_glr_tutorials_scaling_problem.py`
 
@@ -93,6 +135,27 @@ Tutorials
    :hidden:
 
    /tutorials/scaling_problem
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="This Notebook examines the behavior of noise under linear operators numerically. Lets say for s...">
+
+.. only:: html
+
+ .. figure:: /tutorials/images/thumb/sphx_glr_white_noise_between_spaces_thumb.png
+     :alt: 07. White Noise Between Spaces
+
+     :ref:`sphx_glr_tutorials_white_noise_between_spaces.py`
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /tutorials/white_noise_between_spaces
 .. raw:: html
 
     <div class="sphx-glr-clear"></div>

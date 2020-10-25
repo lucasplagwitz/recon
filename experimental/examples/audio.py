@@ -2,7 +2,7 @@ from pydub import AudioSegment
 from pydub.playback import play
 
 import matplotlib.pyplot as plt
-from recon.interfaces import SmoothBregman
+from recon.interfaces import Smoothing, SmoothBregman
 
 import pydub
 import numpy as np
@@ -29,44 +29,40 @@ def write(f, sr, x, normalized=False):
     song.export(f, format="mp3", bitrate="320k")
 
 
-audio = read('/Users/lucasplagwitz/Desktop/test_chopin.m4a')
+audio = read('./data/09.m4a')
+audio = read('./data/08.m4a')
+audio = read('./data/07.mp3')
+
 
 #samples = audio.get_array_of_samples()
-samples = audio[1][:,0]
+samples = audio[1] #[:,0]
 
-# only error
-error_example = samples[int(0.3*(len(samples))//200):int(1.2*(len(samples))//200)].astype(np.int16)
-ee_audio = AudioSegment(
-    error_example.tobytes(),
-    frame_rate=44100,
-    sample_width=error_example.dtype.itemsize,
-    channels=1
-)
-#play(ee_audio)
 
-samples = samples[:15*(len(samples))//100]
-#samples = error_example
-#fac = np.max(samples)
-#sop = Smooth(domain_shape=samples.shape, reg_mode='tikhonov', alpha=10.5, tau=0.00035)
-#x = sop.solve(samples/fac, max_iter=400, tol=10**(-6))
-#x = x*fac
+samples = samples #[:10*(len(samples))//100, :]
+
 
 alpha = np.ones(samples.shape)*0.001
 fac = np.max(samples)
-#sop = SATV(domain_shape=samples.shape,
-#           reg_mode='tv',
-#           alpha=alpha,
-#           tau=0.035,
-#           assessment=0.06*np.sqrt(samples.shape[0]),
-#           noise_sigma=0.06)
-#x = sop.solve(samples/fac, tol=10**(-5))
 
-breg = SmoothBregman(domain_shape=samples.shape, reg_mode='tikhonov', alpha=1.1, tau=0.035, assessment=16)
-x = breg.solve(samples/fac, tol=10**(-5))
+samples = (samples/fac) #+ np.random.normal(0, 0.015, size=np.shape(samples))
+
+#tv = Smoothing(domain_shape=samples.shape, reg_mode='tv', alpha=0.6, tau='calc')
+#x = tv.solve(samples, tol=10**(-5))
+
+tik = Smoothing(domain_shape=samples.shape, reg_mode='tikhonov', alpha=6, tau='calc') #1.4
+x = tik.solve(samples, tol=10**(-5))
+
+
+#bregman = SmoothBregman(domain_shape=samples.shape,
+#                        reg_mode='tv',
+#                        alpha=0.1,
+#                        tau='calc',
+#                        assessment=0.01*np.sqrt(np.prod(samples.shape)))
+#x = bregman.solve(samples, tol=10**(-5))
 
 
 x = x*fac
-
+samples = samples*fac
 print("test")
 
 
@@ -77,36 +73,37 @@ ax2.plot(list(range(len(samples))), list(x))
 ax3.plot(list(range(len(samples))), list(samples-x))
 plt.show()
 
+samples = samples.astype(np.int16)
 x = x.astype(np.int16)
 
-error = (samples -x).astype(np.int16)
+error = (samples - x).astype(np.int16)
 
 error_audio = AudioSegment(
     (error).tobytes(),
     frame_rate=44100,
     sample_width=error.dtype.itemsize,
-    channels=1
+    channels=2
 )
 
-audio_segment = AudioSegment(
+reconstruction = AudioSegment(
     x.tobytes(),
     frame_rate=44100,
     sample_width=x.dtype.itemsize,
-    channels=1
+    channels=2
 )
 
-audio = AudioSegment(
+plain = AudioSegment(
     samples.tobytes(),
     frame_rate=44100,
     sample_width=samples.dtype.itemsize,
-    channels=1
+    channels=2
 )
 
 # test that it sounds right (requires ffplay, or pyaudio):
+play(reconstruction)
+play(plain)
 play(error_audio)
-play(audio)
-play(audio_segment)
 
-audio_segment.export("/Users/lucasplagwitz/Desktop/short.wav", format="wav")
+reconstruction.export("./data/short.wav", format="wav")
 
 print("test")

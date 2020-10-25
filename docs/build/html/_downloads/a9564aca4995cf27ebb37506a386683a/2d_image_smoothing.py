@@ -1,15 +1,18 @@
 """
 01. Smoothing
 ================
-This example ...
+This example shows image smoothing on an image with normal distributed noise.
 """
 
 ###############################################################################
-# We import ....
+# We create a scenario with a scaled demo image to
+# which normally distributed noise with standard
+# deviation of 0.2 is added.
 
 import matplotlib.pyplot as plt
 import numpy as np
 from scipy import misc
+from recon.utils.utils import psnr
 
 from recon.interfaces import Smoothing, SmoothBregman
 
@@ -20,46 +23,53 @@ gt = img
 vmin, vmax = 0, 1
 
 # create noisy image
-sigma = 0.2
+sigma = 0.2 * vmax
 n = np.random.normal(0, sigma, gt.shape)
 noise_img = gt + n
 
 f = plt.figure(figsize=(6, 3))
 plt.gray()
 f.add_subplot(1,2, 1)
-plt.title("GT")
+plt.title("GT - PSNR: "+str(psnr(gt, gt)))
 plt.axis('off')
 plt.imshow(gt, vmin=vmin, vmax=vmax)
 f.add_subplot(1, 2, 2)
 plt.gray()
-plt.title("Noisy")
+plt.title("Noisy - PSNR: "+str(psnr(gt, noise_img)))
 plt.imshow(noise_img, vmin=vmin, vmax=vmax)
 plt.axis('off')
 plt.show(block=False)
 
 ###############################################################################
 # TV-Regularization and Tikhonov
-#
-#
+# Basically the problem here consists of two parts.
+# The data term and the regularization term.
+# While we use the L2 norm to measure the proximity
+# between the image and the original solution, the regularization
+# term measures the property of the solution. In our case we distinguish
+# between TV and Tikhonov.
+# TV is called the L1 norm of the gradient of the solution here,
+# while Tikhonov represents the L2 norm. Overall, TV should preserve
+# the edges better, because larger jumps are not penalized more.
 #
 
 # TV smoothing small alpha
-tv_smoothing = Smoothing(domain_shape=gt.shape, reg_mode='tv', alpha=0.3)
-u_tv = tv_smoothing.solve(data=noise_img, max_iter=450, tol=10**(-5))
+tv_smoothing = Smoothing(domain_shape=gt.shape, reg_mode='tv', alpha=0.1, lam=0.3, tau='calc')
+u_tv = tv_smoothing.solve(data=noise_img, max_iter=2000, tol=1e-4)
 
 # Tikhonov smoothing -> with lam = 1 => alpha > 1 we decrease lam instead.
-tikh_smoothing = Smoothing(domain_shape=gt.shape, reg_mode='tikhonov', lam=0.1, alpha=1, tau=0.1)
-u_tik = tikh_smoothing.solve(data=noise_img, max_iter=450, tol=10**(-5))
+tikh_smoothing = Smoothing(domain_shape=gt.shape, reg_mode='tikhonov', lam=0.1, alpha=1, tau='calc')
+u_tik = tikh_smoothing.solve(data=noise_img, max_iter=2000, tol=1e-4)
 
 f = plt.figure(figsize=(6, 3))
 f.add_subplot(1, 2, 1)
 plt.axis('off')
 plt.gray()
 plt.imshow(u_tik, vmin=vmin, vmax=vmax)
-plt.title("Tikhonov")
+plt.title("Tikhonov - PSNR: "+str(psnr(gt, u_tik)))
 f.add_subplot(1, 2, 2)
 plt.imshow(u_tv, vmin=vmin, vmax=vmax)
-plt.title("TV")
+plt.title("TV - PSNR: "+str(psnr(gt, u_tv)))
 plt.axis('off')
 plt.gray()
 plt.show(block=False)
@@ -79,27 +89,30 @@ plt.plot(bbox_inches='tight', pad_inches=0)
 plt.show()
 
 ###############################################################################
-# Bregman ... iteration
+# Bregman Iteration
+# In the Bregman iterations, starting from an over-regularized solution,
+# the noisy image is iterated with reference to the regularization functional (here TV).
+# For further information please refer to future mathematical descriptions.
 
 breg_smoothing = SmoothBregman(domain_shape=gt.shape,
                                reg_mode='tv',
-                               alpha=1.1,
-                               lam=1,
-                               tau=0.3,
+                               alpha=0.3,
+                               lam=0.1,
+                               tau='calc',
                                plot_iteration=False,
                                assessment=sigma * np.sqrt(np.prod(gt.shape)))
 
-u_breg = breg_smoothing.solve(data=noise_img, max_iter=350, tol=5*10**(-6))
+u_breg = breg_smoothing.solve(data=noise_img, max_iter=2000, tol=1e-4)
 
 f = plt.figure(figsize=(6, 3))
 f.add_subplot(1, 2, 1)
 plt.axis('off')
 plt.gray()
 plt.imshow(u_tv, vmin=vmin, vmax=vmax)
-plt.title("TV")
+plt.title("TV - PSNR: "+str(psnr(gt, u_tv)))
 f.add_subplot(1, 2, 2)
 plt.imshow(u_breg, vmin=vmin, vmax=vmax)
-plt.title("TV-Bregman")
+plt.title("TV-Breg - PSNR: "+str(psnr(gt, u_breg)))
 plt.axis('off')
 plt.gray()
 plt.show(block=False)
@@ -116,4 +129,3 @@ plt.plot(range(x_min, x_max), gt[x_min:x_max,y], color="black", label="GT")
 plt.plot(range(x_min, x_max), u_breg[x_min:x_max,y], color="blue", label="BregTV")
 plt.legend(loc="lower left")
 plt.show()
-plt.close()

@@ -39,7 +39,8 @@
     
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="prev" title="01. Smoothing" href="2d_image_smoothing.html" /> 
+    <link rel="next" title="04. Total Generalized Variation" href="total_generalized_variation.html" />
+    <link rel="prev" title="02. Reconstruction I" href="ct_reconstruction.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -92,7 +93,12 @@
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Tutorials</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="2d_image_smoothing.html">01. Smoothing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ct_reconstruction.html">02. Reconstruction I</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">03. Segmentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="total_generalized_variation.html">04. Total Generalized Variation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="spatially_adapted_total_variation.html">05. Spatially Adapted Total Variation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="scaling_problem.html">06. Scaling Dependent Stepsize Problem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="white_noise_between_spaces.html">07. White Noise Between Spaces</a></li>
 </ul>
 </li>
 </ul>
@@ -168,7 +174,9 @@
 </div>
 <div class="sphx-glr-example-title section" id="segmentation">
 <span id="sphx-glr-tutorials-2d-tv-segmentation-py"></span><h1>03. Segmentation<a class="headerlink" href="#segmentation" title="Permalink to this headline">¶</a></h1>
-<p>This example …</p>
+<p>This example shows how to use the interface for class-based segmentation
+of 2D images. First, depending on the size of the weighting alpha,
+a piecewise constant image is generated before the assignment to certain classes is done.</p>
 <p>TV based segmentation.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">skimage</span>
@@ -185,7 +193,7 @@
 
 <span class="n">classes</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">50</span><span class="o">/</span><span class="mi">255</span><span class="p">,</span> <span class="mi">120</span><span class="o">/</span><span class="mi">255</span><span class="p">,</span> <span class="mi">190</span><span class="o">/</span><span class="mi">255</span><span class="p">,</span> <span class="mi">220</span><span class="o">/</span><span class="mi">255</span><span class="p">]</span>
 
-<span class="n">segmentation</span> <span class="o">=</span> <span class="n">Segmentation</span><span class="p">(</span><span class="n">image</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">classes</span><span class="o">=</span><span class="n">classes</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">tau</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">segmentation</span> <span class="o">=</span> <span class="n">Segmentation</span><span class="p">(</span><span class="n">image</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">classes</span><span class="o">=</span><span class="n">classes</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">tau</span><span class="o">=</span><span class="s1">&#39;calc&#39;</span><span class="p">)</span>
 <span class="n">result</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">segmentation</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
 
 
@@ -203,10 +211,10 @@
 </div>
 <img alt="GT, TV based segmentation" class="sphx-glr-single-img" src="../_images/sphx_glr_2d_tv_segmentation_001.png" />
 <p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Primal-Dual Algorithm: [                                        ]--------------------]
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Early stopping.
 </pre></div>
 </div>
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 2 minutes  8.877 seconds)</p>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 2 minutes  42.279 seconds)</p>
 <div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-tutorials-2d-tv-segmentation-py">
 <div class="sphx-glr-download sphx-glr-download-python docutils container">
 <p><a class="reference download internal" download="" href="../_downloads/36f0b40bdbf9037c7713d2c5dc8e1b29/2d_tv_segmentation.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">2d_tv_segmentation.py</span></code></a></p>
@@ -226,8 +234,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
+        <a href="total_generalized_variation.html" class="btn btn-neutral float-right" title="04. Total Generalized Variation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
-        <a href="2d_image_smoothing.html" class="btn btn-neutral float-left" title="01. Smoothing" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+        <a href="ct_reconstruction.html" class="btn btn-neutral float-left" title="02. Reconstruction I" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

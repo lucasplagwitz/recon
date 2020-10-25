@@ -9,13 +9,15 @@
     .. _sphx_glr_tutorials_scaling_problem.py:
 
 
-05. Scaling Dependent Stepsize Problem
+06. Scaling Dependent Stepsize Problem
 ================
-In some tests it has been noticed that the scaling of the
-image has an influence on the regularized final result.
-In this tutorial an example for the occurrence of such effects is shown.
+In earlier tests it was noticed that the size of the weighting parameters
+has an effect on the solution while keeping the ratio constant.
+Meanwhile the problem has been identified as a too small number of iterations.
+Overall, the default parameters have been adjusted, but in this example,
+we will briefly show what the effect looks like.
 
-A grey image is created and viewed once in area [0, 255] and once in area [0, 1].
+A grey image is created and viewed in area [0, 1].
 The relation of the weighting between dataterm and regularization
 remains the same, but is adjusted in its absolute value too.
 
@@ -25,23 +27,14 @@ remains the same, but is adjusted in its absolute value too.
     import numpy as np
     from recon.interfaces import Smoothing
     import matplotlib.pyplot as plt
-    from pylops import Gradient
 
-    # build image
-    size, small_size = 256, 200
-    scaled_image = np.reshape(np.array([(x/size) for x in range(size)]*size), (size, size))
-    scaled_image[28:small_size+28, 28:small_size+28] = \
-        np.reshape(np.array([(1-x/small_size)for x in range(small_size)]*small_size), (small_size, small_size))
-    scaled_image /= np.max(scaled_image)
+    from recon.utils.images import two_smooth_squares
 
-    assert np.all([0 <= np.min(scaled_image), np.max(scaled_image) == 1])
+    scaled_image = two_smooth_squares(256, 200)
 
-    unscaled_image = scaled_image * 255
+    sigma = 0.3  # the percentage portion standard deviation for normal (Gaussian) distribution.
 
-    sigma = 0.2  # the percentage portion standard deviation for normal (Gaussian) distribution.
-
-    noise_scaled_image = scaled_image + np.random.normal(0, 0.2*np.max(scaled_image), size=(size, size))
-    noise_unscaled_image = unscaled_image + np.random.normal(0, 0.2*np.max(unscaled_image), size=(size, size))
+    noise_image = scaled_image + np.random.normal(0, sigma*np.max(scaled_image), size=scaled_image.shape)
 
 
 
@@ -57,31 +50,37 @@ remains the same, but is adjusted in its absolute value too.
 .. code-block:: default
 
 
-    weights = [(0.001, 0.2), (1, 0.2), (0.005, 1)]
+    weights = [(0.2, 0.2), (1, 1), (2, 2)]
 
     rows = ['{}'.format(row) for row in weights]
 
     f = plt.figure(figsize=(6, 3*len(weights)))
 
-
     for i, weight in enumerate(weights):
-        tv_scaled_obj = Smoothing(domain_shape=scaled_image.shape, reg_mode='tv', lam=weight[0], alpha=weight[1], tau=0.3)
-        scaled_tv_solution = tv_scaled_obj.solve(scaled_image, max_iter=350)
+        tv_scaled_obj = Smoothing(domain_shape=scaled_image.shape,
+                                  reg_mode='tv',
+                                  lam=weight[0],
+                                  alpha=weight[1],
+                                  tau="calc")
+        scaled_tv_solution = tv_scaled_obj.solve(noise_image, max_iter=5550, tol=1e-4)
 
-        tv_unscaled_obj = Smoothing(domain_shape=scaled_image.shape, reg_mode='tv', lam=weight[0], alpha=weight[1], tau=0.3)
-        unscaled_tv_solution = tv_unscaled_obj.solve(unscaled_image, max_iter=350)
+        tv_unscaled_obj = Smoothing(domain_shape=scaled_image.shape,
+                                    reg_mode='tv',
+                                    lam=weight[0],
+                                    alpha=weight[1],
+                                    tau="calc")
+        unscaled_tv_solution = tv_unscaled_obj.solve(noise_image, max_iter=550, tol=1e-4)
 
-
-        f.add_subplot(3, 2, (i)*2+1)
+        f.add_subplot(3, 2, i*2+1)
         plt.gray()
         plt.axis('off')
         plt.imshow(scaled_tv_solution)
-        plt.title("Scaled " + str(weight))
+        plt.title("Long-Run: weight " + str(weight))
         f.add_subplot(3, 2, (i+1)*2)
 
         plt.gray()
         plt.imshow(unscaled_tv_solution)
-        plt.title("Unscaled " + str(weight))
+        plt.title("Short-Run: weight " + str(weight))
         plt.axis('off')
     plt.tight_layout()
     plt.show()
@@ -90,7 +89,7 @@ remains the same, but is adjusted in its absolute value too.
 
 
 .. image:: /tutorials/images/sphx_glr_scaling_problem_001.png
-    :alt: Scaled (0.001, 0.2), Unscaled (0.001, 0.2), Scaled (1, 0.2), Unscaled (1, 0.2), Scaled (0.005, 1), Unscaled (0.005, 1)
+    :alt: Long-Run: weight (0.2, 0.2), Short-Run: weight (0.2, 0.2), Long-Run: weight (1, 1), Short-Run: weight (1, 1), Long-Run: weight (2, 2), Short-Run: weight (2, 2)
     :class: sphx-glr-single-img
 
 
@@ -100,54 +99,24 @@ remains the same, but is adjusted in its absolute value too.
 
  .. code-block:: none
 
-    Primal-Dual Algorithm: [                                        ]--------------------]
-    Primal-Dual Algorithm: [                                        ]--------------------]
-    Primal-Dual Algorithm: [                                        ]--------------------]
-    Primal-Dual Algorithm: [                                        ]-]
-    early stopping!Primal-Dual Algorithm: [                                        ]--------------------]
-    Primal-Dual Algorithm: [                                        ]--------------------]
-
-
-
-
-Gradient Verification
-To check there are no elemiation/condition things on the Gradient Operator:
-
-
-.. code-block:: default
-
-
-    grad = Gradient(dims=(size, size), edge=True, kind='backward')
-    scaled_gradient = grad * noise_scaled_image.ravel()
-    unscaled_gradient = grad * noise_unscaled_image.ravel()
-
-    scaled_reconstruction = np.reshape(grad / scaled_gradient, (size, size))
-    unscaled_reconstruction = np.reshape(grad / unscaled_gradient, (size, size))
-
-    assert abs(np.linalg.norm(scaled_reconstruction - noise_scaled_image) -
-               np.linalg.norm((unscaled_reconstruction - noise_unscaled_image)/255) < 1)
-
-    scaled_reconstruction = grad.H / (grad.H * scaled_gradient)
-    unscaled_reconstruction = grad.H / (grad.H * unscaled_gradient)
-
-    assert(abs(np.linalg.norm(scaled_reconstruction - scaled_gradient) -
-               np.linalg.norm((unscaled_reconstruction - unscaled_gradient)/255)) < 1)
-
-
-
-
+     Early stopping.
+     Early stopping.
+     Early stopping.
+     Early stopping.
+     Early stopping.
+     Early stopping.
 
 
 
 
 Conclusion
-The Prox-Param tau is dependent on input scale.
-Therefore the calc method must be adapted in future versions.
+Be careful with max_iter and tol parameter
+or with the interpretation of result if the number of iteration is too small.
 
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  15.354 seconds)
+   **Total running time of the script:** ( 0 minutes  43.458 seconds)
 
 
 .. _sphx_glr_download_tutorials_scaling_problem.py:

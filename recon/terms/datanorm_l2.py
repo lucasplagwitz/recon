@@ -1,8 +1,9 @@
 from typing import Union
-from pylops import Identity
+from recon.operator import Identity
 import numpy as np
 
 from recon.terms.base_term import BaseDataterm
+
 
 class DatanormL2(BaseDataterm):
     """Datanorm-L2
@@ -38,23 +39,23 @@ class DatanormL2(BaseDataterm):
                  prox_param: float = 0.9,
                  sampling=None):
         if operator is None:
-            operator = Identity(N=np.prod(image_size))
+            operator = Identity(domain_dim=image_size)
 
-        super(DatanormL2, self).__init__(operator, sampling=sampling)
+        super(DatanormL2, self).__init__(operator, sampling=sampling, prox_param=prox_param)
         self.lam = lam
-        self.prox_param = prox_param
         self.data = data
+        self.inv_operator = self.operator.inv
 
     def __call__(self, x):
-        return 1/2*np.sqrt(np.sum((self.operator*x-self.data)**2))
+        return self.lam/2*np.sum((self.operator*x-self.data)**2)
 
     def prox(self, x):
         """
         Proximal Operator
 
-        prox(x) = A_star * (( A*x + tau * lambda * f) / (1 + tau * lambda * diag_sampling))
+        prox(x) = A_inv * (( A*x + tau * lambda * f) / (1 + tau * lambda * diag_sampling))
         """
-        u = self.operator.H*(
+        u = self.inv_operator*(
                 (self.operator*x + self.prox_param * self.lam * self.data) /
                 (1 + self.prox_param * self.lam * self.diag_sampling)
             )

@@ -1,10 +1,7 @@
 import numpy as np
 from skimage.transform import radon, iradon
 
-import sys
-#sys.path.append("/Users/lucasplagwitz/git_projects/recon")
-
-from experimental.operator.fcthdl_operator import FcthdlOperator
+from recon.operator.fcthdl_operator import FcthdlOperator
 
 
 class CtRt(FcthdlOperator):
@@ -24,7 +21,7 @@ class CtRt(FcthdlOperator):
             if len(self.domain_dim) == 2 and self.domain_dim[1] == 1:
                 self.center = int((self.domain_dim[0] + 1) / 2)
             else:
-                self.center = int((self.domain_dim + 1) / 2)
+                self.center = np.array([x//2 for x in list(domain_dim)])
 
         # ToDO: input check
 
@@ -38,13 +35,12 @@ class CtRt(FcthdlOperator):
         if theta is not None:
             self.theta = theta
         else:
-            self.theta = np.linspace(0., 180., 100, endpoint=False) # max(self.domain_dim)
+            self.theta = np.linspace(0., 180., 180, endpoint=False) # max(self.domain_dim)
 
         fwfcthdl = lambda u: radon(u, theta=self.theta, circle=False)
 
-        bwfcthdl = lambda f: iradon(f, theta=self.theta, circle=False)
+        bwfcthdl = lambda f: iradon(f, theta=self.theta, circle=False) #, filter=None
 
         image_dim = (int(np.ceil(np.sqrt(2) * max(domain_dim))), len(self.theta))
 
         super(CtRt, self).__init__(domain_dim, image_dim, fwfcthdl, bwfcthdl)
-

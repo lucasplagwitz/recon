@@ -1,15 +1,11 @@
 import numpy as np
-from scipy import sparse
-from scipy.io import loadmat
 import matplotlib.pyplot as plt
 import imageio
 
 from pylops import Gradient
 
-from recon.interfaces import ReconBregman, Recon
 from experimental.interfaces.recon_satv import ReconSATV
-from experimental.interfaces.recon_satv_direct import ReconSATVDirect
-from experimental.operator.ct_radon import CtRt
+from recon.operator.ct_radon import CtRt
 
 # load content
 image_path = "./../../examples/data/gt.png"

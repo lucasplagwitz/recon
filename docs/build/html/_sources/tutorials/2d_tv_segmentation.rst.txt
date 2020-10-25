@@ -11,7 +11,9 @@
 
 03. Segmentation
 ================
-This example ...
+This example shows how to use the interface for class-based segmentation
+of 2D images. First, depending on the size of the weighting alpha,
+a piecewise constant image is generated before the assignment to certain classes is done.
 
 TV based segmentation.
 
@@ -34,7 +36,7 @@ TV based segmentation.
 
     classes = [0, 50/255, 120/255, 190/255, 220/255]
 
-    segmentation = Segmentation(image.shape, classes=classes, alpha=0.1, tau=3)
+    segmentation = Segmentation(image.shape, classes=classes, alpha=0.01, tau='calc')
     result, _ = segmentation.solve(image)
 
 
@@ -61,7 +63,7 @@ TV based segmentation.
 
  .. code-block:: none
 
-    Primal-Dual Algorithm: [                                        ]--------------------]
+     Early stopping.
 
 
 
@@ -69,7 +71,7 @@ TV based segmentation.
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 2 minutes  8.877 seconds)
+   **Total running time of the script:** ( 2 minutes  42.279 seconds)
 
 
 .. _sphx_glr_download_tutorials_2d_tv_segmentation.py:

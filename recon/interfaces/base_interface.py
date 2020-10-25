@@ -1,5 +1,6 @@
 from typing import Union
 import numpy as np
+from recon.utils.utils import pylops_power_method_opnorm
 from pylops import Gradient, BlockDiag, Diagonal
 
 from recon.terms import DatanormL2, IndicatorL2
@@ -61,10 +62,14 @@ class BaseInterface(object):
         if isinstance(tau, (float, int)):
             self.tau = tau
         elif tau == 'auto':
-            self.tau = 1/np.sqrt(12)  # see references - only 2d
+            self.tau = 1/np.sqrt(12)  # see references - only 2d TGV
         elif tau == 'calc':
             self.tau = self.calc_tau()
-            print("calced prox_param: "+str(self.tau))
+        elif tau == 'relax':
+            raise NotImplementedError("relax is not implemented yet")
+            sk = self.K.tosparse()
+            t = 1/sk.sum(axis=1)
+            self.tau = Diagonal(t)
         else:
             msg = "expected tau to be int, float or in ['calc', 'auto']."
 
@@ -74,32 +79,32 @@ class BaseInterface(object):
         self.K = None
 
     def calc_tau(self) -> float:
-        # ToDo: Recalculate that for ensemble alpha/lambda
-        #if self.weight_term == 'reg':
-        norm = np.abs(np.asscalar(self.K.eigs(neigs=1, which='LM'))) #* self.alpha
-        #else:
-        #    norm = np.abs(np.asscalar(self.K.eigs(neigs=1, which='LM'))) * np.max(self.alpha)
-        return 0.99 / norm
+        norm = np.abs(np.asscalar((self.K.H*self.K).eigs(neigs=1, symmetric=True, largest=True, uselobpcg=True)))
+        fac = 0.99
+        return fac * np.sqrt(1 / norm)
 
     def set_up_operator(self) -> None:
         assert self.reg_mode in self.possible_reg_modes
 
         # since every interface solves via Gradient at this time - will change in future versions
-        self.K = Gradient(self.domain_shape, edge=True, dtype='float64', kind='backward')
-        if self.local_alpha:
-            self.K = BlockDiag([Diagonal(self.alpha.ravel())]*len(self.domain_shape)) * self.K
-        else:
-            self.K = self.alpha * self.K
+        self.K = Gradient(self.domain_shape, edge=True, dtype='float64', kind='backward', sampling=1)
+        #if self.local_alpha:
+        #    self.K = BlockDiag([Diagonal(self.alpha.ravel())]*len(self.domain_shape)) * self.K
+
         if self.reg_mode == 'tv':
-            self.F_star = IndicatorL2(self.domain_shape, len(self.domain_shape), prox_param=self.tau)
+            self.F_star = IndicatorL2(self.domain_shape,
+                                      len(self.domain_shape),
+                                      prox_param=self.tau,
+                                      upper_bound=self.alpha)
         elif self.reg_mode == 'tikhonov':
+            self.K = self.alpha*self.K  # it is possible to rewrite DatanormL2 -> x/self.alpha and lam=self.alpha
             self.F_star = DatanormL2(image_size=self.K.shape[0], data=0, prox_param=self.tau)
         else:
             self.F_star = DatanormL2(image_size=self.domain_shape, data=0, prox_param=self.tau)
             self.K = 0
         return
 
-    def solve(self, data: np.ndarray, max_iter: int = 150, tol: float = 5*10**(-4)):
+    def solve(self, data: np.ndarray, max_iter: int = 5000, tol: float = 1e-5):
         self.set_up_operator()
 
     @property
@@ -120,7 +125,7 @@ class BaseInterface(object):
 
     @alpha.setter
     def alpha(self, value):
-        if not (isinstance(value, (int, float))):
+        if not (isinstance(value, (int, float, tuple))):
             if value == self.domain_shape:
                 self.local_alpha = True
             else:

@@ -75,13 +75,13 @@ class IndicatorL2(BaseRegTerm):
         assert self._input_check(f)
         if self.times is None:
             norm_f = self._infty_abs(f)
-            norm_f = matlib.repmat(norm_f, 1, self.derivate_dim).ravel() / self.upper_bound
+            norm_f = np.array([norm_f]*self.derivate_dim).ravel() / self.upper_bound
             norm_f[norm_f < 1] = 1
         else:
             norm_list = []
             for vec in range(self.times):
                 norm_f = self._infty_abs(f[:, vec])
-                norm_f = matlib.repmat(norm_f, 1, self.derivate_dim).ravel() / self.upper_bound
+                norm_f = np.array([norm_f]*self.derivate_dim).ravel() / self.upper_bound
                 norm_f[norm_f < 1] = 1
                 norm_list.append(norm_f)
             norm_f = np.array(norm_list).T
@@ -89,10 +89,10 @@ class IndicatorL2(BaseRegTerm):
 
     def _infty_abs(self, p):
         """
-        |p_ij| = max_ij sqrt(p1_ij**2 + p2_ij**2)
+        |p_ij| = sqrt(p1_ij**2 + p2_ij**2)
         """
         p_row = np.reshape(p, (self.derivate_dim, np.prod(self.image_size)))
-        norm_f = np.sqrt(np.sum(np.abs(p_row) ** 2, axis=0))
+        norm_f = np.sqrt(np.sum(p_row ** 2, axis=0))
         return norm_f
 
     def _infty_norm(self, p):

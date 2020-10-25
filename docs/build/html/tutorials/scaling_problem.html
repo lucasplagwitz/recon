@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>05. Scaling Dependent Stepsize Problem &mdash; recon 0.0.1 documentation</title>
+  <title>06. Scaling Dependent Stepsize Problem &mdash; recon 0.0.1 documentation</title>
   
 
   
@@ -39,7 +39,8 @@
     
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="prev" title="04. Total Generalized Variation" href="total_generalized_variation.html" /> 
+    <link rel="next" title="07. White Noise Between Spaces" href="white_noise_between_spaces.html" />
+    <link rel="prev" title="05. Spatially Adapted Total Variation" href="spatially_adapted_total_variation.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -92,9 +93,12 @@
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Tutorials</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="2d_image_smoothing.html">01. Smoothing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ct_reconstruction.html">02. Reconstruction I</a></li>
 <li class="toctree-l2"><a class="reference internal" href="2d_tv_segmentation.html">03. Segmentation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="total_generalized_variation.html">04. Total Generalized Variation</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">05. Scaling Dependent Stepsize Problem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="spatially_adapted_total_variation.html">05. Spatially Adapted Total Variation</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">06. Scaling Dependent Stepsize Problem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="white_noise_between_spaces.html">07. White Noise Between Spaces</a></li>
 </ul>
 </li>
 </ul>
@@ -145,7 +149,7 @@
         
           <li><a href="index.html">Tutorials</a> &raquo;</li>
         
-      <li>05. Scaling Dependent Stepsize Problem</li>
+      <li>06. Scaling Dependent Stepsize Problem</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -169,99 +173,79 @@
 <p>Click <a class="reference internal" href="#sphx-glr-download-tutorials-scaling-problem-py"><span class="std std-ref">here</span></a>     to download the full example code</p>
 </div>
 <div class="sphx-glr-example-title section" id="scaling-dependent-stepsize-problem">
-<span id="sphx-glr-tutorials-scaling-problem-py"></span><h1>05. Scaling Dependent Stepsize Problem<a class="headerlink" href="#scaling-dependent-stepsize-problem" title="Permalink to this headline">¶</a></h1>
-<p>In some tests it has been noticed that the scaling of the
-image has an influence on the regularized final result.
-In this tutorial an example for the occurrence of such effects is shown.</p>
-<p>A grey image is created and viewed once in area [0, 255] and once in area [0, 1].
+<span id="sphx-glr-tutorials-scaling-problem-py"></span><h1>06. Scaling Dependent Stepsize Problem<a class="headerlink" href="#scaling-dependent-stepsize-problem" title="Permalink to this headline">¶</a></h1>
+<p>In earlier tests it was noticed that the size of the weighting parameters
+has an effect on the solution while keeping the ratio constant.
+Meanwhile the problem has been identified as a too small number of iterations.
+Overall, the default parameters have been adjusted, but in this example,
+we will briefly show what the effect looks like.</p>
+<p>A grey image is created and viewed in area [0, 1].
 The relation of the weighting between dataterm and regularization
 remains the same, but is adjusted in its absolute value too.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">recon.interfaces</span> <span class="kn">import</span> <span class="n">Smoothing</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">from</span> <span class="nn">pylops</span> <span class="kn">import</span> <span class="n">Gradient</span>
 
-<span class="c1"># build image</span>
-<span class="n">size</span><span class="p">,</span> <span class="n">small_size</span> <span class="o">=</span> <span class="mi">256</span><span class="p">,</span> <span class="mi">200</span>
-<span class="n">scaled_image</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([(</span><span class="n">x</span><span class="o">/</span><span class="n">size</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">size</span><span class="p">)]</span><span class="o">*</span><span class="n">size</span><span class="p">),</span> <span class="p">(</span><span class="n">size</span><span class="p">,</span> <span class="n">size</span><span class="p">))</span>
-<span class="n">scaled_image</span><span class="p">[</span><span class="mi">28</span><span class="p">:</span><span class="n">small_size</span><span class="o">+</span><span class="mi">28</span><span class="p">,</span> <span class="mi">28</span><span class="p">:</span><span class="n">small_size</span><span class="o">+</span><span class="mi">28</span><span class="p">]</span> <span class="o">=</span> \
-    <span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([(</span><span class="mi">1</span><span class="o">-</span><span class="n">x</span><span class="o">/</span><span class="n">small_size</span><span class="p">)</span><span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">small_size</span><span class="p">)]</span><span class="o">*</span><span class="n">small_size</span><span class="p">),</span> <span class="p">(</span><span class="n">small_size</span><span class="p">,</span> <span class="n">small_size</span><span class="p">))</span>
-<span class="n">scaled_image</span> <span class="o">/=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">scaled_image</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">recon.utils.images</span> <span class="kn">import</span> <span class="n">two_smooth_squares</span>
 
-<span class="k">assert</span> <span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">([</span><span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">scaled_image</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">scaled_image</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">])</span>
+<span class="n">scaled_image</span> <span class="o">=</span> <span class="n">two_smooth_squares</span><span class="p">(</span><span class="mi">256</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
 
-<span class="n">unscaled_image</span> <span class="o">=</span> <span class="n">scaled_image</span> <span class="o">*</span> <span class="mi">255</span>
+<span class="n">sigma</span> <span class="o">=</span> <span class="mf">0.3</span>  <span class="c1"># the percentage portion standard deviation for normal (Gaussian) distribution.</span>
 
-<span class="n">sigma</span> <span class="o">=</span> <span class="mf">0.2</span>  <span class="c1"># the percentage portion standard deviation for normal (Gaussian) distribution.</span>
-
-<span class="n">noise_scaled_image</span> <span class="o">=</span> <span class="n">scaled_image</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">scaled_image</span><span class="p">),</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">size</span><span class="p">,</span> <span class="n">size</span><span class="p">))</span>
-<span class="n">noise_unscaled_image</span> <span class="o">=</span> <span class="n">unscaled_image</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">unscaled_image</span><span class="p">),</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">size</span><span class="p">,</span> <span class="n">size</span><span class="p">))</span>
+<span class="n">noise_image</span> <span class="o">=</span> <span class="n">scaled_image</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">sigma</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">scaled_image</span><span class="p">),</span> <span class="n">size</span><span class="o">=</span><span class="n">scaled_image</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>…</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">weights</span> <span class="o">=</span> <span class="p">[(</span><span class="mf">0.001</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">),</span> <span class="p">(</span><span class="mf">0.005</span><span class="p">,</span> <span class="mi">1</span><span class="p">)]</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">weights</span> <span class="o">=</span> <span class="p">[(</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)]</span>
 
 <span class="n">rows</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">row</span><span class="p">)</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">weights</span><span class="p">]</span>
 
 <span class="n">f</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">3</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">weights</span><span class="p">)))</span>
 
-
 <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">weight</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">weights</span><span class="p">):</span>
-    <span class="n">tv_scaled_obj</span> <span class="o">=</span> <span class="n">Smoothing</span><span class="p">(</span><span class="n">domain_shape</span><span class="o">=</span><span class="n">scaled_image</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">reg_mode</span><span class="o">=</span><span class="s1">&#39;tv&#39;</span><span class="p">,</span> <span class="n">lam</span><span class="o">=</span><span class="n">weight</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">alpha</span><span class="o">=</span><span class="n">weight</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">tau</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
-    <span class="n">scaled_tv_solution</span> <span class="o">=</span> <span class="n">tv_scaled_obj</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">scaled_image</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">350</span><span class="p">)</span>
+    <span class="n">tv_scaled_obj</span> <span class="o">=</span> <span class="n">Smoothing</span><span class="p">(</span><span class="n">domain_shape</span><span class="o">=</span><span class="n">scaled_image</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span>
+                              <span class="n">reg_mode</span><span class="o">=</span><span class="s1">&#39;tv&#39;</span><span class="p">,</span>
+                              <span class="n">lam</span><span class="o">=</span><span class="n">weight</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                              <span class="n">alpha</span><span class="o">=</span><span class="n">weight</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+                              <span class="n">tau</span><span class="o">=</span><span class="s2">&quot;calc&quot;</span><span class="p">)</span>
+    <span class="n">scaled_tv_solution</span> <span class="o">=</span> <span class="n">tv_scaled_obj</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">noise_image</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">5550</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="mf">1e-4</span><span class="p">)</span>
 
-    <span class="n">tv_unscaled_obj</span> <span class="o">=</span> <span class="n">Smoothing</span><span class="p">(</span><span class="n">domain_shape</span><span class="o">=</span><span class="n">scaled_image</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">reg_mode</span><span class="o">=</span><span class="s1">&#39;tv&#39;</span><span class="p">,</span> <span class="n">lam</span><span class="o">=</span><span class="n">weight</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">alpha</span><span class="o">=</span><span class="n">weight</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">tau</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
-    <span class="n">unscaled_tv_solution</span> <span class="o">=</span> <span class="n">tv_unscaled_obj</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">unscaled_image</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">350</span><span class="p">)</span>
+    <span class="n">tv_unscaled_obj</span> <span class="o">=</span> <span class="n">Smoothing</span><span class="p">(</span><span class="n">domain_shape</span><span class="o">=</span><span class="n">scaled_image</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span>
+                                <span class="n">reg_mode</span><span class="o">=</span><span class="s1">&#39;tv&#39;</span><span class="p">,</span>
+                                <span class="n">lam</span><span class="o">=</span><span class="n">weight</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                                <span class="n">alpha</span><span class="o">=</span><span class="n">weight</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+                                <span class="n">tau</span><span class="o">=</span><span class="s2">&quot;calc&quot;</span><span class="p">)</span>
+    <span class="n">unscaled_tv_solution</span> <span class="o">=</span> <span class="n">tv_unscaled_obj</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">noise_image</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">550</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="mf">1e-4</span><span class="p">)</span>
 
-
-    <span class="n">f</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">*</span><span class="mi">2</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">i</span><span class="o">*</span><span class="mi">2</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">gray</span><span class="p">()</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">scaled_tv_solution</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Scaled &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">weight</span><span class="p">))</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Long-Run: weight &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">weight</span><span class="p">))</span>
     <span class="n">f</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="mi">2</span><span class="p">)</span>
 
     <span class="n">plt</span><span class="o">.</span><span class="n">gray</span><span class="p">()</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">unscaled_tv_solution</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Unscaled &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">weight</span><span class="p">))</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Short-Run: weight &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">weight</span><span class="p">))</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-<img alt="Scaled (0.001, 0.2), Unscaled (0.001, 0.2), Scaled (1, 0.2), Unscaled (1, 0.2), Scaled (0.005, 1), Unscaled (0.005, 1)" class="sphx-glr-single-img" src="../_images/sphx_glr_scaling_problem_001.png" />
+<img alt="Long-Run: weight (0.2, 0.2), Short-Run: weight (0.2, 0.2), Long-Run: weight (1, 1), Short-Run: weight (1, 1), Long-Run: weight (2, 2), Short-Run: weight (2, 2)" class="sphx-glr-single-img" src="../_images/sphx_glr_scaling_problem_001.png" />
 <p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Primal-Dual Algorithm: [                                        ]--------------------]
-Primal-Dual Algorithm: [                                        ]--------------------]
-Primal-Dual Algorithm: [                                        ]--------------------]
-Primal-Dual Algorithm: [                                        ]-]
-early stopping!Primal-Dual Algorithm: [                                        ]--------------------]
-Primal-Dual Algorithm: [                                        ]--------------------]
-</pre></div>
-</div>
-<p>Gradient Verification
-To check there are no elemiation/condition things on the Gradient Operator:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">grad</span> <span class="o">=</span> <span class="n">Gradient</span><span class="p">(</span><span class="n">dims</span><span class="o">=</span><span class="p">(</span><span class="n">size</span><span class="p">,</span> <span class="n">size</span><span class="p">),</span> <span class="n">edge</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s1">&#39;backward&#39;</span><span class="p">)</span>
-<span class="n">scaled_gradient</span> <span class="o">=</span> <span class="n">grad</span> <span class="o">*</span> <span class="n">noise_scaled_image</span><span class="o">.</span><span class="n">ravel</span><span class="p">()</span>
-<span class="n">unscaled_gradient</span> <span class="o">=</span> <span class="n">grad</span> <span class="o">*</span> <span class="n">noise_unscaled_image</span><span class="o">.</span><span class="n">ravel</span><span class="p">()</span>
-
-<span class="n">scaled_reconstruction</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">grad</span> <span class="o">/</span> <span class="n">scaled_gradient</span><span class="p">,</span> <span class="p">(</span><span class="n">size</span><span class="p">,</span> <span class="n">size</span><span class="p">))</span>
-<span class="n">unscaled_reconstruction</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">grad</span> <span class="o">/</span> <span class="n">unscaled_gradient</span><span class="p">,</span> <span class="p">(</span><span class="n">size</span><span class="p">,</span> <span class="n">size</span><span class="p">))</span>
-
-<span class="k">assert</span> <span class="nb">abs</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">scaled_reconstruction</span> <span class="o">-</span> <span class="n">noise_scaled_image</span><span class="p">)</span> <span class="o">-</span>
-           <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">((</span><span class="n">unscaled_reconstruction</span> <span class="o">-</span> <span class="n">noise_unscaled_image</span><span class="p">)</span><span class="o">/</span><span class="mi">255</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">)</span>
-
-<span class="n">scaled_reconstruction</span> <span class="o">=</span> <span class="n">grad</span><span class="o">.</span><span class="n">H</span> <span class="o">/</span> <span class="p">(</span><span class="n">grad</span><span class="o">.</span><span class="n">H</span> <span class="o">*</span> <span class="n">scaled_gradient</span><span class="p">)</span>
-<span class="n">unscaled_reconstruction</span> <span class="o">=</span> <span class="n">grad</span><span class="o">.</span><span class="n">H</span> <span class="o">/</span> <span class="p">(</span><span class="n">grad</span><span class="o">.</span><span class="n">H</span> <span class="o">*</span> <span class="n">unscaled_gradient</span><span class="p">)</span>
-
-<span class="k">assert</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">scaled_reconstruction</span> <span class="o">-</span> <span class="n">scaled_gradient</span><span class="p">)</span> <span class="o">-</span>
-           <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">((</span><span class="n">unscaled_reconstruction</span> <span class="o">-</span> <span class="n">unscaled_gradient</span><span class="p">)</span><span class="o">/</span><span class="mi">255</span><span class="p">))</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">)</span>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Early stopping.
+Early stopping.
+Early stopping.
+Early stopping.
+Early stopping.
+Early stopping.
 </pre></div>
 </div>
 <p>Conclusion
-The Prox-Param tau is dependent on input scale.
-Therefore the calc method must be adapted in future versions.</p>
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  15.354 seconds)</p>
+Be careful with max_iter and tol parameter
+or with the interpretation of result if the number of iteration is too small.</p>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  43.458 seconds)</p>
 <div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-tutorials-scaling-problem-py">
 <div class="sphx-glr-download sphx-glr-download-python docutils container">
 <p><a class="reference download internal" download="" href="../_downloads/22e0423357a9184fe5e7605f0b3a8bec/scaling_problem.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">scaling_problem.py</span></code></a></p>
@@ -281,8 +265,10 @@ Therefore the calc method must be adapted in future versions.</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
+        <a href="white_noise_between_spaces.html" class="btn btn-neutral float-right" title="07. White Noise Between Spaces" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
-        <a href="total_generalized_variation.html" class="btn btn-neutral float-left" title="04. Total Generalized Variation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+        <a href="spatially_adapted_total_variation.html" class="btn btn-neutral float-left" title="05. Spatially Adapted Total Variation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

@@ -23,7 +23,7 @@ class Smoothing(BaseInterface):
                  reg_mode: str = '',
                  alpha: float = 0.01,
                  lam: float = 1,
-                 tau: Union[float, str] = 'auto'):
+                 tau: Union[float, str] = 'calc'):
 
         super(Smoothing, self).__init__(domain_shape=domain_shape,
                                         reg_mode=reg_mode,
@@ -32,9 +32,9 @@ class Smoothing(BaseInterface):
                                         lam=lam,
                                         tau=tau)
 
-        self.G = DatanormL2(domain_shape, lam=lam, data=0)
+        self.G = DatanormL2(domain_shape, lam=self.lam, prox_param=self.tau)
 
-    def solve(self, data: np.ndarray, max_iter: int = 150, tol: float = 5*10**(-4)):
+    def solve(self, data: np.ndarray, max_iter: int = 5000, tol: float = 1e-4):
         super(Smoothing, self).solve(data=data, max_iter=max_iter, tol=tol)
         self.G.data = data.ravel()
 
@@ -43,4 +43,4 @@ class Smoothing(BaseInterface):
         self.solver.tol = tol
         self.solver.solve()
 
-        return np.reshape(self.solver.var['x'], self.domain_shape)
+        return np.reshape(self.solver.x, self.domain_shape)

@@ -18,12 +18,10 @@ class TestDatanormL2Bregman(TestDatanormL2):
         self.term = DatanormL2Bregman(image_size=self.camera.shape, data=self.camera.ravel())
 
     def test_iterativ_norm_convergence(self):
-        ulast = np.zeros(self.camera.shape)
-        u = ulast
 
         G = self.term
-        F_star = IndicatorL2(self.camera.shape, len(self.camera.shape), prox_param=0.1)
         K = Gradient(self.camera.shape, edge=True, dtype='float64', kind='backward')
+        F_star = IndicatorL2(self.camera.shape, len(self.camera.shape), prox_param=0.3)
 
         i = 0
 
@@ -38,7 +36,7 @@ class TestDatanormL2Bregman(TestDatanormL2):
 
             self.solver.solve()
 
-            u = np.reshape(np.real(self.solver.var['x']), self.camera.shape)
+            u = np.reshape(np.real(self.solver.x), self.camera.shape)
             pk = pk - (1 / G.bregman_weight_alpha) * np.real(u.ravel() - self.camera.ravel())
             i = i + 1
 

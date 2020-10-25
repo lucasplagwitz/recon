@@ -12,7 +12,7 @@ class SmoothBregman(BaseInterface):
     A Reconstruction object to solve iterative regularized inverse reconstruction problems.
     Solver is Primal-Dual based.
     Form:
-        1/2 * ||O*x - f||^2 + \alpha J(x)
+        lam/2 * ||O*x - f||^2 + alpha J(x)
 
         J(x) regularisation term
     """
@@ -22,7 +22,7 @@ class SmoothBregman(BaseInterface):
                  reg_mode: str = 'tv',
                  lam: float = 1,
                  alpha: float = 1.1,
-                 tau: Union[float, str] = None,
+                 tau: Union[float, str] = 'calc',
                  assessment: float = 1,
                  plot_iteration: bool = False,
                  data_output_path: str = ''):
@@ -38,25 +38,27 @@ class SmoothBregman(BaseInterface):
         self.data_output_path = data_output_path
         self.assessment = assessment
 
-        self.G = DatanormL2Bregman(image_size=domain_shape, prox_param=tau, lam=lam)
+        self.G = DatanormL2Bregman(image_size=domain_shape,
+                                   prox_param=self.tau,
+                                   lam=lam,
+                                   bregman_weight_alpha=self.alpha
+                                   )
 
-    def solve(self, data: np.ndarray, max_iter: int = 150, tol: float = 5*10**(-4)):
+    def solve(self, data: np.ndarray, max_iter: int = 5000, tol: float = 1e-4):
 
         super(SmoothBregman, self).solve(data=data, max_iter=max_iter, tol=tol)
 
         self.G.data = data.ravel()
 
-        pk = np.zeros(self.domain_shape)
-        pk = pk.ravel()
+        pk = np.zeros(self.domain_shape).ravel()
 
         if self.plot_iteration:
             plt.Figure()
 
-        ulast = np.zeros(self.domain_shape)
-        u = ulast
+        u = np.zeros(self.domain_shape)
 
-        i = 0
-        while np.linalg.norm(u.ravel() - data.ravel(), 2) > self.assessment:
+        i = old_e = 0
+        while True:
             print("current norm error: " + str(np.linalg.norm(u.ravel() - data.ravel(), 2)))
             print("runs till norm <: " + str(self.assessment))
 
@@ -67,17 +69,27 @@ class SmoothBregman(BaseInterface):
 
             self.solver.solve()
 
-            u = np.reshape(np.real(self.solver.var['x']), self.domain_shape)
-            pk = pk - (1 / self.alpha) * np.real(u.ravel() - data.ravel())
+            u_new = np.reshape(self.solver.x, self.domain_shape)
+
+            e = np.linalg.norm(u_new.ravel() - data.ravel(), 2)
+            if e < self.assessment:
+                # which iteration to choose -> norm nearest
+                if (old_e-self.assessment) > np.abs(e-self.assessment):
+                    u = u_new
+                break
+            old_e = e
+
+            u = u_new
+
+            pk = pk - (self.lam / self.alpha) * (u.ravel() - data.ravel())
+            print(np.max(pk))
             i = i + 1
 
             if self.plot_iteration:
                 plt.gray()
-                plt.imshow(u, vmin=0, vmax=1)
+                plt.imshow(u)
                 plt.axis('off')
                 plt.savefig(self.data_output_path + 'Bregman_iter' + str(i) + '.png', bbox_inches='tight', pad_inches=0)
                 plt.close()
 
         return u
-
-

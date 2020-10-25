@@ -1,11 +1,8 @@
 import numpy as np
-import copy
-import sys
-import pylops
-from pylops import FirstDerivative, Gradient, HStack, BlockDiag
+from pylops import Gradient, BlockDiag
 import matplotlib.pyplot as plt
 
-from recon.terms import IndicatorL2, DatanormL2
+from recon.terms import IndicatorL2, DatanormL2, DatanormL2Bregman
 
 class PdHgmTGV(object):
     """
@@ -30,20 +27,29 @@ class PdHgmTGV(object):
                 2. y^{n+1} = prox_{F_star}( y^{n} - sigma * (K * (2*x^{n+1} - x^{n})) )
                 3. update sens
     """
-    def __init__(self, lam: float = 1, alpha: tuple = (1, 1), tol=10e-5, prox_param: float = 1/np.sqrt(12)):
+    def __init__(self,
+                 lam: float = 1,
+                 alpha: tuple = (1, 1),
+                 tol=1e-4,
+                 mode: str = 'tv',
+                 pk: np.ndarray = None,
+                 prox_param: float = 1/np.sqrt(12)):
         """
         Consturctor. Set required params.
         """
         self.lam = lam
+        self.max_iter = 3000
         self.alpha = alpha   # form: (a_1, a_2)
         self.sigma = prox_param
         self.tau = self.sigma
         self.tol = tol
         self.k = 1
+        self.mode = mode
+        self.pk = pk  # only for Bregman
 
     # Todo: symmetric saves double dxdy <-> dydx...not necessary
 
-    def solve(self, f: np.ndarray, max_iter: int = 400):
+    def solve(self, f: np.ndarray):
         self.k = 1
         if len(np.shape(f)) != 2:
             raise ValueError("The TGV-Algorithm only implemnted for 2D images. Please give input shaped (m, n)")
@@ -57,22 +63,16 @@ class PdHgmTGV(object):
         # Projections
         proj_p = IndicatorL2((primal_n, primal_m), upper_bound=self.alpha[0])
         proj_q = IndicatorL2((2*primal_n, primal_m), upper_bound=self.alpha[1])
-        dataterm = DatanormL2(image_size=f.shape, data=f.ravel(), prox_param=self.tau, lam=self.lam)
+        if self.mode == 'tv':
+            dataterm = DatanormL2(image_size=f.shape, data=f.ravel(), prox_param=self.tau, lam=self.lam)
+        else:
+            dataterm = DatanormL2Bregman(image_size=f.shape, data=f.ravel(), prox_param=self.tau, lam=self.lam)
+            dataterm.pk = self.pk
+            dataterm.bregman_weight_alpha = self.alpha[0]
         sens = 100
-        while (self.tol < sens or self.k == 1) and (self.k <= max_iter):
+        while (self.tol < sens or self.k == 1) and (self.k <= self.max_iter):
             p = proj_p.prox(p + self.sigma*(grad*u_bar - v_bar))
             q = proj_q.prox(q + self.sigma*(grad_v*v_bar)) #self.adjoint_div(v_bar, 1)
-            #plt.imshow(np.reshape((grad_v*v_bar)[:np.prod((primal_n, primal_m))], (primal_n, primal_m)))
-            #plt.show()
-            #assert np.array_equal(
-            #print(np.max(np.abs(
-            #    (grad_v * v_bar)[np.prod((primal_n, primal_m)):2*np.prod((primal_n, primal_m))]-
-            #    (grad_v * v_bar)[2*np.prod((primal_n, primal_m)):3*np.prod((primal_n, primal_m))])
-            #))
-            #plt.imshow(np.reshape((grad_v * v_bar)[3*np.prod((primal_n, primal_m)):
-            #                                       4*np.prod((primal_n, primal_m))], (primal_n, primal_m)))
-            #plt.imshow(np.reshape(v_bar[:np.prod((primal_m, primal_n))], (primal_m, primal_n)))
-            #plt.show()
             u_old = u
             v_old = v
             u = dataterm.prox(u - self.tau*grad.H*p)
@@ -82,7 +82,7 @@ class PdHgmTGV(object):
 
             #self.update_sensivity(u, u_old, v, v_old, grad)
             # test
-            if self.k % 100 == 0:
+            if self.k % 300 == 0:
                 u_gap = u-u_old
                 v_gap = v-v_old
                 sens = 1/2*(
@@ -115,23 +115,3 @@ class PdHgmTGV(object):
         #                     np.linalg.norm(v_gap - self.F_star.get_proxparam() * (self.K * x_gap), 2) /
         #                     np.linalg.norm(v, 2))
         return
-
-
-
-"""
-    def div(self, dual, index: int = 1):
-        A = FirstDerivative(self.primal_x * self.primal_y, dims=(self.primal_x, self.primal_y), dir=0, dtype='float64')
-        B = FirstDerivative(self.primal_x * self.primal_y, dims=(self.primal_x, self.primal_y), dir=1, dtype='float64')
-        start, end = self.primal_x * self.primal_y, None
-        if index == 2:
-            start, end = end, start
-        return (A+B)*dual[start:end]
-
-    def adjoint_div(self, dual, index: int = 1):
-        A = FirstDerivative(self.primal_x * self.primal_y, dims=(self.primal_x, self.primal_y), dir=0, dtype='float64')
-        B = FirstDerivative(self.primal_x * self.primal_y, dims=(self.primal_x, self.primal_y), dir=1, dtype='float64')
-        start, end = self.primal_x * self.primal_y, None
-        if index == 2:
-            start, end = end, start
-        return -(A+B).H * dual[start:end]
-"""

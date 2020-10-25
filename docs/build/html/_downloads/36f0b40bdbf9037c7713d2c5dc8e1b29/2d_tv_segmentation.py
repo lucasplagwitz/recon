@@ -1,7 +1,9 @@
 """
 03. Segmentation
 ================
-This example ...
+This example shows how to use the interface for class-based segmentation
+of 2D images. First, depending on the size of the weighting alpha,
+a piecewise constant image is generated before the assignment to certain classes is done.
 """
 
 ###############################################################################
@@ -22,7 +24,7 @@ image = image/np.max(image)
 
 classes = [0, 50/255, 120/255, 190/255, 220/255]
 
-segmentation = Segmentation(image.shape, classes=classes, alpha=0.1, tau=3)
+segmentation = Segmentation(image.shape, classes=classes, alpha=0.01, tau='calc')
 result, _ = segmentation.solve(image)
 
 

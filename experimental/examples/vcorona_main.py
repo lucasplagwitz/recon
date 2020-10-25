@@ -8,7 +8,7 @@ from scipy.io import loadmat
 import matplotlib.pyplot as plt
 
 
-from experimental.operator.mri_dft import MriDft
+from recon.operator.mri_dft import MriDft
 from recon.terms import Projection, DatatermBregman
 from recon.terms.sampling_dataterm import Dataterm
 from recon.terms import DatatermRecBregman

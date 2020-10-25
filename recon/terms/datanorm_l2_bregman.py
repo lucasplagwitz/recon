@@ -1,5 +1,5 @@
 from typing import Union
-from pylops import Identity
+from recon.operator import Identity
 import numpy as np
 
 from recon.terms import BaseDataterm
@@ -46,24 +46,25 @@ class DatanormL2Bregman(BaseDataterm):
         self._pk = None
 
         if operator is None:
-            operator = Identity(N=np.prod(image_size))
+            operator = Identity(domain_dim=image_size)
 
-        super(DatanormL2Bregman, self).__init__(operator, sampling=sampling)
+        super(DatanormL2Bregman, self).__init__(operator, sampling=sampling, prox_param=prox_param)
         self.lam = lam
-        self.prox_param = prox_param
         self.data = data
-        self.pk = np.zeros(shape=self.data.shape)
         self.bregman_weight_alpha = bregman_weight_alpha
         self.image_size = image_size
+        self.pk = np.zeros(shape=image_size)
+        self.inv_operator = self.operator.inv
 
     def __call__(self, x):
-        return 1/2*np.sqrt(np.sum((self.operator*x-self.data)**2)) - self.bregman_weight_alpha * np.dot(self.pk.T, x)
+        return self.lam/2*np.sqrt(np.sum((self.operator*x-self.data)**2)) - self.bregman_weight_alpha * np.dot(self.pk.T, x)
 
     def prox(self, f):
-        u = self.operator.H*(
+        u = self.inv_operator*(
                 (self.operator * (f + self.prox_param * self.bregman_weight_alpha * self.pk) +
-                    self.prox_param * self.data) /
-                (1 + self.prox_param * self.diag_sampling))
+                    self.prox_param * self.lam * self.data) /
+                (1 + self.prox_param * self.lam * self.diag_sampling)
+        )
         return u
 
     @property
@@ -76,7 +77,7 @@ class DatanormL2Bregman(BaseDataterm):
             if self.image_size == value.shape:
                 self._pk = value.ravel()
                 return
-        elif self.data.shape == value.shape:
+        elif (isinstance(self.data, int)) or np.prod(self.image_size) == value.shape[0]:
             self._pk = value
             return
         msg = "Something went wrong with the input bregman pk shape."

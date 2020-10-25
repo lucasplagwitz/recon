@@ -6,6 +6,7 @@ __pycache__/
 **/thesis
 **/ideas
 *.idea
+**/data_local/*.*
 
 # Compiled source #
 ###################

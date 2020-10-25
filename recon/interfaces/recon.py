@@ -5,14 +5,15 @@ from recon.terms import DatanormL2
 from recon.solver import PdHgm
 from recon.interfaces import BaseInterface
 
+
 class Recon(BaseInterface):
     """
     A reconstruction interface to solve regularized inverse problems.
     Solver is Primal-Dual based.
     Form:
-        lam/2 * ||O*x - f||^2 + \alpha J(x)
+        lam/2 * ||A*x - f||^2 + \alpha J(x)
 
-        with Operator : X -> Y
+        with Operator A : X -> Y
         J(x) regularisation term
     """
 
@@ -35,7 +36,7 @@ class Recon(BaseInterface):
 
         self.G = DatanormL2(operator=operator, image_size=domain_shape, prox_param=self.tau, lam=lam, sampling=sampling)
 
-    def solve(self, data: np.ndarray, max_iter: int = 150, tol: float = 5*10**(-4)):
+    def solve(self, data: np.ndarray, max_iter: int = 1000, tol: float = 1e-4):
 
         super(Recon, self).solve(data=data, max_iter=max_iter, tol=tol)
 
@@ -45,14 +46,11 @@ class Recon(BaseInterface):
         self.solver.tol = tol
         self.solver.solve()
 
-        return np.reshape(self.solver.var['x'], self.domain_shape)
+        return np.reshape(self.solver.x, self.domain_shape)
 
     @staticmethod
     def _check_operator(operator):
-        if hasattr(operator, 'H'):
+        if hasattr(operator, 'inv'):
             return True
         msg = "Recon expected an operator with .H property as adjoint. Pleas check out the documentation."
         raise ValueError(msg)
-
-
-

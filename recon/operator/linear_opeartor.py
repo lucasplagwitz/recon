@@ -109,7 +109,7 @@ class LinearOperator(object):
         return dim
 
     @property
-    def H(self):
+    def inv(self):
         obj = copy.copy(self)
         obj.prop = True
         obj.domain_dim = obj.image_dim

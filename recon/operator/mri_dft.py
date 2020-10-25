@@ -1,6 +1,6 @@
 import numpy as np
 
-from experimental.operator.fcthdl_operator import FcthdlOperator
+from recon.operator.fcthdl_operator import FcthdlOperator
 
 class MriDft(FcthdlOperator):
     """
@@ -20,7 +20,7 @@ class MriDft(FcthdlOperator):
             if len(self.domain_dim) == 2 and self.domain_dim[1] == 1:
                 self.center = int((self.domain_dim[0]+1)/2)
             else:
-                self.cemter = int((self.domain_dim+1)/2)
+                self.center = np.array([x//2 for x in list(domain_dim)])
 
         # ToDO: input check
 
@@ -41,16 +41,16 @@ class MriDft(FcthdlOperator):
                                  ), -int(roll_val[1]), axis= 1
                              )
 
-        bwfcthdl = lambda f: 1/np.sqrt(np.prod(self.domain_dim)) * \
-                             np.fft.fftshift(
-                                 np.fft.fftn(
-                                     np.roll(
-                                         np.roll(f,
-                                                 int(roll_val[0]), axis=0
-                                                 ), int(roll_val[1]), axis= 1
+        bwfcthdl = lambda f: np.real(1/np.sqrt(np.prod(self.domain_dim)) * \
+                                         np.fft.fftshift(
+                                             np.fft.fftn(
+                                                 np.roll(
+                                                     np.roll(f,
+                                                             int(roll_val[0]), axis=0
+                                                             ), int(roll_val[1]), axis= 1
+                                                 )
+                                             )
+                                         )
                                      )
-                                 )
-                             )
         
         super(MriDft, self).__init__(domain_dim, domain_dim, fwfcthdl, bwfcthdl)
-
