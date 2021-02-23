@@ -32,8 +32,7 @@ class TestRecon(unittest.TestCase):
         u = recon.solve(k_data, tol=0.001)
         np.testing.assert_array_almost_equal(np.abs(u), self.camera)
 
-
-        non_quadratic = self.camera[64:,:]
+        non_quadratic = self.camera[64:, :]
         F = MriDft(non_quadratic.shape)
         k_data = F * non_quadratic.ravel()
         recon = Recon(F, domain_shape=non_quadratic.shape, reg_mode='tv', alpha=10 ** (-14), lam=1, tau='calc')
@@ -42,18 +41,18 @@ class TestRecon(unittest.TestCase):
 
     def test_norm_gradient(self):
         F = MriDft((64, 64))
-        grad = Gradient((64, 64) ,kind='backward')
+        grad = Gradient((64, 64), kind='backward')
 
         for _ in range(3):
-            k_data = F * np.random.normal(0, 0.5, size=(4096,))
-            recon = Recon(F, domain_shape=(64, 64), reg_mode='tv', alpha=0.5, lam=1, tau='calc')
-            u_strong_tv = np.abs(recon.solve(k_data, tol=0.001))
+            k_data = F * np.random.normal(1, 0.2, size=(4096,))
+            recon = Recon(F, domain_shape=(64, 64), reg_mode='tv', alpha=1, lam=1, tau='calc', extend_pdhgm=False)
+            u_strong_tv = np.abs(recon.solve(k_data, tol=0.0001))
 
-            recon = Recon(F, domain_shape=(64, 64), reg_mode='tv', alpha=0.1, lam=1, tau='calc')
-            u_weak_tv = np.abs(recon.solve(k_data, tol=0.001))
+            recon = Recon(F, domain_shape=(64, 64), reg_mode='tv', alpha=0.1, lam=1, tau='calc', extend_pdhgm=False)
+            u_weak_tv = np.abs(recon.solve(k_data, tol=0.0001))
 
-            self.assertGreater(np.linalg.norm(grad*u_weak_tv.ravel(), 2),
-                               np.linalg.norm(grad*u_strong_tv.ravel(), 2))
+            self.assertGreater(np.linalg.norm(grad*u_weak_tv.ravel()),
+                               np.linalg.norm(grad*u_strong_tv.ravel()))
 
     def test_undersampling(self):
         F = MriDft((64, 64))
@@ -62,7 +61,8 @@ class TestRecon(unittest.TestCase):
 
         for _ in range(3):
             k_data = F * np.random.normal(0, 0.5, size=(4096,))
-            recon = Recon(F, domain_shape=(64, 64), reg_mode='tv', alpha=0.5, lam=1, tau='calc', sampling=sampling)
+            recon = Recon(F, domain_shape=(64, 64), reg_mode='tv', alpha=0.5,
+                          lam=1, tau='calc', sampling=sampling, extend_pdhgm=False)
             u_strong_tv = np.abs(recon.solve(k_data, tol=0.001))
 
             self.assertGreater(np.linalg.norm(grad * (F.inv*k_data), 2),

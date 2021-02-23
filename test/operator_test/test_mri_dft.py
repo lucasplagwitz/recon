@@ -3,8 +3,6 @@ import os
 from skimage import io
 import unittest
 import numpy as np
-import matplotlib.pyplot as plt
-from skimage.transform import radon, iradon
 
 from recon.operator.mri_dft import MriDft
 

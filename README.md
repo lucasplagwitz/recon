@@ -1,7 +1,8 @@
 # Recon
 
 A python-based toolbox for solving regularized Inverse Problems using Primal-Dual algorithms. 
-The project gives an overview of solving regularization problems and is the result of a master thesis. 
+The project provides an overview of solving regularization problems and is the result of a master's thesis. 
+Build as proof of concept.
 
 ## Overview
 
@@ -36,15 +37,13 @@ from matplotlib.image import imread
 gt = imread("../data/phantom.png")
 gt = gt/np.max(gt)
 
-ntheta = 180
-theta = np.linspace(0, 180, ntheta, endpoint=False)
+theta = np.linspace(0, 180, 180, endpoint=False)
 sigma = 0.01
 R = CtRt(gt.shape, center=[gt.shape[0]//2, gt.shape[1]//2], theta=theta)
 
 y = R*gt.ravel()
 
-lam = 15
-rec = Recon(operator=R, domain_shape=gt.shape, reg_mode='tv', alpha=1, lam=lam, extend_pdhgm=True)
+rec = Recon(operator=R, domain_shape=gt.shape, reg_mode='tv', alpha=1, lam=15, extend_pdhgm=True)
 x_tv = rec.solve(data=y.ravel(), max_iter=1000, tol=1e-4)
  ```
 

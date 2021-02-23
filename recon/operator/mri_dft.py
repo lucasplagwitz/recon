@@ -54,3 +54,7 @@ class MriDft(FcthdlOperator):
                                      )
         
         super(MriDft, self).__init__(domain_dim, domain_dim, fwfcthdl, bwfcthdl)
+
+    @property
+    def H(self):
+        return self.inv
