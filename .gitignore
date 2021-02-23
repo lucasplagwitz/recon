@@ -6,10 +6,9 @@ __pycache__/
 **/thesis
 **/ideas
 *.idea
-**/data_local/*.*
-**/backup
-**/joint_recon_vcorona
-**/experimental
+/backup/
+/experimental/
+/data/joint_recon_vcorona/
 
 # Compiled source #
 ###################
