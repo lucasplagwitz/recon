@@ -16,14 +16,13 @@ import matplotlib.pyplot as plt
 
 from recon.utils import psnr
 from recon.operator.ct_radon import CtRt
-from recon.interfaces import Recon, ReconBregman, Smoothing, SmoothBregman
+from recon.interfaces import Recon, Smoothing
 
 from matplotlib import image
 
 # load image as pixel array
 gt = image.imread("../data/phantom.png")
 gt = gt/np.max(gt)
-gt = gt
 
 ntheta = 180
 theta = np.linspace(0, 180, ntheta, endpoint=False)

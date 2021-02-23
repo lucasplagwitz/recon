@@ -1,58 +1,72 @@
-# PyRegIP
+# Recon
 
-A python-based toolbox for solving regularized Inverse Problems using Primal-Dual algorithms.
+A python-based toolbox for solving regularized Inverse Problems using Primal-Dual algorithms. 
+The project gives an overview of solving regularization problems and is the result of a master thesis. 
 
 ## Overview
 
 * Reconstruction, Smoothing 
 * class-based Segmentation
-* Locally Adapted Regularization
+* Spatially Adapted Regularization
 * Bregman-Iteration
+* Denoising, Deconvolution, Computerized Tomography
 
 
 ## Reconstruction
 In terms of Inverse Problems one is interested in the reason 
 <img src="https://render.githubusercontent.com/render/math?math=\Large u">
 of measurment data 
-<img src="https://render.githubusercontent.com/render/math?math=\Large f">
+<img src="https://render.githubusercontent.com/render/math?math=\Large z">
 with regard to a forward map 
 <img src="https://render.githubusercontent.com/render/math?math=\Large A">.
 Due to the fact of measurement inaccuracies, regularization terms 
 <img src="https://render.githubusercontent.com/render/math?math=\Large J">
 are added and the optimization problem is maintained as
 <p align="center">
-<img src="https://render.githubusercontent.com/render/math?math=\Large \argmin_u \frac{\lambda}{2}||Au - f||^2 %2B \alpha J(u)">
+<img src="https://render.githubusercontent.com/render/math?math=\Large \argmin_u \frac{\lambda}{2}||Au - z||^2 %2B \alpha J(u)">
  <p/>
  
  ```python
- from recon.interfaces import Recon
- import pylops
- 
- FFTop = pylops.signalprocessing.FFT(dims=(nt, nx), dir=0, nfft=nfft, sampling=dt)
- D = FFTop*d.flatten() + n
- tv_recon = Recon(O=FFTop, domain_shape=d.shape, reg_mode='tv', alpha=2.0)
+import numpy as np
 
-u = tv_recon.solve(D, maxiter=350, tol=10**(-4))
+from recon.operator.ct_radon import CtRt
+from recon.interfaces import Recon
+from matplotlib.image import imread
+
+gt = imread("../data/phantom.png")
+gt = gt/np.max(gt)
+
+ntheta = 180
+theta = np.linspace(0, 180, ntheta, endpoint=False)
+sigma = 0.01
+R = CtRt(gt.shape, center=[gt.shape[0]//2, gt.shape[1]//2], theta=theta)
+
+y = R*gt.ravel()
+
+lam = 15
+rec = Recon(operator=R, domain_shape=gt.shape, reg_mode='tv', alpha=1, lam=lam, extend_pdhgm=True)
+x_tv = rec.solve(data=y.ravel(), max_iter=1000, tol=1e-4)
  ```
 
 ## Smoothing
 Image Smoothing is a special case of regularized reconstruction.
 <p align="center">
-<img src="https://render.githubusercontent.com/render/math?math=\Large \argmin_u \frac{\lambda}{2}||u - f||^2 %2B \alpha J(u)">
+<img src="https://render.githubusercontent.com/render/math?math=\Large \argmin_u \frac{\lambda}{2}||u - z||^2 %2B \alpha J(u)">
  <p/>
  
   ```python
+import numpy as np
 from scipy import misc
 from recon.interfaces import Smoothing
 
 img = misc.ascent()
 gt = img/np.max(img)
 sigma = 0.2
-n = sigma*np.max(gt.ravel()*np.random.uniform(-1,1, gt.shape)
+n = sigma*np.max(gt.ravel()*np.random.uniform(-1, 1, gt.shape))
 noise_img = gt + n
  
-tv_smoothing = Smoothing(domain_shape=gt.shape, reg_mode='tv', alpha=0.2, tau=2.3335)
-u0 = tv_smoothing.solve(data=noise_img, maxiter=150, tol=10**(-4))
+tv_smoothing = Smoothing(domain_shape=gt.shape, reg_mode='tv', lam=10, tau='calc')
+u0 = tv_smoothing.solve(data=noise_img, maxiter=1500, tol=10**(-4))
  ```
  
  <table>
@@ -72,20 +86,23 @@ u0 = tv_smoothing.solve(data=noise_img, maxiter=150, tol=10**(-4))
 Some segmentation methods are implemented as part of regularization approaches and performance measurements.
 Through a piecewise constant TV-solution, one quickly obtains a suitable segmentation.
   ```python
+import skimage.data as skd
+import numpy as np
+
 from recon.interfaces import Segmentation
-import nibabel as nib
 
-# segmentation of 3D nifti image
-img = nib.load("file.nii")
-d = np.array(img.dataobj)
-gt = d/np.max(d)
-classes = [0, 0.2, 0.4, 0.7]
+gt = rgb2gray(skd.coffee())[:,80:481]
+gt = gt/np.max(gt)
+gt = gt/np.max(gt)
 
-segmentation = Segmentation(img.shape, classes=classes, alpha=0.1)
-result, _ = segmentation.solve(img)
+classes = [0, 50/255, 120/255, 190/255, 220/255]
+
+segmentation = Segmentation(gt.shape, classes=classes, lam=5, tau='calc')
+result, _ = segmentation.solve(gt, max_iter=4000)
  ```
 
   
   ## References
   1. The Repo based on [Enhancing joint reconstruction and segmentation with non-convex Bregman iteration](https://iopscience.iop.org/article/10.1088/1361-6420/ab0b77/pdf) - Veronica Corona et al 2019 Inverse Problems 35, and their code on [GitHub](https://github.com/veronicacorona/JointReconstructionSegmentation).
   1. To outsource operator handling [PyLops](https://github.com/equinor/pylops) package is used.
+  1. Efficient Radon operator [Astra Toolbox](https://www.astra-toolbox.com).
