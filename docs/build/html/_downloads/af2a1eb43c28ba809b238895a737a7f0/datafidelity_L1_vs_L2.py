@@ -1,6 +1,6 @@
 """
-07. L1 vs. L2 Fidelity-Term
-================
+06. L1 vs. L2 Fidelity-Term
+===========================
 This tutorial...
 
 """

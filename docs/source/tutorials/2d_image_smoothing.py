@@ -1,6 +1,6 @@
 """
-01. Smoothing
-================
+01. Denoising
+=============
 This example shows image smoothing on an image with normal distributed noise.
 """
 

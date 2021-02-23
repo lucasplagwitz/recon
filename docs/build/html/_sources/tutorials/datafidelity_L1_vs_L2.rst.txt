@@ -18,8 +18,8 @@
 .. _sphx_glr_tutorials_datafidelity_L1_vs_L2.py:
 
 
-07. L1 vs. L2 Fidelity-Term
-================
+06. L1 vs. L2 Fidelity-Term
+===========================
 This tutorial...
 
 .. GENERATED FROM PYTHON SOURCE LINES 7-44
@@ -160,7 +160,7 @@ the edges better, because larger jumps are not penalized more.
 
 
 .. image:: /tutorials/images/sphx_glr_datafidelity_L1_vs_L2_001.png
-    :alt: S&P-Noise-PSNR: 15.26, L1 - PSNR: 28.47, L2 - PSNR: 22.7, White-Noise - PSNR: 13.98, L1 - PSNR: 23.96, L2 - PSNR: 24.74
+    :alt: S&P-Noise-PSNR: 15.27, L1 - PSNR: 28.5, L2 - PSNR: 22.73, White-Noise - PSNR: 13.97, L1 - PSNR: 23.91, L2 - PSNR: 24.69
     :class: sphx-glr-single-img
 
 
@@ -181,7 +181,7 @@ the edges better, because larger jumps are not penalized more.
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 2 minutes  42.200 seconds)
+   **Total running time of the script:** ( 2 minutes  43.014 seconds)
 
 
 .. _sphx_glr_download_tutorials_datafidelity_L1_vs_L2.py:

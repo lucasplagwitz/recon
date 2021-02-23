@@ -18,7 +18,7 @@
 .. _sphx_glr_tutorials_2d_tv_segmentation.py:
 
 
-03. Segmentation
+07. Segmentation
 ================
 This example shows how to use the interface for class-based segmentation
 of 2D images. First, depending on the size of the weighting alpha,
@@ -84,7 +84,7 @@ TV based segmentation
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  35.931 seconds)
+   **Total running time of the script:** ( 0 minutes  40.547 seconds)
 
 
 .. _sphx_glr_download_tutorials_2d_tv_segmentation.py:

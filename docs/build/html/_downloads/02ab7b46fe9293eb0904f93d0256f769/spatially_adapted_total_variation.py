@@ -1,6 +1,6 @@
 """
 05. Spatially Adapted Total Variation
-================
+=====================================
 
 Here a locally adapted regularization is shown.
 For this purpose the SATV algorithm was implemented.

@@ -43,7 +43,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="05. Spatially Adapted Total Variation" href="spatially_adapted_total_variation.html" />
-    <link rel="prev" title="03. Segmentation" href="2d_tv_segmentation.html" /> 
+    <link rel="prev" title="03. Reconstruction II" href="convolution.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -95,13 +95,14 @@
               <p class="caption"><span class="caption-text">Getting started:</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Tutorials</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="2d_image_smoothing.html">01. Smoothing</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ct_reconstruction.html">02. Reconstruction I</a></li>
-<li class="toctree-l2"><a class="reference internal" href="2d_tv_segmentation.html">03. Segmentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2d_image_smoothing.html">01. Denoising</a></li>
+<li class="toctree-l2"><a class="reference internal" href="radon.html">02. Reconstruction I</a></li>
+<li class="toctree-l2"><a class="reference internal" href="convolution.html">03. Reconstruction II</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">04. Total Generalized Variation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="spatially_adapted_total_variation.html">05. Spatially Adapted Total Variation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="scaling_problem.html">06. Scaling Dependent Stepsize Problem</a></li>
-<li class="toctree-l2"><a class="reference internal" href="datafidelity_L1_vs_L2.html">07. L1 vs. L2 Fidelity-Term</a></li>
+<li class="toctree-l2"><a class="reference internal" href="datafidelity_L1_vs_L2.html">06. L1 vs. L2 Fidelity-Term</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2d_tv_segmentation.html">07. Segmentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="scaling_problem.html">08. Scaling Dependent Stepsize Problem</a></li>
 </ul>
 </li>
 </ul>
@@ -180,14 +181,14 @@ to download the full example code</p>
 </div>
 <div class="sphx-glr-example-title section" id="total-generalized-variation">
 <span id="sphx-glr-tutorials-total-generalized-variation-py"></span><h1>04. Total Generalized Variation<a class="headerlink" href="#total-generalized-variation" title="Permalink to this headline">¶</a></h1>
-<p>Now we take a step deeper into Total Variation based regularization.</p>
+<p>We take a step deeper into total-variation-based regularization.</p>
 <p>We focus on concepts from different papers.
 Mainly we use for numerical access:</p>
 <blockquote>
 <div><p>Knoll, Bredis, Pock: Second Order Total Generalized Variation (TGV) for MRI</p>
 </div></blockquote>
-<p>The first order Total Variation got some problems with smooth edges.
-See following noisy example with the TV-Regularization.</p>
+<p>The first order total variation got some stair-casing problems.
+See following noisy example with the TV regularization.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 
@@ -217,11 +218,54 @@ See following noisy example with the TV-Regularization.</p>
 </div>
 <img alt="Noisy, TV based denoising" class="sphx-glr-single-img" src="../_images/sphx_glr_total_generalized_variation_001.png" />
 <p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Early stopping.
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>N/A% (0 of 2000) |                                                                                                                            | Elapsed Time: 0:00:00 ETA:  --:--:--
+  0% (12 of 2000) |                                                                                                                           | Elapsed Time: 0:00:00 ETA:  00:00:00
+  1% (23 of 2000) |#                                                                                                                          | Elapsed Time: 0:00:00 ETA:   0:00:13
+  1% (34 of 2000) |##                                                                                                                         | Elapsed Time: 0:00:00 ETA:   0:00:13
+  2% (45 of 2000) |##                                                                                                                         | Elapsed Time: 0:00:00 ETA:   0:00:13
+  2% (56 of 2000) |###                                                                                                                        | Elapsed Time: 0:00:00 ETA:   0:00:13
+  3% (67 of 2000) |####                                                                                                                       | Elapsed Time: 0:00:00 ETA:   0:00:13
+  3% (78 of 2000) |####                                                                                                                       | Elapsed Time: 0:00:00 ETA:   0:00:13
+  4% (89 of 2000) |#####                                                                                                                      | Elapsed Time: 0:00:00 ETA:   0:00:14
+  5% (100 of 2000) |######                                                                                                                    | Elapsed Time: 0:00:00 ETA:   0:00:13
+  5% (112 of 2000) |######                                                                                                                    | Elapsed Time: 0:00:00 ETA:   0:00:14
+  6% (123 of 2000) |#######                                                                                                                   | Elapsed Time: 0:00:00 ETA:   0:00:14
+  6% (134 of 2000) |########                                                                                                                  | Elapsed Time: 0:00:01 ETA:   0:00:14
+  7% (145 of 2000) |########                                                                                                                  | Elapsed Time: 0:00:01 ETA:   0:00:14
+  7% (156 of 2000) |#########                                                                                                                 | Elapsed Time: 0:00:01 ETA:   0:00:14
+  8% (167 of 2000) |##########                                                                                                                | Elapsed Time: 0:00:01 ETA:   0:00:14
+  8% (178 of 2000) |##########                                                                                                                | Elapsed Time: 0:00:01 ETA:   0:00:14
+  9% (189 of 2000) |###########                                                                                                               | Elapsed Time: 0:00:01 ETA:   0:00:13
+ 10% (200 of 2000) |############                                                                                                              | Elapsed Time: 0:00:01 ETA:   0:00:13
+ 10% (212 of 2000) |############                                                                                                              | Elapsed Time: 0:00:01 ETA:   0:00:13
+ 11% (223 of 2000) |#############                                                                                                             | Elapsed Time: 0:00:01 ETA:   0:00:13
+ 11% (234 of 2000) |##############                                                                                                            | Elapsed Time: 0:00:01 ETA:   0:00:13
+ 12% (245 of 2000) |##############                                                                                                            | Elapsed Time: 0:00:01 ETA:   0:00:13
+ 12% (256 of 2000) |###############                                                                                                           | Elapsed Time: 0:00:02 ETA:   0:00:13
+ 13% (267 of 2000) |################                                                                                                          | Elapsed Time: 0:00:02 ETA:   0:00:13
+ 13% (278 of 2000) |################                                                                                                          | Elapsed Time: 0:00:02 ETA:   0:00:13
+ 14% (289 of 2000) |#################                                                                                                         | Elapsed Time: 0:00:02 ETA:   0:00:13
+ 15% (300 of 2000) |##################                                                                                                        | Elapsed Time: 0:00:02 ETA:   0:00:13
+ 15% (312 of 2000) |###################                                                                                                       | Elapsed Time: 0:00:02 ETA:   0:00:13
+ 16% (323 of 2000) |###################                                                                                                       | Elapsed Time: 0:00:02 ETA:   0:00:13
+ 16% (334 of 2000) |####################                                                                                                      | Elapsed Time: 0:00:02 ETA:   0:00:13
+ 17% (345 of 2000) |#####################                                                                                                     | Elapsed Time: 0:00:02 ETA:   0:00:13
+ 17% (356 of 2000) |#####################                                                                                                     | Elapsed Time: 0:00:02 ETA:   0:00:13
+ 18% (367 of 2000) |######################                                                                                                    | Elapsed Time: 0:00:02 ETA:   0:00:13
+ 18% (378 of 2000) |#######################                                                                                                   | Elapsed Time: 0:00:02 ETA:   0:00:13
+ 19% (389 of 2000) |#######################                                                                                                   | Elapsed Time: 0:00:03 ETA:   0:00:12
+ 20% (400 of 2000) |########################                                                                                                  | Elapsed Time: 0:00:03 ETA:   0:00:12
+ 20% (412 of 2000) |#########################                                                                                                 | Elapsed Time: 0:00:03 ETA:   0:00:12
+ 21% (423 of 2000) |#########################                                                                                                 | Elapsed Time: 0:00:03 ETA:   0:00:12
+ 21% (434 of 2000) |##########################                                                                                                | Elapsed Time: 0:00:03 ETA:   0:00:12
+ 22% (445 of 2000) |###########################                                                                                               | Elapsed Time: 0:00:03 ETA:   0:00:12
+ 22% (456 of 2000) |###########################                                                                                               | Elapsed Time: 0:00:03 ETA:   0:00:12
+ 23% (467 of 2000) |############################                                                                                              | Elapsed Time: 0:00:03 ETA:   0:00:12
+ Early stopping.
 </pre></div>
 </div>
-<p>To avoid strong stair-casing effects, we introduce the Total Generalized Variation.
-At this point there is no interface for second order TV. We implement it direct with the
+<p>To avoid the strong stair-casing effects, we introduce the total generalized variation (TGV).
+At this point there is no interface for second order TV. We implement it direct with an
 adapted Primal-Dual algorithm.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">recon.solver.pd_hgm_tgv</span> <span class="kn">import</span> <span class="n">PdHgmTGV</span>
 
@@ -251,13 +295,15 @@ adapted Primal-Dual algorithm.</p>
 </div>
 <img alt="Original, TV based denoising, TGV based denoising" class="sphx-glr-single-img" src="../_images/sphx_glr_total_generalized_variation_002.png" />
 <p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>0.000765362808757
-0.000379147346815
-0.000291780617741
-0.00021201816304
-0.000148266411871
-0.000117968914174
-8.92353328212e-05
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>0.000764614049753
+0.000397201494434
+0.000304035249686
+0.00024355480438
+0.000162279550237
+0.000130706100585
+0.000129061167859
+0.000102232977547
+7.11006476213e-05
 </pre></div>
 </div>
 <p>Since TGV also represents a convex functional, it can also be extended by Bregman.
@@ -294,34 +340,25 @@ Maybe there will be an interface for this in the future.</p>
 </pre></div>
 </div>
 <p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>current norm error: 165.633763952
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>current norm error: 165.363145995
 runs till norm &lt;: 51.2
-0.000943532859819
-0.000282388550186
-0.000242282407063
-0.000150067731341
-9.2285516598e-05
-current norm error: 52.781652899
+0.000948832561286
+0.000320276543381
+0.000205870494849
+0.00013199463164
+0.000106690738814
+7.37955640915e-05
+current norm error: 52.6045737022
 runs till norm &lt;: 51.2
-0.0010448653069
-0.000443879105009
-0.000333571739168
-0.00016860633176
-0.000149456530208
-0.00014325308855
-0.000136350335276
-8.63831664208e-05
-current norm error: 51.2547492065
-runs till norm &lt;: 51.2
-0.00101725139128
-0.000535834570308
-0.000356034903108
-0.000216574048047
-0.000203573179779
-0.000160166971899
-0.000103229455815
-0.000106274093406
-5.64069008594e-05
+0.000944594155825
+0.000513833375003
+0.000339951555744
+0.000182587287897
+0.000197057292599
+0.000148069527604
+0.000146200245197
+0.000116822145932
+7.03171505036e-05
 </pre></div>
 </div>
 <p>Compare it to normal BTV</p>
@@ -362,19 +399,200 @@ runs till norm &lt;: 51.2
 </div>
 <img alt="Original, BTV , BTGV" class="sphx-glr-single-img" src="../_images/sphx_glr_total_generalized_variation_003.png" />
 <p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>current norm error: 165.633763952
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>current norm error: 165.363145995
 runs till norm &lt;: 51.2
+N/A% (0 of 2000) |                                                                                                                            | Elapsed Time: 0:00:00 ETA:  --:--:--
+  0% (12 of 2000) |                                                                                                                           | Elapsed Time: 0:00:00 ETA:  00:00:00
+  1% (23 of 2000) |#                                                                                                                          | Elapsed Time: 0:00:00 ETA:   0:00:16
+  1% (34 of 2000) |##                                                                                                                         | Elapsed Time: 0:00:00 ETA:   0:00:16
+  2% (44 of 2000) |##                                                                                                                         | Elapsed Time: 0:00:00 ETA:   0:00:17
+  2% (56 of 2000) |###                                                                                                                        | Elapsed Time: 0:00:00 ETA:   0:00:17
+  3% (67 of 2000) |####                                                                                                                       | Elapsed Time: 0:00:00 ETA:   0:00:16
+  3% (78 of 2000) |####                                                                                                                       | Elapsed Time: 0:00:00 ETA:   0:00:16
+  4% (89 of 2000) |#####                                                                                                                      | Elapsed Time: 0:00:00 ETA:   0:00:16
+  5% (100 of 2000) |######                                                                                                                    | Elapsed Time: 0:00:00 ETA:   0:00:16
+  5% (110 of 2000) |######                                                                                                                    | Elapsed Time: 0:00:00 ETA:   0:00:16
+  5% (119 of 2000) |#######                                                                                                                   | Elapsed Time: 0:00:01 ETA:   0:00:16
+  6% (130 of 2000) |#######                                                                                                                   | Elapsed Time: 0:00:01 ETA:   0:00:16
+  7% (141 of 2000) |########                                                                                                                  | Elapsed Time: 0:00:01 ETA:   0:00:16
+  7% (152 of 2000) |#########                                                                                                                 | Elapsed Time: 0:00:01 ETA:   0:00:16
+  8% (164 of 2000) |##########                                                                                                                | Elapsed Time: 0:00:01 ETA:   0:00:16
+  8% (177 of 2000) |##########                                                                                                                | Elapsed Time: 0:00:01 ETA:   0:00:16
+  9% (189 of 2000) |###########                                                                                                               | Elapsed Time: 0:00:01 ETA:   0:00:16
+ 10% (200 of 2000) |############                                                                                                              | Elapsed Time: 0:00:01 ETA:   0:00:15
+ 10% (212 of 2000) |############                                                                                                              | Elapsed Time: 0:00:01 ETA:   0:00:15
+ 11% (221 of 2000) |#############                                                                                                             | Elapsed Time: 0:00:01 ETA:   0:00:15
+ 11% (233 of 2000) |##############                                                                                                            | Elapsed Time: 0:00:02 ETA:   0:00:15
+ 12% (245 of 2000) |##############                                                                                                            | Elapsed Time: 0:00:02 ETA:   0:00:15
+ 12% (256 of 2000) |###############                                                                                                           | Elapsed Time: 0:00:02 ETA:   0:00:15
+ 13% (267 of 2000) |################                                                                                                          | Elapsed Time: 0:00:02 ETA:   0:00:15
+ 13% (278 of 2000) |################                                                                                                          | Elapsed Time: 0:00:02 ETA:   0:00:15
+ 14% (289 of 2000) |#################                                                                                                         | Elapsed Time: 0:00:02 ETA:   0:00:14
+ 15% (300 of 2000) |##################                                                                                                        | Elapsed Time: 0:00:02 ETA:   0:00:14
+ 15% (312 of 2000) |###################                                                                                                       | Elapsed Time: 0:00:02 ETA:   0:00:14
+ 16% (323 of 2000) |###################                                                                                                       | Elapsed Time: 0:00:02 ETA:   0:00:14
+ 16% (334 of 2000) |####################                                                                                                      | Elapsed Time: 0:00:02 ETA:   0:00:14
+ 17% (345 of 2000) |#####################                                                                                                     | Elapsed Time: 0:00:02 ETA:   0:00:14
+ 17% (356 of 2000) |#####################                                                                                                     | Elapsed Time: 0:00:03 ETA:   0:00:14
+ 18% (367 of 2000) |######################                                                                                                    | Elapsed Time: 0:00:03 ETA:   0:00:13
+ 18% (378 of 2000) |#######################                                                                                                   | Elapsed Time: 0:00:03 ETA:   0:00:13
+ 19% (389 of 2000) |#######################                                                                                                   | Elapsed Time: 0:00:03 ETA:   0:00:13
+ 19% (399 of 2000) |########################                                                                                                  | Elapsed Time: 0:00:03 ETA:   0:00:13
+ 20% (411 of 2000) |#########################                                                                                                 | Elapsed Time: 0:00:03 ETA:   0:00:13
+ 21% (423 of 2000) |#########################                                                                                                 | Elapsed Time: 0:00:03 ETA:   0:00:13
+ 21% (434 of 2000) |##########################                                                                                                | Elapsed Time: 0:00:03 ETA:   0:00:13
+ 22% (445 of 2000) |###########################                                                                                               | Elapsed Time: 0:00:03 ETA:   0:00:13
+ 22% (456 of 2000) |###########################                                                                                               | Elapsed Time: 0:00:03 ETA:   0:00:13
+ 23% (467 of 2000) |############################                                                                                              | Elapsed Time: 0:00:04 ETA:   0:00:12
+ 23% (478 of 2000) |#############################                                                                                             | Elapsed Time: 0:00:04 ETA:   0:00:12
+ 24% (489 of 2000) |#############################                                                                                             | Elapsed Time: 0:00:04 ETA:   0:00:12
+ 25% (500 of 2000) |##############################                                                                                            | Elapsed Time: 0:00:04 ETA:   0:00:12
+ 25% (511 of 2000) |###############################                                                                                           | Elapsed Time: 0:00:04 ETA:   0:00:12
+ 26% (523 of 2000) |###############################                                                                                           | Elapsed Time: 0:00:04 ETA:   0:00:12
+ 26% (534 of 2000) |################################                                                                                          | Elapsed Time: 0:00:04 ETA:   0:00:12
+ 27% (545 of 2000) |#################################                                                                                         | Elapsed Time: 0:00:04 ETA:   0:00:12
+ 27% (556 of 2000) |#################################                                                                                         | Elapsed Time: 0:00:04 ETA:   0:00:12
+ 28% (567 of 2000) |##################################                                                                                        | Elapsed Time: 0:00:04 ETA:   0:00:12
+ 28% (578 of 2000) |###################################                                                                                       | Elapsed Time: 0:00:04 ETA:   0:00:12
+ 29% (589 of 2000) |###################################                                                                                       | Elapsed Time: 0:00:05 ETA:   0:00:12
+ 30% (600 of 2000) |####################################                                                                                      | Elapsed Time: 0:00:05 ETA:   0:00:12
+ 30% (612 of 2000) |#####################################                                                                                     | Elapsed Time: 0:00:05 ETA:   0:00:12
+ 31% (623 of 2000) |######################################                                                                                    | Elapsed Time: 0:00:05 ETA:   0:00:11
+ 31% (634 of 2000) |######################################                                                                                    | Elapsed Time: 0:00:05 ETA:   0:00:11
+ 32% (645 of 2000) |#######################################                                                                                   | Elapsed Time: 0:00:05 ETA:   0:00:11
+ 32% (656 of 2000) |########################################                                                                                  | Elapsed Time: 0:00:05 ETA:   0:00:11
+ 33% (667 of 2000) |########################################                                                                                  | Elapsed Time: 0:00:05 ETA:   0:00:11
+ 33% (678 of 2000) |#########################################                                                                                 | Elapsed Time: 0:00:05 ETA:   0:00:11
+ 34% (689 of 2000) |##########################################                                                                                | Elapsed Time: 0:00:05 ETA:   0:00:11
+ 35% (700 of 2000) |##########################################                                                                                | Elapsed Time: 0:00:05 ETA:   0:00:10
+ 35% (711 of 2000) |###########################################                                                                               | Elapsed Time: 0:00:06 ETA:   0:00:10
+ 35% (719 of 2000) |###########################################                                                                               | Elapsed Time: 0:00:06 ETA:   0:00:11
+ 36% (729 of 2000) |############################################                                                                              | Elapsed Time: 0:00:06 ETA:   0:00:10
+ 37% (742 of 2000) |#############################################                                                                             | Elapsed Time: 0:00:06 ETA:   0:00:10
+ 37% (755 of 2000) |##############################################                                                                            | Elapsed Time: 0:00:06 ETA:   0:00:10
+ 38% (767 of 2000) |##############################################                                                                            | Elapsed Time: 0:00:06 ETA:   0:00:10
+ 38% (778 of 2000) |###############################################                                                                           | Elapsed Time: 0:00:06 ETA:   0:00:10
+ 39% (789 of 2000) |################################################                                                                          | Elapsed Time: 0:00:06 ETA:   0:00:10
+ 40% (800 of 2000) |################################################                                                                          | Elapsed Time: 0:00:06 ETA:   0:00:10
+ 40% (812 of 2000) |#################################################                                                                         | Elapsed Time: 0:00:07 ETA:   0:00:10
+ 41% (823 of 2000) |##################################################                                                                        | Elapsed Time: 0:00:07 ETA:   0:00:10
+ 41% (834 of 2000) |##################################################                                                                        | Elapsed Time: 0:00:07 ETA:   0:00:10
+ 42% (845 of 2000) |###################################################                                                                       | Elapsed Time: 0:00:07 ETA:   0:00:10
+ 42% (856 of 2000) |####################################################                                                                      | Elapsed Time: 0:00:07 ETA:   0:00:09
+ 43% (867 of 2000) |####################################################                                                                      | Elapsed Time: 0:00:07 ETA:   0:00:09
+ 43% (878 of 2000) |#####################################################                                                                     | Elapsed Time: 0:00:07 ETA:   0:00:09
+ 44% (889 of 2000) |######################################################                                                                    | Elapsed Time: 0:00:07 ETA:   0:00:09
+ 44% (898 of 2000) |######################################################                                                                    | Elapsed Time: 0:00:07 ETA:   0:00:09
+ 45% (907 of 2000) |#######################################################                                                                   | Elapsed Time: 0:00:07 ETA:   0:00:10
+ 45% (919 of 2000) |########################################################                                                                  | Elapsed Time: 0:00:08 ETA:   0:00:09
+ 46% (931 of 2000) |########################################################                                                                  | Elapsed Time: 0:00:08 ETA:   0:00:09
+ 47% (944 of 2000) |#########################################################                                                                 | Elapsed Time: 0:00:08 ETA:   0:00:09
+ 47% (956 of 2000) |##########################################################                                                                | Elapsed Time: 0:00:08 ETA:   0:00:09
+ 48% (967 of 2000) |##########################################################                                                                | Elapsed Time: 0:00:08 ETA:   0:00:09
+ 48% (978 of 2000) |###########################################################                                                               | Elapsed Time: 0:00:08 ETA:   0:00:09
+ 49% (989 of 2000) |############################################################                                                              | Elapsed Time: 0:00:08 ETA:   0:00:08
+ 50% (1000 of 2000) |############################################################                                                             | Elapsed Time: 0:00:08 ETA:   0:00:08
+ 50% (1011 of 2000) |#############################################################                                                            | Elapsed Time: 0:00:08 ETA:   0:00:08
+ 51% (1023 of 2000) |#############################################################                                                            | Elapsed Time: 0:00:08 ETA:   0:00:08
+ 51% (1034 of 2000) |##############################################################                                                           | Elapsed Time: 0:00:08 ETA:   0:00:08
  Early stopping.
-current norm error: 54.1543680004
+current norm error: 54.07429052
 runs till norm &lt;: 51.2
+N/A% (0 of 2000) |                                                                                                                            | Elapsed Time: 0:00:00 ETA:  --:--:--
+  0% (12 of 2000) |                                                                                                                           | Elapsed Time: 0:00:00 ETA:  00:00:00
+  1% (23 of 2000) |#                                                                                                                          | Elapsed Time: 0:00:00 ETA:   0:00:15
+  1% (34 of 2000) |##                                                                                                                         | Elapsed Time: 0:00:00 ETA:   0:00:15
+  2% (45 of 2000) |##                                                                                                                         | Elapsed Time: 0:00:00 ETA:   0:00:15
+  2% (56 of 2000) |###                                                                                                                        | Elapsed Time: 0:00:00 ETA:   0:00:15
+  3% (67 of 2000) |####                                                                                                                       | Elapsed Time: 0:00:00 ETA:   0:00:15
+  3% (78 of 2000) |####                                                                                                                       | Elapsed Time: 0:00:00 ETA:   0:00:15
+  4% (89 of 2000) |#####                                                                                                                      | Elapsed Time: 0:00:00 ETA:   0:00:15
+  5% (100 of 2000) |######                                                                                                                    | Elapsed Time: 0:00:00 ETA:   0:00:15
+  5% (112 of 2000) |######                                                                                                                    | Elapsed Time: 0:00:00 ETA:   0:00:15
+  6% (123 of 2000) |#######                                                                                                                   | Elapsed Time: 0:00:00 ETA:   0:00:15
+  6% (134 of 2000) |########                                                                                                                  | Elapsed Time: 0:00:01 ETA:   0:00:15
+  7% (145 of 2000) |########                                                                                                                  | Elapsed Time: 0:00:01 ETA:   0:00:15
+  7% (156 of 2000) |#########                                                                                                                 | Elapsed Time: 0:00:01 ETA:   0:00:14
+  8% (167 of 2000) |##########                                                                                                                | Elapsed Time: 0:00:01 ETA:   0:00:14
+  8% (178 of 2000) |##########                                                                                                                | Elapsed Time: 0:00:01 ETA:   0:00:14
+  9% (189 of 2000) |###########                                                                                                               | Elapsed Time: 0:00:01 ETA:   0:00:14
+ 10% (200 of 2000) |############                                                                                                              | Elapsed Time: 0:00:01 ETA:   0:00:14
+ 10% (212 of 2000) |############                                                                                                              | Elapsed Time: 0:00:01 ETA:   0:00:14
+ 11% (222 of 2000) |#############                                                                                                             | Elapsed Time: 0:00:01 ETA:   0:00:14
+ 11% (232 of 2000) |##############                                                                                                            | Elapsed Time: 0:00:01 ETA:   0:00:14
+ 12% (245 of 2000) |##############                                                                                                            | Elapsed Time: 0:00:02 ETA:   0:00:14
+ 12% (256 of 2000) |###############                                                                                                           | Elapsed Time: 0:00:02 ETA:   0:00:14
+ 13% (267 of 2000) |################                                                                                                          | Elapsed Time: 0:00:02 ETA:   0:00:14
+ 13% (278 of 2000) |################                                                                                                          | Elapsed Time: 0:00:02 ETA:   0:00:14
+ 14% (289 of 2000) |#################                                                                                                         | Elapsed Time: 0:00:02 ETA:   0:00:14
+ 15% (300 of 2000) |##################                                                                                                        | Elapsed Time: 0:00:02 ETA:   0:00:14
+ 15% (312 of 2000) |###################                                                                                                       | Elapsed Time: 0:00:02 ETA:   0:00:14
+ 16% (323 of 2000) |###################                                                                                                       | Elapsed Time: 0:00:02 ETA:   0:00:13
+ 16% (334 of 2000) |####################                                                                                                      | Elapsed Time: 0:00:02 ETA:   0:00:13
+ 17% (345 of 2000) |#####################                                                                                                     | Elapsed Time: 0:00:02 ETA:   0:00:13
+ 17% (356 of 2000) |#####################                                                                                                     | Elapsed Time: 0:00:02 ETA:   0:00:13
+ 18% (367 of 2000) |######################                                                                                                    | Elapsed Time: 0:00:03 ETA:   0:00:13
+ 18% (378 of 2000) |#######################                                                                                                   | Elapsed Time: 0:00:03 ETA:   0:00:13
+ 19% (389 of 2000) |#######################                                                                                                   | Elapsed Time: 0:00:03 ETA:   0:00:13
+ 20% (400 of 2000) |########################                                                                                                  | Elapsed Time: 0:00:03 ETA:   0:00:13
+ 20% (412 of 2000) |#########################                                                                                                 | Elapsed Time: 0:00:03 ETA:   0:00:13
+ 21% (423 of 2000) |#########################                                                                                                 | Elapsed Time: 0:00:03 ETA:   0:00:13
+ 21% (434 of 2000) |##########################                                                                                                | Elapsed Time: 0:00:03 ETA:   0:00:13
+ 22% (445 of 2000) |###########################                                                                                               | Elapsed Time: 0:00:03 ETA:   0:00:13
+ 22% (456 of 2000) |###########################                                                                                               | Elapsed Time: 0:00:03 ETA:   0:00:12
+ 23% (466 of 2000) |############################                                                                                              | Elapsed Time: 0:00:03 ETA:   0:00:12
+ 23% (478 of 2000) |#############################                                                                                             | Elapsed Time: 0:00:03 ETA:   0:00:12
+ 24% (489 of 2000) |#############################                                                                                             | Elapsed Time: 0:00:04 ETA:   0:00:12
+ 25% (500 of 2000) |##############################                                                                                            | Elapsed Time: 0:00:04 ETA:   0:00:12
+ 25% (512 of 2000) |###############################                                                                                           | Elapsed Time: 0:00:04 ETA:   0:00:12
+ 26% (523 of 2000) |###############################                                                                                           | Elapsed Time: 0:00:04 ETA:   0:00:12
+ 26% (534 of 2000) |################################                                                                                          | Elapsed Time: 0:00:04 ETA:   0:00:12
+ 27% (545 of 2000) |#################################                                                                                         | Elapsed Time: 0:00:04 ETA:   0:00:12
+ 27% (556 of 2000) |#################################                                                                                         | Elapsed Time: 0:00:04 ETA:   0:00:11
+ 28% (567 of 2000) |##################################                                                                                        | Elapsed Time: 0:00:04 ETA:   0:00:11
+ 28% (578 of 2000) |###################################                                                                                       | Elapsed Time: 0:00:04 ETA:   0:00:11
+ 29% (589 of 2000) |###################################                                                                                       | Elapsed Time: 0:00:04 ETA:   0:00:11
+ 30% (600 of 2000) |####################################                                                                                      | Elapsed Time: 0:00:04 ETA:   0:00:11
+ 30% (612 of 2000) |#####################################                                                                                     | Elapsed Time: 0:00:05 ETA:   0:00:11
+ 31% (623 of 2000) |######################################                                                                                    | Elapsed Time: 0:00:05 ETA:   0:00:11
+ 31% (634 of 2000) |######################################                                                                                    | Elapsed Time: 0:00:05 ETA:   0:00:11
+ 32% (645 of 2000) |#######################################                                                                                   | Elapsed Time: 0:00:05 ETA:   0:00:11
+ 32% (656 of 2000) |########################################                                                                                  | Elapsed Time: 0:00:05 ETA:   0:00:11
+ 33% (667 of 2000) |########################################                                                                                  | Elapsed Time: 0:00:05 ETA:   0:00:11
+ 33% (678 of 2000) |#########################################                                                                                 | Elapsed Time: 0:00:05 ETA:   0:00:11
+ 34% (689 of 2000) |##########################################                                                                                | Elapsed Time: 0:00:05 ETA:   0:00:11
+ 35% (700 of 2000) |##########################################                                                                                | Elapsed Time: 0:00:05 ETA:   0:00:11
+ 35% (711 of 2000) |###########################################                                                                               | Elapsed Time: 0:00:05 ETA:   0:00:10
+ 36% (723 of 2000) |############################################                                                                              | Elapsed Time: 0:00:06 ETA:   0:00:10
+ 36% (734 of 2000) |############################################                                                                              | Elapsed Time: 0:00:06 ETA:   0:00:10
+ 37% (745 of 2000) |#############################################                                                                             | Elapsed Time: 0:00:06 ETA:   0:00:10
+ 37% (756 of 2000) |##############################################                                                                            | Elapsed Time: 0:00:06 ETA:   0:00:10
+ 38% (767 of 2000) |##############################################                                                                            | Elapsed Time: 0:00:06 ETA:   0:00:10
+ 38% (778 of 2000) |###############################################                                                                           | Elapsed Time: 0:00:06 ETA:   0:00:10
+ 39% (789 of 2000) |################################################                                                                          | Elapsed Time: 0:00:06 ETA:   0:00:10
+ 40% (800 of 2000) |################################################                                                                          | Elapsed Time: 0:00:06 ETA:   0:00:10
+ 40% (811 of 2000) |#################################################                                                                         | Elapsed Time: 0:00:06 ETA:   0:00:10
+ 41% (823 of 2000) |##################################################                                                                        | Elapsed Time: 0:00:06 ETA:   0:00:10
+ 41% (834 of 2000) |##################################################                                                                        | Elapsed Time: 0:00:07 ETA:   0:00:10
+ 42% (845 of 2000) |###################################################                                                                       | Elapsed Time: 0:00:07 ETA:   0:00:09
+ 42% (856 of 2000) |####################################################                                                                      | Elapsed Time: 0:00:07 ETA:   0:00:09
+ 43% (867 of 2000) |####################################################                                                                      | Elapsed Time: 0:00:07 ETA:   0:00:09
+ 43% (878 of 2000) |#####################################################                                                                     | Elapsed Time: 0:00:07 ETA:   0:00:09
+ 44% (889 of 2000) |######################################################                                                                    | Elapsed Time: 0:00:07 ETA:   0:00:09
+ 45% (900 of 2000) |######################################################                                                                    | Elapsed Time: 0:00:07 ETA:   0:00:09
+ 45% (911 of 2000) |#######################################################                                                                   | Elapsed Time: 0:00:07 ETA:   0:00:09
+ 46% (922 of 2000) |########################################################                                                                  | Elapsed Time: 0:00:07 ETA:   0:00:09
+ 46% (934 of 2000) |########################################################                                                                  | Elapsed Time: 0:00:07 ETA:   0:00:09
+ 47% (945 of 2000) |#########################################################                                                                 | Elapsed Time: 0:00:07 ETA:   0:00:09
+ 47% (956 of 2000) |##########################################################                                                                | Elapsed Time: 0:00:08 ETA:   0:00:09
  Early stopping.
-TV-PSNR: 32.78
-TGV-PSNR: 33.24
-BTV-PSNR: 31.12
-BTGV-PSNR: 37.72
+TV-PSNR: 32.84
+TGV-PSNR: 33.33
+BTV-PSNR: 31.81
+BTGV-PSNR: 36.88
 </pre></div>
 </div>
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 3 minutes  29.049 seconds)</p>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 2 minutes  58.334 seconds)</p>
 <div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-tutorials-total-generalized-variation-py">
 <div class="sphx-glr-download sphx-glr-download-python docutils container">
 <p><a class="reference download internal" download="" href="../_downloads/02981c4d92fc2b16f53a38a866603b6f/total_generalized_variation.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">total_generalized_variation.py</span></code></a></p>
@@ -393,7 +611,7 @@ BTGV-PSNR: 37.72
           <footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
         <a href="spatially_adapted_total_variation.html" class="btn btn-neutral float-right" title="05. Spatially Adapted Total Variation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-        <a href="2d_tv_segmentation.html" class="btn btn-neutral float-left" title="03. Segmentation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="convolution.html" class="btn btn-neutral float-left" title="03. Reconstruction II" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
 
   <hr/>

@@ -1,5 +1,5 @@
 """
-03. Segmentation
+07. Segmentation
 ================
 This example shows how to use the interface for class-based segmentation
 of 2D images. First, depending on the size of the weighting alpha,

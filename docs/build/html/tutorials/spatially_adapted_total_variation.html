@@ -42,7 +42,7 @@
     
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="06. Scaling Dependent Stepsize Problem" href="scaling_problem.html" />
+    <link rel="next" title="06. L1 vs. L2 Fidelity-Term" href="datafidelity_L1_vs_L2.html" />
     <link rel="prev" title="04. Total Generalized Variation" href="total_generalized_variation.html" /> 
 </head>
 
@@ -95,13 +95,14 @@
               <p class="caption"><span class="caption-text">Getting started:</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Tutorials</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="2d_image_smoothing.html">01. Smoothing</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ct_reconstruction.html">02. Reconstruction I</a></li>
-<li class="toctree-l2"><a class="reference internal" href="2d_tv_segmentation.html">03. Segmentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2d_image_smoothing.html">01. Denoising</a></li>
+<li class="toctree-l2"><a class="reference internal" href="radon.html">02. Reconstruction I</a></li>
+<li class="toctree-l2"><a class="reference internal" href="convolution.html">03. Reconstruction II</a></li>
 <li class="toctree-l2"><a class="reference internal" href="total_generalized_variation.html">04. Total Generalized Variation</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">05. Spatially Adapted Total Variation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="scaling_problem.html">06. Scaling Dependent Stepsize Problem</a></li>
-<li class="toctree-l2"><a class="reference internal" href="datafidelity_L1_vs_L2.html">07. L1 vs. L2 Fidelity-Term</a></li>
+<li class="toctree-l2"><a class="reference internal" href="datafidelity_L1_vs_L2.html">06. L1 vs. L2 Fidelity-Term</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2d_tv_segmentation.html">07. Segmentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="scaling_problem.html">08. Scaling Dependent Stepsize Problem</a></li>
 </ul>
 </li>
 </ul>
@@ -216,7 +217,7 @@ Furthermore, TV is compared with TGV in the context of the local regularization.
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">block</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </pre></div>
 </div>
-<img alt="GT - PSNR: -1, TV - PSNR: 29.52" class="sphx-glr-single-img" src="../_images/sphx_glr_spatially_adapted_total_variation_001.png" />
+<img alt="GT - PSNR: -1, TV - PSNR: 29.37" class="sphx-glr-single-img" src="../_images/sphx_glr_spatially_adapted_total_variation_001.png" />
 <p class="sphx-glr-script-out">Out:</p>
 <div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Early stopping.
 </pre></div>
@@ -248,18 +249,18 @@ Furthermore, TV is compared with TGV in the context of the local regularization.
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-<img alt="Noisy - PSNR: 19.97, SATV - PSNR: 32.19, SATV-weight $\lambda$" class="sphx-glr-single-img" src="../_images/sphx_glr_spatially_adapted_total_variation_002.png" />
+<img alt="Noisy - PSNR: 19.99, SATV - PSNR: 32.08, SATV-weight $\lambda$" class="sphx-glr-single-img" src="../_images/sphx_glr_spatially_adapted_total_variation_002.png" />
 <p class="sphx-glr-script-out">Out:</p>
 <div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>0-Iteration of SATV
-97.5215830887
+97.2275470536
 25.6
  Early stopping.
 1-Iteration of SATV
-41.9524197777
+41.8556780581
 25.6
  Early stopping.
 2-Iteration of SATV
-26.9435706518
+26.9018709523
 25.6
  Early stopping.
 </pre></div>
@@ -301,7 +302,7 @@ Furthermore, TV is compared with TGV in the context of the local regularization.
 <div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>&#39;\nlam = 0.3\nsatv_obj = SATV(domain_shape=image.shape,\n                reg_mode=\&#39;tgv\&#39;,\n                lam=lam,\n                plot_iteration=False,\n                tau=\&#39;auto\&#39;,\n                alpha=(0.3, 0.6),\n                noise_sigma=noise_sigma,\n                assessment=noise_sigma*np.sqrt(np.prod(image.shape)))\nsatv_solution = satv_obj.solve(noisy_image, max_iter=5000, tol=1e-4)\n\nf = plt.figure(figsize=(9, 3))\nf.add_subplot(1, 3, 1)\nplt.gray()\nplt.axis(\&#39;off\&#39;)\nplt.imshow(noisy_image, vmin=0, vmax=np.max(image))\nplt.title(&quot;Noisy - PSNR: &quot;+str(psnr(image, noisy_image)))\nf.add_subplot(1, 3, 2)\nplt.gray()\nplt.imshow(satv_solution, vmin=0, vmax=np.max(image))\nplt.title(&quot;SATGV - PSNR: &quot;+str(psnr(image, satv_solution)))\nplt.axis(\&#39;off\&#39;)\nf.add_subplot(1, 3, 3)\nplt.gray()\nplt.imshow(np.reshape(satv_obj.lam, image.shape))\nplt.title(&quot;SATGV-weight $\\lambda$&quot;)\nplt.axis(\&#39;off\&#39;)\nplt.show()\n&#39;
 </pre></div>
 </div>
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  45.360 seconds)</p>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  48.272 seconds)</p>
 <div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-tutorials-spatially-adapted-total-variation-py">
 <div class="sphx-glr-download sphx-glr-download-python docutils container">
 <p><a class="reference download internal" download="" href="../_downloads/02ab7b46fe9293eb0904f93d0256f769/spatially_adapted_total_variation.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">spatially_adapted_total_variation.py</span></code></a></p>
@@ -319,7 +320,7 @@ Furthermore, TV is compared with TGV in the context of the local regularization.
           </div>
           <footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="scaling_problem.html" class="btn btn-neutral float-right" title="06. Scaling Dependent Stepsize Problem" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="datafidelity_L1_vs_L2.html" class="btn btn-neutral float-right" title="06. L1 vs. L2 Fidelity-Term" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
         <a href="total_generalized_variation.html" class="btn btn-neutral float-left" title="04. Total Generalized Variation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
 

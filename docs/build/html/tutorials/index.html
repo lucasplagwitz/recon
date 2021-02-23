@@ -42,7 +42,7 @@
     
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="01. Smoothing" href="2d_image_smoothing.html" />
+    <link rel="next" title="01. Denoising" href="2d_image_smoothing.html" />
     <link rel="prev" title="RECON" href="../index.html" /> 
 </head>
 
@@ -95,13 +95,14 @@
               <p class="caption"><span class="caption-text">Getting started:</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Tutorials</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="2d_image_smoothing.html">01. Smoothing</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ct_reconstruction.html">02. Reconstruction I</a></li>
-<li class="toctree-l2"><a class="reference internal" href="2d_tv_segmentation.html">03. Segmentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2d_image_smoothing.html">01. Denoising</a></li>
+<li class="toctree-l2"><a class="reference internal" href="radon.html">02. Reconstruction I</a></li>
+<li class="toctree-l2"><a class="reference internal" href="convolution.html">03. Reconstruction II</a></li>
 <li class="toctree-l2"><a class="reference internal" href="total_generalized_variation.html">04. Total Generalized Variation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="spatially_adapted_total_variation.html">05. Spatially Adapted Total Variation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="scaling_problem.html">06. Scaling Dependent Stepsize Problem</a></li>
-<li class="toctree-l2"><a class="reference internal" href="datafidelity_L1_vs_L2.html">07. L1 vs. L2 Fidelity-Term</a></li>
+<li class="toctree-l2"><a class="reference internal" href="datafidelity_L1_vs_L2.html">06. L1 vs. L2 Fidelity-Term</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2d_tv_segmentation.html">07. Segmentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="scaling_problem.html">08. Scaling Dependent Stepsize Problem</a></li>
 </ul>
 </li>
 </ul>
@@ -173,21 +174,21 @@
             
   <div class="section" id="tutorials">
 <span id="sphx-glr-tutorials"></span><span id="id1"></span><h1>Tutorials<a class="headerlink" href="#tutorials" title="Permalink to this headline">¶</a></h1>
-<div class="sphx-glr-thumbcontainer" tooltip="01. Smoothing"><div class="figure align-default" id="id2">
-<img alt="01. Smoothing" src="../_images/sphx_glr_2d_image_smoothing_thumb1.png" />
-<p class="caption"><span class="caption-text"><a class="reference internal" href="2d_image_smoothing.html#sphx-glr-tutorials-2d-image-smoothing-py"><span class="std std-ref">01. Smoothing</span></a></span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
+<div class="sphx-glr-thumbcontainer" tooltip="01. Denoising"><div class="figure align-default" id="id2">
+<img alt="01. Denoising" src="../_images/sphx_glr_2d_image_smoothing_thumb1.png" />
+<p class="caption"><span class="caption-text"><a class="reference internal" href="2d_image_smoothing.html#sphx-glr-tutorials-2d-image-smoothing-py"><span class="std std-ref">01. Denoising</span></a></span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
 </div>
 </div><div class="toctree-wrapper compound">
 </div>
-<div class="sphx-glr-thumbcontainer" tooltip="IN PROGRESS"><div class="figure align-default" id="id3">
-<img alt="02. Reconstruction I" src="../_images/sphx_glr_ct_reconstruction_thumb.png" />
-<p class="caption"><span class="caption-text"><a class="reference internal" href="ct_reconstruction.html#sphx-glr-tutorials-ct-reconstruction-py"><span class="std std-ref">02. Reconstruction I</span></a></span><a class="headerlink" href="#id3" title="Permalink to this image">¶</a></p>
+<div class="sphx-glr-thumbcontainer" tooltip="02. Reconstruction I"><div class="figure align-default" id="id3">
+<img alt="02. Reconstruction I" src="../_images/sphx_glr_radon_thumb.png" />
+<p class="caption"><span class="caption-text"><a class="reference internal" href="radon.html#sphx-glr-tutorials-radon-py"><span class="std std-ref">02. Reconstruction I</span></a></span><a class="headerlink" href="#id3" title="Permalink to this image">¶</a></p>
 </div>
 </div><div class="toctree-wrapper compound">
 </div>
-<div class="sphx-glr-thumbcontainer" tooltip="03. Segmentation"><div class="figure align-default" id="id4">
-<img alt="03. Segmentation" src="../_images/sphx_glr_2d_tv_segmentation_thumb1.png" />
-<p class="caption"><span class="caption-text"><a class="reference internal" href="2d_tv_segmentation.html#sphx-glr-tutorials-2d-tv-segmentation-py"><span class="std std-ref">03. Segmentation</span></a></span><a class="headerlink" href="#id4" title="Permalink to this image">¶</a></p>
+<div class="sphx-glr-thumbcontainer" tooltip="IN PROGRESS"><div class="figure align-default" id="id4">
+<img alt="03. Reconstruction II" src="../_images/sphx_glr_convolution_thumb.png" />
+<p class="caption"><span class="caption-text"><a class="reference internal" href="convolution.html#sphx-glr-tutorials-convolution-py"><span class="std std-ref">03. Reconstruction II</span></a></span><a class="headerlink" href="#id4" title="Permalink to this image">¶</a></p>
 </div>
 </div><div class="toctree-wrapper compound">
 </div>
@@ -203,15 +204,21 @@
 </div>
 </div><div class="toctree-wrapper compound">
 </div>
-<div class="sphx-glr-thumbcontainer" tooltip="06. Scaling Dependent Stepsize Problem"><div class="figure align-default" id="id7">
-<img alt="06. Scaling Dependent Stepsize Problem" src="../_images/sphx_glr_scaling_problem_thumb.png" />
-<p class="caption"><span class="caption-text"><a class="reference internal" href="scaling_problem.html#sphx-glr-tutorials-scaling-problem-py"><span class="std std-ref">06. Scaling Dependent Stepsize Problem</span></a></span><a class="headerlink" href="#id7" title="Permalink to this image">¶</a></p>
+<div class="sphx-glr-thumbcontainer" tooltip="06. L1 vs. L2 Fidelity-Term"><div class="figure align-default" id="id7">
+<img alt="06. L1 vs. L2 Fidelity-Term" src="../_images/sphx_glr_datafidelity_L1_vs_L2_thumb.png" />
+<p class="caption"><span class="caption-text"><a class="reference internal" href="datafidelity_L1_vs_L2.html#sphx-glr-tutorials-datafidelity-l1-vs-l2-py"><span class="std std-ref">06. L1 vs. L2 Fidelity-Term</span></a></span><a class="headerlink" href="#id7" title="Permalink to this image">¶</a></p>
 </div>
 </div><div class="toctree-wrapper compound">
 </div>
-<div class="sphx-glr-thumbcontainer" tooltip="07. L1 vs. L2 Fidelity-Term"><div class="figure align-default" id="id8">
-<img alt="07. L1 vs. L2 Fidelity-Term" src="../_images/sphx_glr_datafidelity_L1_vs_L2_thumb.png" />
-<p class="caption"><span class="caption-text"><a class="reference internal" href="datafidelity_L1_vs_L2.html#sphx-glr-tutorials-datafidelity-l1-vs-l2-py"><span class="std std-ref">07. L1 vs. L2 Fidelity-Term</span></a></span><a class="headerlink" href="#id8" title="Permalink to this image">¶</a></p>
+<div class="sphx-glr-thumbcontainer" tooltip="07. Segmentation"><div class="figure align-default" id="id8">
+<img alt="07. Segmentation" src="../_images/sphx_glr_2d_tv_segmentation_thumb1.png" />
+<p class="caption"><span class="caption-text"><a class="reference internal" href="2d_tv_segmentation.html#sphx-glr-tutorials-2d-tv-segmentation-py"><span class="std std-ref">07. Segmentation</span></a></span><a class="headerlink" href="#id8" title="Permalink to this image">¶</a></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="sphx-glr-thumbcontainer" tooltip="08. Scaling Dependent Stepsize Problem"><div class="figure align-default" id="id9">
+<img alt="08. Scaling Dependent Stepsize Problem" src="../_images/sphx_glr_scaling_problem_thumb.png" />
+<p class="caption"><span class="caption-text"><a class="reference internal" href="scaling_problem.html#sphx-glr-tutorials-scaling-problem-py"><span class="std std-ref">08. Scaling Dependent Stepsize Problem</span></a></span><a class="headerlink" href="#id9" title="Permalink to this image">¶</a></p>
 </div>
 </div><div class="toctree-wrapper compound">
 </div>
@@ -232,7 +239,7 @@
           </div>
           <footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="2d_image_smoothing.html" class="btn btn-neutral float-right" title="01. Smoothing" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="2d_image_smoothing.html" class="btn btn-neutral float-right" title="01. Denoising" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
         <a href="../index.html" class="btn btn-neutral float-left" title="RECON" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
 

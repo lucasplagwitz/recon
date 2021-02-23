@@ -19,7 +19,7 @@
 
 
 05. Spatially Adapted Total Variation
-================
+=====================================
 
 Here a locally adapted regularization is shown.
 For this purpose the SATV algorithm was implemented.
@@ -65,7 +65,7 @@ Furthermore, TV is compared with TGV in the context of the local regularization.
 
 
 .. image:: /tutorials/images/sphx_glr_spatially_adapted_total_variation_001.png
-    :alt: GT - PSNR: -1, TV - PSNR: 29.52
+    :alt: GT - PSNR: -1, TV - PSNR: 29.37
     :class: sphx-glr-single-img
 
 
@@ -119,7 +119,7 @@ Furthermore, TV is compared with TGV in the context of the local regularization.
 
 
 .. image:: /tutorials/images/sphx_glr_spatially_adapted_total_variation_002.png
-    :alt: Noisy - PSNR: 19.97, SATV - PSNR: 32.19, SATV-weight $\lambda$
+    :alt: Noisy - PSNR: 19.99, SATV - PSNR: 32.08, SATV-weight $\lambda$
     :class: sphx-glr-single-img
 
 
@@ -130,15 +130,15 @@ Furthermore, TV is compared with TGV in the context of the local regularization.
  .. code-block:: none
 
     0-Iteration of SATV
-    97.5215830887
+    97.2275470536
     25.6
      Early stopping.
     1-Iteration of SATV
-    41.9524197777
+    41.8556780581
     25.6
      Early stopping.
     2-Iteration of SATV
-    26.9435706518
+    26.9018709523
     25.6
      Early stopping.
 
@@ -200,7 +200,7 @@ Not important -> maybe later.
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  45.360 seconds)
+   **Total running time of the script:** ( 0 minutes  48.272 seconds)
 
 
 .. _sphx_glr_download_tutorials_spatially_adapted_total_variation.py:

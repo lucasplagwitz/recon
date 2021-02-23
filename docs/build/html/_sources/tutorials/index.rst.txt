@@ -12,12 +12,12 @@ Tutorials
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="01. Smoothing">
+    <div class="sphx-glr-thumbcontainer" tooltip="01. Denoising">
 
 .. only:: html
 
  .. figure:: /tutorials/images/thumb/sphx_glr_2d_image_smoothing_thumb.png
-     :alt: 01. Smoothing
+     :alt: 01. Denoising
 
      :ref:`sphx_glr_tutorials_2d_image_smoothing.py`
 
@@ -33,35 +33,35 @@ Tutorials
 
 .. raw:: html
 
+    <div class="sphx-glr-thumbcontainer" tooltip="02. Reconstruction I">
+
+.. only:: html
+
+ .. figure:: /tutorials/images/thumb/sphx_glr_radon_thumb.png
+     :alt: 02. Reconstruction I
+
+     :ref:`sphx_glr_tutorials_radon.py`
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /tutorials/radon
+
+.. raw:: html
+
     <div class="sphx-glr-thumbcontainer" tooltip="IN PROGRESS">
 
 .. only:: html
 
- .. figure:: /tutorials/images/thumb/sphx_glr_ct_reconstruction_thumb.png
-     :alt: 02. Reconstruction I
+ .. figure:: /tutorials/images/thumb/sphx_glr_convolution_thumb.png
+     :alt: 03. Reconstruction II
 
-     :ref:`sphx_glr_tutorials_ct_reconstruction.py`
-
-.. raw:: html
-
-    </div>
-
-
-.. toctree::
-   :hidden:
-
-   /tutorials/ct_reconstruction
-
-.. raw:: html
-
-    <div class="sphx-glr-thumbcontainer" tooltip="03. Segmentation">
-
-.. only:: html
-
- .. figure:: /tutorials/images/thumb/sphx_glr_2d_tv_segmentation_thumb.png
-     :alt: 03. Segmentation
-
-     :ref:`sphx_glr_tutorials_2d_tv_segmentation.py`
+     :ref:`sphx_glr_tutorials_convolution.py`
 
 .. raw:: html
 
@@ -71,7 +71,7 @@ Tutorials
 .. toctree::
    :hidden:
 
-   /tutorials/2d_tv_segmentation
+   /tutorials/convolution
 
 .. raw:: html
 
@@ -117,33 +117,12 @@ Tutorials
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="06. Scaling Dependent Stepsize Problem">
-
-.. only:: html
-
- .. figure:: /tutorials/images/thumb/sphx_glr_scaling_problem_thumb.png
-     :alt: 06. Scaling Dependent Stepsize Problem
-
-     :ref:`sphx_glr_tutorials_scaling_problem.py`
-
-.. raw:: html
-
-    </div>
-
-
-.. toctree::
-   :hidden:
-
-   /tutorials/scaling_problem
-
-.. raw:: html
-
-    <div class="sphx-glr-thumbcontainer" tooltip="07. L1 vs. L2 Fidelity-Term">
+    <div class="sphx-glr-thumbcontainer" tooltip="06. L1 vs. L2 Fidelity-Term">
 
 .. only:: html
 
  .. figure:: /tutorials/images/thumb/sphx_glr_datafidelity_L1_vs_L2_thumb.png
-     :alt: 07. L1 vs. L2 Fidelity-Term
+     :alt: 06. L1 vs. L2 Fidelity-Term
 
      :ref:`sphx_glr_tutorials_datafidelity_L1_vs_L2.py`
 
@@ -156,6 +135,48 @@ Tutorials
    :hidden:
 
    /tutorials/datafidelity_L1_vs_L2
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="07. Segmentation">
+
+.. only:: html
+
+ .. figure:: /tutorials/images/thumb/sphx_glr_2d_tv_segmentation_thumb.png
+     :alt: 07. Segmentation
+
+     :ref:`sphx_glr_tutorials_2d_tv_segmentation.py`
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /tutorials/2d_tv_segmentation
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="08. Scaling Dependent Stepsize Problem">
+
+.. only:: html
+
+ .. figure:: /tutorials/images/thumb/sphx_glr_scaling_problem_thumb.png
+     :alt: 08. Scaling Dependent Stepsize Problem
+
+     :ref:`sphx_glr_tutorials_scaling_problem.py`
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /tutorials/scaling_problem
 .. raw:: html
 
     <div class="sphx-glr-clear"></div>

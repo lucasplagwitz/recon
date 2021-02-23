@@ -1,6 +1,6 @@
 """
-06. Scaling Dependent Stepsize Problem
-================
+08. Scaling Dependent Stepsize Problem
+======================================
 In earlier tests it was noticed that the size of the weighting parameters
 has an effect on the solution while keeping the ratio constant.
 Meanwhile the problem has been identified as a too small number of iterations.

@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>03. Segmentation &mdash; recon 0.0.1 documentation</title>
+  <title>07. Segmentation &mdash; recon 0.0.1 documentation</title>
   
 
   
@@ -42,8 +42,8 @@
     
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="04. Total Generalized Variation" href="total_generalized_variation.html" />
-    <link rel="prev" title="02. Reconstruction I" href="ct_reconstruction.html" /> 
+    <link rel="next" title="08. Scaling Dependent Stepsize Problem" href="scaling_problem.html" />
+    <link rel="prev" title="06. L1 vs. L2 Fidelity-Term" href="datafidelity_L1_vs_L2.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -95,13 +95,14 @@
               <p class="caption"><span class="caption-text">Getting started:</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Tutorials</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="2d_image_smoothing.html">01. Smoothing</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ct_reconstruction.html">02. Reconstruction I</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">03. Segmentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2d_image_smoothing.html">01. Denoising</a></li>
+<li class="toctree-l2"><a class="reference internal" href="radon.html">02. Reconstruction I</a></li>
+<li class="toctree-l2"><a class="reference internal" href="convolution.html">03. Reconstruction II</a></li>
 <li class="toctree-l2"><a class="reference internal" href="total_generalized_variation.html">04. Total Generalized Variation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="spatially_adapted_total_variation.html">05. Spatially Adapted Total Variation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="scaling_problem.html">06. Scaling Dependent Stepsize Problem</a></li>
-<li class="toctree-l2"><a class="reference internal" href="datafidelity_L1_vs_L2.html">07. L1 vs. L2 Fidelity-Term</a></li>
+<li class="toctree-l2"><a class="reference internal" href="datafidelity_L1_vs_L2.html">06. L1 vs. L2 Fidelity-Term</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">07. Segmentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="scaling_problem.html">08. Scaling Dependent Stepsize Problem</a></li>
 </ul>
 </li>
 </ul>
@@ -154,7 +155,7 @@
         
           <li><a href="index.html">Tutorials</a> &raquo;</li>
         
-      <li>03. Segmentation</li>
+      <li>07. Segmentation</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -179,7 +180,7 @@
 to download the full example code</p>
 </div>
 <div class="sphx-glr-example-title section" id="segmentation">
-<span id="sphx-glr-tutorials-2d-tv-segmentation-py"></span><h1>03. Segmentation<a class="headerlink" href="#segmentation" title="Permalink to this headline">¶</a></h1>
+<span id="sphx-glr-tutorials-2d-tv-segmentation-py"></span><h1>07. Segmentation<a class="headerlink" href="#segmentation" title="Permalink to this headline">¶</a></h1>
 <p>This example shows how to use the interface for class-based segmentation
 of 2D images. First, depending on the size of the weighting alpha,
 a piecewise constant image is generated before the assignment to certain classes is done.</p>
@@ -221,7 +222,7 @@ a piecewise constant image is generated before the assignment to certain classes
 <div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Early stopping.
 </pre></div>
 </div>
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  35.931 seconds)</p>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  40.547 seconds)</p>
 <div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-tutorials-2d-tv-segmentation-py">
 <div class="sphx-glr-download sphx-glr-download-python docutils container">
 <p><a class="reference download internal" download="" href="../_downloads/36f0b40bdbf9037c7713d2c5dc8e1b29/2d_tv_segmentation.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">2d_tv_segmentation.py</span></code></a></p>
@@ -239,8 +240,8 @@ a piecewise constant image is generated before the assignment to certain classes
           </div>
           <footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="total_generalized_variation.html" class="btn btn-neutral float-right" title="04. Total Generalized Variation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-        <a href="ct_reconstruction.html" class="btn btn-neutral float-left" title="02. Reconstruction I" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="scaling_problem.html" class="btn btn-neutral float-right" title="08. Scaling Dependent Stepsize Problem" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="datafidelity_L1_vs_L2.html" class="btn btn-neutral float-left" title="06. L1 vs. L2 Fidelity-Term" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
 
   <hr/>
