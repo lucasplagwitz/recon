@@ -11,6 +11,7 @@ install:
   - pip install pytest
   - pip install pytest-cov
   - pip install coveralls
+  - pip install odl
 script:
   - PYTHONPATH=./ pytest ./test --cov=./recon
 after_success:
