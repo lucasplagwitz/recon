@@ -1,7 +1,7 @@
 import numpy as np
 import copy
 
-from experimental.helpers.functions import is_numeric, is_scalar, is_vector, switch_arguments
+from recon.utils.functions import is_numeric, is_scalar, is_vector, switch_arguments
 
 
 class LinearOperator(object):
