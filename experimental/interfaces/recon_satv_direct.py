@@ -1,51 +1,57 @@
-from pylops.basicoperators import Gradient
-from pylops import Diagonal, Smoothing2D, BlockDiag
+from typing import Union
+
+from pylops import Identity, Smoothing2D, Diagonal
 import numpy as np
 import matplotlib.pyplot as plt
 
-from experimental.terms.dataterm_linear_constrained import DatatermLinearConstrained
+from recon.interfaces.satv import SATV
 
-from recon.terms import Projection, Dataterm, DatatermLinear
-from recon.solver.pd_hgm import PdHgm
+from recon.interfaces import BaseInterface, Recon
+from recon.terms import DatanormL2
+from recon.solver import PdHgm, PdHgmTGV
 
 
-class ReconSATVDirect(object):
+class ReconSATVDirect(BaseInterface):
     """
     A Reconstruction object to solve regularized inverse reconstruction problems.
     Solver is Primal-Dual based.
     Form:
-        1/2 * ||x - f||^2 + \alpha J(x)
+        lambda/2 * ||Ax - f||^2 + \alpha(x) J(x)
 
         J(x) regularisation term J in [TV(), || ||]
     """
 
     def __init__(self,
-                 O,
+                 operator,
                  domain_shape: np.ndarray,
-                 image_shape: np.ndarray,
                  assessment: float = 1,
                  noise_sigma: float = 0.2,
                  reg_mode: str = '',
-                 alpha=0.01,
-                 tau: float = None,
+                 lam: float = 0.1,
+                 alpha: Union[float, np.ndarray]  = 1,
+                 tau: Union[float, str] = None,
+                 plot_iteration: bool = False,
                  data_output_path: str = ''):
         self._reg_mode = None
 
-        self.image_shape = image_shape
-        self.domain_shape = domain_shape
-        self.alpha = alpha
-        self.tau = tau
-        self.reg_mode = reg_mode
+        super(ReconSATVDirect, self).__init__(domain_shape=domain_shape,
+                                   reg_mode=reg_mode,
+                                   possible_reg_modes=['tv', 'tgv'],
+                                   lam=lam,
+                                   tau=tau)
+
+        self.operator = operator
         self.solver = None
-        self.plot_iteration = True
+        self.plot_iteration = plot_iteration
         self.assessment = assessment
         self.noise_sigma = noise_sigma
         self.data_output_path = data_output_path
-        self.norm = 1
-        self.O = O
+        self.window_size = 10
+        self.w = None
+        self.alpha = alpha
 
-        if type(alpha) is not float:
-            if self.alpha.shape == image_shape:
+        if not isinstance(lam, (int, float)):
+            if self.alpha.shape == domain_shape or self.alpha.shape[0] == np.prod(domain_shape):
                 #self.alpha = Diagonal(self.alpha.ravel())
                 pass
             else:
@@ -53,146 +59,102 @@ class ReconSATVDirect(object):
                       str(self.alpha.shape) + "!=" + str(domain_shape)
                 raise ValueError(msg)
 
+    def solve(self, data: np.ndarray, max_iter: int = 400, tol: float = 1e-4):
 
-    @property
-    def reg_mode(self):
-        return self._reg_mode
+        super(ReconSATVDirect, self).solve(data=data, max_iter=max_iter, tol=tol)
 
-    @reg_mode.setter
-    def reg_mode(self, value):
-        if value in ['tikhonov', 'tv', None]:
-            self._reg_mode = value
-        else:
-            msg = "Please use reg_mode out of ['tikhonov', 'tv', '']"
-            raise ValueError(msg)
-
-    def solve(self, data: np.ndarray, maxiter: int = 150, tol: float = 5*10**(-4)):
-
-        if self.reg_mode is not None:
-
-            grad = Gradient(dims=self.domain_shape, edge = True, dtype='float64', kind="backward")
-
-            if not isinstance(self.alpha, float):
-                #K = BlockDiag([Diagonal(self.alpha.ravel()), Diagonal(self.alpha.ravel())]) * grad
-                K = grad
-            else:
-                K = self.alpha * grad
-
-            if not self.tau:
-                if np.prod(self.domain_shape) > 25000:
-                    long = True
-                else:
-                    long = False
-                if long:
-                    print("Start evaluate tau. Long runtime.")
-
-                norm = np.abs(np.asscalar(K.eigs(neigs=1, which='LM')))
-                #norm = 0.001
-                sigma = 0.99 / norm
-                if long:
-                    print("Calc tau: "+str(sigma))
-                tau = sigma
-            else:
-                tau = self.tau
-                sigma = tau
-
-            if self.reg_mode == 'tv':
-                F_star = Projection(self.domain_shape, len(self.domain_shape))
-            else:
-                F_star = DatatermLinear()
-                F_star.set_proxdata(0)
-        else:
-            tau = 0.99
-            sigma = tau
-            F_star = DatatermLinear()
-            K = 0
-
-        G = Dataterm(self.O)
-        G.set_proxparam(tau)
-        G.set_weight(self.alpha.ravel())
-        G.set_proxdata(data.ravel())
-        F_star.set_proxparam(sigma)
 
         plt.Figure()
-        ulast = np.zeros(self.domain_shape)
-        u = ulast
-        u_sol = u
-        k = 0
+        u = np.zeros(self.operator.domain_dim)
+        k = old_e = 0
+        alpha_bar = self.alpha
 
+        pk = 0
 
-        while np.linalg.norm(self.O*u.ravel() - data.ravel()) > self.assessment:
-            print(str(k)+"-Iteration of SATV")
-            print(np.linalg.norm(self.O*u.ravel() - data.ravel()))
+        min_alpha = np.min(self.alpha)
+
+        while True:
+            print(str(k) + "-Iteration of SATV")
+            print(np.linalg.norm(self.operator*u.ravel() - data.ravel(), 2))
             print(self.assessment)
+            #print(np.linalg.norm(self.operator*u.ravel() - data.ravel(), 2))
+            #print(self.assessment)
 
-            #G.set_proxparam(tau)
-            F_star.set_proxparam(sigma)
-
-            if k == 0:
-                alpha_bar = self.alpha
-            else:
-                v = (data.ravel() - self.O*u.ravel())
-                G = Dataterm(self.O)
-                G.set_proxdata(v)
-                G.set_proxparam(tau)
-                G.set_weight(self.alpha.ravel())
+            if k > 0:
+                # if self.original is None:
+                v = (data.ravel() - self.operator*u.ravel())
 
                 # residual filter
-                w = 6
-                Sop = Smoothing2D(nsmooth=[w, w], dims=self.image_shape, dtype='float64')
-                S = np.reshape(Sop * (v**2), self.image_shape)
-                T = (w/self.noise_sigma)**2 * S
-                B = (self.noise_sigma/w) ** 2 * (3*w**2)
-                S[S<B] = self.noise_sigma**2
+                Sop = Smoothing2D(nsmooth=[self.window_size, self.window_size],
+                                  dims=self.operator.image_dim, dtype='float64')
 
-                #S = np.clip(S, self.noise_sigma**2,5)
-                eta = 1.3# 0.7
-                L = 100000
-                #rho = np.max(alpha_bar)/self.noise_sigma
-                rho = 4 #0.9
-                alpha_bar = eta * np.clip(alpha_bar + rho*(np.sqrt(S) - self.noise_sigma), 1, L)
-                #Sop = Smoothing2D(nsmooth=[1, 1], dims=self.image_shape, dtype='float64')
-                self.alpha = np.reshape(alpha_bar.ravel(), self.image_shape)
-                #grad = Gradient(dims=self.domain_shape, edge=True, dtype='float64', kind="backward")
-                #K = BlockDiag([Diagonal(self.alpha.ravel()), Diagonal(self.alpha.ravel())]) * grad
-                #norm = np.abs(np.asscalar(K.eigs(neigs=1, which='LM')))
-                #sigma = 0.99 / norm
-                #sigma = self.tau
-                #tau = sigma
+                S = np.reshape(Sop * (v ** 2), self.operator.image_dim)
+                #T = (self.window_size / self.noise_sigma) ** 2 * S
+                #B = (self.noise_sigma / self.window_size) ** 2 * self.noise_sigma
+                #B = (self.noise_sigma / self.window_size) ** 2 * (self.noise_sigma ** 2)
+                #B = self.noise_sigma**2
+                B = self.noise_sigma ** 2 * 1.3
+                #S[S < B] = self.noise_sigma ** 2
 
-            self.solver = PdHgm(K, F_star, G)
-            self.solver.maxiter = maxiter
-            self.solver.tol = tol
+                #S[S < B] = (self.noise_sigma / self.window_size) ** 2
+                S[(S < B)] = self.noise_sigma
 
-            #G.set_proxparam(tau)
-            F_star.set_proxparam(sigma)
+                eta = 2  # original == 2
+                L = 20
+                rho = np.max(alpha_bar) / self.noise_sigma
+                #alpha_bar = eta * np.clip(alpha_bar + rho * (np.sqrt(S).ravel() - self.noise_sigma), 0, L)
+                alpha_bar = eta * np.clip(alpha_bar + rho * (np.sqrt(S).ravel() - self.noise_sigma), min_alpha, L)
+                self.alpha = np.reshape(Sop*alpha_bar.ravel(), self.domain_shape)
 
-            self.solver.solve()
-            u_sol = np.reshape(np.real(self.solver.var['x']), self.domain_shape)
-            u = u_sol + u
-            ulast = u
+                print("MIN: " + str(np.min(self.alpha)))
+                print("MAX: "+str(np.max(self.alpha)))
+
+            #self.lam = 1
+
+            rec = Recon(operator=self.operator,
+                        domain_shape=self.operator.domain_dim,
+                        reg_mode='tv', alpha=(self.lam, 0), lam=self.alpha) #lam=1
+            rec.breg_p = pk
+            u_new = rec.solve(data=data.ravel(), max_iter=max_iter, tol=1e-4)
+
+            pk = pk - (1 / self.lam) * self.operator.H * (Diagonal(self.alpha.ravel()/2).H * (self.alpha/2) *
+                                                          ((self.operator*u_new.ravel() - data.ravel())))
+
+            e = np.linalg.norm(self.operator*u_new.ravel() - data.ravel(), 2)
+            if e < self.assessment:
+                # which iteration to choose -> norm nearest
+                if (old_e - self.assessment) > np.abs(e - self.assessment):
+                    u = u_new
+                break
+            old_e = e
+            u = u_new
+
             k = k + 1
 
             if self.plot_iteration:
-                #plt.gray()
-                plt.imshow(u)
+                plt.imshow(np.reshape(u, self.operator.domain_dim), vmin=0, vmax=1)
                 plt.axis('off')
                 # plt.title('RRE =' + str(round(RRE_breg, 2)), y=-0.1, fontsize=20)
-                plt.savefig(self.data_output_path + 'SATV_segmentation_iter' + str(k) + '.png',
+                plt.savefig(self.data_output_path + 'RESATV_segmentation2_iter' + str(k) + '.png',
                             bbox_inches='tight',
                             pad_inches=0)
                 plt.close()
 
-                #plt.gray()
-                plt.imshow(np.reshape(self.O.H*self.alpha.ravel(), self.domain_shape))
+                plt.imshow(np.reshape(self.alpha, self.operator.image_dim), vmin=0, vmax=1)
+                #plt.imshow(np.reshape(self.alpha, self.operator.image_dim))
                 plt.axis('off')
                 # plt.title('RRE =' + str(round(RRE_breg, 2)), y=-0.1, fontsize=20)
-                plt.savefig(self.data_output_path + 'SATV_segmentation_iter' + str(k) + '_alpha.png',
+                plt.savefig(self.data_output_path + 'RESATV_segmentation2_iter' + str(k) + '_alpha.png',
+                            bbox_inches='tight',
+                            pad_inches=0)
+                plt.close()
+
+                plt.imshow(np.reshape(self.operator.inv*self.alpha.ravel(), self.operator.domain_dim))
+                plt.axis('off')
+                # plt.title('RRE =' + str(round(RRE_breg, 2)), y=-0.1, fontsize=20)
+                plt.savefig(self.data_output_path + 'RESATV_segmentation2_iter' + str(k) + '_recweight.png',
                             bbox_inches='tight',
                             pad_inches=0)
                 plt.close()
 
         return u
-
-
-

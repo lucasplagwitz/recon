@@ -5,20 +5,20 @@
 
 Computation times
 =================
-**35:23.648** total execution time for **tutorials** files:
+**15:42.947** total execution time for **tutorials** files:
 
 +-----------------------------------------------------------------------------------------------------------+-----------+--------+
-| :ref:`sphx_glr_tutorials_ct_reconstruction.py` (``ct_reconstruction.py``)                                 | 20:02.989 | 0.0 MB |
+| :ref:`sphx_glr_tutorials_2d_image_smoothing.py` (``2d_image_smoothing.py``)                               | 04:38.150 | 0.0 MB |
 +-----------------------------------------------------------------------------------------------------------+-----------+--------+
-| :ref:`sphx_glr_tutorials_2d_image_smoothing.py` (``2d_image_smoothing.py``)                               | 07:13.436 | 0.0 MB |
+| :ref:`sphx_glr_tutorials_ct_reconstruction.py` (``ct_reconstruction.py``)                                 | 03:32.256 | 0.0 MB |
 +-----------------------------------------------------------------------------------------------------------+-----------+--------+
-| :ref:`sphx_glr_tutorials_total_generalized_variation.py` (``total_generalized_variation.py``)             | 05:24.944 | 0.0 MB |
+| :ref:`sphx_glr_tutorials_total_generalized_variation.py` (``total_generalized_variation.py``)             | 03:29.049 | 0.0 MB |
 +-----------------------------------------------------------------------------------------------------------+-----------+--------+
-| :ref:`sphx_glr_tutorials_2d_tv_segmentation.py` (``2d_tv_segmentation.py``)                               | 02:42.279 | 0.0 MB |
+| :ref:`sphx_glr_tutorials_datafidelity_L1_vs_L2.py` (``datafidelity_L1_vs_L2.py``)                         | 02:42.200 | 0.0 MB |
++-----------------------------------------------------------------------------------------------------------+-----------+--------+
+| :ref:`sphx_glr_tutorials_spatially_adapted_total_variation.py` (``spatially_adapted_total_variation.py``) | 00:45.360 | 0.0 MB |
++-----------------------------------------------------------------------------------------------------------+-----------+--------+
+| :ref:`sphx_glr_tutorials_2d_tv_segmentation.py` (``2d_tv_segmentation.py``)                               | 00:35.931 | 0.0 MB |
 +-----------------------------------------------------------------------------------------------------------+-----------+--------+
 | :ref:`sphx_glr_tutorials_scaling_problem.py` (``scaling_problem.py``)                                     | 00:00.000 | 0.0 MB |
-+-----------------------------------------------------------------------------------------------------------+-----------+--------+
-| :ref:`sphx_glr_tutorials_spatially_adapted_total_variation.py` (``spatially_adapted_total_variation.py``) | 00:00.000 | 0.0 MB |
-+-----------------------------------------------------------------------------------------------------------+-----------+--------+
-| :ref:`sphx_glr_tutorials_white_noise_between_spaces.py` (``white_noise_between_spaces.py``)               | 00:00.000 | 0.0 MB |
 +-----------------------------------------------------------------------------------------------------------+-----------+--------+

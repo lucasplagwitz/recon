@@ -36,6 +36,7 @@ class SmoothBregmanSATV(BaseInterface):
                                             tau=tau)
 
         self.plot_iteration = plot_iteration
+        self.window_size = 10
         self.data_output_path = data_output_path
         self.assessment = assessment
         self.noise_sigma = noise_sigma
@@ -70,23 +71,38 @@ class SmoothBregmanSATV(BaseInterface):
             print("runs till norm <: " + str(self.assessment))
 
             if k > 0:
-                v = (data.ravel()- u.ravel())
+                v = (data.ravel() - u.ravel())
 
 
                 # residual filter
-                w = 5
-                Sop = Smoothing2D(nsmooth=[w, w], dims=self.domain_shape, dtype='float64')
+                Sop = Smoothing2D(nsmooth=[self.window_size, self.window_size],
+                                  dims=self.domain_shape, dtype='float64')
 
                 S = np.reshape(Sop * (v ** 2), self.domain_shape)
-                T = (w / self.noise_sigma) ** 2 * S
-                B = (self.noise_sigma / w) ** 2 * (3 * w ** 2)
-                S[S < B] = self.noise_sigma ** 2  # original implementation with these line
+                T = (self.window_size / self.noise_sigma) ** 2 * S
 
-                eta = 2 # original == 2
-                L = 100000
+                #B = (self.noise_sigma / w) ** 2 * (3 * w ** 2)
+                #S[S < B] = self.noise_sigma ** 2  # original implementation with these line
+
+                #eta = 2 # original == 2
+                #L = 20
+                #rho = np.max(lam_bar) / self.noise_sigma
+                B = (self.noise_sigma / self.window_size) ** 2 * 1.3
+                B = self.noise_sigma ** 2 * 1.3
+                S[(S < B)] = self.noise_sigma** 2
+
+                # S[S < B] = self.noise_sigma ** 2
+
+                eta = 2  # original == 2
+                L = 20
                 rho = np.max(lam_bar) / self.noise_sigma
-                lam_bar = eta * np.clip(lam_bar + rho * (np.sqrt(S).ravel() - self.noise_sigma), 0, L)
+                lam_bar = eta * np.clip(lam_bar + rho * (np.sqrt(S).ravel() - self.noise_sigma), 0,
+                                        L)
+
                 self.lam = np.reshape(Sop*lam_bar.ravel(), self.domain_shape)
+
+                print("MIN: "+str(np.min(self.lam)))
+                print("MAX: "+str(np.max(self.lam)))
 
                 self.G.lam = self.lam.ravel()
                 v = data.ravel()
@@ -101,7 +117,7 @@ class SmoothBregmanSATV(BaseInterface):
 
             self.solver.solve()
 
-            u_new = np.reshape(self.solver.var['x'], self.domain_shape)
+            u_new = np.reshape(self.solver.x, self.domain_shape)
 
             e = np.linalg.norm(u_new.ravel() - data.ravel(), 2)
 
@@ -114,7 +130,7 @@ class SmoothBregmanSATV(BaseInterface):
 
             u = u_new
 
-            pk = pk - (self.lam / self.alpha) * (u.ravel() - v)
+            #pk = pk - (self.lam/ self.alpha) * (u.ravel() - v)
             k += 1
 
             if self.plot_iteration:

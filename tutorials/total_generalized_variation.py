@@ -43,7 +43,7 @@ plt.show()
 # At this point there is no interface for second order TV. We implement it direct with the
 # adapted Primal-Dual algorithm.
 
-from recon.solver.pd_hgm_extend import PdHgmTGV
+from recon.solver.pd_hgm_tgv import PdHgmTGV
 
 # TGV smoothing small alpha
 alpha = (0.3, 0.6)
@@ -104,7 +104,7 @@ while True:
         plt.close()
 
 ###############################################################################
-# Compare it to normal TV-Bregman
+# Compare it to normal BTV
 
 breg_smoothing = SmoothBregman(domain_shape=image.shape,
                                reg_mode='tv',
@@ -127,15 +127,15 @@ f.add_subplot(1, 3, 2)
 plt.gray()
 plt.axis('off')
 plt.imshow(np.reshape(u_breg, image.shape), vmin=0, vmax=np.max(image))
-plt.title("Bregman-TV ")
+plt.title("BTV ")
 f.add_subplot(1, 3, 3)
 plt.gray()
-plt.imshow(np.reshape(u, image.shape), vmin=0, vmax=np.max(image))
-plt.title("Bregman-TGV")
+plt.imshow(np.reshape(u_new, image.shape), vmin=0, vmax=np.max(image))
+plt.title("BTGV")
 plt.axis('off')
 plt.show()
 
 print("TV-PSNR: "+str(psnr(image, tv_solution)))
 print("TGV-PSNR: "+str(psnr(image, tgv_solution)))
-print("Bregman-TV-PSNR: "+str(psnr(image, u_breg)))
-print("Bregman-TGV-PSNR: "+str(psnr(image, u_new)))
+print("BTV-PSNR: "+str(psnr(image, u_breg)))
+print("BTGV-PSNR: "+str(psnr(image, u_new)))

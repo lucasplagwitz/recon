@@ -4,7 +4,7 @@ import imageio
 
 from pylops import Gradient
 
-from experimental.interfaces.recon_satv import ReconSATV
+from experimental.interfaces.recon_satv_old import ReconSATV
 from recon.operator.ct_radon import CtRt
 
 # load content

@@ -3,9 +3,9 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8">
+  <meta charset="utf-8" />
   
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <title>04. Total Generalized Variation &mdash; recon 0.0.1 documentation</title>
   
@@ -16,10 +16,14 @@
   <link rel="stylesheet" href="../_static/gallery.css" type="text/css" />
   <link rel="stylesheet" href="../_static/gallery-binder.css" type="text/css" />
   <link rel="stylesheet" href="../_static/gallery-dataframe.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/gallery-rendered-html.css" type="text/css" />
 
   
   
+
   
+  
+
   
 
   
@@ -32,7 +36,6 @@
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
-        <script src="../_static/language_data.js"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
@@ -54,7 +57,7 @@
           
 
           
-            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> recon
+            <a href="../index.html" class="icon icon-home"> recon
           
 
           
@@ -98,7 +101,7 @@
 <li class="toctree-l2 current"><a class="current reference internal" href="#">04. Total Generalized Variation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="spatially_adapted_total_variation.html">05. Spatially Adapted Total Variation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="scaling_problem.html">06. Scaling Dependent Stepsize Problem</a></li>
-<li class="toctree-l2"><a class="reference internal" href="white_noise_between_spaces.html">07. White Noise Between Spaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="datafidelity_L1_vs_L2.html">07. L1 vs. L2 Fidelity-Term</a></li>
 </ul>
 </li>
 </ul>
@@ -141,6 +144,8 @@
 
 
 
+
+
 <div role="navigation" aria-label="breadcrumbs navigation">
 
   <ul class="wy-breadcrumbs">
@@ -154,7 +159,7 @@
     
       <li class="wy-breadcrumbs-aside">
         
-            
+          
             <a href="../_sources/tutorials/total_generalized_variation.rst.txt" rel="nofollow"> View page source</a>
           
         
@@ -170,7 +175,8 @@
             
   <div class="sphx-glr-download-link-note admonition note">
 <p class="admonition-title">Note</p>
-<p>Click <a class="reference internal" href="#sphx-glr-download-tutorials-total-generalized-variation-py"><span class="std std-ref">here</span></a>     to download the full example code</p>
+<p>Click <a class="reference internal" href="#sphx-glr-download-tutorials-total-generalized-variation-py"><span class="std std-ref">here</span></a>
+to download the full example code</p>
 </div>
 <div class="sphx-glr-example-title section" id="total-generalized-variation">
 <span id="sphx-glr-tutorials-total-generalized-variation-py"></span><h1>04. Total Generalized Variation<a class="headerlink" href="#total-generalized-variation" title="Permalink to this headline">¶</a></h1>
@@ -217,7 +223,7 @@ See following noisy example with the TV-Regularization.</p>
 <p>To avoid strong stair-casing effects, we introduce the Total Generalized Variation.
 At this point there is no interface for second order TV. We implement it direct with the
 adapted Primal-Dual algorithm.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">recon.solver.pd_hgm_extend</span> <span class="kn">import</span> <span class="n">PdHgmTGV</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">recon.solver.pd_hgm_tgv</span> <span class="kn">import</span> <span class="n">PdHgmTGV</span>
 
 <span class="c1"># TGV smoothing small alpha</span>
 <span class="n">alpha</span> <span class="o">=</span> <span class="p">(</span><span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.6</span><span class="p">)</span>
@@ -245,16 +251,13 @@ adapted Primal-Dual algorithm.</p>
 </div>
 <img alt="Original, TV based denoising, TGV based denoising" class="sphx-glr-single-img" src="../_images/sphx_glr_total_generalized_variation_002.png" />
 <p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>0.00771069298652
-0.0031111419832
-0.00180729507596
-0.00122331678004
-0.000907678083309
-0.000728211463402
-0.000608057434836
-0.000504880376087
-0.000440147529181
-0.000372074371319
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>0.000765362808757
+0.000379147346815
+0.000291780617741
+0.00021201816304
+0.000148266411871
+0.000117968914174
+8.92353328212e-05
 </pre></div>
 </div>
 <p>Since TGV also represents a convex functional, it can also be extended by Bregman.
@@ -291,57 +294,37 @@ Maybe there will be an interface for this in the future.</p>
 </pre></div>
 </div>
 <p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>current norm error: 165.119961638
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>current norm error: 165.633763952
 runs till norm &lt;: 51.2
-0.012877106605
-0.00521424351287
-0.00284649811812
-0.00176420359798
-0.0012907136069
-0.000988516676199
-0.000852329732466
-0.000816692532205
-0.000667334100981
-0.000556070797568
-current norm error: 52.9145316603
+0.000943532859819
+0.000282388550186
+0.000242282407063
+0.000150067731341
+9.2285516598e-05
+current norm error: 52.781652899
 runs till norm &lt;: 51.2
-0.0130646688425
-0.00503696518632
-0.00302054257841
-0.00194678593056
-0.00142751246296
-0.00109094354898
-0.00089387244592
-0.000766550512147
-0.000619090179674
-0.000534423426562
-current norm error: 51.4622815594
+0.0010448653069
+0.000443879105009
+0.000333571739168
+0.00016860633176
+0.000149456530208
+0.00014325308855
+0.000136350335276
+8.63831664208e-05
+current norm error: 51.2547492065
 runs till norm &lt;: 51.2
-0.0155674014557
-0.00591369574443
-0.00336137692153
-0.0021950467685
-0.00157342659696
-0.00118577464407
-0.000967438770227
-0.00079032204254
-0.000647887128984
-0.000564429791908
-current norm error: 51.3277683524
-runs till norm &lt;: 51.2
-0.0182142922654
-0.00675238577248
-0.00363658070046
-0.00232872520605
-0.00162157138821
-0.00122637344611
-0.000976911132042
-0.000793198843987
-0.000664255558431
-0.00056278336667
+0.00101725139128
+0.000535834570308
+0.000356034903108
+0.000216574048047
+0.000203573179779
+0.000160166971899
+0.000103229455815
+0.000106274093406
+5.64069008594e-05
 </pre></div>
 </div>
-<p>Compare it to normal TV-Bregman</p>
+<p>Compare it to normal BTV</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">breg_smoothing</span> <span class="o">=</span> <span class="n">SmoothBregman</span><span class="p">(</span><span class="n">domain_shape</span><span class="o">=</span><span class="n">image</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span>
                                <span class="n">reg_mode</span><span class="o">=</span><span class="s1">&#39;tv&#39;</span><span class="p">,</span>
                                <span class="n">alpha</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
@@ -363,40 +346,35 @@ runs till norm &lt;: 51.2
 <span class="n">plt</span><span class="o">.</span><span class="n">gray</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">u_breg</span><span class="p">,</span> <span class="n">image</span><span class="o">.</span><span class="n">shape</span><span class="p">),</span> <span class="n">vmin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">image</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Bregman-TV &quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;BTV &quot;</span><span class="p">)</span>
 <span class="n">f</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">gray</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">image</span><span class="o">.</span><span class="n">shape</span><span class="p">),</span> <span class="n">vmin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">image</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Bregman-TGV&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">u_new</span><span class="p">,</span> <span class="n">image</span><span class="o">.</span><span class="n">shape</span><span class="p">),</span> <span class="n">vmin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">image</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;BTGV&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;TV-PSNR: &quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">psnr</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">tv_solution</span><span class="p">)))</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;TGV-PSNR: &quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">psnr</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">tgv_solution</span><span class="p">)))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Bregman-TV-PSNR: &quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">psnr</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">u_breg</span><span class="p">)))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Bregman-TGV-PSNR: &quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">psnr</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">u_new</span><span class="p">)))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;BTV-PSNR: &quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">psnr</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">u_breg</span><span class="p">)))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;BTGV-PSNR: &quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">psnr</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">u_new</span><span class="p">)))</span>
 </pre></div>
 </div>
-<img alt="Original, Bregman-TV , Bregman-TGV" class="sphx-glr-single-img" src="../_images/sphx_glr_total_generalized_variation_003.png" />
+<img alt="Original, BTV , BTGV" class="sphx-glr-single-img" src="../_images/sphx_glr_total_generalized_variation_003.png" />
 <p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>current norm error: 165.119961638
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>current norm error: 165.633763952
 runs till norm &lt;: 51.2
  Early stopping.
-0.428998886775
-current norm error: 54.3755669727
+current norm error: 54.1543680004
 runs till norm &lt;: 51.2
  Early stopping.
-0.836379326847
-current norm error: 51.2498963996
-runs till norm &lt;: 51.2
- Early stopping.
-TV-PSNR: 32.31
-TGV-PSNR: 32.85
-Bregman-TV-PSNR: 31.12
-Bregman-TGV-PSNR: 34.45
+TV-PSNR: 32.78
+TGV-PSNR: 33.24
+BTV-PSNR: 31.12
+BTGV-PSNR: 37.72
 </pre></div>
 </div>
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 5 minutes  24.944 seconds)</p>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 3 minutes  29.049 seconds)</p>
 <div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-tutorials-total-generalized-variation-py">
 <div class="sphx-glr-download sphx-glr-download-python docutils container">
 <p><a class="reference download internal" download="" href="../_downloads/02981c4d92fc2b16f53a38a866603b6f/total_generalized_variation.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">total_generalized_variation.py</span></code></a></p>
@@ -413,37 +391,29 @@ Bregman-TGV-PSNR: 34.45
            
           </div>
           <footer>
-  
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="spatially_adapted_total_variation.html" class="btn btn-neutral float-right" title="05. Spatially Adapted Total Variation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
-      
-      
-        <a href="2d_tv_segmentation.html" class="btn btn-neutral float-left" title="03. Segmentation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
-      
+        <a href="spatially_adapted_total_variation.html" class="btn btn-neutral float-right" title="05. Spatially Adapted Total Variation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="2d_tv_segmentation.html" class="btn btn-neutral float-left" title="03. Segmentation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
-  
 
   <hr/>
 
   <div role="contentinfo">
     <p>
-        
-        &copy; Copyright 2020, Lucas Plagwitz
+        &#169; Copyright 2020, Lucas Plagwitz.
 
     </p>
   </div>
     
     
     
-    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
     
-    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
     
     provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
-
         </div>
       </div>
 

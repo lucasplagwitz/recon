@@ -33,7 +33,7 @@ Tutorials
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="02. Reconstruction I">
+    <div class="sphx-glr-thumbcontainer" tooltip="IN PROGRESS">
 
 .. only:: html
 
@@ -138,14 +138,14 @@ Tutorials
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="This Notebook examines the behavior of noise under linear operators numerically. Lets say for s...">
+    <div class="sphx-glr-thumbcontainer" tooltip="07. L1 vs. L2 Fidelity-Term">
 
 .. only:: html
 
- .. figure:: /tutorials/images/thumb/sphx_glr_white_noise_between_spaces_thumb.png
-     :alt: 07. White Noise Between Spaces
+ .. figure:: /tutorials/images/thumb/sphx_glr_datafidelity_L1_vs_L2_thumb.png
+     :alt: 07. L1 vs. L2 Fidelity-Term
 
-     :ref:`sphx_glr_tutorials_white_noise_between_spaces.py`
+     :ref:`sphx_glr_tutorials_datafidelity_L1_vs_L2.py`
 
 .. raw:: html
 
@@ -155,7 +155,7 @@ Tutorials
 .. toctree::
    :hidden:
 
-   /tutorials/white_noise_between_spaces
+   /tutorials/datafidelity_L1_vs_L2
 .. raw:: html
 
     <div class="sphx-glr-clear"></div>

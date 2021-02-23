@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 
 from recon.interfaces.satv import SATV
 
-from recon.interfaces import BaseInterface
+from recon.interfaces import BaseInterface, Recon
 from recon.terms import DatanormL2
 from recon.solver.pd_hgm import PdHgm
 
@@ -62,6 +62,8 @@ class ReconSATV(BaseInterface):
                 list(np.linspace(60., 120., 60, endpoint=False)) + \
                 list(np.linspace(120., 180., 60, endpoint=True))
 
+
+
     def solve(self, data: np.ndarray, max_iter: int = 1000, tol: float = 1e-4):
 
         super(ReconSATV, self).solve(data=data, max_iter=max_iter, tol=tol)
@@ -78,8 +80,8 @@ class ReconSATV(BaseInterface):
         alpha_old = self.alpha
 
 
-        er = self.operator.H * np.random.normal(0, self.noise_sigma, size=data.shape).ravel()
-        noise_sigma2 = np.std(er, ddof=1)
+        er = self.operator.inv * np.random.normal(0, self.noise_sigma, size=data.shape).ravel()
+        init_sig = noise_sigma2 = np.std(er, ddof=1)
         assessment2 = noise_sigma2*np.sqrt(np.prod(self.domain_shape))
 
         start_lam = self.lam
@@ -88,42 +90,42 @@ class ReconSATV(BaseInterface):
             print(np.linalg.norm(u.ravel() - ulast.ravel())/np.linalg.norm(ulast))
             #self.alpha = np.ones(self.domain_shape) * 1
             #self.alpha = (np.ones(self.domain_shape) * 1 + alpha_old) /2
+            if k<-1:
+                #er = (1-self.lam/np.max(self.lam))*er
+                #noise_sigma2 = np.std(er, ddof=1)
+                assessment2 = assessment2 - np.linalg.norm(w.ravel() - self.w.ravel(), 2) #noise_sigma2 * np.sqrt(np.prod(self.domain_shape))
+                print("......")
+                print(noise_sigma2)
+                print(assessment2)
+                print("......")
+
             tv_smoothing = SATV(domain_shape=self.domain_shape,
                                 reg_mode='tv',
-                                lam=start_lam,
+                                lam=self.lam,
+                                original=self.w,
                                 data_output_path=self.data_output_path,
+                                window_size=5,
                                 noise_sigma=noise_sigma2,
                                 tau='calc',
                                 assessment=assessment2)
-            ulast = u
             u = tv_smoothing.solve(data=w, max_iter=1000, tol=1e-4)
             self.lam = tv_smoothing.lam
             print("--------SATV-FINISHED-------")
 
-            #self.alpha = tv_smoothing.alpha
-            #alpha_old = self.alpha
+            self.lam = self.lam / np.max(self.lam) * 0.01
 
-            fac = 1.0
-            #K = fac * Diagonal((self.lam.ravel()))
-            K = Identity(np.prod(self.domain_shape))
+            rec = Recon(operator=self.operator,
+                        domain_shape=self.operator.domain_dim,
+                        data=u.ravel(),
+                        reg_mode='tik', alpha=(self.lam,0), lam=0.02)
+            w = rec.solve(data=data.ravel(), max_iter=400, tol=1e-4)
 
-            iter_tau = 0.9
-            G = DatanormL2(image_size=self.domain_shape,
-                           operator=self.operator, lam=self.alpha,
-                           prox_param=iter_tau, data=data.ravel())
-
-            F_star = DatanormL2(image_size=self.domain_shape,
-                                data=-1/2*self.lam.ravel()*u.ravel(),
-                                prox_param=iter_tau,
-                                lam=self.lam.ravel())
-
-            solver = PdHgm(K, F_star, G)
-            solver.max_iter = 1000
-            solver.tol = tol
-            solver.solve()
-            w = np.reshape(solver.var['x'], self.domain_shape)
+            if k == 0:
+                u0 = u
 
             k = k + 1
+
+            #self.lam = self.lam / 2
 
             if self.plot_iteration:
                 plt.imshow(np.reshape(u, self.domain_shape), vmin=0, vmax=1)

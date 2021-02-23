@@ -1,117 +1,152 @@
+"""
+Primal Dual Algorithm based on Paper:
+A first-order primal-dual algorithm for convex problems with applications to imaging
+by Antonin Chambolle, Thomas Pock.
+
+Implementation is based on Veronica Corona et al.
+"""
 import numpy as np
-from pylops import Gradient, BlockDiag
-import matplotlib.pyplot as plt
+import copy
+import sys
+import pylops
+from typing import Union
+import progressbar
+import time
 
-from recon.terms import IndicatorL2, DatanormL2, DatanormL2Bregman
+from recon.terms import BaseDataterm, BaseRegTerm, IndicatorL2
+from recon.solver import PdHgm
 
-class PdHgmTGV(object):
+
+class PdHgmExtend(object):
     """
-    Primal Dual Solver for pairwise primal and dual variable.
+    Primal Dual Solver. Special form for PdHgm
 
-    Implementation based on:
-        Knoll, Bredis, Pock: Second Order Total Generalized Variation (TGV) for MRI
+    argmin G(Ax) + F(Kx) 
 
-    K1 := div_1     K1star=-grad
-    K2 := div_2     K2star=-epsilon
-
-    Algorithm: dual variable (p,q) - primal variable (u, v)
+    Algorithm: (See /documentation/primal_dual.pdf for derivation)
             while tol < sens and max_iter not reached
-                1. p^{n+1} = prox_F1^star(p^{n} + sigma*(K_1*u - v))
-                2. q^{n+1} = prox_F2^star()
-
-                3. (u_old, v_old) = (u, v)
-                4. u = 2*Prox_G1(u+tau*)
-
-
                 1. x^{n+1} = prox_{G}( x^{n} - phi * (K.T * y^{n}) )
                 2. y^{n+1} = prox_{F_star}( y^{n} - sigma * (K * (2*x^{n+1} - x^{n})) )
                 3. update sens
-    """
-    def __init__(self,
-                 lam: float = 1,
-                 alpha: tuple = (1, 1),
-                 tol=1e-4,
-                 mode: str = 'tv',
-                 pk: np.ndarray = None,
-                 prox_param: float = 1/np.sqrt(12)):
-        """
-        Consturctor. Set required params.
-        """
-        self.lam = lam
-        self.max_iter = 3000
-        self.alpha = alpha   # form: (a_1, a_2)
-        self.sigma = prox_param
-        self.tau = self.sigma
-        self.tol = tol
-        self.k = 1
-        self.mode = mode
-        self.pk = pk  # only for Bregman
 
-    # Todo: symmetric saves double dxdy <-> dydx...not necessary
+    Parameter
+    ---------
+    G: BaseDataterm
+
+    F_star: BaseRegTerm
+
+    K: pylops.LineareOperator
+
+    gamma: float default: None
+        stepsize for adaption rule for tau and sigma
+
+    """
+
+    def __init__(self,
+                 alpha: tuple,
+                 image_size: tuple,
+                 A: pylops.LinearOperator,
+                 lam: Union[float, np.ndarray] = 1,
+                 tau: float = 1/np.sqrt(12),
+                 data = None,
+                 reg_mode = 'tv',
+                 gamma: Union[float, bool] = False):
+
+        self.lam = lam
+        self.A = A
+        self.alpha = alpha
+        self.tau = tau
+        self.tol = 1e-4
+        self.max_iter = 150
+        self.x = 0
+        self.image_size = image_size
+        self.sens = 100
+        self.gamma = False
+
+        self.data = data
+        self.reg_mode = reg_mode
+
+        if False:
+            self.breg_p = np.zeros(A.image_dim).ravel()
+        else:
+            self.breg_p = 0
 
     def solve(self, f: np.ndarray):
-        self.k = 1
-        if len(np.shape(f)) != 2:
-            raise ValueError("The TGV-Algorithm only implemnted for 2D images. Please give input shaped (m, n)")
-        (primal_n, primal_m) = np.shape(f)
-        grad = Gradient(dims=(primal_n, primal_m), dtype='float64', edge=True, kind="backward")
-        grad_v = BlockDiag([grad, grad])  # symmetric dxdy <-> dydx not necessary (expensive) but easy and functional
-        p, q = 0, 0
-        v = v_bar = np.zeros(2*primal_n*primal_m)
-        u = u_bar = f.ravel()
-
-        # Projections
-        proj_p = IndicatorL2((primal_n, primal_m), upper_bound=self.alpha[0])
-        proj_q = IndicatorL2((2*primal_n, primal_m), upper_bound=self.alpha[1])
-        if self.mode == 'tv':
-            dataterm = DatanormL2(image_size=f.shape, data=f.ravel(), prox_param=self.tau, lam=self.lam)
-        else:
-            dataterm = DatanormL2Bregman(image_size=f.shape, data=f.ravel(), prox_param=self.tau, lam=self.lam)
-            dataterm.pk = self.pk
-            dataterm.bregman_weight_alpha = self.alpha[0]
-        sens = 100
-        while (self.tol < sens or self.k == 1) and (self.k <= self.max_iter):
-            p = proj_p.prox(p + self.sigma*(grad*u_bar - v_bar))
-            q = proj_q.prox(q + self.sigma*(grad_v*v_bar)) #self.adjoint_div(v_bar, 1)
-            u_old = u
-            v_old = v
-            u = dataterm.prox(u - self.tau*grad.H*p)
-            u_bar = 2*u - u_old
-            v = v + self.tau*(p - grad_v.H*q)
-            v_bar = 2*v - v_old
-
-            #self.update_sensivity(u, u_old, v, v_old, grad)
-            # test
-            if self.k % 300 == 0:
-                u_gap = u-u_old
-                v_gap = v-v_old
-                sens = 1/2*(
-                        np.linalg.norm(u_gap - self.tau*grad.H*proj_p.prox(p+self.sigma*(grad*u_gap - v_gap)), 2)/
-                        np.linalg.norm(u, 2) +
-                        np.linalg.norm(v-proj_p.prox(p+self.sigma*(grad*u_gap - v_gap))-grad_v.H*proj_q.prox(q+ self.sigma*(grad_v*v_gap)), 2)/
-                        np.linalg.norm(v, 2))   # not best sens
-                print(np.linalg.norm(u_gap, 2))
-            self.k += 1
-        return np.reshape(u, (primal_n, primal_m))
-
-    def update_sensivity(self, u, u_old, v, v_old, K):
         """
-        Update for sensivity
-
-        Formula:
-            x_gap^{n+1} = x^{n+1} - x^{n}
-            y_gap^{n+1} = y^{n+1} - y^{n}
-            sens^{n+1} = 1/2 * ( || x_gap^{n+1} - phi * (K.T * y_gap) || / ||x^{n+1}|| +
-                                 || y_gap^{n+1} - sigma * (K * x_gap) || / ||y^{n+1}||
-                               )
-
+        Description of main primal-dual iteration.
         :return: None
         """
 
-        u_gap = u - u_old
-        v_gap = v - v_old
-        #self.sens = 1 / 2 * (np.linalg.norm(u_gap - self.G.get_proxparam() * (self.K.T * y_gap), 2) /
-        #                     np.linalg.norm(u, 2) +
-        #                     np.linalg.norm(v_gap - self.F_star.get_proxparam() * (self.K * x_gap), 2) /
-        #                     np.linalg.norm(v, 2))
-        return
+        (primal_n, primal_m) = self.image_size
+
+        v = w = 0
+        g = f.ravel()
+        p = p_bar = np.zeros(primal_n*primal_m)
+        q = q_bar = np.zeros(2*primal_n*primal_m)
+
+        if self.reg_mode != 'tik':
+            grad = pylops.Gradient(dims=(primal_n, primal_m), dtype='float64', edge=True, kind="backward")
+        else:
+            grad = pylops.Identity(np.prod(self.image_size))
+
+        grad1 = pylops.BlockDiag([grad, grad])  # symmetric dxdy <-> dydx not necessary (expensive) but easy and functional
+
+        proj_0 = IndicatorL2((primal_n, primal_m), upper_bound=self.alpha[0])
+        proj_1 = IndicatorL2((2 * primal_n, primal_m), upper_bound=self.alpha[1])
+
+        progress = progressbar.ProgressBar(max_value=self.max_iter)
+
+        k = 0
+
+        while (self.tol < self.sens or k == 0) and (k < self.max_iter):
+
+            p_old = p
+            q_old = q
+
+            # Dual Update
+            g = self.lam / (self.tau + self.lam) * (g + self.tau * (self.A*(p_bar ) - f)) #- self.alpha[0]*self.breg_p
+
+            if self.reg_mode != 'tik':
+                v = proj_0.prox(v + self.tau * (grad * p_bar - q_bar))
+            else:
+                v = self.alpha[0] / (self.tau + self.alpha[0]) * \
+                    (v + self.tau * (grad*p_bar - self.data))
+
+
+            if self.reg_mode == 'tgv':
+                w = proj_1.prox(w + self.tau * grad1*q_bar)
+
+            # Primal Update
+            p = p - self.tau * (-self.alpha[0]*self.breg_p + self.A.H*g + grad.H * v)
+
+
+            if self.reg_mode == 'tgv':
+                q = q + self.tau * (v - grad1.H * w)
+
+            # Extragradient Update
+
+            p_bar = 2 * p - p_old
+            q_bar = 2 * q - q_old
+
+
+            if k % 50 == 0:
+                p_gap = p - p_old
+                self.sens = np.linalg.norm(p_gap)/np.linalg.norm(p_old)
+                print(self.sens)
+
+            if self.gamma:
+                raise NotImplementedError("The adjustment of the step size in the "
+                                          "Primal-Dual is not yet fully developed.")
+                thetha  = 1 / np.sqrt(1 + 2*self.gamma * self.G.prox_param)
+                self.G.prox_param = thetha * self.G.prox_param
+                self.F_star.prox_param = self.F_star.prox_param / thetha
+
+            k += 1
+            progress.update(k)
+
+        self.x = p
+
+        if k <= self.max_iter:
+            print(" Early stopping.")
+
+        return self.x

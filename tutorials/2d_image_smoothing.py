@@ -54,12 +54,12 @@ plt.show(block=False)
 #
 
 # TV smoothing small alpha
-tv_smoothing = Smoothing(domain_shape=gt.shape, reg_mode='tv', alpha=0.1, lam=0.3, tau='calc')
-u_tv = tv_smoothing.solve(data=noise_img, max_iter=2000, tol=1e-4)
+tv_smoothing = Smoothing(domain_shape=gt.shape, reg_mode='tv', lam=3, tau='calc')
+u_tv = tv_smoothing.solve(data=noise_img, max_iter=3000, tol=1e-4)
 
 # Tikhonov smoothing -> with lam = 1 => alpha > 1 we decrease lam instead.
-tikh_smoothing = Smoothing(domain_shape=gt.shape, reg_mode='tikhonov', lam=0.1, alpha=1, tau='calc')
-u_tik = tikh_smoothing.solve(data=noise_img, max_iter=2000, tol=1e-4)
+tikh_smoothing = Smoothing(domain_shape=gt.shape, reg_mode='tikhonov', lam=0.1, tau='calc')
+u_tik = tikh_smoothing.solve(data=noise_img, max_iter=3000, tol=1e-4)
 
 f = plt.figure(figsize=(6, 3))
 f.add_subplot(1, 2, 1)
@@ -96,8 +96,7 @@ plt.show()
 
 breg_smoothing = SmoothBregman(domain_shape=gt.shape,
                                reg_mode='tv',
-                               alpha=0.3,
-                               lam=0.1,
+                               lam=1,
                                tau='calc',
                                plot_iteration=False,
                                assessment=sigma * np.sqrt(np.prod(gt.shape)))

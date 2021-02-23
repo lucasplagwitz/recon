@@ -1,8 +1,8 @@
 import numpy as np
 from math import log10, sqrt
 
-import odl
-from odl.operator.oputils import power_method_opnorm
+#import odl
+#from odl.operator.oputils import power_method_opnorm
 
 
 # https://www.geeksforgeeks.org/python-peak-signal-to-noise-ratio-psnr/
@@ -12,11 +12,24 @@ def psnr(original, compressed):
         # Therefore PSNR have no importance.
         return -1
     max_pixel = np.max(original)
-    psnr = 20 * log10(max_pixel / sqrt(mse))
+    try:
+        psnr = 20 * log10(max_pixel / sqrt(mse))
+    except:
+        psnr = 0
     return round(psnr, 2)
 
-# odl.operator.oputils version of power_method_opnorm for pylops operators
+def power_method(A, A_adjoint, x0=None, max_iter=100):
+    if not x0:
+        sol = np.ones(A.domain_dim).ravel()
+    else:
+        sol = x0
+    for _ in range(max_iter):
+        sol = A_adjoint*(A*sol)
+        sol = sol / np.linalg.norm(sol)
+    return np.linalg.norm(A_adjoint*(A*sol))
 
+
+"""
 def pylops_power_method_opnorm(pylops_operator, len=256):
 
     class OdlOperator(odl.Operator):
@@ -40,8 +53,8 @@ def pylops_power_method_opnorm(pylops_operator, len=256):
     # odl.IntervalProd([0], [limit]).element()
 
     return power_method_opnorm(op)
-
-import pylops
-print(pylops_power_method_opnorm(pylops_operator=pylops.Gradient((512, 512),
-                                                                 edge=True,
-                                                                 dtype='float64', kind='backward'), len=512*512))
+"""
+#import pylops
+#print(pylops_power_method_opnorm(pylops_operator=pylops.Gradient((512, 512),
+#                                                                 edge=True,
+#                                                                 dtype='float64', kind='backward'), len=512*512))

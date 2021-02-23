@@ -3,9 +3,9 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8">
+  <meta charset="utf-8" />
   
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <title>05. Spatially Adapted Total Variation &mdash; recon 0.0.1 documentation</title>
   
@@ -16,10 +16,14 @@
   <link rel="stylesheet" href="../_static/gallery.css" type="text/css" />
   <link rel="stylesheet" href="../_static/gallery-binder.css" type="text/css" />
   <link rel="stylesheet" href="../_static/gallery-dataframe.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/gallery-rendered-html.css" type="text/css" />
 
   
   
+
   
+  
+
   
 
   
@@ -32,7 +36,6 @@
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
-        <script src="../_static/language_data.js"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
@@ -54,7 +57,7 @@
           
 
           
-            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> recon
+            <a href="../index.html" class="icon icon-home"> recon
           
 
           
@@ -98,7 +101,7 @@
 <li class="toctree-l2"><a class="reference internal" href="total_generalized_variation.html">04. Total Generalized Variation</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">05. Spatially Adapted Total Variation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="scaling_problem.html">06. Scaling Dependent Stepsize Problem</a></li>
-<li class="toctree-l2"><a class="reference internal" href="white_noise_between_spaces.html">07. White Noise Between Spaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="datafidelity_L1_vs_L2.html">07. L1 vs. L2 Fidelity-Term</a></li>
 </ul>
 </li>
 </ul>
@@ -141,6 +144,8 @@
 
 
 
+
+
 <div role="navigation" aria-label="breadcrumbs navigation">
 
   <ul class="wy-breadcrumbs">
@@ -154,7 +159,7 @@
     
       <li class="wy-breadcrumbs-aside">
         
-            
+          
             <a href="../_sources/tutorials/spatially_adapted_total_variation.rst.txt" rel="nofollow"> View page source</a>
           
         
@@ -170,7 +175,8 @@
             
   <div class="sphx-glr-download-link-note admonition note">
 <p class="admonition-title">Note</p>
-<p>Click <a class="reference internal" href="#sphx-glr-download-tutorials-spatially-adapted-total-variation-py"><span class="std std-ref">here</span></a>     to download the full example code</p>
+<p>Click <a class="reference internal" href="#sphx-glr-download-tutorials-spatially-adapted-total-variation-py"><span class="std std-ref">here</span></a>
+to download the full example code</p>
 </div>
 <div class="sphx-glr-example-title section" id="spatially-adapted-total-variation">
 <span id="sphx-glr-tutorials-spatially-adapted-total-variation-py"></span><h1>05. Spatially Adapted Total Variation<a class="headerlink" href="#spatially-adapted-total-variation" title="Permalink to this headline">¶</a></h1>
@@ -180,197 +186,122 @@ The application and the nurzen are shown.
 Furthermore, TV is compared with TGV in the context of the local regularization.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">image</span>
+
 <span class="kn">from</span> <span class="nn">recon.utils.utils</span> <span class="kn">import</span> <span class="n">psnr</span>
-<span class="kn">from</span> <span class="nn">recon.utils.images</span> <span class="kn">import</span> <span class="n">local_tss</span>
 <span class="kn">from</span> <span class="nn">recon.interfaces</span> <span class="kn">import</span> <span class="n">SATV</span><span class="p">,</span> <span class="n">Smoothing</span>
 
-<span class="n">image</span> <span class="o">=</span> <span class="n">local_tss</span><span class="p">()</span>
+<span class="n">gt</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="s2">&quot;../data/phantom.png&quot;</span><span class="p">)</span>
+<span class="n">gt</span> <span class="o">=</span> <span class="n">gt</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">gt</span><span class="p">)</span>
+<span class="n">gt</span> <span class="o">=</span> <span class="n">gt</span>
 
-<span class="n">noise_sigma</span> <span class="o">=</span> <span class="mf">0.2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
+<span class="n">noise_sigma</span> <span class="o">=</span> <span class="mf">0.1</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">gt</span><span class="p">)</span>
 
-<span class="n">noisy_image</span> <span class="o">=</span> <span class="n">image</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">noise_sigma</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">image</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="n">noisy_image</span> <span class="o">=</span> <span class="n">gt</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">noise_sigma</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">gt</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
 
 <span class="c1"># TV smoothing small alpha</span>
-<span class="n">tv_smoothing</span> <span class="o">=</span> <span class="n">Smoothing</span><span class="p">(</span><span class="n">domain_shape</span><span class="o">=</span><span class="n">image</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">reg_mode</span><span class="o">=</span><span class="s1">&#39;tv&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">lam</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">tv_smoothing</span> <span class="o">=</span> <span class="n">Smoothing</span><span class="p">(</span><span class="n">domain_shape</span><span class="o">=</span><span class="n">gt</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">reg_mode</span><span class="o">=</span><span class="s1">&#39;tv&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">lam</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
 <span class="n">u_tv</span> <span class="o">=</span> <span class="n">tv_smoothing</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">noisy_image</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">5000</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="mf">1e-4</span><span class="p">)</span>
 
 
 <span class="n">f</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
 <span class="n">f</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">gray</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">image</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;GT - PSNR: &quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">psnr</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">image</span><span class="p">)))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">gt</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">gt</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;GT - PSNR: &quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">psnr</span><span class="p">(</span><span class="n">gt</span><span class="p">,</span> <span class="n">gt</span><span class="p">)))</span>
 <span class="n">f</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">u_tv</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">image</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;TV - PSNR: &quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">psnr</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">u_tv</span><span class="p">)))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">u_tv</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">gt</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;TV - PSNR: &quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">psnr</span><span class="p">(</span><span class="n">gt</span><span class="p">,</span> <span class="n">u_tv</span><span class="p">)))</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">gray</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">block</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </pre></div>
 </div>
-<img alt="GT - PSNR: -1, TV - PSNR: 20.07" class="sphx-glr-single-img" src="../_images/sphx_glr_spatially_adapted_total_variation_001.png" />
+<img alt="GT - PSNR: -1, TV - PSNR: 29.52" class="sphx-glr-single-img" src="../_images/sphx_glr_spatially_adapted_total_variation_001.png" />
 <p class="sphx-glr-script-out">Out:</p>
 <div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Early stopping.
 </pre></div>
 </div>
 <p>…</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">satv_obj</span> <span class="o">=</span> <span class="n">SATV</span><span class="p">(</span><span class="n">domain_shape</span><span class="o">=</span><span class="n">image</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">satv_obj</span> <span class="o">=</span> <span class="n">SATV</span><span class="p">(</span><span class="n">domain_shape</span><span class="o">=</span><span class="n">gt</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span>
                 <span class="n">reg_mode</span><span class="o">=</span><span class="s1">&#39;tv&#39;</span><span class="p">,</span>
-                <span class="n">lam</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span>
-                <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span>
+                <span class="n">lam</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+                <span class="n">alpha</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
                 <span class="n">plot_iteration</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                 <span class="n">noise_sigma</span><span class="o">=</span><span class="n">noise_sigma</span><span class="p">,</span>
-                <span class="n">assessment</span><span class="o">=</span><span class="n">noise_sigma</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">prod</span><span class="p">(</span><span class="n">image</span><span class="o">.</span><span class="n">shape</span><span class="p">)))</span>
+                <span class="n">window_size</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+                <span class="n">assessment</span><span class="o">=</span><span class="n">noise_sigma</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">prod</span><span class="p">(</span><span class="n">gt</span><span class="o">.</span><span class="n">shape</span><span class="p">)))</span>
 <span class="n">satv_solution</span> <span class="o">=</span> <span class="n">satv_obj</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">noisy_image</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">5000</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="mf">1e-4</span><span class="p">)</span>
 
 <span class="n">f</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
 <span class="n">f</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">gray</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">noisy_image</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">image</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Noisy - PSNR: &quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">psnr</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">noisy_image</span><span class="p">)))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">noisy_image</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">gt</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Noisy - PSNR: &quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">psnr</span><span class="p">(</span><span class="n">gt</span><span class="p">,</span> <span class="n">noisy_image</span><span class="p">)))</span>
 <span class="n">f</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">gray</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">satv_solution</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">image</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;SATV - PSNR: &quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">psnr</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">satv_solution</span><span class="p">)))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">satv_solution</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">gt</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;SATV - PSNR: &quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">psnr</span><span class="p">(</span><span class="n">gt</span><span class="p">,</span> <span class="n">satv_solution</span><span class="p">)))</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
 <span class="n">f</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">gray</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">satv_obj</span><span class="o">.</span><span class="n">lam</span><span class="p">,</span> <span class="n">image</span><span class="o">.</span><span class="n">shape</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">satv_obj</span><span class="o">.</span><span class="n">lam</span><span class="p">,</span> <span class="n">gt</span><span class="o">.</span><span class="n">shape</span><span class="p">))</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;SATV-weight $\lambda$&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-<img alt="Noisy - PSNR: 13.99, SATV - PSNR: 23.1, SATV-weight $\lambda$" class="sphx-glr-single-img" src="../_images/sphx_glr_spatially_adapted_total_variation_002.png" />
+<img alt="Noisy - PSNR: 19.97, SATV - PSNR: 32.19, SATV-weight $\lambda$" class="sphx-glr-single-img" src="../_images/sphx_glr_spatially_adapted_total_variation_002.png" />
 <p class="sphx-glr-script-out">Out:</p>
 <div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>0-Iteration of SATV
-171.693912127
-51.2
+97.5215830887
+25.6
  Early stopping.
 1-Iteration of SATV
-62.1600287167
-51.2
+41.9524197777
+25.6
  Early stopping.
 2-Iteration of SATV
-56.6030122109
-51.2
+26.9435706518
+25.6
  Early stopping.
 </pre></div>
 </div>
-<p>…</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">lam</span> <span class="o">=</span> <span class="mf">0.3</span>
-<span class="n">satv_obj</span> <span class="o">=</span> <span class="n">SATV</span><span class="p">(</span><span class="n">domain_shape</span><span class="o">=</span><span class="n">image</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span>
-                <span class="n">reg_mode</span><span class="o">=</span><span class="s1">&#39;tgv&#39;</span><span class="p">,</span>
-                <span class="n">lam</span><span class="o">=</span><span class="n">lam</span><span class="p">,</span>
-                <span class="n">plot_iteration</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-                <span class="n">tau</span><span class="o">=</span><span class="s1">&#39;auto&#39;</span><span class="p">,</span>
-                <span class="n">alpha</span><span class="o">=</span><span class="p">(</span><span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.6</span><span class="p">),</span>
-                <span class="n">noise_sigma</span><span class="o">=</span><span class="n">noise_sigma</span><span class="p">,</span>
-                <span class="n">assessment</span><span class="o">=</span><span class="n">noise_sigma</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">prod</span><span class="p">(</span><span class="n">image</span><span class="o">.</span><span class="n">shape</span><span class="p">)))</span>
-<span class="n">satv_solution</span> <span class="o">=</span> <span class="n">satv_obj</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">noisy_image</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">5000</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="mf">1e-4</span><span class="p">)</span>
+<p>Not important -&gt; maybe later.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">lam = 0.3</span>
+<span class="sd">satv_obj = SATV(domain_shape=image.shape,</span>
+<span class="sd">                reg_mode=&#39;tgv&#39;,</span>
+<span class="sd">                lam=lam,</span>
+<span class="sd">                plot_iteration=False,</span>
+<span class="sd">                tau=&#39;auto&#39;,</span>
+<span class="sd">                alpha=(0.3, 0.6),</span>
+<span class="sd">                noise_sigma=noise_sigma,</span>
+<span class="sd">                assessment=noise_sigma*np.sqrt(np.prod(image.shape)))</span>
+<span class="sd">satv_solution = satv_obj.solve(noisy_image, max_iter=5000, tol=1e-4)</span>
 
-<span class="n">f</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
-<span class="n">f</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">gray</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">noisy_image</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">image</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Noisy - PSNR: &quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">psnr</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">noisy_image</span><span class="p">)))</span>
-<span class="n">f</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">gray</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">satv_solution</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">image</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;SATGV - PSNR: &quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">psnr</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">satv_solution</span><span class="p">)))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
-<span class="n">f</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">gray</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">satv_obj</span><span class="o">.</span><span class="n">lam</span><span class="p">,</span> <span class="n">image</span><span class="o">.</span><span class="n">shape</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;SATGV-weight $\lambda$&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="sd">f = plt.figure(figsize=(9, 3))</span>
+<span class="sd">f.add_subplot(1, 3, 1)</span>
+<span class="sd">plt.gray()</span>
+<span class="sd">plt.axis(&#39;off&#39;)</span>
+<span class="sd">plt.imshow(noisy_image, vmin=0, vmax=np.max(image))</span>
+<span class="sd">plt.title(&quot;Noisy - PSNR: &quot;+str(psnr(image, noisy_image)))</span>
+<span class="sd">f.add_subplot(1, 3, 2)</span>
+<span class="sd">plt.gray()</span>
+<span class="sd">plt.imshow(satv_solution, vmin=0, vmax=np.max(image))</span>
+<span class="sd">plt.title(&quot;SATGV - PSNR: &quot;+str(psnr(image, satv_solution)))</span>
+<span class="sd">plt.axis(&#39;off&#39;)</span>
+<span class="sd">f.add_subplot(1, 3, 3)</span>
+<span class="sd">plt.gray()</span>
+<span class="sd">plt.imshow(np.reshape(satv_obj.lam, image.shape))</span>
+<span class="sd">plt.title(&quot;SATGV-weight $\lambda$&quot;)</span>
+<span class="sd">plt.axis(&#39;off&#39;)</span>
+<span class="sd">plt.show()</span>
+<span class="sd">&quot;&quot;&quot;</span>
 </pre></div>
 </div>
-<img alt="Noisy - PSNR: 13.99, SATGV - PSNR: 22.66, SATGV-weight $\lambda$" class="sphx-glr-single-img" src="../_images/sphx_glr_spatially_adapted_total_variation_003.png" />
 <p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>0-Iteration of SATV
-171.693912127
-51.2
-0.0181177667598
-0.00681895822641
-0.00358816114008
-0.0021949561867
-0.00151712062041
-0.00109739900666
-0.000864223846837
-0.000774919550898
-0.000664707182746
-0.000666144848679
-0.000565197866876
-0.000465394394756
-0.000435155460224
-0.000376188852254
-0.000336749790499
-0.000305606333372
-1-Iteration of SATV
-63.9680952684
-51.2
-0.00719013184408
-0.00284897706062
-0.00167790049279
-0.00115529455053
-0.000886480296806
-0.00069953633358
-0.000599418077365
-0.000491691705493
-0.000418458246237
-0.000376070917757
-0.000326865536687
-0.000284421164466
-0.000253487670888
-0.000244422386638
-0.000230147732331
-0.000224991415727
-2-Iteration of SATV
-57.6239833032
-51.2
-0.00655531943155
-0.00288742757745
-0.00165898304734
-0.00112047379036
-0.000825891946648
-0.000673266727242
-0.000513183236464
-0.000434341984155
-0.000356690642513
-0.000321330349693
-0.000274482097361
-0.000228557650628
-0.000200565405497
-0.000179265276754
-0.000169702465718
-0.000152352754659
-3-Iteration of SATV
-51.4735271373
-51.2
-0.00350993140609
-0.00121272011399
-0.000636771532763
-0.000396918051784
-0.000275737584399
-0.000203552060157
-0.000156807263247
-0.000120455297774
-9.76794112007e-05
-8.15937649295e-05
-7.08915674187e-05
-6.01392863394e-05
-5.19300757252e-05
-4.63371028841e-05
-4.26855879841e-05
-4.03706873443e-05
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>&#39;\nlam = 0.3\nsatv_obj = SATV(domain_shape=image.shape,\n                reg_mode=\&#39;tgv\&#39;,\n                lam=lam,\n                plot_iteration=False,\n                tau=\&#39;auto\&#39;,\n                alpha=(0.3, 0.6),\n                noise_sigma=noise_sigma,\n                assessment=noise_sigma*np.sqrt(np.prod(image.shape)))\nsatv_solution = satv_obj.solve(noisy_image, max_iter=5000, tol=1e-4)\n\nf = plt.figure(figsize=(9, 3))\nf.add_subplot(1, 3, 1)\nplt.gray()\nplt.axis(\&#39;off\&#39;)\nplt.imshow(noisy_image, vmin=0, vmax=np.max(image))\nplt.title(&quot;Noisy - PSNR: &quot;+str(psnr(image, noisy_image)))\nf.add_subplot(1, 3, 2)\nplt.gray()\nplt.imshow(satv_solution, vmin=0, vmax=np.max(image))\nplt.title(&quot;SATGV - PSNR: &quot;+str(psnr(image, satv_solution)))\nplt.axis(\&#39;off\&#39;)\nf.add_subplot(1, 3, 3)\nplt.gray()\nplt.imshow(np.reshape(satv_obj.lam, image.shape))\nplt.title(&quot;SATGV-weight $\\lambda$&quot;)\nplt.axis(\&#39;off\&#39;)\nplt.show()\n&#39;
 </pre></div>
 </div>
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 8 minutes  30.121 seconds)</p>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  45.360 seconds)</p>
 <div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-tutorials-spatially-adapted-total-variation-py">
 <div class="sphx-glr-download sphx-glr-download-python docutils container">
 <p><a class="reference download internal" download="" href="../_downloads/02ab7b46fe9293eb0904f93d0256f769/spatially_adapted_total_variation.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">spatially_adapted_total_variation.py</span></code></a></p>
@@ -387,37 +318,29 @@ Furthermore, TV is compared with TGV in the context of the local regularization.
            
           </div>
           <footer>
-  
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="scaling_problem.html" class="btn btn-neutral float-right" title="06. Scaling Dependent Stepsize Problem" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
-      
-      
-        <a href="total_generalized_variation.html" class="btn btn-neutral float-left" title="04. Total Generalized Variation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
-      
+        <a href="scaling_problem.html" class="btn btn-neutral float-right" title="06. Scaling Dependent Stepsize Problem" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="total_generalized_variation.html" class="btn btn-neutral float-left" title="04. Total Generalized Variation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
-  
 
   <hr/>
 
   <div role="contentinfo">
     <p>
-        
-        &copy; Copyright 2020, Lucas Plagwitz
+        &#169; Copyright 2020, Lucas Plagwitz.
 
     </p>
   </div>
     
     
     
-    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
     
-    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
     
     provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
-
         </div>
       </div>
 

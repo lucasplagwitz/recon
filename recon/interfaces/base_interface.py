@@ -1,6 +1,5 @@
 from typing import Union
 import numpy as np
-from recon.utils.utils import pylops_power_method_opnorm
 from pylops import Gradient, BlockDiag, Diagonal
 
 from recon.terms import DatanormL2, IndicatorL2
@@ -126,7 +125,7 @@ class BaseInterface(object):
     @alpha.setter
     def alpha(self, value):
         if not (isinstance(value, (int, float, tuple))):
-            if value == self.domain_shape:
+            if value.shape == self.domain_shape:
                 self.local_alpha = True
             else:
                 msg = "shape of local parameter alpha does not match: " + \

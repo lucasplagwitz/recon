@@ -11,26 +11,32 @@ class DatanormL2Bregman(BaseDataterm):
         This class is the basic form of the L2-Datanorm in terms of A: X -> Y.
 
         Function u(x):
-            lambda/2 * ||Ax - f||_2^2 - w * <p_k, x>
+            lambda/2 * ||Ax - f||_2^2 - alpha * <p_k, x>
 
         Special Form with A=identity:
-            lambda/2 * ||x - f||_2^2 - w * <p_k, x>
+            lambda/2 * ||x - f||_2^2 - alpha * <p_k, x>
 
         Parameter
         ---------
         image_size:
             Size of input image in unraveld form.
+
         operator:
-            Should have adjoint method called operator.H.
+            Should have adjoint method called operator.inv.
+
         lam: float
             weight Parameter, see lambda in above function
+
         prox_param: float
             same behavior like lam. normally known as tau*u(x)
+
         bregman_weight_alpha:
             In equations above the w. Often denoted as alpha.
             Renamed to prevent naming issues with reg-weight alpha.
+
         sampling:
             Matrix for undersampling data f.
+
         data: np.ndarry, float
             
         """

@@ -12,24 +12,37 @@ import numpy as np
 from scipy import misc
 
 from experimental.interfaces.smooth_bregman_satv import SmoothBregmanSATV
-from recon.interfaces import Smoothing, SmoothBregman
-from recon.solver.pd_hgm_extend import PdHgmTGV
+from recon.interfaces import Smoothing, SmoothBregman, SATV
+from recon.solver.pd_hgm_tgv import PdHgmTGV
 from recon.utils.utils import psnr
 
+from skimage.data import shepp_logan_phantom
+from skimage.transform import rescale
 
-size, small_size = 256, 200
-image = np.reshape(np.array([(x/size) for x in range(size)]*size), (size, size))
-image[28:small_size+28, 28:small_size+28] = \
-    np.reshape(np.array([(1-x/small_size)for x in range(small_size)]*small_size), (small_size, small_size))
+image = shepp_logan_phantom()
+image[160:180, 140:160] = 1
+for i in range(1, 20, 2):
+    for j in range(1, 30, 4):
+        image[190+j*2:192+j*2, 140+i*2:142+i*2] = np.random.uniform(1,1)
 
-some_dots = [(i*10, i*10+5) for i in range(5, 15)]
-some_dots += [(i*10, i*10+2) for i in range(15, 21)]
-some_dots += [(i*10+3, i*10+5) for i in range(15, 21)]
+image[200:280, 240:260] = 1
+for i in range(1, 20, 2):
+    for j in range(1, 30, 3):
+        image[290+j*2:292+j*2, 240+i*2:242+i*2] = np.random.uniform(1,1)
 
-for dot0 in some_dots:
-    for dot1 in some_dots:
-        image[dot0[0]: dot0[1], dot1[0]: dot1[1]] = 1
+from scipy import misc
 
+image = misc.ascent()
+
+#image = rescale(image, scale=0.8, mode='reflect', multichannel=False)
+image = image / np.max(image)
+"""
+image = np.zeros((64, 64))
+image[10:50, 10:50] = 0.5
+for i in range(1,20,4):
+    for j in range(1, 20, 4):
+        image[20+i:22+i, 20+j:22+j] = 1
+"""
 img = image / np.max(image)
 
 gt = img
@@ -58,13 +71,14 @@ plt.show(block=False)
 # TV-Regularization (with Bregman)
 #
 # TV smoothing small alpha
-tv_smoothing = Smoothing(domain_shape=gt.shape, reg_mode='tv', alpha=0.1, lam=0.3, tau='calc')
+
+tv_smoothing = Smoothing(domain_shape=gt.shape, reg_mode='tv', alpha=0.3, lam=1, tau='calc')
 u_tv = tv_smoothing.solve(data=noise_img, max_iter=5000, tol=1e-4)
 
 breg_smoothing = SmoothBregman(domain_shape=gt.shape,
                                reg_mode='tv',
                                alpha=0.5,
-                               lam=0.1,
+                               lam=0.6,
                                tau='calc',
                                plot_iteration=False,
                                assessment=sigma * np.sqrt(np.prod(gt.shape)))
@@ -93,12 +107,12 @@ plt.show(block=False)
 # TV smoothing small alpha
 tv_smoothing = SmoothBregmanSATV(domain_shape=gt.shape,
                                  reg_mode='tv',
-                                 lam=0.1,
-                                 alpha=0.5,
+                                 lam=0.5,
+                                 alpha=0.6,
                                  tau='calc',
                                  noise_sigma=sigma,
-                                 assessment=sigma*np.sqrt(np.prod(img.shape)),
-                                 plot_iteration=True)
+                                 plot_iteration=True,
+                                 assessment=sigma*np.sqrt(np.prod(img.shape)))
 u_tv = tv_smoothing.solve(data=noise_img, max_iter=5000, tol=1e-4)
 
 
@@ -114,6 +128,41 @@ plt.title("BregSATV - PSNR"+ str(psnr(gt, u_tv)))
 plt.axis('off')
 plt.gray()
 plt.show(block=False)
+
+
+print("MIN-value: "+str(np.min(u_tv)))
+print("MAX-value: "+str(np.max(u_tv)))
+
+
+
+satv_obj = SATV(domain_shape=image.shape,
+                reg_mode='tv',
+                lam=0.5,
+                alpha=0.6,
+                plot_iteration=False,
+                noise_sigma=sigma,
+                assessment=sigma*np.sqrt(np.prod(image.shape)))
+satv_solution = satv_obj.solve(noise_img, max_iter=5000, tol=1e-4)
+
+f = plt.figure(figsize=(9, 3))
+f.add_subplot(1, 3, 1)
+plt.gray()
+plt.axis('off')
+plt.imshow(noise_img, vmin=0, vmax=vmax)
+plt.title("Noisy - PSNR: "+str(psnr(image, noise_img)))
+f.add_subplot(1, 3, 2)
+plt.gray()
+plt.imshow(satv_solution, vmin=0, vmax=vmax)
+plt.title("SATV - PSNR: "+str(psnr(image, satv_solution)))
+plt.axis('off')
+f.add_subplot(1, 3, 3)
+plt.gray()
+plt.imshow(u_tv, vmin=vmin, vmax=vmax)
+plt.title("BregSATV - PSNR"+ str(psnr(gt, u_tv)))
+plt.axis('off')
+plt.show()
+
+
 
 """
 ###############################################################################

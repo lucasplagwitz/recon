@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 from scipy import misc
 
-from recon.solver.pd_hgm_extend import PdHgmTGV
+from recon.solver.pd_hgm_tgv import PdHgmTGV
 
 data_import_path = "./data/"
 data_output_path = data_import_path+"tgv/"

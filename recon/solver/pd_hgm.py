@@ -14,6 +14,7 @@ import progressbar
 
 from recon.terms import BaseDataterm, BaseRegTerm
 
+
 class PdHgm(object):
     """
     Primal Dual Solver.
@@ -83,7 +84,8 @@ class PdHgm(object):
         if self.plot_on:
             raise NotImplementedError()
 
-        progress = progressbar.ProgressBar(max_value=self.max_iter)
+        if True:
+            progress = progressbar.ProgressBar(max_value=self.max_iter)
 
         while (self.tol < self.sens or self.k == 0) and (self.k < self.max_iter):
 
@@ -98,7 +100,7 @@ class PdHgm(object):
                                                 (self.K * (2 * self.x - self.x_prev))
                                       )
 
-            if self.k % 200 == 0:
+            if self.k % 10 == 0:
                 self.update_sensivity()
 
             if self.gamma:
@@ -109,7 +111,8 @@ class PdHgm(object):
                 self.F_star.prox_param = self.F_star.prox_param / thetha
 
             self.k += 1
-            progress.update(self.k)
+            if True:
+                progress.update(self.k)
 
         if self.k <= self.max_iter:
             print(" Early stopping.")

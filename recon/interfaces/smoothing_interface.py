@@ -1,7 +1,7 @@
 from typing import Union
 import numpy as np
 
-from recon.terms import DatanormL2
+from recon.terms import DatanormL1, DatanormL2
 from recon.solver.pd_hgm import PdHgm
 from recon.interfaces import BaseInterface
 
@@ -21,8 +21,9 @@ class Smoothing(BaseInterface):
     def __init__(self,
                  domain_shape: Union[np.ndarray, tuple],
                  reg_mode: str = '',
-                 alpha: float = 0.01,
+                 alpha: float = 1,
                  lam: float = 1,
+                 norm: str = 'L2',
                  tau: Union[float, str] = 'calc'):
 
         super(Smoothing, self).__init__(domain_shape=domain_shape,
@@ -32,7 +33,10 @@ class Smoothing(BaseInterface):
                                         lam=lam,
                                         tau=tau)
 
-        self.G = DatanormL2(domain_shape, lam=self.lam, prox_param=self.tau)
+        if norm == 'L2':
+            self.G = DatanormL2(domain_shape, lam=self.lam, prox_param=self.tau)
+        elif norm == 'L1':
+            self.G = DatanormL1(domain_shape, lam=self.lam, prox_param=self.tau)
 
     def solve(self, data: np.ndarray, max_iter: int = 5000, tol: float = 1e-4):
         super(Smoothing, self).solve(data=data, max_iter=max_iter, tol=tol)

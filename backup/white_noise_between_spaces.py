@@ -20,6 +20,7 @@ import matplotlib.pyplot as plt
 from recon.operator.ct_radon import CtRt
 
 u = misc.face(gray=True)[256:256*3, 256:256*3]
+u[:, 256:] = 0
 u = u/np.max(u)
 plt.imshow(u, cmap=plt.cm.gray)
 plt.show()
@@ -41,7 +42,7 @@ plt.show()
 
 ###############################################################################
 # 3
-theta = list(np.linspace(0., 180., 180, endpoint=False))
+theta = list(np.linspace(0., 180., 25, endpoint=False))
 
 R = CtRt(np.shape(u),
          np.array([(np.shape(u)[0]/2)+1, (np.shape(u)[0]/2)+1]),
@@ -110,3 +111,13 @@ for shape in [(128, 128), (256, 256), (512, 512)]:
     eta_est = R.inv*eta.ravel()
     print(str(shape) + "-Mean: "+str(round(np.mean(eta_est), 4)))
     print(str(shape) +"-Sigma: "+str(round(np.std(eta_est, ddof=1),4)))
+
+###############################################################################
+## Estimation of the background
+w = R*u.ravel()
+w0 = R*(u+eta_image).ravel()
+background = np.reshape((R.inv * w0), u.shape) [:, int(256+1):]
+sigma_est = np.mean(background**2)
+mu_est = np.mean(background)
+print("BACKGROUND-Sigma: "+str(sigma_est))
+print("BACKGROUND-MU: "+str(mu_est))

@@ -21,10 +21,11 @@ class SmoothBregman(BaseInterface):
                  domain_shape: Union[np.ndarray, tuple],
                  reg_mode: str = 'tv',
                  lam: float = 1,
-                 alpha: float = 1.1,
+                 alpha: float = 1,
                  tau: Union[float, str] = 'calc',
                  assessment: float = 1,
                  plot_iteration: bool = False,
+                 stop_in_front: bool = False,
                  data_output_path: str = ''):
 
         super(SmoothBregman, self).__init__(domain_shape=domain_shape,
@@ -37,6 +38,7 @@ class SmoothBregman(BaseInterface):
         self.plot_iteration = plot_iteration
         self.data_output_path = data_output_path
         self.assessment = assessment
+        self.stop_in_front = stop_in_front
 
         self.G = DatanormL2Bregman(image_size=domain_shape,
                                    prox_param=self.tau,
@@ -59,7 +61,7 @@ class SmoothBregman(BaseInterface):
 
         i = old_e = 0
         while True:
-            print("current norm error: " + str(np.linalg.norm(u.ravel() - data.ravel(), 2)))
+            print("current norm error: " + str(np.linalg.norm(u.ravel() - data.ravel())))
             print("runs till norm <: " + str(self.assessment))
 
             self.solver = PdHgm(self.K, self.F_star, self.G)
@@ -71,23 +73,22 @@ class SmoothBregman(BaseInterface):
 
             u_new = np.reshape(self.solver.x, self.domain_shape)
 
-            e = np.linalg.norm(u_new.ravel() - data.ravel(), 2)
+            e = np.linalg.norm(u_new.ravel() - data.ravel())
             if e < self.assessment:
                 # which iteration to choose -> norm nearest
-                if (old_e-self.assessment) > np.abs(e-self.assessment):
+                if np.abs(old_e-self.assessment) > np.abs(e-self.assessment) and not self.stop_in_front:
                     u = u_new
                 break
             old_e = e
 
             u = u_new
 
-            pk = pk - (self.lam / self.alpha) * (u.ravel() - data.ravel())
-            print(np.max(pk))
+            #pk = pk - (self.lam / self.alpha) * (u.ravel() - data.ravel())
+            pk = pk - self.lam * (u.ravel() - data.ravel())
             i = i + 1
 
             if self.plot_iteration:
-                plt.gray()
-                plt.imshow(u)
+                plt.imshow(u, vmin=0, vmax=1)
                 plt.axis('off')
                 plt.savefig(self.data_output_path + 'Bregman_iter' + str(i) + '.png', bbox_inches='tight', pad_inches=0)
                 plt.close()
