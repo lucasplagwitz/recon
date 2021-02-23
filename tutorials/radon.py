@@ -1,12 +1,11 @@
 """
 02. Reconstruction I
-================
+====================
 This tutorial demonstrates the reconstruction of a
-measurement obtained in computer tomography.
-As mathematical construct the radon transformation is used here.
-The implementations of skimage (radon, iradon) are used.
+measurement obtained in computerized tomography.
+As mathematical construct the radon transform is obtained.
+The implementations of Astra-Toolbox are used.
 
-IN PROGRESS
 """
 
 ###############################################################################

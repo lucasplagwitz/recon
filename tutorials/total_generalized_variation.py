@@ -1,7 +1,7 @@
 """
 04. Total Generalized Variation
 ===============================
-Now we take a step deeper into Total Variation based regularization.
+We take a step deeper into total-variation-based regularization.
 
 We focus on concepts from different papers.
 Mainly we use for numerical access:
@@ -10,8 +10,8 @@ Mainly we use for numerical access:
 """
 
 ###############################################################################
-# The first order Total Variation got some problems with smooth edges.
-# See following noisy example with the TV-Regularization.
+# The first order total variation got some stair-casing problems.
+# See following noisy example with the TV regularization.
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -39,8 +39,8 @@ plt.axis('off')
 plt.show()
 
 ###############################################################################
-# To avoid strong stair-casing effects, we introduce the Total Generalized Variation.
-# At this point there is no interface for second order TV. We implement it direct with the
+# To avoid the strong stair-casing effects, we introduce the total generalized variation (TGV).
+# At this point there is no interface for second order TV. We implement it direct with an
 # adapted Primal-Dual algorithm.
 
 from recon.solver.pd_hgm_tgv import PdHgmTGV
