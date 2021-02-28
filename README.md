@@ -71,7 +71,7 @@ gt = img/np.max(img)
 sigma = 0.2
 n = sigma*np.max(gt.ravel()*np.random.uniform(-1, 1, gt.shape))
 noise_img = gt + n
- 
+
 tv_smoothing = Smoothing(domain_shape=gt.shape, reg_mode='tv', lam=10, tau='calc')
 u0 = tv_smoothing.solve(data=noise_img, maxiter=1500, tol=10**(-4))
  ```
