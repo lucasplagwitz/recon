@@ -52,7 +52,7 @@ Imaging result for another inverse problem where
 is a convolution operator:
 
  <p align="center">
- <img src="./docs/source/tutorials/images/sphx_glr_convolution_001.png" alt="" width="600">
+ <img src="./docs/source/tutorials/images/sphx_glr_convolution_001.png" alt="" width="800">
  </p>
 
 ## Denoising
