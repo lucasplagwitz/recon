@@ -47,6 +47,14 @@ rec = Recon(operator=R, domain_shape=gt.shape, reg_mode='tv', alpha=1, lam=15, e
 x_tv = rec.solve(data=y.ravel(), max_iter=1000, tol=1e-4)
  ```
 
+Imaging result for another inverse problem where 
+<img src="https://render.githubusercontent.com/render/math?math=\Large A">
+is a convolution operator:
+
+ <p align="center">
+ <img src="./docs/source/tutorials/images/sphx_glr_convolution_001.png" alt="" width="600">
+ </p>
+
 ## Denoising
 Image denoising is a special case of regularized reconstruction.
 <p align="center">
@@ -99,7 +107,7 @@ result, _ = segmentation.solve(gt, max_iter=4000)
  ```
 
  <p align="center">
- <img src="./docs/source/tutorials/images/sphx_glr_2d_tv_segmentation_001.png" alt="" width="400">
+ <img src="./docs/source/tutorials/images/sphx_glr_2d_tv_segmentation_001.png" alt="" width="800">
  </p>
   
   ## References
