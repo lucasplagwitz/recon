@@ -2,9 +2,13 @@
 ##################
 
 **/output/*.*
+__pycache__/
 **/thesis
 **/ideas
 *.idea
+/backup/
+/experimental/
+/data/joint_recon_vcorona/
 
 # Compiled source #
 ###################

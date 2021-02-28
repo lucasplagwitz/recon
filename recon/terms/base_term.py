@@ -1,53 +1,47 @@
-import pylops
 import numpy as np
+
 
 class BaseDataterm(object):
 
-    def __init__(self, O, sampling=None):
-        self.tau = 0.99
-        self.O = O
-        self.data = None
-        self.samling = sampling
-        if not sampling:
-            self.sampling = 1
+    def __init__(self, operator, sampling=None, prox_param: float = 0.99):
+        self._data = None
+
+        self.prox_param = prox_param
+        self.operator = operator
+        if sampling is None:
             self.diag_sampling = 1
             self.sampling_transpose = 1
         else:
-            self.diag_sampling = (self.sampling.T * self.sampling).diagonal()
-            self.sampling_transpose = self.samling.T
+            self.diag_sampling = (sampling.T * sampling).diagonal()
+            self.sampling_transpose = sampling.T
 
-    def set_proxparam(self, tau):
-        self.tau = tau
+    @property
+    def data(self):
+        return self._data
 
-    def get_proxparam(self):
-        return self.tau
-
-    def set_proxdata(self, proxdata):
-        if isinstance(proxdata, (int, float)):
-            self.data = proxdata
+    @data.setter
+    def data(self, value):
+        if isinstance(value, (int, float)):
+            self._data = value
+        elif isinstance(value, np.ndarray) and len(value.shape):
+            self._data = self.sampling_transpose*value
         else:
-            self.data = (self.sampling_transpose)*proxdata
+            raise ValueError("Require int, float, np.ndarray in raveled form.")
 
-    def prox(self, f):
-        """
-        proximal operator of term
-        """
-        pass
+    def __call__(self, x):
+        return x
+
+    def prox(self, u):
+        return u
 
 
 class BaseRegTerm(object):
 
-    def __init__(self):
-        self.sigma = 0.99
+    def __init__(self, prox_param: float = 0.99):
+        self.prox_param = prox_param
 
-    def set_proxparam(self, sigma):
-        self.tau = sigma
+    def __call__(self, x):
+        return x
 
-    def get_proxparam(self):
-        return self.sigma
-
-    def prox(self, f):
-        """
-        proximal operator of term
-        """
-        pass
+    def prox(self, u):
+        return u

@@ -1,4 +1,8 @@
-numpy
 imageio
-sklearn
+matplotlib
+numpy
 pylops
+scikit-image
+scipy
+scikit-learn
+progressbar2
