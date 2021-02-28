@@ -23,10 +23,9 @@
 
 Here a locally adapted regularization is shown.
 For this purpose the SATV algorithm was implemented.
-The application and the nurzen are shown.
-Furthermore, TV is compared with TGV in the context of the local regularization.
+The application and the benefit are shown.
 
-.. GENERATED FROM PYTHON SOURCE LINES 11-42
+.. GENERATED FROM PYTHON SOURCE LINES 10-41
 
 .. code-block:: default
 
@@ -65,7 +64,7 @@ Furthermore, TV is compared with TGV in the context of the local regularization.
 
 
 .. image:: /tutorials/images/sphx_glr_spatially_adapted_total_variation_001.png
-    :alt: GT - PSNR: -1, TV - PSNR: 29.37
+    :alt: GT - PSNR: -1, TV - PSNR: 29.34
     :class: sphx-glr-single-img
 
 
@@ -80,11 +79,11 @@ Furthermore, TV is compared with TGV in the context of the local regularization.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 43-44
+.. GENERATED FROM PYTHON SOURCE LINES 42-43
 
 ...
 
-.. GENERATED FROM PYTHON SOURCE LINES 44-71
+.. GENERATED FROM PYTHON SOURCE LINES 43-70
 
 .. code-block:: default
 
@@ -119,7 +118,7 @@ Furthermore, TV is compared with TGV in the context of the local regularization.
 
 
 .. image:: /tutorials/images/sphx_glr_spatially_adapted_total_variation_002.png
-    :alt: Noisy - PSNR: 19.99, SATV - PSNR: 32.08, SATV-weight $\lambda$
+    :alt: Noisy - PSNR: 19.98, SATV - PSNR: 31.97, SATV-weight $\lambda$
     :class: sphx-glr-single-img
 
 
@@ -130,26 +129,26 @@ Furthermore, TV is compared with TGV in the context of the local regularization.
  .. code-block:: none
 
     0-Iteration of SATV
-    97.2275470536
+    97.3679717517
     25.6
      Early stopping.
     1-Iteration of SATV
-    41.8556780581
+    41.8916064116
     25.6
      Early stopping.
     2-Iteration of SATV
-    26.9018709523
+    26.8865308612
     25.6
      Early stopping.
 
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 72-73
+.. GENERATED FROM PYTHON SOURCE LINES 71-72
 
 Not important -> maybe later.
 
-.. GENERATED FROM PYTHON SOURCE LINES 73-102
+.. GENERATED FROM PYTHON SOURCE LINES 72-101
 
 .. code-block:: default
 
@@ -200,7 +199,7 @@ Not important -> maybe later.
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  48.272 seconds)
+   **Total running time of the script:** ( 0 minutes  44.853 seconds)
 
 
 .. _sphx_glr_download_tutorials_spatially_adapted_total_variation.py:

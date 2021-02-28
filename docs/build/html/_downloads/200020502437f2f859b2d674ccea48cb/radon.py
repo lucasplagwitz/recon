@@ -4,12 +4,14 @@
 This tutorial demonstrates the reconstruction of a
 measurement obtained in computerized tomography.
 As mathematical construct the radon transform is obtained.
-The implementations of Astra-Toolbox are used.
+The implementation of the Astra-Toolbox is used.
 
 """
 
 ###############################################################################
-# We create a scenario with a
+# We create a scenario with a 180 equal distributed angles.
+#
+
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -47,13 +49,16 @@ axs[2].imshow(x_rec, vmin=0, vmax=1)
 axs[2].set_title("FBP - PSNR: "+str(psnr(gt, x_rec)))
 axs[2].axis('tight')
 fig.tight_layout()
-plt.show()
+plt.show(block=False)
 
+###############################################################################
+# Now we solve the problem using the optimization problem.
+# A comparison to the denoising of the FBP solution is shown.
+#
 
 lam = 15
 rec = Recon(operator=R, domain_shape=gt.shape, reg_mode='tv', alpha=1, lam=lam, extend_pdhgm=True)
 x_tv = rec.solve(data=y.ravel(), max_iter=1000, tol=1e-4)
-plt.imshow(x_tv, vmin=0, vmax=1)
 
 tv_smoothing = Smoothing(domain_shape=gt.shape, reg_mode='tv', lam=10, tau='calc')
 fbp_smooth = tv_smoothing.solve(data=x_rec, max_iter=1000, tol=1e-4)
@@ -70,4 +75,4 @@ axs[2].imshow(fbp_smooth, vmin=0, vmax=1)
 axs[2].set_title("FBP-Smooth - PSNR: "+str(psnr(gt, fbp_smooth)))
 axs[2].axis('tight')
 fig.tight_layout()
-plt.show()
+plt.show(block=False)

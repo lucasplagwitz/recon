@@ -181,8 +181,8 @@ to download the full example code</p>
 </div>
 <div class="sphx-glr-example-title section" id="segmentation">
 <span id="sphx-glr-tutorials-2d-tv-segmentation-py"></span><h1>07. Segmentation<a class="headerlink" href="#segmentation" title="Permalink to this headline">¶</a></h1>
-<p>This example shows how to use the interface for class-based segmentation
-of 2D images. First, depending on the size of the weighting alpha,
+<p>This example shows the interface usage for class-based segmentation
+of a 2D image. First, depending on the size of the weighting lambda,
 a piecewise constant image is generated before the assignment to certain classes is done.</p>
 <p>TV based segmentation</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">skimage.data</span> <span class="k">as</span> <span class="nn">skd</span>
@@ -191,12 +191,14 @@ a piecewise constant image is generated before the assignment to certain classes
 
 <span class="kn">from</span> <span class="nn">recon.interfaces</span> <span class="kn">import</span> <span class="n">Segmentation</span>
 
+
 <span class="k">def</span> <span class="nf">rgb2gray</span><span class="p">(</span><span class="n">rgb</span><span class="p">):</span>
-    <span class="n">r</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">rgb</span><span class="p">[:,:,</span><span class="mi">0</span><span class="p">],</span> <span class="n">rgb</span><span class="p">[:,:,</span><span class="mi">1</span><span class="p">],</span> <span class="n">rgb</span><span class="p">[:,:,</span><span class="mi">2</span><span class="p">]</span>
+    <span class="n">r</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">rgb</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">rgb</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">rgb</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">2</span><span class="p">]</span>
     <span class="n">gray</span> <span class="o">=</span> <span class="mf">0.2989</span> <span class="o">*</span> <span class="n">r</span> <span class="o">+</span> <span class="mf">0.5870</span> <span class="o">*</span> <span class="n">g</span> <span class="o">+</span> <span class="mf">0.1140</span> <span class="o">*</span> <span class="n">b</span>
     <span class="k">return</span> <span class="n">gray</span>
 
-<span class="n">gt</span> <span class="o">=</span> <span class="n">rgb2gray</span><span class="p">(</span><span class="n">skd</span><span class="o">.</span><span class="n">coffee</span><span class="p">())[:,</span><span class="mi">80</span><span class="p">:</span><span class="mi">481</span><span class="p">]</span>
+
+<span class="n">gt</span> <span class="o">=</span> <span class="n">rgb2gray</span><span class="p">(</span><span class="n">skd</span><span class="o">.</span><span class="n">coffee</span><span class="p">())[:,</span> <span class="mi">80</span><span class="p">:</span><span class="mi">481</span><span class="p">]</span>
 <span class="n">gt</span> <span class="o">=</span> <span class="n">gt</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">gt</span><span class="p">)</span>
 <span class="n">gt</span> <span class="o">=</span> <span class="n">gt</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">gt</span><span class="p">)</span>
 
@@ -205,7 +207,7 @@ a piecewise constant image is generated before the assignment to certain classes
 <span class="n">segmentation</span> <span class="o">=</span> <span class="n">Segmentation</span><span class="p">(</span><span class="n">gt</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">classes</span><span class="o">=</span><span class="n">classes</span><span class="p">,</span> <span class="n">lam</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">tau</span><span class="o">=</span><span class="s1">&#39;calc&#39;</span><span class="p">)</span>
 <span class="n">result</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">segmentation</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">gt</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">4000</span><span class="p">)</span>
 
-<span class="n">f</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="n">f</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
 <span class="n">f</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">gt</span><span class="p">)</span>
@@ -222,7 +224,7 @@ a piecewise constant image is generated before the assignment to certain classes
 <div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Early stopping.
 </pre></div>
 </div>
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  40.547 seconds)</p>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  40.695 seconds)</p>
 <div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-tutorials-2d-tv-segmentation-py">
 <div class="sphx-glr-download sphx-glr-download-python docutils container">
 <p><a class="reference download internal" download="" href="../_downloads/36f0b40bdbf9037c7713d2c5dc8e1b29/2d_tv_segmentation.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">2d_tv_segmentation.py</span></code></a></p>

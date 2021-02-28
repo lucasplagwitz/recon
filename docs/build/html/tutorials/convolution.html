@@ -185,26 +185,25 @@ to download the full example code</p>
 <p>IN PROGRESS</p>
 <img alt="Degraded, Minimum-Norm, TV-Recon" class="sphx-glr-single-img" src="../_images/sphx_glr_convolution_001.png" />
 <p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>/Users/lucasplagwitz/git_projects/recon/tutorials/convolution.py:90: DeprecationWarning: np.asscalar(a) is deprecated since NumPy v1.16, use a.item() instead
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>/Users/lucasplagwitz/git_projects/recon/tutorials/convolution.py:89: DeprecationWarning: np.asscalar(a) is deprecated since NumPy v1.16, use a.item() instead
   norm = np.abs(np.asscalar((K.H*K).eigs(neigs=1, symmetric=True, largest=True, uselobpcg=True)))
-0.350554944434
+0.350540804411
  Early stopping.
 1.0
-0.000191305373388
-0.000122229529903
+0.000191388322656
+0.000122128998729
 PSNR Noise: 22.87
 PSNR Minimum-Norm: 18.84
-PSNR TV-Recon: 26.36
-MAE Noise: 0.0397690878776
-MAE Minimum-Norm: 0.101265230542
-MAE TV-Recon: 0.0264499396962
+PSNR TV-Recon: 26.34
+MAE Noise: 0.0397541860084
+MAE Minimum-Norm: 0.101340461986
+MAE TV-Recon: 0.0264372818344
 </pre></div>
 </div>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pylops.signalprocessing</span> <span class="kn">import</span> <span class="n">FFT2D</span>
-<span class="kn">from</span> <span class="nn">pylops</span> <span class="kn">import</span> <span class="n">Gradient</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pylops</span> <span class="kn">import</span> <span class="n">Gradient</span>
 
 <span class="kn">from</span> <span class="nn">recon.terms</span> <span class="kn">import</span> <span class="n">BaseDataterm</span><span class="p">,</span> <span class="n">IndicatorL2</span>
 <span class="kn">from</span> <span class="nn">recon.solver</span> <span class="kn">import</span> <span class="n">PdHgm</span>
@@ -216,12 +215,14 @@ MAE TV-Recon: 0.0264499396962
 
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
+
 <span class="k">def</span> <span class="nf">rgb2gray</span><span class="p">(</span><span class="n">rgb</span><span class="p">):</span>
 
     <span class="n">r</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">rgb</span><span class="p">[:,:,</span><span class="mi">0</span><span class="p">],</span> <span class="n">rgb</span><span class="p">[:,:,</span><span class="mi">1</span><span class="p">],</span> <span class="n">rgb</span><span class="p">[:,:,</span><span class="mi">2</span><span class="p">]</span>
     <span class="n">gray</span> <span class="o">=</span> <span class="mf">0.2989</span> <span class="o">*</span> <span class="n">r</span> <span class="o">+</span> <span class="mf">0.5870</span> <span class="o">*</span> <span class="n">g</span> <span class="o">+</span> <span class="mf">0.1140</span> <span class="o">*</span> <span class="n">b</span>
 
     <span class="k">return</span> <span class="n">gray</span>
+
 
 <span class="n">gt</span> <span class="o">=</span> <span class="n">rgb2gray</span><span class="p">(</span><span class="n">skd</span><span class="o">.</span><span class="n">coffee</span><span class="p">())[:,</span><span class="mi">80</span><span class="p">:</span><span class="mi">481</span><span class="p">]</span>
 <span class="n">gt</span> <span class="o">=</span> <span class="n">gt</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">gt</span><span class="p">)</span>
@@ -248,8 +249,6 @@ MAE TV-Recon: 0.0264499396962
 
 <span class="n">back</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">roll</span><span class="p">(</span><span class="n">f2</span><span class="p">,</span> <span class="p">(((</span><span class="n">kernel</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span><span class="o">//</span><span class="mi">2</span><span class="p">),</span> <span class="p">((</span><span class="n">kernel</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span><span class="o">//</span><span class="mi">2</span><span class="p">)),</span> <span class="n">axis</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
 <span class="n">back</span> <span class="o">=</span> <span class="n">fft2</span><span class="p">(</span><span class="n">back</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="n">back</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
-
-<span class="n">Fop</span> <span class="o">=</span> <span class="n">FFT2D</span><span class="p">(</span><span class="n">dims</span><span class="o">=</span><span class="n">sh</span><span class="p">)</span>
 
 
 <span class="k">class</span> <span class="nc">DatanormL2Conv</span><span class="p">(</span><span class="n">BaseDataterm</span><span class="p">):</span>
@@ -333,7 +332,7 @@ MAE TV-Recon: 0.0264499396962
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;MAE TV-Recon: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">f2</span><span class="o">-</span><span class="n">x_tv</span><span class="p">))</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">prod</span><span class="p">(</span><span class="n">gt</span><span class="o">.</span><span class="n">shape</span><span class="p">)))</span>
 </pre></div>
 </div>
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 2 minutes  5.916 seconds)</p>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 2 minutes  10.589 seconds)</p>
 <div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-tutorials-convolution-py">
 <div class="sphx-glr-download sphx-glr-download-python docutils container">
 <p><a class="reference download internal" download="" href="../_downloads/76e95f5dfb8347303022fff0a4f83769/convolution.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">convolution.py</span></code></a></p>

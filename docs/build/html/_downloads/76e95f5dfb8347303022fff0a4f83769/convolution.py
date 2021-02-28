@@ -5,7 +5,6 @@ Convolution
 
 IN PROGRESS
 """
-from pylops.signalprocessing import FFT2D
 from pylops import Gradient
 
 from recon.terms import BaseDataterm, IndicatorL2
@@ -18,12 +17,14 @@ from recon.utils import psnr
 
 import numpy as np
 
+
 def rgb2gray(rgb):
 
     r, g, b = rgb[:,:,0], rgb[:,:,1], rgb[:,:,2]
     gray = 0.2989 * r + 0.5870 * g + 0.1140 * b
 
     return gray
+
 
 gt = rgb2gray(skd.coffee())[:,80:481]
 gt = gt/np.max(gt)
@@ -50,8 +51,6 @@ f2 = f2 + np.random.normal(0, 0.01, size=f2.shape)
 
 back = np.roll(f2, (((kernel.shape[0] - 1)//2), ((kernel.shape[1] - 1)//2)), axis=(0, 1))
 back = fft2(back, shape=back.shape)
-
-Fop = FFT2D(dims=sh)
 
 
 class DatanormL2Conv(BaseDataterm):

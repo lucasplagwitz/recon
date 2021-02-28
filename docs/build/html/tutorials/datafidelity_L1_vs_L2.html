@@ -181,7 +181,9 @@ to download the full example code</p>
 </div>
 <div class="sphx-glr-example-title section" id="l1-vs-l2-fidelity-term">
 <span id="sphx-glr-tutorials-datafidelity-l1-vs-l2-py"></span><h1>06. L1 vs. L2 Fidelity-Term<a class="headerlink" href="#l1-vs-l2-fidelity-term" title="Permalink to this headline">¶</a></h1>
-<p>This tutorial…</p>
+<p>This tutorial shows the difference between
+two fidelity norms with different underlying noise types.
+Here using the example of Salt-And-Pepper and Gaussian noise.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">misc</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
@@ -195,9 +197,10 @@ to download the full example code</p>
 
 <span class="n">vmin</span><span class="p">,</span> <span class="n">vmax</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span>
 <span class="n">sigma</span> <span class="o">=</span> <span class="mf">0.2</span> <span class="o">*</span> <span class="n">vmax</span>
-
-
-<span class="k">def</span> <span class="nf">sp_noise</span><span class="p">(</span><span class="n">image</span><span class="p">):</span>
+</pre></div>
+</div>
+<p>Create two noisy images.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">sp_noise</span><span class="p">(</span><span class="n">image</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Add salt and pepper noise to image.&quot;&quot;&quot;</span>
     <span class="n">s_vs_p</span> <span class="o">=</span> <span class="mf">0.5</span>
     <span class="n">amount</span> <span class="o">=</span> <span class="mf">0.1</span>
@@ -221,22 +224,13 @@ to download the full example code</p>
 </pre></div>
 </div>
 <p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>/Users/lucasplagwitz/git_projects/recon/tutorials/datafidelity_L1_vs_L2.py:31: FutureWarning: Using a non-tuple sequence for multidimensional indexing is deprecated; use `arr[tuple(seq)]` instead of `arr[seq]`. In the future this will be interpreted as an array index, `arr[np.array(seq)]`, which will result either in an error or a different result.
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>/Users/lucasplagwitz/git_projects/recon/tutorials/datafidelity_L1_vs_L2.py:36: FutureWarning: Using a non-tuple sequence for multidimensional indexing is deprecated; use `arr[tuple(seq)]` instead of `arr[seq]`. In the future this will be interpreted as an array index, `arr[np.array(seq)]`, which will result either in an error or a different result.
   out[coords] = 1
-/Users/lucasplagwitz/git_projects/recon/tutorials/datafidelity_L1_vs_L2.py:37: FutureWarning: Using a non-tuple sequence for multidimensional indexing is deprecated; use `arr[tuple(seq)]` instead of `arr[seq]`. In the future this will be interpreted as an array index, `arr[np.array(seq)]`, which will result either in an error or a different result.
+/Users/lucasplagwitz/git_projects/recon/tutorials/datafidelity_L1_vs_L2.py:42: FutureWarning: Using a non-tuple sequence for multidimensional indexing is deprecated; use `arr[tuple(seq)]` instead of `arr[seq]`. In the future this will be interpreted as an array index, `arr[np.array(seq)]`, which will result either in an error or a different result.
   out[coords] = 0
 </pre></div>
 </div>
-<p>TV-Regularization and Tikhonov
-Basically the problem here consists of two parts.
-The data term and the regularization term.
-While we use the L2 norm to measure the proximity
-between the image and the original solution, the regularization
-term measures the property of the solution. In our case we distinguish
-between TV and Tikhonov.
-TV is called the L1 norm of the gradient of the solution here,
-while Tikhonov represents the L2 norm. Overall, TV should preserve
-the edges better, because larger jumps are not penalized more.</p>
+<p>Application of the various fidelity norms.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># L1-fidelity</span>
 <span class="n">tv_smoothing</span> <span class="o">=</span> <span class="n">Smoothing</span><span class="p">(</span><span class="n">domain_shape</span><span class="o">=</span><span class="n">gt</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">reg_mode</span><span class="o">=</span><span class="s1">&#39;tv&#39;</span><span class="p">,</span> <span class="n">norm</span><span class="o">=</span><span class="s1">&#39;L1&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">lam</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">tau</span><span class="o">=</span><span class="s1">&#39;calc&#39;</span><span class="p">)</span>
 <span class="n">u_L1_sp</span> <span class="o">=</span> <span class="n">tv_smoothing</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">noise_img_sp</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">2000</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="mf">1e-4</span><span class="p">)</span>
@@ -295,7 +289,7 @@ the edges better, because larger jumps are not penalized more.</p>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">block</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </pre></div>
 </div>
-<img alt="S&amp;P-Noise-PSNR: 15.27, L1 - PSNR: 28.5, L2 - PSNR: 22.73, White-Noise - PSNR: 13.97, L1 - PSNR: 23.91, L2 - PSNR: 24.69" class="sphx-glr-single-img" src="../_images/sphx_glr_datafidelity_L1_vs_L2_001.png" />
+<img alt="S&amp;P-Noise-PSNR: 15.31, L1 - PSNR: 28.53, L2 - PSNR: 22.75, White-Noise - PSNR: 13.97, L1 - PSNR: 23.94, L2 - PSNR: 24.72" class="sphx-glr-single-img" src="../_images/sphx_glr_datafidelity_L1_vs_L2_001.png" />
 <p class="sphx-glr-script-out">Out:</p>
 <div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Early stopping.
 Early stopping.
@@ -303,7 +297,7 @@ Early stopping.
 Early stopping.
 </pre></div>
 </div>
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 2 minutes  43.014 seconds)</p>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 2 minutes  27.311 seconds)</p>
 <div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-tutorials-datafidelity-l1-vs-l2-py">
 <div class="sphx-glr-download sphx-glr-download-python docutils container">
 <p><a class="reference download internal" download="" href="../_downloads/af2a1eb43c28ba809b238895a737a7f0/datafidelity_L1_vs_L2.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">datafidelity_L1_vs_L2.py</span></code></a></p>

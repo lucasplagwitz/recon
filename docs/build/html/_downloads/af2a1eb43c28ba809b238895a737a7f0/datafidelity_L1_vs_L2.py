@@ -1,7 +1,9 @@
 """
 06. L1 vs. L2 Fidelity-Term
 ===========================
-This tutorial...
+This tutorial shows the difference between
+two fidelity norms with different underlying noise types.
+Here using the example of Salt-And-Pepper and Gaussian noise.
 
 """
 import numpy as np
@@ -18,6 +20,9 @@ gt = img
 vmin, vmax = 0, 1
 sigma = 0.2 * vmax
 
+###############################################################################
+# Create two noisy images.
+#
 
 def sp_noise(image):
     """Add salt and pepper noise to image."""
@@ -42,16 +47,7 @@ noise_img_sp = sp_noise(gt)
 noise_img_white = gt + np.random.normal(0, sigma, size=gt.shape)
 
 ###############################################################################
-# TV-Regularization and Tikhonov
-# Basically the problem here consists of two parts.
-# The data term and the regularization term.
-# While we use the L2 norm to measure the proximity
-# between the image and the original solution, the regularization
-# term measures the property of the solution. In our case we distinguish
-# between TV and Tikhonov.
-# TV is called the L1 norm of the gradient of the solution here,
-# while Tikhonov represents the L2 norm. Overall, TV should preserve
-# the edges better, because larger jumps are not penalized more.
+# Application of the various fidelity norms.
 #
 
 # L1-fidelity

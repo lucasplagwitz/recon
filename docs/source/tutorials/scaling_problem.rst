@@ -28,18 +28,18 @@ we will briefly show what the effect looks like.
 
 .. GENERATED FROM PYTHON SOURCE LINES 12-15
 
-A grey image is created and viewed in area [0, 1].
+A grey image is created and viewed in an area [0, 1].
 The relation of the weighting between dataterm and regularization
 remains the same, but is adjusted in its absolute value too.
 
-.. GENERATED FROM PYTHON SOURCE LINES 15-28
+.. GENERATED FROM PYTHON SOURCE LINES 15-62
 
 .. code-block:: default
 
     import numpy as np
-    from recon.interfaces import Smoothing
     import matplotlib.pyplot as plt
 
+    from recon.interfaces import Smoothing
     from recon.utils.images import two_smooth_squares
 
     scaled_image = two_smooth_squares(256, 200)
@@ -47,23 +47,6 @@ remains the same, but is adjusted in its absolute value too.
     sigma = 0.3  # the percentage portion standard deviation for normal (Gaussian) distribution.
 
     noise_image = scaled_image + np.random.normal(0, sigma*np.max(scaled_image), size=scaled_image.shape)
-
-
-
-
-
-
-
-
-
-.. GENERATED FROM PYTHON SOURCE LINES 29-30
-
-...
-
-.. GENERATED FROM PYTHON SOURCE LINES 30-66
-
-.. code-block:: default
-
 
     weights = [(0.2, 0.2), (1, 1), (2, 2)]
 
@@ -124,7 +107,7 @@ remains the same, but is adjusted in its absolute value too.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 67-70
+.. GENERATED FROM PYTHON SOURCE LINES 63-66
 
 Conclusion
 Be careful with max_iter and tol parameter
@@ -133,7 +116,7 @@ or with the interpretation of result if the number of iteration is too small.
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  45.430 seconds)
+   **Total running time of the script:** ( 0 minutes  42.344 seconds)
 
 
 .. _sphx_glr_download_tutorials_scaling_problem.py:

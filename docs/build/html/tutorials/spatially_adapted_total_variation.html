@@ -183,8 +183,7 @@ to download the full example code</p>
 <span id="sphx-glr-tutorials-spatially-adapted-total-variation-py"></span><h1>05. Spatially Adapted Total Variation<a class="headerlink" href="#spatially-adapted-total-variation" title="Permalink to this headline">¶</a></h1>
 <p>Here a locally adapted regularization is shown.
 For this purpose the SATV algorithm was implemented.
-The application and the nurzen are shown.
-Furthermore, TV is compared with TGV in the context of the local regularization.</p>
+The application and the benefit are shown.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">image</span>
@@ -217,7 +216,7 @@ Furthermore, TV is compared with TGV in the context of the local regularization.
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">block</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </pre></div>
 </div>
-<img alt="GT - PSNR: -1, TV - PSNR: 29.37" class="sphx-glr-single-img" src="../_images/sphx_glr_spatially_adapted_total_variation_001.png" />
+<img alt="GT - PSNR: -1, TV - PSNR: 29.34" class="sphx-glr-single-img" src="../_images/sphx_glr_spatially_adapted_total_variation_001.png" />
 <p class="sphx-glr-script-out">Out:</p>
 <div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Early stopping.
 </pre></div>
@@ -249,18 +248,18 @@ Furthermore, TV is compared with TGV in the context of the local regularization.
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-<img alt="Noisy - PSNR: 19.99, SATV - PSNR: 32.08, SATV-weight $\lambda$" class="sphx-glr-single-img" src="../_images/sphx_glr_spatially_adapted_total_variation_002.png" />
+<img alt="Noisy - PSNR: 19.98, SATV - PSNR: 31.97, SATV-weight $\lambda$" class="sphx-glr-single-img" src="../_images/sphx_glr_spatially_adapted_total_variation_002.png" />
 <p class="sphx-glr-script-out">Out:</p>
 <div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>0-Iteration of SATV
-97.2275470536
+97.3679717517
 25.6
  Early stopping.
 1-Iteration of SATV
-41.8556780581
+41.8916064116
 25.6
  Early stopping.
 2-Iteration of SATV
-26.9018709523
+26.8865308612
 25.6
  Early stopping.
 </pre></div>
@@ -302,7 +301,7 @@ Furthermore, TV is compared with TGV in the context of the local regularization.
 <div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>&#39;\nlam = 0.3\nsatv_obj = SATV(domain_shape=image.shape,\n                reg_mode=\&#39;tgv\&#39;,\n                lam=lam,\n                plot_iteration=False,\n                tau=\&#39;auto\&#39;,\n                alpha=(0.3, 0.6),\n                noise_sigma=noise_sigma,\n                assessment=noise_sigma*np.sqrt(np.prod(image.shape)))\nsatv_solution = satv_obj.solve(noisy_image, max_iter=5000, tol=1e-4)\n\nf = plt.figure(figsize=(9, 3))\nf.add_subplot(1, 3, 1)\nplt.gray()\nplt.axis(\&#39;off\&#39;)\nplt.imshow(noisy_image, vmin=0, vmax=np.max(image))\nplt.title(&quot;Noisy - PSNR: &quot;+str(psnr(image, noisy_image)))\nf.add_subplot(1, 3, 2)\nplt.gray()\nplt.imshow(satv_solution, vmin=0, vmax=np.max(image))\nplt.title(&quot;SATGV - PSNR: &quot;+str(psnr(image, satv_solution)))\nplt.axis(\&#39;off\&#39;)\nf.add_subplot(1, 3, 3)\nplt.gray()\nplt.imshow(np.reshape(satv_obj.lam, image.shape))\nplt.title(&quot;SATGV-weight $\\lambda$&quot;)\nplt.axis(\&#39;off\&#39;)\nplt.show()\n&#39;
 </pre></div>
 </div>
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  48.272 seconds)</p>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  44.853 seconds)</p>
 <div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-tutorials-spatially-adapted-total-variation-py">
 <div class="sphx-glr-download sphx-glr-download-python docutils container">
 <p><a class="reference download internal" download="" href="../_downloads/02ab7b46fe9293eb0904f93d0256f769/spatially_adapted_total_variation.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">spatially_adapted_total_variation.py</span></code></a></p>

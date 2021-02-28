@@ -50,6 +50,7 @@ class PdHgmExtend(object):
                  tau: float = 1/np.sqrt(12),
                  data = None,
                  reg_mode = 'tv',
+                 silent_mode: bool = True,
                  gamma: Union[float, bool] = False):
 
         self.lam = lam
@@ -62,6 +63,7 @@ class PdHgmExtend(object):
         self.image_size = image_size
         self.sens = 100
         self.gamma = False
+        self.silent_mode = silent_mode
 
         self.data = data
         self.reg_mode = reg_mode
@@ -94,7 +96,8 @@ class PdHgmExtend(object):
         proj_0 = IndicatorL2((primal_n, primal_m), upper_bound=self.alpha[0])
         proj_1 = IndicatorL2((2 * primal_n, primal_m), upper_bound=self.alpha[1])
 
-        progress = progressbar.ProgressBar(max_value=self.max_iter)
+        if not self.silent_mode:
+            progress = progressbar.ProgressBar(max_value=self.max_iter)
 
         k = 0
 
@@ -142,7 +145,8 @@ class PdHgmExtend(object):
                 self.F_star.prox_param = self.F_star.prox_param / thetha
 
             k += 1
-            progress.update(k)
+            if not self.silent_mode:
+                progress.update(k)
 
         self.x = p
 

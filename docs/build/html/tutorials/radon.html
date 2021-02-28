@@ -184,8 +184,8 @@ to download the full example code</p>
 <p>This tutorial demonstrates the reconstruction of a
 measurement obtained in computerized tomography.
 As mathematical construct the radon transform is obtained.
-The implementations of Astra-Toolbox are used.</p>
-<p>We create a scenario with a</p>
+The implementation of the Astra-Toolbox is used.</p>
+<p>We create a scenario with a 180 equal distributed angles.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 
@@ -223,13 +223,15 @@ The implementations of Astra-Toolbox are used.</p>
 <span class="n">axs</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;FBP - PSNR: &quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">psnr</span><span class="p">(</span><span class="n">gt</span><span class="p">,</span> <span class="n">x_rec</span><span class="p">)))</span>
 <span class="n">axs</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;tight&#39;</span><span class="p">)</span>
 <span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-
-
-<span class="n">lam</span> <span class="o">=</span> <span class="mi">15</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">block</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+<img alt="Model, Data, FBP - PSNR: 18.53" class="sphx-glr-single-img" src="../_images/sphx_glr_radon_001.png" />
+<p>Now we solve the problem using the optimization problem.
+A comparison to the denoising of the FBP solution is shown.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">lam</span> <span class="o">=</span> <span class="mi">15</span>
 <span class="n">rec</span> <span class="o">=</span> <span class="n">Recon</span><span class="p">(</span><span class="n">operator</span><span class="o">=</span><span class="n">R</span><span class="p">,</span> <span class="n">domain_shape</span><span class="o">=</span><span class="n">gt</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">reg_mode</span><span class="o">=</span><span class="s1">&#39;tv&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">lam</span><span class="o">=</span><span class="n">lam</span><span class="p">,</span> <span class="n">extend_pdhgm</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="n">x_tv</span> <span class="o">=</span> <span class="n">rec</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">y</span><span class="o">.</span><span class="n">ravel</span><span class="p">(),</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="mf">1e-4</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">x_tv</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 
 <span class="n">tv_smoothing</span> <span class="o">=</span> <span class="n">Smoothing</span><span class="p">(</span><span class="n">domain_shape</span><span class="o">=</span><span class="n">gt</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">reg_mode</span><span class="o">=</span><span class="s1">&#39;tv&#39;</span><span class="p">,</span> <span class="n">lam</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">tau</span><span class="o">=</span><span class="s1">&#39;calc&#39;</span><span class="p">)</span>
 <span class="n">fbp_smooth</span> <span class="o">=</span> <span class="n">tv_smoothing</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">x_rec</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="mf">1e-4</span><span class="p">)</span>
@@ -246,40 +248,35 @@ The implementations of Astra-Toolbox are used.</p>
 <span class="n">axs</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;FBP-Smooth - PSNR: &quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">psnr</span><span class="p">(</span><span class="n">gt</span><span class="p">,</span> <span class="n">fbp_smooth</span><span class="p">)))</span>
 <span class="n">axs</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;tight&#39;</span><span class="p">)</span>
 <span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">block</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </pre></div>
 </div>
-<ul class="sphx-glr-horizontal">
-<li><img alt="Model, Data, FBP - PSNR: 18.54" class="sphx-glr-multi-img" src="../_images/sphx_glr_radon_001.png" />
-</li>
-<li><img alt="Model, TV-Recon - PSNR: 25.88, FBP-Smooth - PSNR: 20.73" class="sphx-glr-multi-img" src="../_images/sphx_glr_radon_002.png" />
-</li>
-</ul>
+<img alt="Model, TV-Recon - PSNR: 25.96, FBP-Smooth - PSNR: 20.75" class="sphx-glr-single-img" src="../_images/sphx_glr_radon_002.png" />
 <p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>/Users/lucasplagwitz/git_projects/recon/recon/solver/pd_hgm_extend.py:134: RuntimeWarning: divide by zero encountered in double_scalars
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>/Users/lucasplagwitz/git_projects/recon/recon/solver/pd_hgm_extend.py:137: RuntimeWarning: divide by zero encountered in double_scalars
   self.sens = np.linalg.norm(p_gap)/np.linalg.norm(p_old)
 inf
-0.0576221982853
-0.0250590271988
-0.012309055285
-0.00695943002427
-0.00381897465857
-0.0022573587332
-0.00135378404459
-0.000830739109936
-0.000539449666536
-0.000353876947839
-0.000252753271428
-0.000190379186281
-0.000150003907903
-0.000124340639847
-0.00010582352149
-9.2989420842e-05
+0.0575879430761
+0.0250657895096
+0.0123394724924
+0.00698178486739
+0.00383661007699
+0.00223954403196
+0.00136202788
+0.000839463622562
+0.000535423830805
+0.000357559031815
+0.000246971744871
+0.000188842471093
+0.000151375819315
+0.000126698668617
+0.000109222033788
+9.76307796608e-05
  Early stopping.
  Early stopping.
 </pre></div>
 </div>
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 3 minutes  40.312 seconds)</p>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 3 minutes  32.760 seconds)</p>
 <div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-tutorials-radon-py">
 <div class="sphx-glr-download sphx-glr-download-python docutils container">
 <p><a class="reference download internal" download="" href="../_downloads/200020502437f2f859b2d674ccea48cb/radon.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">radon.py</span></code></a></p>

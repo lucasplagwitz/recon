@@ -4,8 +4,7 @@
 
 Here a locally adapted regularization is shown.
 For this purpose the SATV algorithm was implemented.
-The application and the nurzen are shown.
-Furthermore, TV is compared with TGV in the context of the local regularization.
+The application and the benefit are shown.
 
 """
 import numpy as np

@@ -47,8 +47,8 @@ rec = Recon(operator=R, domain_shape=gt.shape, reg_mode='tv', alpha=1, lam=15, e
 x_tv = rec.solve(data=y.ravel(), max_iter=1000, tol=1e-4)
  ```
 
-## Smoothing
-Image Smoothing is a special case of regularized reconstruction.
+## Denoising
+Image denoising is a special case of regularized reconstruction.
 <p align="center">
 <img src="https://render.githubusercontent.com/render/math?math=\Large \argmin_u \frac{\lambda}{2}||u - z||^2 %2B \alpha J(u)">
  <p/>
@@ -71,8 +71,6 @@ u0 = tv_smoothing.solve(data=noise_img, maxiter=1500, tol=10**(-4))
  <table>
   <tr>
     <td><img src="./docs/source/tutorials/images/sphx_glr_2d_image_smoothing_001.png" alt="" width="800"></td>
- </tr>
- <tr>
     <td><img src="./docs/source/tutorials/images/sphx_glr_2d_image_smoothing_002.png" alt="" width="800"></td>
     </td>
   </tr>
@@ -100,6 +98,9 @@ segmentation = Segmentation(gt.shape, classes=classes, lam=5, tau='calc')
 result, _ = segmentation.solve(gt, max_iter=4000)
  ```
 
+ <p align="center">
+ <img src="./docs/source/tutorials/images/sphx_glr_2d_tv_segmentation_001.png" alt="" width="400">
+ </p>
   
   ## References
   1. The Repo based on [Enhancing joint reconstruction and segmentation with non-convex Bregman iteration](https://iopscience.iop.org/article/10.1088/1361-6420/ab0b77/pdf) - Veronica Corona et al 2019 Inverse Problems 35, and their code on [GitHub](https://github.com/veronicacorona/JointReconstructionSegmentation).

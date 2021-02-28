@@ -11,7 +11,7 @@ Mainly we use for numerical access:
 
 ###############################################################################
 # The first order total variation got some stair-casing problems.
-# See following noisy example with the TV regularization.
+# See the following denoising example with the TV regularization.
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -104,7 +104,7 @@ while True:
         plt.close()
 
 ###############################################################################
-# Compare it to normal BTV
+# Compare it to normal BTV.
 
 breg_smoothing = SmoothBregman(domain_shape=image.shape,
                                reg_mode='tv',

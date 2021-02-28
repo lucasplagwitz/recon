@@ -23,15 +23,17 @@
 This tutorial demonstrates the reconstruction of a
 measurement obtained in computerized tomography.
 As mathematical construct the radon transform is obtained.
-The implementations of Astra-Toolbox are used.
+The implementation of the Astra-Toolbox is used.
 
-.. GENERATED FROM PYTHON SOURCE LINES 12-13
+.. GENERATED FROM PYTHON SOURCE LINES 12-14
 
-We create a scenario with a
+We create a scenario with a 180 equal distributed angles.
 
-.. GENERATED FROM PYTHON SOURCE LINES 13-74
+
+.. GENERATED FROM PYTHON SOURCE LINES 14-54
 
 .. code-block:: default
+
 
     import numpy as np
     import matplotlib.pyplot as plt
@@ -70,13 +72,33 @@ We create a scenario with a
     axs[2].set_title("FBP - PSNR: "+str(psnr(gt, x_rec)))
     axs[2].axis('tight')
     fig.tight_layout()
-    plt.show()
+    plt.show(block=False)
+
+
+
+
+.. image:: /tutorials/images/sphx_glr_radon_001.png
+    :alt: Model, Data, FBP - PSNR: 18.53
+    :class: sphx-glr-single-img
+
+
+
+
+
+.. GENERATED FROM PYTHON SOURCE LINES 55-58
+
+Now we solve the problem using the optimization problem.
+A comparison to the denoising of the FBP solution is shown.
+
+
+.. GENERATED FROM PYTHON SOURCE LINES 58-79
+
+.. code-block:: default
 
 
     lam = 15
     rec = Recon(operator=R, domain_shape=gt.shape, reg_mode='tv', alpha=1, lam=lam, extend_pdhgm=True)
     x_tv = rec.solve(data=y.ravel(), max_iter=1000, tol=1e-4)
-    plt.imshow(x_tv, vmin=0, vmax=1)
 
     tv_smoothing = Smoothing(domain_shape=gt.shape, reg_mode='tv', lam=10, tau='calc')
     fbp_smooth = tv_smoothing.solve(data=x_rec, max_iter=1000, tol=1e-4)
@@ -93,24 +115,13 @@ We create a scenario with a
     axs[2].set_title("FBP-Smooth - PSNR: "+str(psnr(gt, fbp_smooth)))
     axs[2].axis('tight')
     fig.tight_layout()
-    plt.show()
+    plt.show(block=False)
 
 
 
-.. rst-class:: sphx-glr-horizontal
-
-
-    *
-
-      .. image:: /tutorials/images/sphx_glr_radon_001.png
-          :alt: Model, Data, FBP - PSNR: 18.54
-          :class: sphx-glr-multi-img
-
-    *
-
-      .. image:: /tutorials/images/sphx_glr_radon_002.png
-          :alt: Model, TV-Recon - PSNR: 25.88, FBP-Smooth - PSNR: 20.73
-          :class: sphx-glr-multi-img
+.. image:: /tutorials/images/sphx_glr_radon_002.png
+    :alt: Model, TV-Recon - PSNR: 25.96, FBP-Smooth - PSNR: 20.75
+    :class: sphx-glr-single-img
 
 
 .. rst-class:: sphx-glr-script-out
@@ -119,25 +130,25 @@ We create a scenario with a
 
  .. code-block:: none
 
-    /Users/lucasplagwitz/git_projects/recon/recon/solver/pd_hgm_extend.py:134: RuntimeWarning: divide by zero encountered in double_scalars
+    /Users/lucasplagwitz/git_projects/recon/recon/solver/pd_hgm_extend.py:137: RuntimeWarning: divide by zero encountered in double_scalars
       self.sens = np.linalg.norm(p_gap)/np.linalg.norm(p_old)
     inf
-    0.0576221982853
-    0.0250590271988
-    0.012309055285
-    0.00695943002427
-    0.00381897465857
-    0.0022573587332
-    0.00135378404459
-    0.000830739109936
-    0.000539449666536
-    0.000353876947839
-    0.000252753271428
-    0.000190379186281
-    0.000150003907903
-    0.000124340639847
-    0.00010582352149
-    9.2989420842e-05
+    0.0575879430761
+    0.0250657895096
+    0.0123394724924
+    0.00698178486739
+    0.00383661007699
+    0.00223954403196
+    0.00136202788
+    0.000839463622562
+    0.000535423830805
+    0.000357559031815
+    0.000246971744871
+    0.000188842471093
+    0.000151375819315
+    0.000126698668617
+    0.000109222033788
+    9.76307796608e-05
      Early stopping.
      Early stopping.
 
@@ -147,7 +158,7 @@ We create a scenario with a
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 3 minutes  40.312 seconds)
+   **Total running time of the script:** ( 3 minutes  32.760 seconds)
 
 
 .. _sphx_glr_download_tutorials_radon.py:

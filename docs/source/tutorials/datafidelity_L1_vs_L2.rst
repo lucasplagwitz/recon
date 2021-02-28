@@ -20,9 +20,11 @@
 
 06. L1 vs. L2 Fidelity-Term
 ===========================
-This tutorial...
+This tutorial shows the difference between
+two fidelity norms with different underlying noise types.
+Here using the example of Salt-And-Pepper and Gaussian noise.
 
-.. GENERATED FROM PYTHON SOURCE LINES 7-44
+.. GENERATED FROM PYTHON SOURCE LINES 9-23
 
 .. code-block:: default
 
@@ -39,6 +41,22 @@ This tutorial...
 
     vmin, vmax = 0, 1
     sigma = 0.2 * vmax
+
+
+
+
+
+
+
+
+.. GENERATED FROM PYTHON SOURCE LINES 24-26
+
+Create two noisy images.
+
+
+.. GENERATED FROM PYTHON SOURCE LINES 26-49
+
+.. code-block:: default
 
 
     def sp_noise(image):
@@ -73,29 +91,20 @@ This tutorial...
 
  .. code-block:: none
 
-    /Users/lucasplagwitz/git_projects/recon/tutorials/datafidelity_L1_vs_L2.py:31: FutureWarning: Using a non-tuple sequence for multidimensional indexing is deprecated; use `arr[tuple(seq)]` instead of `arr[seq]`. In the future this will be interpreted as an array index, `arr[np.array(seq)]`, which will result either in an error or a different result.
+    /Users/lucasplagwitz/git_projects/recon/tutorials/datafidelity_L1_vs_L2.py:36: FutureWarning: Using a non-tuple sequence for multidimensional indexing is deprecated; use `arr[tuple(seq)]` instead of `arr[seq]`. In the future this will be interpreted as an array index, `arr[np.array(seq)]`, which will result either in an error or a different result.
       out[coords] = 1
-    /Users/lucasplagwitz/git_projects/recon/tutorials/datafidelity_L1_vs_L2.py:37: FutureWarning: Using a non-tuple sequence for multidimensional indexing is deprecated; use `arr[tuple(seq)]` instead of `arr[seq]`. In the future this will be interpreted as an array index, `arr[np.array(seq)]`, which will result either in an error or a different result.
+    /Users/lucasplagwitz/git_projects/recon/tutorials/datafidelity_L1_vs_L2.py:42: FutureWarning: Using a non-tuple sequence for multidimensional indexing is deprecated; use `arr[tuple(seq)]` instead of `arr[seq]`. In the future this will be interpreted as an array index, `arr[np.array(seq)]`, which will result either in an error or a different result.
       out[coords] = 0
 
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 45-56
+.. GENERATED FROM PYTHON SOURCE LINES 50-52
 
-TV-Regularization and Tikhonov
-Basically the problem here consists of two parts.
-The data term and the regularization term.
-While we use the L2 norm to measure the proximity
-between the image and the original solution, the regularization
-term measures the property of the solution. In our case we distinguish
-between TV and Tikhonov.
-TV is called the L1 norm of the gradient of the solution here,
-while Tikhonov represents the L2 norm. Overall, TV should preserve
-the edges better, because larger jumps are not penalized more.
+Application of the various fidelity norms.
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 56-113
+.. GENERATED FROM PYTHON SOURCE LINES 52-109
 
 .. code-block:: default
 
@@ -160,7 +169,7 @@ the edges better, because larger jumps are not penalized more.
 
 
 .. image:: /tutorials/images/sphx_glr_datafidelity_L1_vs_L2_001.png
-    :alt: S&P-Noise-PSNR: 15.27, L1 - PSNR: 28.5, L2 - PSNR: 22.73, White-Noise - PSNR: 13.97, L1 - PSNR: 23.91, L2 - PSNR: 24.69
+    :alt: S&P-Noise-PSNR: 15.31, L1 - PSNR: 28.53, L2 - PSNR: 22.75, White-Noise - PSNR: 13.97, L1 - PSNR: 23.94, L2 - PSNR: 24.72
     :class: sphx-glr-single-img
 
 
@@ -181,7 +190,7 @@ the edges better, because larger jumps are not penalized more.
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 2 minutes  43.014 seconds)
+   **Total running time of the script:** ( 2 minutes  27.311 seconds)
 
 
 .. _sphx_glr_download_tutorials_datafidelity_L1_vs_L2.py:

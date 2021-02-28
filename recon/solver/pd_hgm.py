@@ -40,7 +40,8 @@ class PdHgm(object):
 
     """
 
-    def __init__(self, K: pylops.LinearOperator, F_star: BaseRegTerm, G: BaseDataterm, gamma: Union[float, bool] = False):
+    def __init__(self, K: pylops.LinearOperator, F_star: BaseRegTerm, G: BaseDataterm,
+                 gamma: Union[float, bool] = False, silent_mode: bool = True):
 
         self.K = K
         self.F_star = F_star
@@ -50,6 +51,7 @@ class PdHgm(object):
         self.tol = 1e-4
         self.k = 1
         self.sens = 0.001
+        self.silent_mode = silent_mode
 
         self.plot_on = False
 
@@ -84,7 +86,7 @@ class PdHgm(object):
         if self.plot_on:
             raise NotImplementedError()
 
-        if True:
+        if not self.silent_mode:
             progress = progressbar.ProgressBar(max_value=self.max_iter)
 
         while (self.tol < self.sens or self.k == 0) and (self.k < self.max_iter):
@@ -100,7 +102,7 @@ class PdHgm(object):
                                                 (self.K * (2 * self.x - self.x_prev))
                                       )
 
-            if self.k % 10 == 0:
+            if self.k % 100 == 0:
                 self.update_sensivity()
 
             if self.gamma:
@@ -111,7 +113,7 @@ class PdHgm(object):
                 self.F_star.prox_param = self.F_star.prox_param / thetha
 
             self.k += 1
-            if True:
+            if not self.silent_mode:
                 progress.update(self.k)
 
         if self.k <= self.max_iter:

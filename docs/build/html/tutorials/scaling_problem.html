@@ -185,13 +185,13 @@ has an effect on the solution while keeping the ratio constant.
 Meanwhile the problem has been identified as a too small number of iterations.
 Overall, the default parameters have been adjusted, but in this example,
 we will briefly show what the effect looks like.</p>
-<p>A grey image is created and viewed in area [0, 1].
+<p>A grey image is created and viewed in an area [0, 1].
 The relation of the weighting between dataterm and regularization
 remains the same, but is adjusted in its absolute value too.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">recon.interfaces</span> <span class="kn">import</span> <span class="n">Smoothing</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 
+<span class="kn">from</span> <span class="nn">recon.interfaces</span> <span class="kn">import</span> <span class="n">Smoothing</span>
 <span class="kn">from</span> <span class="nn">recon.utils.images</span> <span class="kn">import</span> <span class="n">two_smooth_squares</span>
 
 <span class="n">scaled_image</span> <span class="o">=</span> <span class="n">two_smooth_squares</span><span class="p">(</span><span class="mi">256</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
@@ -199,10 +199,8 @@ remains the same, but is adjusted in its absolute value too.</p>
 <span class="n">sigma</span> <span class="o">=</span> <span class="mf">0.3</span>  <span class="c1"># the percentage portion standard deviation for normal (Gaussian) distribution.</span>
 
 <span class="n">noise_image</span> <span class="o">=</span> <span class="n">scaled_image</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">sigma</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">scaled_image</span><span class="p">),</span> <span class="n">size</span><span class="o">=</span><span class="n">scaled_image</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>…</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">weights</span> <span class="o">=</span> <span class="p">[(</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)]</span>
+
+<span class="n">weights</span> <span class="o">=</span> <span class="p">[(</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)]</span>
 
 <span class="n">rows</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">row</span><span class="p">)</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">weights</span><span class="p">]</span>
 
@@ -251,7 +249,7 @@ Early stopping.
 <p>Conclusion
 Be careful with max_iter and tol parameter
 or with the interpretation of result if the number of iteration is too small.</p>
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  45.430 seconds)</p>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  42.344 seconds)</p>
 <div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-tutorials-scaling-problem-py">
 <div class="sphx-glr-download sphx-glr-download-python docutils container">
 <p><a class="reference download internal" download="" href="../_downloads/22e0423357a9184fe5e7605f0b3a8bec/scaling_problem.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">scaling_problem.py</span></code></a></p>

@@ -24,7 +24,7 @@ Convolution
 
 IN PROGRESS
 
-.. GENERATED FROM PYTHON SOURCE LINES 8-136
+.. GENERATED FROM PYTHON SOURCE LINES 8-135
 
 
 
@@ -39,19 +39,19 @@ IN PROGRESS
 
  .. code-block:: none
 
-    /Users/lucasplagwitz/git_projects/recon/tutorials/convolution.py:90: DeprecationWarning: np.asscalar(a) is deprecated since NumPy v1.16, use a.item() instead
+    /Users/lucasplagwitz/git_projects/recon/tutorials/convolution.py:89: DeprecationWarning: np.asscalar(a) is deprecated since NumPy v1.16, use a.item() instead
       norm = np.abs(np.asscalar((K.H*K).eigs(neigs=1, symmetric=True, largest=True, uselobpcg=True)))
-    0.350554944434
+    0.350540804411
      Early stopping.
     1.0
-    0.000191305373388
-    0.000122229529903
+    0.000191388322656
+    0.000122128998729
     PSNR Noise: 22.87
     PSNR Minimum-Norm: 18.84
-    PSNR TV-Recon: 26.36
-    MAE Noise: 0.0397690878776
-    MAE Minimum-Norm: 0.101265230542
-    MAE TV-Recon: 0.0264499396962
+    PSNR TV-Recon: 26.34
+    MAE Noise: 0.0397541860084
+    MAE Minimum-Norm: 0.101340461986
+    MAE TV-Recon: 0.0264372818344
 
 
 
@@ -62,7 +62,6 @@ IN PROGRESS
 
 .. code-block:: default
 
-    from pylops.signalprocessing import FFT2D
     from pylops import Gradient
 
     from recon.terms import BaseDataterm, IndicatorL2
@@ -75,12 +74,14 @@ IN PROGRESS
 
     import numpy as np
 
+
     def rgb2gray(rgb):
 
         r, g, b = rgb[:,:,0], rgb[:,:,1], rgb[:,:,2]
         gray = 0.2989 * r + 0.5870 * g + 0.1140 * b
 
         return gray
+
 
     gt = rgb2gray(skd.coffee())[:,80:481]
     gt = gt/np.max(gt)
@@ -107,8 +108,6 @@ IN PROGRESS
 
     back = np.roll(f2, (((kernel.shape[0] - 1)//2), ((kernel.shape[1] - 1)//2)), axis=(0, 1))
     back = fft2(back, shape=back.shape)
-
-    Fop = FFT2D(dims=sh)
 
 
     class DatanormL2Conv(BaseDataterm):
@@ -194,7 +193,7 @@ IN PROGRESS
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 2 minutes  5.916 seconds)
+   **Total running time of the script:** ( 2 minutes  10.589 seconds)
 
 
 .. _sphx_glr_download_tutorials_convolution.py:

@@ -9,13 +9,13 @@ we will briefly show what the effect looks like.
 """
 
 ###############################################################################
-# A grey image is created and viewed in area [0, 1].
+# A grey image is created and viewed in an area [0, 1].
 # The relation of the weighting between dataterm and regularization
 # remains the same, but is adjusted in its absolute value too.
 import numpy as np
-from recon.interfaces import Smoothing
 import matplotlib.pyplot as plt
 
+from recon.interfaces import Smoothing
 from recon.utils.images import two_smooth_squares
 
 scaled_image = two_smooth_squares(256, 200)
@@ -23,10 +23,6 @@ scaled_image = two_smooth_squares(256, 200)
 sigma = 0.3  # the percentage portion standard deviation for normal (Gaussian) distribution.
 
 noise_image = scaled_image + np.random.normal(0, sigma*np.max(scaled_image), size=scaled_image.shape)
-
-
-###############################################################################
-# ...
 
 weights = [(0.2, 0.2), (1, 1), (2, 2)]
 
