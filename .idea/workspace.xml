@@ -1,0 +1,1191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="0ff715c0-77f2-4a6d-9da2-54bf536f8191" name="Default Changelist" comment="" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CoverageViewManager">
+    <option name="myElementSize" value="543" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/data/demo/2d_smoothing_bregman.png">
+          <provider selected="true" editor-type-id="images" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/docs/source/tutorials/images/sphx_glr_convolution_001.png">
+          <provider selected="true" editor-type-id="images" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/README.md">
+          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+            <state split_layout="SPLIT">
+              <first_editor relative-caret-position="449">
+                <caret line="57" column="12" lean-forward="true" selection-start-line="57" selection-start-column="12" selection-end-line="57" selection-end-column="12" />
+                <folding>
+                  <element signature="e#0#26#0" expanded="true" />
+                </folding>
+              </first_editor>
+              <second_editor />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/tutorials/radon.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="346">
+              <caret line="54" column="58" selection-start-line="54" selection-start-column="58" selection-end-line="54" selection-end-column="58" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/tutorials/convolution.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-66">
+              <caret line="54" lean-forward="true" selection-start-line="54" selection-end-line="54" />
+              <folding>
+                <element signature="e#77#104#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/recon/solver/pd_hgm_extend.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="849">
+              <caret line="75" column="35" selection-start-line="75" selection-start-column="35" selection-end-line="75" selection-end-column="35" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/recon/solver/pd_hgm.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="184">
+              <caret line="43" column="50" selection-start-line="43" selection-start-column="50" selection-end-line="43" selection-end-column="76" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/docs/source/tutorials/images/sphx_glr_2d_tv_segmentation_001.png">
+          <provider selected="true" editor-type-id="images" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/data/demo/2d_smoothing_tikhonov.png">
+          <provider selected="true" editor-type-id="images" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/data/demo/2d_smoothing_tv.png">
+          <provider selected="true" editor-type-id="images" />
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>shape</find>
+      <find>sens</find>
+      <find>prox_param</find>
+      <find>self.alpha</find>
+      <find>ulast</find>
+      <find>shape_nd</find>
+      <find>sp_fft</find>
+      <find>_init_freq_conv_axes</find>
+      <find>comple</find>
+      <find>max_iter</find>
+      <find>coff</find>
+      <find>fftconvolve2d2</find>
+      <find>identi</find>
+      <find>lam_bar</find>
+      <find>asses</find>
+      <find>min_lam</find>
+      <find>plot_iteration</find>
+      <find>pylops_power_method_opnorm</find>
+      <find>inv</find>
+      <find>interp1d</find>
+      <find>partial</find>
+      <find>odl</find>
+      <find>misc</find>
+      <find>stop_in_front</find>
+      <find>stop</find>
+      <find>progress</find>
+      <find>u_new</find>
+      <find>image</find>
+      <find>gray</find>
+      <find>lam</find>
+    </findStrings>
+    <replaceStrings>
+      <replace />
+    </replaceStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/data/thesis/master/chapter4_realworld/41/satv_colab/main.py" />
+        <option value="$PROJECT_DIR$/data/thesis/master/chapter4_realworld/41/btv_colab/main.py" />
+        <option value="$PROJECT_DIR$/data/thesis/master/chapter4_realworld/41/satv_colab/eval.py" />
+        <option value="$PROJECT_DIR$/data/thesis/master/chapter4_realworld/41/tv_colab/eval.py" />
+        <option value="$PROJECT_DIR$/data/thesis/master/chapter4_realworld/41/btv_colab/eval.py" />
+        <option value="$PROJECT_DIR$/data/thesis/master/chapter4_realworld/41/sabtv_colab/main.py" />
+        <option value="$PROJECT_DIR$/data/thesis/master/chapter1/11_different_noise_L1L2.py" />
+        <option value="$PROJECT_DIR$/data/thesis/master/chapter4_realworld/43/low_dose/sabtv/main.py" />
+        <option value="$PROJECT_DIR$/data/thesis/master/chapter4_realworld/43/low_dose/tv/main.py" />
+        <option value="$PROJECT_DIR$/data/thesis/master/chapter4_realworld/43/low_dose/satv/mian.py" />
+        <option value="$PROJECT_DIR$/data/thesis/master/chapter4_realworld/43/low_dose_2/satv/mian.py" />
+        <option value="$PROJECT_DIR$/data/thesis/master/chapter4_realworld/43/low_dose_2/tv/main.py" />
+        <option value="$PROJECT_DIR$/data/thesis/master/chapter4_realworld/43/low_dose_2/btv/main.py" />
+        <option value="$PROJECT_DIR$/data/thesis/master/chapter4_realworld/43/low_dose_2/sabtv/main.py" />
+        <option value="$PROJECT_DIR$/data/thesis/master/chapter4_realworld/42/tv/main.py" />
+        <option value="$PROJECT_DIR$/data/thesis/master/chapter4_realworld/42/satv/main.py" />
+        <option value="$PROJECT_DIR$/data/thesis/master/chapter4_realworld/main.py" />
+        <option value="$PROJECT_DIR$/data/output/tmp.py" />
+        <option value="$PROJECT_DIR$/data/thesis/master/chapter4_realworld/41/tv/main.py" />
+        <option value="$PROJECT_DIR$/data/thesis/master/chapter4_realworld/41/breg/main.py" />
+        <option value="$PROJECT_DIR$/data/thesis/master/chapter4_realworld/41/satv/main.py" />
+        <option value="$PROJECT_DIR$/data/thesis/master/chapter4_realworld/41/sabtv/main.py" />
+        <option value="$PROJECT_DIR$/data/thesis/master/chapter4_realworld/42/btv/main.py" />
+        <option value="$PROJECT_DIR$/recon/interfaces/satv.py" />
+        <option value="$PROJECT_DIR$/tutorials/datanorms_L1_vs_L2.py" />
+        <option value="$PROJECT_DIR$/recon/operator/fft_conv.py" />
+        <option value="$PROJECT_DIR$/.gitignore" />
+        <option value="$PROJECT_DIR$/tutorials/ct_reconstruction.py" />
+        <option value="$PROJECT_DIR$/test/operator_test/test_mri_dft.py" />
+        <option value="$PROJECT_DIR$/recon/operator/mri_dft.py" />
+        <option value="$PROJECT_DIR$/test/interfaces_test/test_recon.py" />
+        <option value="$PROJECT_DIR$/recon/operator/linear_opeartor.py" />
+        <option value="$PROJECT_DIR$/.travis.yml" />
+        <option value="$PROJECT_DIR$/requirements.txt" />
+        <option value="$PROJECT_DIR$/test/operator_test/test_ct_radon.py" />
+        <option value="$PROJECT_DIR$/tutorials/conv_recon.py" />
+        <option value="$PROJECT_DIR$/data/thesis/master/chapter4_realworld/42/sabtv/satv.py" />
+        <option value="$PROJECT_DIR$/data/thesis/master/chapter4_realworld/42/sabtv/main.py" />
+        <option value="$PROJECT_DIR$/data/thesis/master/chapter4_realworld/43/low_dose/btv/main.py" />
+        <option value="$PROJECT_DIR$/data/thesis/master/chapter1/conving.py" />
+        <option value="$PROJECT_DIR$/recon/solver/pd_hgm.py" />
+        <option value="$PROJECT_DIR$/tutorials/convolution.py" />
+        <option value="$PROJECT_DIR$/tutorials/datafidelity_L1_vs_L2.py" />
+        <option value="$PROJECT_DIR$/tutorials/scaling_problem.py" />
+        <option value="$PROJECT_DIR$/tutorials/spatially_adapted_total_variation.py" />
+        <option value="$PROJECT_DIR$/tutorials/total_generalized_variation.py" />
+        <option value="$PROJECT_DIR$/tutorials/2d_tv_segmentation.py" />
+        <option value="$PROJECT_DIR$/tutorials/2d_image_smoothing.py" />
+        <option value="$PROJECT_DIR$/tutorials/radon.py" />
+        <option value="$PROJECT_DIR$/recon/solver/pd_hgm_extend.py" />
+        <option value="$PROJECT_DIR$/README.md" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectConfigurationFiles">
+    <option name="files">
+      <list>
+        <option value="$PROJECT_DIR$/.idea/recon.iml" />
+        <option value="$PROJECT_DIR$/.idea/misc.xml" />
+        <option value="$PROJECT_DIR$/.idea/modules.xml" />
+        <option value="$PROJECT_DIR$/.idea/vcs.xml" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectFrameBounds" fullScreen="true">
+    <option name="width" value="1920" />
+    <option name="height" value="1080" />
+  </component>
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="recon" type="b2602c69:ProjectViewProjectNode" />
+              <item name="recon" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="recon" type="b2602c69:ProjectViewProjectNode" />
+              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="Scope" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/data/thesis/master/chapter4_realworld/42/sabtv" />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+  </component>
+  <component name="PyCoverageOptionsProvider">
+    <option name="myUseBundledCoveragePy" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/data/thesis/master/chapter4_realworld/42/sabtv" />
+      <recent name="$PROJECT_DIR$/data/demo" />
+      <recent name="$PROJECT_DIR$/data/thesis/master/chapter4_realworld/43" />
+      <recent name="$PROJECT_DIR$/data/thesis/master/chapter4/conv/kernel_3" />
+      <recent name="$PROJECT_DIR$/data/thesis/master/chapter4/conv/big_kernel_7" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/recon/utils" />
+      <recent name="$PROJECT_DIR$/data" />
+      <recent name="$PROJECT_DIR$/backup" />
+      <recent name="$PROJECT_DIR$/data/thesis/master/chapter4_realworld/data2" />
+      <recent name="$PROJECT_DIR$/data/thesis/master/chapter4_realworld/42/tv" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager" selected="Python.radon">
+    <configuration name="2d_image_smoothing" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="recon" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tutorials" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/tutorials/2d_image_smoothing.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="conving" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="recon" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/data/thesis/master/chapter1" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/data/thesis/master/chapter1/conving.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="main (1)" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="recon" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/data/thesis/master/chapter4_realworld/43/low_dose/btv" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/data/thesis/master/chapter4_realworld/43/low_dose/btv/main.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="recon" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/data/thesis/master/chapter4_realworld/42/sabtv" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/data/thesis/master/chapter4_realworld/42/sabtv/main.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="radon" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="recon" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tutorials" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/tutorials/radon.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.radon" />
+        <item itemvalue="Python.2d_image_smoothing" />
+        <item itemvalue="Python.conving" />
+        <item itemvalue="Python.main (1)" />
+        <item itemvalue="Python.main" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="0ff715c0-77f2-4a6d-9da2-54bf536f8191" name="Default Changelist" comment="" />
+      <created>1581758899347</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1581758899347</updated>
+      <workItem from="1581758904563" duration="9593000" />
+      <workItem from="1581843427550" duration="9404000" />
+      <workItem from="1582211369049" duration="15140000" />
+      <workItem from="1582289634191" duration="10997000" />
+      <workItem from="1582532598949" duration="13614000" />
+      <workItem from="1582615059214" duration="22983000" />
+      <workItem from="1582726598918" duration="3004000" />
+      <workItem from="1582816520436" duration="3342000" />
+      <workItem from="1582898311912" duration="24168000" />
+      <workItem from="1583425805479" duration="2499000" />
+      <workItem from="1583428385129" duration="16080000" />
+      <workItem from="1583686500118" duration="4650000" />
+      <workItem from="1583694391376" duration="7740000" />
+      <workItem from="1583744456818" duration="15931000" />
+      <workItem from="1584374302060" duration="28235000" />
+      <workItem from="1584780944668" duration="32431000" />
+      <workItem from="1585120660848" duration="5309000" />
+      <workItem from="1585141146300" duration="21000" />
+      <workItem from="1586285825552" duration="67386000" />
+      <workItem from="1586934714549" duration="13520000" />
+      <workItem from="1587021694245" duration="1800000" />
+      <workItem from="1587579723946" duration="26000" />
+      <workItem from="1587973030487" duration="3353000" />
+      <workItem from="1588182270146" duration="29052000" />
+      <workItem from="1588686077205" duration="75000" />
+      <workItem from="1589787982303" duration="567000" />
+      <workItem from="1590323482783" duration="10434000" />
+      <workItem from="1590412758990" duration="13805000" />
+      <workItem from="1590504944240" duration="9164000" />
+      <workItem from="1590572927920" duration="3208000" />
+      <workItem from="1590579653597" duration="39122000" />
+      <workItem from="1590672969026" duration="454000" />
+      <workItem from="1590673440501" duration="5034000" />
+      <workItem from="1590698588113" duration="179000" />
+      <workItem from="1590698772751" duration="3682000" />
+      <workItem from="1590704268934" duration="1663000" />
+      <workItem from="1591024260540" duration="72659000" />
+      <workItem from="1591740056209" duration="20223000" />
+      <workItem from="1591876577810" duration="79496000" />
+      <workItem from="1592230649167" duration="41579000" />
+      <workItem from="1592808737341" duration="45000" />
+      <workItem from="1594825004021" duration="2813000" />
+      <workItem from="1596365976423" duration="25469000" />
+      <workItem from="1596456647513" duration="22616000" />
+      <workItem from="1596633069597" duration="9900000" />
+      <workItem from="1597066203565" duration="19054000" />
+      <workItem from="1597135553978" duration="22000" />
+      <workItem from="1597312049793" duration="20750000" />
+      <workItem from="1597348072561" duration="29000" />
+      <workItem from="1597386929136" duration="2131000" />
+      <workItem from="1597393663056" duration="2250000" />
+      <workItem from="1597996107779" duration="24073000" />
+      <workItem from="1598861723389" duration="1883000" />
+      <workItem from="1598941862759" duration="1657000" />
+      <workItem from="1599115507602" duration="13386000" />
+      <workItem from="1599481428441" duration="30983000" />
+      <workItem from="1599665731347" duration="23923000" />
+      <workItem from="1600014952598" duration="15548000" />
+      <workItem from="1600065438212" duration="2169000" />
+      <workItem from="1600069545258" duration="16921000" />
+      <workItem from="1600117979939" duration="1087000" />
+      <workItem from="1600265739148" duration="3001000" />
+      <workItem from="1600761368611" duration="76000" />
+      <workItem from="1600935261172" duration="5609000" />
+      <workItem from="1602837131548" duration="45403000" />
+      <workItem from="1603182462080" duration="10000" />
+      <workItem from="1603207295667" duration="36991000" />
+      <workItem from="1603372932888" duration="13748000" />
+      <workItem from="1603530529390" duration="95274000" />
+      <workItem from="1603797742024" duration="126862000" />
+      <workItem from="1604147908065" duration="109000" />
+      <workItem from="1604148021440" duration="23909000" />
+      <workItem from="1604419278884" duration="34929000" />
+      <workItem from="1605181184318" duration="3674000" />
+      <workItem from="1605603825766" duration="31000" />
+      <workItem from="1606840610098" duration="10161000" />
+      <workItem from="1606995580299" duration="31225000" />
+      <workItem from="1607197499691" duration="15958000" />
+      <workItem from="1607608455744" duration="26933000" />
+      <workItem from="1607958027301" duration="13000" />
+      <workItem from="1608110010467" duration="9070000" />
+      <workItem from="1608477832951" duration="37816000" />
+      <workItem from="1609317665437" duration="96745000" />
+      <workItem from="1610104135605" duration="364000" />
+      <workItem from="1610656680723" duration="116353000" />
+      <workItem from="1610996451483" duration="27656000" />
+      <workItem from="1611096021443" duration="110000" />
+      <workItem from="1611171258476" duration="171000" />
+      <workItem from="1611171432011" duration="13008000" />
+      <workItem from="1611320742943" duration="7958000" />
+      <workItem from="1611501550928" duration="29512000" />
+      <workItem from="1611599016622" duration="5400000" />
+      <workItem from="1611778387699" duration="7421000" />
+      <workItem from="1611948177508" duration="5861000" />
+      <workItem from="1612254019169" duration="2942000" />
+      <workItem from="1612516323690" duration="31557000" />
+      <workItem from="1613059994962" duration="10000" />
+      <workItem from="1613227754336" duration="43297000" />
+      <workItem from="1613386108522" duration="32755000" />
+      <workItem from="1613552319970" duration="10746000" />
+      <workItem from="1614020197066" duration="10627000" />
+      <workItem from="1614065755943" duration="34834000" />
+      <workItem from="1614531051520" duration="5184000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TestHistory">
+    <history-entry file="Unittests_in_test_recon_py - 2021.02.23 at 14h 49m 44s.xml">
+      <configuration name="Unittests in test_recon.py" configurationId="tests" />
+    </history-entry>
+    <history-entry file="Unittests_in_test_recon_py - 2021.02.23 at 14h 50m 06s.xml">
+      <configuration name="Unittests in test_recon.py" configurationId="tests" />
+    </history-entry>
+    <history-entry file="Unittests_in_test_recon_py - 2021.02.23 at 14h 50m 44s.xml">
+      <configuration name="Unittests in test_recon.py" configurationId="tests" />
+    </history-entry>
+    <history-entry file="Unittests_in_test_recon_py - 2021.02.23 at 14h 51m 19s.xml">
+      <configuration name="Unittests in test_recon.py" configurationId="tests" />
+    </history-entry>
+    <history-entry file="Unittests_in_test_recon_py - 2021.02.23 at 14h 52m 48s.xml">
+      <configuration name="Unittests in test_recon.py" configurationId="tests" />
+    </history-entry>
+    <history-entry file="Unittests_in_test_recon_py - 2021.02.23 at 14h 56m 10s.xml">
+      <configuration name="Unittests in test_recon.py" configurationId="tests" />
+    </history-entry>
+    <history-entry file="Unittests_in_test_recon_py - 2021.02.23 at 14h 57m 45s.xml">
+      <configuration name="Unittests in test_recon.py" configurationId="tests" />
+    </history-entry>
+    <history-entry file="Unittests_in_test - 2021.02.23 at 15h 01m 50s.xml">
+      <configuration name="Unittests in test" configurationId="tests" />
+    </history-entry>
+    <history-entry file="Unittests_in_test - 2021.02.23 at 15h 11m 52s.xml">
+      <configuration name="Unittests in test" configurationId="tests" />
+    </history-entry>
+    <history-entry file="Unittests_in_test_ct_radon_py - 2021.02.23 at 18h 18m 00s.xml">
+      <configuration name="Unittests in test_ct_radon.py" configurationId="tests" />
+    </history-entry>
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="1915539000" />
+  </component>
+  <component name="TodoView">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="0" y="0" width="1920" height="1080" extended-state="0" />
+    <editor active="true" />
+    <layout>
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.21778488" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32970297" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.19504951" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.280198" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" weight="0.32876712" />
+      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="8" weight="0.32970297" />
+      <window_info anchor="bottom" id="Database Changes" order="9" />
+      <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
+      <window_info anchor="bottom" id="Terminal" order="11" weight="0.32876712" />
+      <window_info anchor="bottom" id="Python Console" order="12" weight="0.32871288" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Remote Host" order="3" />
+      <window_info anchor="right" id="SciView" order="4" sideWeight="0.4979424" weight="0.21352503" />
+      <window_info anchor="right" id="Database" order="5" />
+      <window_info anchor="right" id="Coverage" order="6" sideWeight="0.5020576" side_tool="true" weight="0.3743344" />
+    </layout>
+    <layout-to-restore>
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.21647818" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.28219178" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.28082192" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" weight="0.32876712" />
+      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="8" />
+      <window_info anchor="bottom" id="Database Changes" order="9" />
+      <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
+      <window_info anchor="bottom" id="Terminal" order="11" weight="0.32876712" />
+      <window_info anchor="bottom" id="Python Console" order="12" weight="0.32871288" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Remote Host" order="3" />
+      <window_info anchor="right" id="SciView" order="4" sideWeight="0.4979424" visible="true" weight="0.39660743" />
+      <window_info anchor="right" id="Database" order="5" />
+      <window_info anchor="right" id="Coverage" order="6" sideWeight="0.5020576" side_tool="true" weight="0.3743344" />
+    </layout-to-restore>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/experimental/ideas/unet_master/model.py</url>
+          <line>38</line>
+          <option name="timeStamp" value="75" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/data/thesis/tv_reconstruction_mrt.py</url>
+          <line>294</line>
+          <option name="timeStamp" value="76" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/data/thesis/tv_bregman_reconstruction_mrt.py</url>
+          <line>105</line>
+          <option name="timeStamp" value="80" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/data/thesis/other/primal_dual_figure.py</url>
+          <line>55</line>
+          <option name="timeStamp" value="81" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/experimental/ideas/gif_your_nifti_master/gif_your_nifti/core.py</url>
+          <line>200</line>
+          <option name="timeStamp" value="105" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/experimental/examples/vcorona_main.py</url>
+          <line>429</line>
+          <option name="timeStamp" value="156" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/experimental/ideas/fastMRI/first_test.py</url>
+          <line>21</line>
+          <option name="timeStamp" value="160" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/experimental/ideas/fastMRI/first_test.py</url>
+          <line>50</line>
+          <option name="timeStamp" value="161" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/experimental/interfaces/pd_smooth_mtv.py</url>
+          <line>142</line>
+          <option name="timeStamp" value="184" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/experimental/examples/local_blurring_parameter.py</url>
+          <line>136</line>
+          <option name="timeStamp" value="198" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/own/lukas_segmentation.py</url>
+          <line>23</line>
+          <option name="timeStamp" value="210" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/experimental/terms/dataterm_linear_constrained.py</url>
+          <line>17</line>
+          <option name="timeStamp" value="215" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/experimental/examples/unequally_dirstirbuted_ct.py</url>
+          <line>73</line>
+          <option name="timeStamp" value="243" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/experimental/examples/audio.py</url>
+          <line>108</line>
+          <option name="timeStamp" value="244" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/experimental/analysis/1D_comparisson.py</url>
+          <line>76</line>
+          <option name="timeStamp" value="335" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/data/thesis/master/chapter1/conving.py</url>
+          <line>141</line>
+          <option name="timeStamp" value="367" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/data/thesis/master/chapter4/conv/phantom_01/satv/main.py</url>
+          <line>82</line>
+          <option name="timeStamp" value="383" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/experimental/interfaces/recon_satv.py</url>
+          <line>182</line>
+          <option name="timeStamp" value="386" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/experimental/tutorials/ct_satv.py</url>
+          <line>141</line>
+          <option name="timeStamp" value="388" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/backup/test2.py</url>
+          <line>204</line>
+          <option name="timeStamp" value="429" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/backup/test3.py</url>
+          <line>54</line>
+          <option name="timeStamp" value="432" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/data/thesis/master/chapter4_ct/exmp_low_dose/satv_2/main.py</url>
+          <line>35</line>
+          <option name="timeStamp" value="443" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/data/thesis/master/chapter4_ct/exmp_low_dose/satv_2/main.py</url>
+          <line>127</line>
+          <option name="timeStamp" value="444" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/recon/interfaces/satv.py</url>
+          <line>125</line>
+          <option name="timeStamp" value="445" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/data/thesis/master/chapter4_realworld/42/sabtv/main.py</url>
+          <line>129</line>
+          <option name="timeStamp" value="450" />
+        </line-breakpoint>
+      </breakpoints>
+      <default-breakpoints>
+        <breakpoint type="python-exception">
+          <properties notifyOnTerminate="true" exception="BaseException">
+            <option name="notifyOnTerminate" value="true" />
+          </properties>
+        </breakpoint>
+      </default-breakpoints>
+    </breakpoint-manager>
+    <watches-manager>
+      <configuration name="PythonConfigurationType">
+        <watch expression="a" />
+      </configuration>
+    </watches-manager>
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/recon$chanvese_multiclass_segmentation.coverage" NAME="chanvese_multiclass_segmentation Coverage Results" MODIFIED="1591471447861" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/examples" />
+    <SUITE FILE_PATH="coverage/recon$segmentation_2.coverage" NAME="segmentation_2 Coverage Results" MODIFIED="1592464318914" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/recon/interfaces" />
+    <SUITE FILE_PATH="coverage/recon$smooth_bregman.coverage" NAME="smooth_bregman Coverage Results" MODIFIED="1607612879218" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/recon/interfaces" />
+    <SUITE FILE_PATH="coverage/recon$pd_recon.coverage" NAME="pd_recon Coverage Results" MODIFIED="1591470714059" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/recon/reconstruction" />
+    <SUITE FILE_PATH="coverage/recon$folie3.coverage" NAME="folie3 Coverage Results" MODIFIED="1591733730727" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/examples" />
+    <SUITE FILE_PATH="coverage/recon$pd_hgm_extend.coverage" NAME="pd_hgm_extend Coverage Results" MODIFIED="1603708683271" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/recon/solver" />
+    <SUITE FILE_PATH="coverage/recon$3d_nifti_segmentation.coverage" NAME="3d_nifti_segmentation Coverage Results" MODIFIED="1592465884700" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/examples" />
+    <SUITE FILE_PATH="coverage/recon$example_script.coverage" NAME="example_script Coverage Results" MODIFIED="1592290138557" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/recon/ideas/gif_your_nifti_master/examples" />
+    <SUITE FILE_PATH="coverage/recon$test.coverage" NAME="test Coverage Results" MODIFIED="1610803848091" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tutorials" />
+    <SUITE FILE_PATH="coverage/recon$datanorms_L1_vs_L2.coverage" NAME="datanorms_L1_vs_L2 Coverage Results" MODIFIED="1614076074369" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tutorials" />
+    <SUITE FILE_PATH="coverage/recon$2d_pylops_reconstruction.coverage" NAME="2d_pylops_reconstruction Coverage Results" MODIFIED="1592429972962" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/examples" />
+    <SUITE FILE_PATH="coverage/recon$base_interface.coverage" NAME="base_interface Coverage Results" MODIFIED="1603536396831" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/recon/interfaces" />
+    <SUITE FILE_PATH="coverage/recon$ct_radon.coverage" NAME="ct_radon Coverage Results" MODIFIED="1610723491699" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/recon/operator" />
+    <SUITE FILE_PATH="coverage/recon$Unittests_in_test_ct_radon_py.coverage" NAME="Unittests in test_ct_radon.py Coverage Results" MODIFIED="1614100677640" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test/operator_test" />
+    <SUITE FILE_PATH="coverage/recon$unequally_dirstirbuted_ct.coverage" NAME="unequally_dirstirbuted_ct Coverage Results" MODIFIED="1597396612575" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/experimental/examples" />
+    <SUITE FILE_PATH="coverage/recon$datanorm_l2_bregman.coverage" NAME="datanorm_l2_bregman Coverage Results" MODIFIED="1600081983467" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/recon/terms" />
+    <SUITE FILE_PATH="coverage/recon$fft_reconstruction__1_.coverage" NAME="fft_reconstruction (1) Coverage Results" MODIFIED="1591305424749" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/examples/nifti" />
+    <SUITE FILE_PATH="coverage/recon$audio.coverage" NAME="audio Coverage Results" MODIFIED="1602931386590" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/experimental/examples" />
+    <SUITE FILE_PATH="coverage/recon$tv_reconstruction_mrt.coverage" NAME="tv_reconstruction_mrt Coverage Results" MODIFIED="1586940474459" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/examples/thesis" />
+    <SUITE FILE_PATH="coverage/recon$example_script__1_.coverage" NAME="example_script (1) Coverage Results" MODIFIED="1591341557270" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/recon/ideas/gif_your_nifti_master/examples" />
+    <SUITE FILE_PATH="coverage/recon$pylops_thing.coverage" NAME="pylops_thing Coverage Results" MODIFIED="1603700721753" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/experimental/tutorials" />
+    <SUITE FILE_PATH="coverage/recon$fft_reconstruction.coverage" NAME="fft_reconstruction Coverage Results" MODIFIED="1591190903012" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/examples/pylops" />
+    <SUITE FILE_PATH="coverage/recon$test_segmentation.coverage" NAME="test_segmentation Coverage Results" MODIFIED="1604048373582" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/experimental/tutorials" />
+    <SUITE FILE_PATH="coverage/recon$main__5_.coverage" NAME="main (5) Coverage Results" MODIFIED="1614067206353" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/data/thesis/master/chapter4_realworld/42/sabtv" />
+    <SUITE FILE_PATH="coverage/recon$Unittests_in_test_mri_dft_py.coverage" NAME="Unittests in test_mri_dft.py Coverage Results" MODIFIED="1603662186018" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test/operator" />
+    <SUITE FILE_PATH="coverage/recon$satv__1_.coverage" NAME="satv (1) Coverage Results" MODIFIED="1609775313613" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/data/thesis/master/chapter4/conv/phantom_01/bregman_satv" />
+    <SUITE FILE_PATH="coverage/recon$conv_recon.coverage" NAME="conv_recon Coverage Results" MODIFIED="1614104221636" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tutorials" />
+    <SUITE FILE_PATH="coverage/recon$radon.coverage" NAME="radon Coverage Results" MODIFIED="1614535213219" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tutorials" />
+    <SUITE FILE_PATH="coverage/recon$Unittests_in_test_indicator_l2_py.coverage" NAME="Unittests in test_indicator_l2.py Coverage Results" MODIFIED="1603667033404" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test/terms_test" />
+    <SUITE FILE_PATH="coverage/recon$pd_hgm.coverage" NAME="pd_hgm Coverage Results" MODIFIED="1599724373427" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/recon/solver" />
+    <SUITE FILE_PATH="coverage/recon$3d_nifti_reconstruction.coverage" NAME="3d_nifti_reconstruction Coverage Results" MODIFIED="1592462931119" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/examples" />
+    <SUITE FILE_PATH="coverage/recon$2d_image_smoothing__1_.coverage" NAME="2d_image_smoothing (1) Coverage Results" MODIFIED="1599561679734" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tutorials" />
+    <SUITE FILE_PATH="coverage/recon$mian.coverage" NAME="mian Coverage Results" MODIFIED="1613556376292" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/data/thesis/master/chapter4_realworld/43/low_dose/satv" />
+    <SUITE FILE_PATH="coverage/recon$pd_algorithm_comparisson.coverage" NAME="pd_algorithm_comparisson Coverage Results" MODIFIED="1591538148059" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/examples" />
+    <SUITE FILE_PATH="coverage/recon$pylops_problem.coverage" NAME="pylops_problem Coverage Results" MODIFIED="1591562413667" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/examples" />
+    <SUITE FILE_PATH="coverage/recon$PTPN_Recon.coverage" NAME="PTPN_Recon Coverage Results" MODIFIED="1586354896072" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/ideas/TMI_parameter_tuning-master" />
+    <SUITE FILE_PATH="coverage/recon$corona_main.coverage" NAME="corona_main Coverage Results" MODIFIED="1591187652063" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/examples/other" />
+    <SUITE FILE_PATH="coverage/recon$mian__1_.coverage" NAME="mian (1) Coverage Results" MODIFIED="1613557250082" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/data/thesis/master/chapter4_realworld/43/low_dose_2/satv" />
+    <SUITE FILE_PATH="coverage/recon$Unittests_in_test.coverage" NAME="Unittests in test Coverage Results" MODIFIED="1614089295402" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test" />
+    <SUITE FILE_PATH="coverage/recon$chan_vese_multi_class.coverage" NAME="chan_vese_multi_class Coverage Results" MODIFIED="1584786800723" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/examples/segmentation" />
+    <SUITE FILE_PATH="coverage/recon$white_noise_between_spaces.coverage" NAME="white_noise_between_spaces Coverage Results" MODIFIED="1610659893340" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tutorials" />
+    <SUITE FILE_PATH="coverage/recon$kaczmarz__1_.coverage" NAME="kaczmarz (1) Coverage Results" MODIFIED="1611046928422" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/data/thesis/master/chapter4_ct/exmp_limited_angle/main_tv" />
+    <SUITE FILE_PATH="coverage/recon$main.coverage" NAME="main Coverage Results" MODIFIED="1614115432693" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/data/thesis/master/chapter4_realworld/42/sabtv" />
+    <SUITE FILE_PATH="coverage/recon$utils.coverage" NAME="utils Coverage Results" MODIFIED="1602880757515" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/recon/utils" />
+    <SUITE FILE_PATH="coverage/recon$ct_satv_compensation.coverage" NAME="ct_satv_compensation Coverage Results" MODIFIED="1604072630076" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/experimental/tutorials" />
+    <SUITE FILE_PATH="coverage/recon$eval__2_.coverage" NAME="eval (2) Coverage Results" MODIFIED="1612651041375" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/data/thesis/master/chapter4_realworld/41/tv_colab" />
+    <SUITE FILE_PATH="coverage/recon$demonstration.coverage" NAME="demonstration Coverage Results" MODIFIED="1608645345484" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/experimental/tutorials" />
+    <SUITE FILE_PATH="coverage/recon$chan_vese_01.coverage" NAME="chan_vese_01 Coverage Results" MODIFIED="1583327389856" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/examples/segmentation" />
+    <SUITE FILE_PATH="coverage/recon$bregman_satv_smoothing.coverage" NAME="bregman_satv_smoothing Coverage Results" MODIFIED="1604083283706" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/experimental/tutorials" />
+    <SUITE FILE_PATH="coverage/recon$dottest.coverage" NAME="dottest Coverage Results" MODIFIED="1610716757969" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$USER_HOME$/anaconda/envs/recon/lib/python3.7/site-packages/pylops/utils" />
+    <SUITE FILE_PATH="coverage/recon$tv_pdghm.coverage" NAME="tv_pdghm Coverage Results" MODIFIED="1591339855688" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/examples/segmentation" />
+    <SUITE FILE_PATH="coverage/recon$create_learning_data.coverage" NAME="create_learning_data Coverage Results" MODIFIED="1586443526465" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/recon/ideas" />
+    <SUITE FILE_PATH="coverage/recon$ct_reconstruction.coverage" NAME="ct_reconstruction Coverage Results" MODIFIED="1614078050499" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tutorials" />
+    <SUITE FILE_PATH="coverage/recon$direct_reconstruction_ct.coverage" NAME="direct_reconstruction_ct Coverage Results" MODIFIED="1587022123137" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/examples/thesis" />
+    <SUITE FILE_PATH="coverage/recon$sharp.coverage" NAME="sharp Coverage Results" MODIFIED="1607077744454" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/data/thesis/master" />
+    <SUITE FILE_PATH="coverage/recon$main__4_.coverage" NAME="main (4) Coverage Results" MODIFIED="1614030154739" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/data/thesis/master/chapter4_realworld/41/sabtv" />
+    <SUITE FILE_PATH="coverage/recon$odl_thing.coverage" NAME="odl_thing Coverage Results" MODIFIED="1603665070255" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/experimental/tutorials" />
+    <SUITE FILE_PATH="coverage/recon$chanvese_singleclass_segmentation.coverage" NAME="chanvese_singleclass_segmentation Coverage Results" MODIFIED="1591471656007" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/examples" />
+    <SUITE FILE_PATH="coverage/recon$test3.coverage" NAME="test3 Coverage Results" MODIFIED="1610803852740" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tutorials" />
+    <SUITE FILE_PATH="coverage/recon$local_blurring_satv.coverage" NAME="local_blurring_satv Coverage Results" MODIFIED="1596637265082" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/experimental/examples" />
+    <SUITE FILE_PATH="coverage/recon$linear_opeartor.coverage" NAME="linear_opeartor Coverage Results" MODIFIED="1582573998656" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/recon/math/operator" />
+    <SUITE FILE_PATH="coverage/recon$pd_smooth_satv.coverage" NAME="pd_smooth_satv Coverage Results" MODIFIED="1591613395772" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/recon/reconstruction" />
+    <SUITE FILE_PATH="coverage/recon$Unittests_in_constraints_uniform_unitsimpex_test_py.coverage" NAME="Unittests in constraints_uniform_unitsimpex_test.py Coverage Results" MODIFIED="1584603032486" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test/math/terms" />
+    <SUITE FILE_PATH="coverage/recon$direct_reconstruction.coverage" NAME="direct_reconstruction Coverage Results" MODIFIED="1586333477970" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/examples/thesis" />
+    <SUITE FILE_PATH="coverage/recon$short_test.coverage" NAME="short_test Coverage Results" MODIFIED="1603636835220" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/experimental/examples" />
+    <SUITE FILE_PATH="coverage/recon$tv_bregman_reconstruction_mrt.coverage" NAME="tv_bregman_reconstruction_mrt Coverage Results" MODIFIED="1586948066333" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/examples/thesis" />
+    <SUITE FILE_PATH="coverage/recon$zooming.coverage" NAME="zooming Coverage Results" MODIFIED="1607076321072" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/data/thesis/master" />
+    <SUITE FILE_PATH="coverage/recon$radon_transform.coverage" NAME="radon_transform Coverage Results" MODIFIED="1610736280969" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$USER_HOME$/anaconda/envs/recon/lib/python3.7/site-packages/skimage/transform" />
+    <SUITE FILE_PATH="coverage/recon$tv_pdghm__1_.coverage" NAME="tv_pdghm (1) Coverage Results" MODIFIED="1584899847040" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/recon/segmentation" />
+    <SUITE FILE_PATH="coverage/recon$core.coverage" NAME="core Coverage Results" MODIFIED="1591821837903" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/recon/ideas/gif_your_nifti_master/gif_your_nifti" />
+    <SUITE FILE_PATH="coverage/recon$conving.coverage" NAME="conving Coverage Results" MODIFIED="1614160889971" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/data/thesis/master/chapter1" />
+    <SUITE FILE_PATH="coverage/recon$tgv.coverage" NAME="tgv Coverage Results" MODIFIED="1609363732018" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/data/thesis/master/chapter4/tgv" />
+    <SUITE FILE_PATH="coverage/recon$dataterm.coverage" NAME="dataterm Coverage Results" MODIFIED="1591188517569" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/recon/math/terms" />
+    <SUITE FILE_PATH="coverage/recon$1D_comparisson.coverage" NAME="1D_comparisson Coverage Results" MODIFIED="1605183526901" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/experimental/analysis" />
+    <SUITE FILE_PATH="coverage/recon$convex_segmentation.coverage" NAME="convex_segmentation Coverage Results" MODIFIED="1584605998137" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/recon/segmentation" />
+    <SUITE FILE_PATH="coverage/recon$fft_reconstruction_3d.coverage" NAME="fft_reconstruction_3d Coverage Results" MODIFIED="1591217676092" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/examples/pylops" />
+    <SUITE FILE_PATH="coverage/recon$pd_smooth_mtv.coverage" NAME="pd_smooth_mtv Coverage Results" MODIFIED="1592224904101" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/recon/reconstruction" />
+    <SUITE FILE_PATH="coverage/recon$Unittests_in_test_datanorm_l2_bregman_py.coverage" NAME="Unittests in test_datanorm_l2_bregman.py Coverage Results" MODIFIED="1603666823765" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test" />
+    <SUITE FILE_PATH="coverage/recon$spatially_adapted_total_variation.coverage" NAME="spatially_adapted_total_variation Coverage Results" MODIFIED="1614080103592" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tutorials" />
+    <SUITE FILE_PATH="coverage/recon$total_generalized_variation.coverage" NAME="total_generalized_variation Coverage Results" MODIFIED="1614072603966" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tutorials" />
+    <SUITE FILE_PATH="coverage/recon$PTPN_Recon__2_.coverage" NAME="PTPN_Recon (2) Coverage Results" MODIFIED="1586469940704" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/recon/ideas/TMI_parameter_tuning_master" />
+    <SUITE FILE_PATH="coverage/recon$eval.coverage" NAME="eval Coverage Results" MODIFIED="1612651226737" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/data/thesis/master/chapter4_realworld/41/sabtv_colab" />
+    <SUITE FILE_PATH="coverage/recon$chan_vese_multi_dim.coverage" NAME="chan_vese_multi_dim Coverage Results" MODIFIED="1583506701788" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/recon/segmentation" />
+    <SUITE FILE_PATH="coverage/recon$cv.coverage" NAME="cv Coverage Results" MODIFIED="1581862096346" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/recon/segmentation" />
+    <SUITE FILE_PATH="coverage/recon$Unittests_in_test_datanorm_l2_py.coverage" NAME="Unittests in test_datanorm_l2.py Coverage Results" MODIFIED="1603666415065" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test/terms_test" />
+    <SUITE FILE_PATH="coverage/recon$main__1_.coverage" NAME="main (1) Coverage Results" MODIFIED="1614149959746" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/data/thesis/master/chapter4_realworld/43/low_dose/btv" />
+    <SUITE FILE_PATH="coverage/recon$plot_likelyhood.coverage" NAME="plot_likelyhood Coverage Results" MODIFIED="1611783620375" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/data/thesis/master/chapter3" />
+    <SUITE FILE_PATH="coverage/recon$main__2_.coverage" NAME="main (2) Coverage Results" MODIFIED="1614024156150" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/data/thesis/master/chapter4_realworld/41/breg" />
+    <SUITE FILE_PATH="coverage/recon$2d_tv_segmentation__1_.coverage" NAME="2d_tv_segmentation (1) Coverage Results" MODIFIED="1599560176514" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tutorials" />
+    <SUITE FILE_PATH="coverage/recon$11_different_noise_L1L2.coverage" NAME="11_different_noise_L1L2 Coverage Results" MODIFIED="1613241010312" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/data/thesis/master/chapter1" />
+    <SUITE FILE_PATH="coverage/recon$direct_reconstruction_mrt.coverage" NAME="direct_reconstruction_mrt Coverage Results" MODIFIED="1587022107786" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/examples/thesis" />
+    <SUITE FILE_PATH="coverage/recon$recon_satv_direct.coverage" NAME="recon_satv_direct Coverage Results" MODIFIED="1604069833722" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/experimental/interfaces" />
+    <SUITE FILE_PATH="coverage/recon$ct_satv.coverage" NAME="ct_satv Coverage Results" MODIFIED="1609800322346" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/experimental/tutorials" />
+    <SUITE FILE_PATH="coverage/recon$mri_dft.coverage" NAME="mri_dft Coverage Results" MODIFIED="1614088530429" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/recon/operator" />
+    <SUITE FILE_PATH="coverage/recon$eval__1_.coverage" NAME="eval (1) Coverage Results" MODIFIED="1612651106056" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/data/thesis/master/chapter4_realworld/41/btv_colab" />
+    <SUITE FILE_PATH="coverage/recon$tmp.coverage" NAME="tmp Coverage Results" MODIFIED="1614020328183" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/data/output" />
+    <SUITE FILE_PATH="coverage/recon$stepsize.coverage" NAME="stepsize Coverage Results" MODIFIED="1611603933553" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/data/thesis/master/chapter4/satv" />
+    <SUITE FILE_PATH="coverage/recon$local_blurring_parameter.coverage" NAME="local_blurring_parameter Coverage Results" MODIFIED="1592308027554" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/examples" />
+    <SUITE FILE_PATH="coverage/recon$segmentation.coverage" NAME="segmentation Coverage Results" MODIFIED="1592434681410" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/recon/interfaces" />
+    <SUITE FILE_PATH="coverage/recon$chan_vese.coverage" NAME="chan_vese Coverage Results" MODIFIED="1583327362647" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/recon/segmentation" />
+    <SUITE FILE_PATH="coverage/recon$base_term.coverage" NAME="base_term Coverage Results" MODIFIED="1599550774970" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/recon/terms" />
+    <SUITE FILE_PATH="coverage/recon$main__3_.coverage" NAME="main (3) Coverage Results" MODIFIED="1614024424031" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/data/thesis/master/chapter4_realworld/41/satv" />
+    <SUITE FILE_PATH="coverage/recon$test4.coverage" NAME="test4 Coverage Results" MODIFIED="1610797063842" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tutorials" />
+    <SUITE FILE_PATH="coverage/recon$vcorona_main.coverage" NAME="vcorona_main Coverage Results" MODIFIED="1591941773554" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/examples" />
+    <SUITE FILE_PATH="coverage/recon$smooth_bregman_satv.coverage" NAME="smooth_bregman_satv Coverage Results" MODIFIED="1604054870613" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/experimental/interfaces" />
+    <SUITE FILE_PATH="coverage/recon$2d_tgv_image_smoothing.coverage" NAME="2d_tgv_image_smoothing Coverage Results" MODIFIED="1599229653149" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/examples" />
+    <SUITE FILE_PATH="coverage/recon$satv.coverage" NAME="satv Coverage Results" MODIFIED="1611331138178" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/data/thesis/master/chapter4/conv/big_kernel_7/bregman_satv" />
+    <SUITE FILE_PATH="coverage/recon$recon_satv.coverage" NAME="recon_satv Coverage Results" MODIFIED="1609788302157" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/experimental/interfaces" />
+    <SUITE FILE_PATH="coverage/recon$kaczmarz.coverage" NAME="kaczmarz Coverage Results" MODIFIED="1611052359229" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/data/thesis/master/chapter4_ct/normal/main_tv" />
+    <SUITE FILE_PATH="coverage/recon$first_test.coverage" NAME="first_test Coverage Results" MODIFIED="1592086137245" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/recon/ideas/fastMRI" />
+    <SUITE FILE_PATH="coverage/recon$smoothing_interface.coverage" NAME="smoothing_interface Coverage Results" MODIFIED="1602883235080" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/recon/interfaces" />
+    <SUITE FILE_PATH="coverage/recon$2d_tv_segmentation.coverage" NAME="2d_tv_segmentation Coverage Results" MODIFIED="1614078721290" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tutorials" />
+    <SUITE FILE_PATH="coverage/recon$Unittests_in_operator_test.coverage" NAME="Unittests in operator_test Coverage Results" MODIFIED="1603668201372" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test/operator_test" />
+    <SUITE FILE_PATH="coverage/recon$projection.coverage" NAME="projection Coverage Results" MODIFIED="1592287408694" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/recon/math/terms" />
+    <SUITE FILE_PATH="coverage/recon$primal_dual_figure.coverage" NAME="primal_dual_figure Coverage Results" MODIFIED="1587978976886" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/examples/thesis/other" />
+    <SUITE FILE_PATH="coverage/recon$lukas_segmentation.coverage" NAME="lukas_segmentation Coverage Results" MODIFIED="1594829569267" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/examples" />
+    <SUITE FILE_PATH="coverage/recon$2d_fft_reconstruction_pylops.coverage" NAME="2d_fft_reconstruction_pylops Coverage Results" MODIFIED="1592466995632" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/examples" />
+    <SUITE FILE_PATH="coverage/recon$different_one.coverage" NAME="different_one Coverage Results" MODIFIED="1604167717169" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/experimental/tutorials" />
+    <SUITE FILE_PATH="coverage/recon$2d_image_smoothing.coverage" NAME="2d_image_smoothing Coverage Results" MODIFIED="1614533546597" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tutorials" />
+    <SUITE FILE_PATH="coverage/recon$diff_operator.coverage" NAME="diff_operator Coverage Results" MODIFIED="1584476537508" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/recon/math/operator" />
+    <SUITE FILE_PATH="coverage/recon$tv_loop_reconstruction_mrt.coverage" NAME="tv_loop_reconstruction_mrt Coverage Results" MODIFIED="1586945931389" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/examples/thesis" />
+    <SUITE FILE_PATH="coverage/recon$Unittests_in_test_recon_py.coverage" NAME="Unittests in test_recon.py Coverage Results" MODIFIED="1614088653442" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test/interfaces_test" />
+    <SUITE FILE_PATH="coverage/recon$image_boundary.coverage" NAME="image_boundary Coverage Results" MODIFIED="1583699366065" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/recon/helpers" />
+    <SUITE FILE_PATH="coverage/recon$exp_test.coverage" NAME="exp_test Coverage Results" MODIFIED="1608222521327" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/data/thesis" />
+    <SUITE FILE_PATH="coverage/recon$scaling_problem.coverage" NAME="scaling_problem Coverage Results" MODIFIED="1610659498343" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tutorials" />
+    <SUITE FILE_PATH="coverage/recon$images.coverage" NAME="images Coverage Results" MODIFIED="1603901064992" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/recon/utils" />
+    <SUITE FILE_PATH="coverage/recon$PTPN_Recon__1_.coverage" NAME="PTPN_Recon (1) Coverage Results" MODIFIED="1586354988742" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/ideas/TMI_parameter_tuning_master" />
+    <SUITE FILE_PATH="coverage/recon$smooth.coverage" NAME="smooth Coverage Results" MODIFIED="1591468948073" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/examples/other" />
+    <SUITE FILE_PATH="coverage/recon$3d_pylops_reconstruction.coverage" NAME="3d_pylops_reconstruction Coverage Results" MODIFIED="1592466984578" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/examples" />
+    <SUITE FILE_PATH="coverage/recon$pd_smooth.coverage" NAME="pd_smooth Coverage Results" MODIFIED="1592204573916" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/recon/reconstruction" />
+    <SUITE FILE_PATH="coverage/recon$test2.coverage" NAME="test2 Coverage Results" MODIFIED="1610795203078" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tutorials" />
+    <SUITE FILE_PATH="coverage/recon$dataterm_regularization.coverage" NAME="dataterm_regularization Coverage Results" MODIFIED="1597394701662" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/experimental/examples" />
+    <SUITE FILE_PATH="coverage/recon$main2.coverage" NAME="main2 Coverage Results" MODIFIED="1612005134845" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/data/thesis/master/chapter2/bregman" />
+    <SUITE FILE_PATH="coverage/recon$datanorm_l2.coverage" NAME="datanorm_l2 Coverage Results" MODIFIED="1599503009059" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/recon/terms" />
+    <SUITE FILE_PATH="coverage/recon$eval__3_.coverage" NAME="eval (3) Coverage Results" MODIFIED="1612651158624" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/data/thesis/master/chapter4_realworld/41/satv_colab" />
+  </component>
+  <component name="debuggerHistoryManager">
+    <expressions id="setValue">
+      <expression>
+        <expression-string>[0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0.]</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+    </expressions>
+    <expressions id="evaluateExpression">
+      <expression>
+        <expression-string>(self.back) * self.f_data.conjugate()</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>self.prox_param * self.lam * (self.back) * self.f_data.conjugate()</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>self.operator(np.reshape(x + self.prox_param * self.bregman_weight_alpha * self.pk, gt.shape)) + self.prox_param * self.lam * (self.back) * self.f_data.conjugate()</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>self.operator(np.reshape(x + self.prox_param * self.bregman_weight_alpha * self.pk, gt.shape)) +                  self.prox_param * self.lam * (self.back) * self.f_data.conjugate()</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>self.operator(np.reshape(x + self.prox_param * self.bregman_weight_alpha * self.pk, gt.shape)) +                  self.prox_param * self.lam * (self.back) * self.f_data.conjugate())</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>ds.pixel_array</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>eval(el)[0]</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>eval(el)</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>el</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+    </expressions>
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/data/thesis/master/chapter4_realworld/43/low_dose/tv/main.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="28" selection-start-line="28" selection-end-line="28" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/thesis/master/chapter4_realworld/43/low_dose/btv/main.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="17" column="21" selection-start-line="17" selection-start-column="21" selection-end-line="17" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/thesis/master/chapter4_realworld/43/low_dose/btv/Breg2.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/thesis/master/chapter4_realworld/43/low_dose/btv/Breg3.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/thesis/master/chapter4_realworld/43/low_dose/btv/Breg5.png" />
+    <entry file="file://$PROJECT_DIR$/data/thesis/master/chapter4_realworld/43/low_dose/btv/Breg4.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/thesis/master/chapter1/conv/direct.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/thesis/master/chapter1/conv/gt.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/thesis/master/chapter1/conv/noise.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/thesis/master/chapter1/conv/recon.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/thesis/master/chapter4_realworld/43/low_dose/sabtv/RR_iter_lam5.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/thesis/master/chapter4_realworld/43/low_dose/sabtv/RR_iter_lam4.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/thesis/master/chapter4_realworld/43/low_dose/sabtv/RR_iter_lam3.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/thesis/master/chapter4_realworld/43/low_dose/sabtv/RR_iter_lam2.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/thesis/master/chapter1/conving.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="263">
+          <caret line="156" column="8" selection-start-line="156" selection-start-column="8" selection-end-line="156" selection-end-column="8" />
+          <folding>
+            <element signature="e#0#46#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tutorials/datafidelity_L1_vs_L2.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="42" column="14" lean-forward="true" selection-start-line="42" selection-start-column="14" selection-end-line="42" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tutorials/scaling_problem.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="188">
+          <caret line="17" column="38" lean-forward="true" selection-start-line="17" selection-start-column="38" selection-end-line="17" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tutorials/spatially_adapted_total_variation.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-145">
+          <caret line="15" lean-forward="true" selection-start-line="15" selection-end-line="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tutorials/total_generalized_variation.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-807">
+          <caret line="31" column="48" lean-forward="true" selection-start-line="31" selection-start-column="48" selection-end-line="31" selection-end-column="48" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/demo/2d_smoothing_1d_comp_2.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/source/tutorials/images/sphx_glr_2d_tv_segmentation_002.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/source/tutorials/images/sphx_glr_ct_reconstruction_001.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/source/tutorials/images/sphx_glr_ct_reconstruction_002.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/source/tutorials/images/sphx_glr_ct_reconstruction_003.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/source/tutorials/images/sphx_glr_spatially_adapted_total_variation_003.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/source/tutorials/2d_image_smoothing.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="e#330#361#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tutorials/2d_image_smoothing.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="159">
+          <caret line="30" column="10" selection-start-line="30" selection-start-column="10" selection-end-line="30" selection-end-column="10" />
+          <folding>
+            <element signature="e#330#361#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tutorials/2d_tv_segmentation.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="10" column="1" selection-start-line="10" selection-start-column="1" selection-end-line="10" selection-end-column="1" />
+          <folding>
+            <element signature="e#377#403#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/source/tutorials/images/sphx_glr_2d_image_smoothing_003.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/source/tutorials/images/sphx_glr_2d_image_smoothing_005.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/source/tutorials/images/sphx_glr_radon_001.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/source/tutorials/images/sphx_glr_2d_image_smoothing_002.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/source/tutorials/images/sphx_glr_2d_image_smoothing_001.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/source/tutorials/images/sphx_glr_2d_image_smoothing_004.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/source/tutorials/images/sphx_glr_spatially_adapted_total_variation_001.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/source/tutorials/images/sphx_glr_spatially_adapted_total_variation_002.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/source/tutorials/images/sphx_glr_total_generalized_variation_001.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/source/tutorials/images/sphx_glr_total_generalized_variation_002.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/source/tutorials/images/sphx_glr_total_generalized_variation_003.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/source/tutorials/images/sphx_glr_radon_002.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/demo/2d_smoothing_noisy.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/demo/2d_smoothing_tikhonov.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/demo/2d_smoothing_tv.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/demo/2d_smoothing_bregman.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/source/tutorials/images/sphx_glr_2d_tv_segmentation_001.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tutorials/radon.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="346">
+          <caret line="54" column="58" selection-start-line="54" selection-start-column="58" selection-end-line="54" selection-end-column="58" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/recon/solver/pd_hgm.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="184">
+          <caret line="43" column="50" selection-start-line="43" selection-start-column="50" selection-end-line="43" selection-end-column="76" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/recon/solver/pd_hgm_extend.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="849">
+          <caret line="75" column="35" selection-start-line="75" selection-start-column="35" selection-end-line="75" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/source/tutorials/images/sphx_glr_convolution_001.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tutorials/convolution.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-66">
+          <caret line="54" lean-forward="true" selection-start-line="54" selection-end-line="54" />
+          <folding>
+            <element signature="e#77#104#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="449">
+            <caret line="57" column="12" lean-forward="true" selection-start-line="57" selection-start-column="12" selection-end-line="57" selection-end-column="12" />
+            <folding>
+              <element signature="e#0#26#0" expanded="true" />
+            </folding>
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>
