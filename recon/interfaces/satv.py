@@ -29,9 +29,8 @@ class SATV(BaseInterface):
                  lam: Union[float, np.ndarray] = 0.01,
                  alpha: Union[float, tuple] = 1,
                  tau: Union[float, str] = 'calc',
-                 stepsize=2,
+                 stepsize: float = 2,
                  window_size: int = 10,
-                 original = None,
                  data_output_path: str = '',
                  plot_iteration: bool = False):
         self._reg_mode = None
@@ -76,7 +75,7 @@ class SATV(BaseInterface):
         self.G.lam = self.lam
 
         self.F_star.prox_param = self.tau
-
+        min_lam = np.min(self.lam)
         plt.Figure()
         u = np.zeros(self.domain_shape)
         k = old_e = 0
@@ -85,45 +84,31 @@ class SATV(BaseInterface):
         while True:
             self.old_lam = self.lam
             print(str(k) + "-Iteration of SATV")
-            #print(np.linalg.norm((self.operator*u).ravel() - data.ravel()))
             print(np.linalg.norm((self.operator * u).ravel() - data.ravel()))
             print(self.assessment)
 
             if k > 0:
-                #if self.original is None:
                 v = (data.ravel() - (self.operator*u).ravel())
-                #else:
-                #    v = (self.original.ravel() - u.ravel())
-
 
                 # residual filter
-                if len(self.domain_shape) == 2:
-                    Sop = Smoothing2D(nsmooth=[self.window_size, self.window_size], dims=self.domain_shape, dtype='float64')
-                #else:
-                #    Sop = Smoothing1D(nsmooth=self.window_size, dims=self.domain_shape,
-                #                      dtype='float64')
+                Sop = Smoothing2D(nsmooth=[self.window_size, self.window_size], dims=self.domain_shape, dtype='float64')
 
                 S = np.reshape(Sop * (v ** 2), self.domain_shape)
-                #B = (self.noise_sigma / self.window_size) ** 2 * (0.577215+np.pi/np.sqrt(6))
                 B = self.noise_sigma ** 2 * 1.781576
-                #if self.bregman:
-                #    S[(S < B) & (S > (self.noise_sigma**2 - B))] = self.noise_sigma ** 2
-                #else:
-                S[S < B] = self.noise_sigma ** 2  # original implementation with these line
+                S[S < B] = self.noise_sigma ** 2
 
                 if self.bregman:
-                    eta = 1  # original == 2
+                    eta = 1
                     rho = 1 / self.noise_sigma
-                    l = .5
+                    l = min_lam
                     L = 10
                 else:
                     eta = self.stepsize
                     rho = np.max(lam_bar) / self.noise_sigma
-                    #rho = 4 # np.max(lam_bar) / self.noise_sigma
-                    l = 1
+                    l = min_lam
                     L = 40000
                 lam_bar = eta * np.clip(lam_bar + rho * (np.sqrt(S).ravel() - self.noise_sigma), l, L)
-                self.lam = np.reshape(np.clip(Sop*lam_bar.ravel(),l,L), self.domain_shape)
+                self.lam = np.reshape(np.clip(Sop*lam_bar.ravel(), l, L), self.domain_shape)
 
                 if self.G_template is not None:
                     self.G = self.G_template["object"](image_size=self.G_template['image_size'],
@@ -156,31 +141,6 @@ class SATV(BaseInterface):
                 alpha = self.alpha #np.mean(self.lam)
                 stop_in_front = False #not (k == 4)
 
-                while True:
-                    print("current norm error: " + str(np.linalg.norm(fftconvolve2d(u, kernel).ravel() - f2.ravel())))
-                    print("runs till norm <: " + str(assessment))
-
-                    solver = PdHgm(K, F_star, G)
-                    max_iter = 2000
-                    tol = 1e-4
-                    G.pk = pk
-
-                    solver.solve()
-
-                    u_new = np.reshape(solver.x, gt.shape)
-
-                    u = u_new
-
-                    # pk = pk - (self.lam / self.alpha) * (u.ravel() - data.ravel())
-                    pk = pk - lam * np.real(ifft2(G.f_data.conjugate() * (G.f_data * fft2(u, shape=a.shape) - G.back),
-                                                  shape=a.shape)).ravel()  # G.back.conjugate()*G.back*
-                    i = i + 1
-
-
-
-
-
-                """
                 breg_smoothing = SmoothBregman(domain_shape=self.domain_shape,
                                                reg_mode='tv',
                                                alpha=alpha,
@@ -191,8 +151,7 @@ class SATV(BaseInterface):
                                                assessment=ass)
 
                 u_sol = breg_smoothing.solve(data=data.ravel(), max_iter=2000, tol=1e-4)
-                """
-                u_sol = u
+
 
             if self.bregman:
                 u_new = u_sol #+ u
@@ -202,7 +161,7 @@ class SATV(BaseInterface):
             e = np.linalg.norm((self.operator*u_new).ravel() - data.ravel())
             if e < self.assessment:
                 # which iteration to choose -> norm nearest
-                if True or np.abs(old_e - self.assessment) > np.abs(e - self.assessment):
+                if np.abs(old_e - self.assessment) > np.abs(e - self.assessment):
                     u = u_new
                 if not self.bregman:
                     break
@@ -217,15 +176,22 @@ class SATV(BaseInterface):
 
             if self.plot_iteration:
                 #plt.gray()
+                plt.close()
                 plt.imshow(u, vmin=0, vmax=1)
                 plt.axis('off')
                 plt.savefig(self.data_output_path + 'SATV_iter' + str(k) + '.png', bbox_inches='tight')
                 plt.close()
 
                 #plt.gray()
-                plt.imshow(np.reshape(self.lam, self.domain_shape))
+                plt.imshow(np.reshape(self.lam, self.domain_shape), vmin=0, vmax=10)
                 plt.axis('off')
                 plt.savefig(self.data_output_path + 'SATV_iter_lam' + str(k) + '.png', bbox_inches='tight')
+                plt.close()
+
+                plt.close()
+                plt.imshow(u, vmin=0, vmax=1)
+                plt.axis('off')
+                plt.savefig(self.data_output_path + 'SATV_iter' + str(k) + '.png', bbox_inches='tight')
                 plt.close()
 
         return u

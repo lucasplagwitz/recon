@@ -2,14 +2,14 @@
 
 A python-based toolbox for solving regularized Inverse Problems using Primal-Dual algorithms. 
 The project provides an overview of solving regularization problems and is the result of a master's thesis. 
-Build as proof of concept.
+Built as proof of concept.
 
 ## Overview
 
 * Reconstruction, Smoothing 
-* class-based Segmentation
-* Spatially Adapted Regularization
-* Bregman-Iteration
+* Class-Based Segmentation
+* Spatially-Adapted Regularization
+* Bregman Iteration
 * Denoising, Deconvolution, Computerized Tomography
 
 
